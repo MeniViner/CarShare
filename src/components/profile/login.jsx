@@ -3,7 +3,6 @@ import EmailLogin from './emailLogin';
 import GoogleLogin from './googleLogin';
 
 
-
 const Login = ({userName}) => {
 
     return (
