@@ -1,0 +1,193 @@
+ /* .popup-window {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 300px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+  
+.popup-window img {
+    height: 18vh;
+}
+  
+.popup-window h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+  
+.popup-window p {
+    margin-bottom: 5px;
+}
+  
+.location-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+  
+.location-info span {
+    margin-right: 5px;
+}
+   
+
+ */
+
+
+
+
+
+/* MapWithInfoWindow.css */
+ /* .map-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+  } */
+   
+  /* CarInfoWindow.css */
+   /* .popup-window {
+    
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 300px;
+    max-height: 20vh;
+  }
+  
+  .popup-window img {
+    width: 40%;
+    height: auto;
+    margin-bottom: 1px;
+  }
+  
+  .popup-window h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .popup-window p {
+    margin-bottom: 5px;
+  }
+  
+  .location-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .location-info span {
+    margin-right: 5px;
+  }
+  
+  .close-button {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .close-button:hover {
+    background-color: #d32f2f;
+  } */
+
+
+
+
+
+
+
+
+
+
+
+   /* .info-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+  }
+   */
+  .vehicle-info {
+    margin: 10px 5px ;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    /* z-index: 1000; */
+  }
+  
+  .vehicle-info-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-direction: row-reverse;
+    /* background-color: rgba(225, 44, 44, 0.577); */
+  }
+  .vehicle-info-header img {
+    margin-top: -10vh;
+  }
+  
+  .vehicle-info-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .vehicle-info-image {
+    width: 150px;
+    height: 100px;
+    margin-right: 10px;
+  }
+  
+  .vehicle-info-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .vehicle-info-details div {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  .vehicle-info-details div span {
+    margin-left: 5px;
+  }
+  
+  .vehicle-info-rate {
+    margin-bottom: 10px;
+  }
+  
+  .vehicle-info-rate p {
+    margin: 0;
+  }
+  
+  .vehicle-info-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .vehicle-info-footer button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .vehicle-info-footer button:hover {
+    background-color: #0056b3;
+  }

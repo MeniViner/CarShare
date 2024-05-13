@@ -1,0 +1,2 @@
+folder: /utils is a place where you can place small snippets you can use throughout the application.
+ - Small functions to build bigger things with.

@@ -1,0 +1,138 @@
+:root {
+  --main: rgb(255, 254, 251);
+  --none: rgba(255, 255, 255, 0);
+  --braun: rgb(52, 40, 5);
+}
+
+.app {
+  position: relative;
+  
+}
+
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: floralwhite;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav.open {
+  width: 250px;
+}
+
+.top {
+  height: 15vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px 20px;
+  background-color: var(--main);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+
+.left-icon,
+.right-icon {
+  font-size: 24px; 
+  cursor: pointer;
+  color: var(--braun);
+}
+
+
+.map {
+  border: solid red 1px ;
+  
+  width: 95vw;
+  height: 75vh;
+}
+
+#location-bt {
+  position: fixed;
+  bottom: 60px; 
+  right: 10px;
+  border: var(--braun) 1px solid;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 1px;
+  font-size: xx-large;
+  color: var(--braun);
+  background-color: var(--none);
+  
+}
+
+.bottom {
+  border: solid rgb(102, 255, 0) 1px ;
+  
+  width: 90vw;
+  height: 5vh;
+}
+
+
+.popup-window {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  max-width: 300px;
+  font-family: Arial, sans-serif;
+}
+
+.popup-window img {
+  height: 115px;
+  width: 168px;
+  margin-bottom: 10px;
+}
+
+.popup-window h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.popup-window p {
+  margin-bottom: 5px;
+}
+
+/* Additional styles as needed */
+
+
+.order-window {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30vh;
+  background-color: white;
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(100%);
+  transition: transform 0.3s ease-out;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.order-window.open {
+  transform: translateY(0);
+}
+
+.order-window img {
+  max-width: 100%;
+  max-height: 150px;
+}

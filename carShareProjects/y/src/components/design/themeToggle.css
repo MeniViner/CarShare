@@ -1,0 +1,45 @@
+.theme-toggle {
+    width: 60px;
+    height: 30px;
+    background-color: #ddd;
+    border: rgb(255, 220, 187) solid 1px;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 3%;
+  }
+  
+  .toggle-track {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-thumb {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .theme-toggle.dark .toggle-track {
+    background-color: #ddd;
+    border-radius: 15px;
+    border: rgb(255, 220, 187) solid 1px;
+  }
+  
+  .theme-toggle.dark .toggle-thumb {
+    transform: translateX(30px);
+  }
+  
