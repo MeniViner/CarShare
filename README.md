@@ -1,3 +1,3 @@
 # Car Share React App
 
-![alt text](image.png)
+![main page](image.png)
