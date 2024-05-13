@@ -1,8 +1,10 @@
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
+
 
 // Your web app's Firebase configuration
 // const firebaseConfig = {
@@ -14,14 +16,21 @@ import { getFirestore } from "firebase/firestore";
 //   appId: process.env.REACT_APP_APP_ID
 // };
 
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAOEc4qKjI4uIlx",
-  authDomain: "employee-database-a283c.firebaseapp.com",
-  projectId: "employee-database-a283c",
-  storageBucket: "employee-database-a283c.appspot.com",
-  messagingSenderId: "137735978066",
-  appId: "1:137735978066:web:0069ef5a9a7e2414f7338b"
+  apiKey: "AIzaSyBPGbd227eBPhTCWNP8tvBxFI8ndcxJuZ4",
+  authDomain: "car-share-react.firebaseapp.com",
+  projectId: "car-share-react",
+  storageBucket: "car-share-react.appspot.com",
+  messagingSenderId: "92813777463",
+  appId: "1:92813777463:web:c152b470da685afb533db2",
+  measurementId: "G-8E2HD380D8"
 };
+
+// Initialize Firebase
+const analytics = getAnalytics(app);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
