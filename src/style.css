@@ -50,8 +50,8 @@
   margin-left: 1%;
 } */
 
-.side-nav-bt {
-  /* position: fixed; */
+/* .side-nav-bt {
+  position: fixed;
 
   display: flex;
 
@@ -59,23 +59,25 @@
 
   margin-top: 25vh;
   margin-left: 42vw;
-}
+} */
 
-.list-cars-bt {
+/* .list-cars-bt {
   position: fixed;
   display: flex;
   z-index: 0;
   margin-top: 25vh;
   margin-left: 42vw;
-}
+} */
 
 .location-button {
   position: fixed;
 
   display: flex;
-  /* z-index: 0; */
+  z-index: 1;
   margin-top: 3vh;
-  margin-top: 28vh;
+  /* margin-top: 28vh;
+  margin-left: 42vw; */
+  margin-top: 25vh;
   margin-left: 42vw;
  
 }
