@@ -14,9 +14,9 @@ const ListCars = ({ distance }) => {
   return (
     <>
       <div className={`cars-list ${isListCarsOpen ? 'open' : ''}`}>
-        <div className='faListUl faArrowLeft' onClick={closeListCars}>
+        {/* <div className='faListUl faArrowLeft' onClick={closeListCars}>
           <FontAwesomeIcon icon={faArrowLeft}/>
-        </div>
+        </div> */}
         <h2>Vehicles nearby</h2>
         {cars.map((car) => (
           <div key={car.id} className="car-item">
@@ -38,11 +38,11 @@ const ListCars = ({ distance }) => {
         ))}
 
       </div> 
-      <div className='list-cars-bt'>
+      {/* <div className='list-cars-bt'>
         <div className='faListUl' onClick={openListCars}>
           <FontAwesomeIcon icon={faListUl}/>
         </div>
-      </div>
+      </div> */}
 
       {isListCarsOpen && <div className="overlay" onClick={closeListCars}></div>}
     </>
