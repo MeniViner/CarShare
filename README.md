@@ -1,3 +1,3 @@
-# car shaer React App
+# Car Share React App
 
 ![alt text](image.png)
