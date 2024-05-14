@@ -10,6 +10,7 @@ const Login = ({userName}) => {
             <div className="user-login">
                 <h1> login page </h1>
                 <EmailLogin/>
+                
                 <GoogleLogin/>
             </div>    
         </>

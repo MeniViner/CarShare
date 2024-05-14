@@ -1,0 +1,16 @@
+.separate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+.separate-line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: grey;
+    margin: 0 10px;
+}
+h5 {
+    margin: 0;
+    color: grey;
+}

@@ -110,38 +110,56 @@
     position: relative;
     width: 100%;
     height: 100vh;
+  }*/
+  
+  
+ .vehicle-info {
+   margin: 10px 5px ;
+   border-radius: 12px;
+   position: absolute;
+   bottom: 5px;
+   left: 0;
+   right: 0;
+   background-color: #fff;
+   padding: 10px;
+   box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+   z-index: 10;
+ } 
 
-  }
-   */
-  .vehicle-info {
-    margin: 10px 5px ;
-    border-radius: 12px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    padding: 10px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-    /* z-index: 1000; */
-  }
   
   .vehicle-info-header {
     display: flex;
+    flex-direction: row; 
     align-items: center;
-    margin-bottom: 10px;
-    flex-direction: row-reverse;
-    /* background-color: rgba(225, 44, 44, 0.577); */
+    margin-bottom: 0px;
+    border: #ff5900 solid 1px;
+    justify-content: space-between;
   }
   .vehicle-info-header img {
     margin-top: -10vh;
+    border: #007bff solid 1px;
+    margin-left: 20px
+  }
+  vehicle-info-header-text {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+  .vehicle-info-header-text h2  {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.1em;
+    border: #007bff solid 1px;
+    margin-bottom: 10px;
   }
   
-  .vehicle-info-header h2 {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
+  .vehicle-info-header-text h3 {
+    font-size: 0.8em;
+    margin: 0px;
+
   }
+
+
   
   .vehicle-info-image {
     width: 150px;

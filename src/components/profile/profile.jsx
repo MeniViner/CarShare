@@ -1,6 +1,7 @@
 import React from 'react';
 import Login from './login';
 
+
 const Profile = ({userName}) => {
 
     return (
@@ -9,6 +10,7 @@ const Profile = ({userName}) => {
                 <h1> profile page </h1>
                 {/* <h1>Wellcome back {userName} </h1> */}
                 <Login/>
+                
             </div>    
         </>
     );
