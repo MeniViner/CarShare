@@ -7,7 +7,7 @@ const Top = ({userName}) => {
     return (
         <>
             <div className="top">
-                <h1> wellcome back {"username ;"}</h1>
+                <h3> wellcome back {"${UserName}"}</h3>
                 {/* <h1>Wellcome back {userName} </h1> */}
             </div>    
         </>

@@ -17,6 +17,18 @@ const Map = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [mapCenter, setMapCenter] = useState({ lat: 31.795729, lng: 35.219848 });
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(true);
+
+  const handleMarkerClick = (car) => {
+    setSelectedCar(car);
+    setIsInfoWindowOpen(true);
+  };
+
+  const handleCloseClick = () => {
+    setIsInfoWindowOpen(false);
+  };
+
   
 
   const getMapOptions = () => {
@@ -85,21 +97,19 @@ const Map = () => {
           />
         )}
         
-        <div className="on-map-btns">
 
-          <div className="side-nav-bt on-map-bt" >
+          <div className="side-nav-bt" >
             <SideNavigation/>
           </div>
-
+{/* 
           <div className="list-cars-bt son-map-bt" >
             <ListCars/>
-          </div>
+          </div> */}
 
-          <div className="location-button on-map-bt" onClick={handleLocationButtonClick}>
+          <div className="location-button" onClick={handleLocationButtonClick}>
             <LocationButton/>
           </div>
 
-        </div>
         
         {/* <div className="toggle-track toggle-Theme">
           <ThemeToggle toggleTheme={toggleTheme} />
@@ -109,7 +119,7 @@ const Map = () => {
           <Marker
             key={car.id}
             position={{ lat: car.coordinates.lat, lng: car.coordinates.lng }}
-            onClick={() => setSelectedCar(car)}
+            onClick={() => handleMarkerClick(car)}
             icon={{
               url: 'images/car-side-solid.svg',
               scaledSize: new window.google.maps.Size(25, 25),
@@ -131,11 +141,11 @@ const Map = () => {
           </InfoWindow>
         )} */}
 
-      {selectedCar && (
+      {(selectedCar && isInfoWindowOpen ) && (
         <CarInfoWindow
           selectedCar={selectedCar}
           userLocation={userLocation}
-          onCloseClick={() => setSelectedCar(null)}
+          onCloseClick={(handleCloseClick)}
         />
       )}
 

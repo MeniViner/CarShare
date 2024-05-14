@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../styles/login.css'
 
 
 const GoogleLogin = ({userName}) => {
@@ -6,7 +7,11 @@ const GoogleLogin = ({userName}) => {
     return (
         <>
            <div className="small-container">
-                <h1>Login with google</h1>
+           <div className="separate">
+                <div className="separate-line"></div>
+                    <h5>or login with google</h5>
+                <div className="separate-line"></div>
+            </div>
            </div>
         </>
     );

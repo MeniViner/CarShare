@@ -1,0 +1,53 @@
+.page-404 {
+    background-color: white;
+  }
+  
+  .page-404 h1 {
+    color: rgb(193, 132, 127);
+  }
+  
+  .page-404 h2 {
+    color: grey;
+  }
+  
+  .page-404 #logo-section {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: 4%;
+    padding-left: 43%;
+    gap: 2%;
+  }
+  
+  .page-404 #b, .page-404 #h {
+    color: rgb(168, 84, 78);
+  }
+  
+  .page-404 #h:hover {
+    text-decoration: underline;
+  }
+  
+  .page-404 #hmm {
+    color: black;
+  }
+  
+  .page-404 video {
+    border: none;
+    border-radius: 15px;
+    pointer-events: none;
+    padding-left: 25%;
+    width: 864px;
+    height: 486.06px;
+  }
+  
+  @media (max-width: 767px) {
+    .page-404 #logo-section {
+      padding-left: 16%;
+    }
+  
+    .page-404 video {
+      padding-left: 0;
+      width: 433px;
+      height: 243.03px;
+    }
+  }

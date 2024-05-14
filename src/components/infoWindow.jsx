@@ -147,7 +147,7 @@
 
 
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGasPump, faCog } from '@fortawesome/free-solid-svg-icons';
 import { mdiMapMarkerQuestionOutline, mdiCarSeat } from '@mdi/js';
@@ -155,22 +155,38 @@ import Icon from '@mdi/react';
 import '../styles/infoWindow.css'
 
 
+const CarInfoWindow = ({ selectedCar, userLocation, onCloseClick  }) => {
+  const ref = useRef(null);
 
-const CarInfoWindow = ({ selectedCar, userLocation }) => {
+  useEffect(() => {
+      const handleClickOutside = (event) => {
+          if (ref.current && !ref.current.contains(event.target)) {
+              onCloseClick();
+          }
+      };
+
+      document.body.addEventListener('mousedown', handleClickOutside);
+
+      return () => {
+          document.body.removeEventListener('mousedown', handleClickOutside);
+      };
+  }, [onCloseClick]);
   
   // const distance = calculateDistance(userLocation, selectedCar.coordinates);
 
   return (
-    <div className="map-container">
-      {/* Map component goes here */}
+    <div ref={ref} >
       <div className="vehicle-info">
         <div className="vehicle-info-header">
+          <div className="vehicle-info-header-text">
+            <h2>{selectedCar.brand}</h2>
+            <h3>{selectedCar.model}</h3>
+          </div>
           <img
             src={selectedCar.image}
             alt={`${selectedCar.brand} ${selectedCar.model}`}
             className="vehicle-info-image"
           />
-          <h2>{selectedCar.brand} {selectedCar.model}</h2>
         </div>
         <div className="vehicle-info-details">
           <div>
@@ -190,7 +206,7 @@ const CarInfoWindow = ({ selectedCar, userLocation }) => {
           <p>Standard rate (km)</p>
           <p>{selectedCar.ratePerKm} {selectedCar.pricePerHour}€/km</p>
         </div>
-        <div className="vehicle-info-rate">
+        {/* <div className="vehicle-info-rate">
           <p>Unlock Fee</p>
           <p>{selectedCar.unlockFee}€</p>
         </div>
@@ -201,11 +217,12 @@ const CarInfoWindow = ({ selectedCar, userLocation }) => {
         <div className="vehicle-info-rate">
           <p>Fuel</p>
           <p>Free refueling at our partner gas stations</p>
-        </div>
+        </div> */}
         <div className="vehicle-info-footer">
           <p>66km (12%)</p>
           <button>Reserve now</button>
         </div>
+        <button className="close-button" onClick={onCloseClick}>Close</button>
       </div>
     </div>
   );

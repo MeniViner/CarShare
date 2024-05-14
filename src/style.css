@@ -13,8 +13,7 @@
   position: relative;
   display: flex;
   z-index: 0;
-  height: 85dvh;
-  border: 2px red solid;
+  height: 90dvh;
 }
 
 .sidenav {
@@ -50,41 +49,26 @@
   margin-left: 1%;
 } */
 
-/* .side-nav-bt {
-  position: fixed;
-
-  display: flex;
-
-  z-index: 0;
-
-  margin-top: 25vh;
-  margin-left: 42vw;
-} */
-
-/* .list-cars-bt {
+.side-nav-bt {
   position: fixed;
   display: flex;
   z-index: 0;
-  margin-top: 25vh;
-  margin-left: 42vw;
-} */
+  margin-top: 25dvh;
+  margin-left: 42dvw;
+}
 
 .location-button {
   position: fixed;
-
   display: flex;
-  z-index: 1;
-  margin-top: 3vh;
-  /* margin-top: 28vh;
-  margin-left: 42vw; */
-  margin-top: 25vh;
-  margin-left: 42vw;
- 
+  z-index: 0;
+  margin-top: 28dvh;
+  margin-left: 42dvw;
+
 }
 
 
 
-.faLocation, 
+.fa-location, 
 .faBarsStaggered {
   font-size: 18px;
   border-radius: 50%;
@@ -97,7 +81,7 @@
   border: 0;
   box-shadow: 0 3px 15px rgba(60,64,67,0.3),0 3px 5px 1px rgba(60,64,67,0.15);
 }
-.faLocation,
+.fa-location,
 .faBarsStaggered {
   display: flex;
   align-items: center;
@@ -113,8 +97,3 @@
   align-items: center;
 }
 
-.on-map-btns {
-  border: purple 1px solid;
-  background-color: yellow;
-  color: #000;
-}

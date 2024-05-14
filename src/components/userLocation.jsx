@@ -5,9 +5,9 @@ import { faLocation } from '@fortawesome/free-solid-svg-icons';
 const LocationButton = ({onClick}) => {
   return (
     <div className='location-button'>
-      <button onClick={onClick} className='faLocation'>
+      <div onClick={onClick} className='fa-location'>
         <FontAwesomeIcon icon={faLocation} />
-      </button>
+      </div>
     </div>
   );
 };
@@ -39,7 +39,7 @@ export { LocationButton, UserLocation };
 // const LocationButton = ({ onClick }) => {
 //   return (
 //     <div className='location-button'>
-//       <button onClick={onClick} className='faLocation'>
+//       <button onClick={onClick} className='fa-location'>
 //         <FontAwesomeIcon icon={faLocation} />
 //       </button>
 //     </div>

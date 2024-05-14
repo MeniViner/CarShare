@@ -6,6 +6,7 @@
 }
 
 .buttom {
+    background-color: white;
     margin-top: 0.5vh;
     height: 6vh;
     display: flex;
@@ -17,17 +18,15 @@
     bottom: 0px;
     right: 0px;
     left: 0px;
-    margin-bottom: 0.1%;
 }
 
 .buttom-menu-bt {
     padding: 5vw;
     color: burlywood; 
-    transition: color 0.4s, transform 0.2s, font-size 0.3s; ; 
+    transition: color 0.4s, transform 0.2s;
 }
 
 .buttom-menu-bt.active {
     color: brown; 
     transform: translateY(-4px); 
-    font-size: 1.1em; 
 }
