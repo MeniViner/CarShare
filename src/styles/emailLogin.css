@@ -29,6 +29,7 @@
 }
 
 /* עיצוב שדות הקלט */
+.login-container input[type="text"],
 .login-container input[type="email"],
 .login-container input[type="password"] {
   padding: 0.6rem;

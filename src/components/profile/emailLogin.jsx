@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { updateProfile } from "firebase/auth";
 import { auth } from '../../data/firebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import Swal from 'sweetalert2';
 import '../../styles/emailLogin.css';
 
 const EmailLogin = ({ setIsAuthenticated, setUser }) => {
+  const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(true); // true = login, false = register
@@ -13,13 +15,17 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
     e.preventDefault();
 
     try {
+      let userCredential; // הגדרת משתנה מחוץ לתנאים
+
       if (isLogin) {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        userCredential = await signInWithEmailAndPassword(auth, email, password);
         setUser(userCredential.user);
         localStorage.setItem('user', JSON.stringify(userCredential.user));
         Swal.fire('Success', 'Logged in successfully', 'success');
       } else {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        // await userCredential.user.updateProfile({ displayName: name }); 
+        await updateProfile(userCredential.user, { displayName: name });
         setUser(userCredential.user);
         localStorage.setItem('user', JSON.stringify(userCredential.user));
         Swal.fire('Success', 'Registered successfully', 'success');
@@ -41,7 +47,19 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
     <div className="login-container">
       <form onSubmit={handleSubmit}>
         <h2>{isLogin ? 'Login' : 'Register'}</h2>
-        <label htmlFor="email">Email</label>
+        {!isLogin && ( // הצגת שדה השם רק בעת הרשמה
+          <>
+            <label htmlFor="name">full name</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </>
+        )}
+        <label htmlFor="email">email addres</label>
         <input
           type="email"
           id="email"
@@ -49,7 +67,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">strong password</label>
         <input
           type="password"
           id="password"
