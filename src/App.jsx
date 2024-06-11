@@ -8,7 +8,7 @@ import Settings from './components/settings';
 import './style.css';
 import Buttom from './components/buttom';
 import Top from './components/top';
-import NotFound from './components/NotFound'; // Import the NotFound component
+import NotFound from './components/NotFound'; 
 
 
 export default function App() {

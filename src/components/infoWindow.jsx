@@ -153,10 +153,13 @@ import { faGasPump, faCog } from '@fortawesome/free-solid-svg-icons';
 import { mdiMapMarkerQuestionOutline, mdiCarSeat } from '@mdi/js';
 import Icon from '@mdi/react';
 import '../styles/infoWindow.css'
-
+import { calculateDistance } from '../utils/distanceCalculator';
 
 const CarInfoWindow = ({ selectedCar, userLocation, onCloseClick  }) => {
   const ref = useRef(null);
+
+  const distance = calculateDistance(userLocation, selectedCar.coordinates);
+
 
   useEffect(() => {
       const handleClickOutside = (event) => {
@@ -172,7 +175,6 @@ const CarInfoWindow = ({ selectedCar, userLocation, onCloseClick  }) => {
       };
   }, [onCloseClick]);
   
-  // const distance = calculateDistance(userLocation, selectedCar.coordinates);
 
   return (
     <div ref={ref} >
@@ -189,6 +191,9 @@ const CarInfoWindow = ({ selectedCar, userLocation, onCloseClick  }) => {
           />
         </div>
         <div className="vehicle-info-details">
+
+          <p>Distance:{distance || 'No distance available'}</p>
+
           <div>
             <FontAwesomeIcon icon={faCog} />
             <span>{selectedCar.transmission}</span>
