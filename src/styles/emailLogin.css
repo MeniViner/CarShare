@@ -1,17 +1,17 @@
-form {
+.small-container form {
   display: flex;
   flex-direction: column;
   /* align-items: flex-start; */
   font-family: Arial, sans-serif;
 }
 
-label {
+.small-container label {
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
 
-input[type="email"],
-input[type="password"] {
+.small-container input[type="email"],
+.small-container input[type="password"] {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -20,27 +20,34 @@ input[type="password"] {
   margin-bottom: 1rem;
 }
 
-button {
+.small-container input[type="submit"]  {
   padding: 0.6rem 1.1rem;
+  width: calc(50% - 6px);
+  padding: 10px;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
+  color: white;
+  background-color: #007bff;
   cursor: pointer;
-  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
-button:first-of-type {
+
+.small-container input[type="submit"][name="Login"] {
   background-color: #007bff;
   color: #fff;
   margin-right: 0.5rem;
 }
 
-button:last-of-type {
+.small-container input[type="submit"][name="Register"] {
   background-color: #000;
   color: #fff;
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 5vw;
+.small-container input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.small-container input[type="submit"][name="Register"]:hover {
+  background-color: #218838;
 }

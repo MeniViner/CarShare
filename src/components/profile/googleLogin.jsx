@@ -12,6 +12,7 @@ const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
     try {
       const userCredential = await signInWithPopup(auth, provider);
       setUser(userCredential.user);
+      localStorage.setItem('user', JSON.stringify(userCredential.user));
       Swal.fire({
         icon: 'success',
         title: 'Successfully logged in with Google!',
@@ -32,18 +33,16 @@ const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
 
   return (
     <>
-        <div className="small-container">
-            <div className="separate">
-                <div className="separate-line"></div>
-                    <h5>or login with google</h5>
-                <div className="separate-line"></div>
-            </div>
-            
-            <button className="google-btn" onClick={handleGoogleLogin}>
-                <FcGoogle className="google-icon" />
-                Login with Google
-            </button>
-        </div>
+      <div className="separate">
+          <div className="separate-line"></div>
+            <h5>or login with google</h5>
+          <div className="separate-line"></div>
+      </div>
+      
+      <button className="google-btn" onClick={handleGoogleLogin}>
+        <FcGoogle className="google-icon" />
+        Login with Google
+      </button>
     </>
   );
 };

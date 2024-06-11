@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import { auth } from '../../data/firebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import '../../styles/emailLogin.css'; 
 
 const EmailLogin = ({ setIsAuthenticated, setUser }) => {
   const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
       if (action === 'Login') {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         setUser(userCredential.user); 
+        localStorage.setItem('user', JSON.stringify(userCredential.user));
         Swal.fire({
           icon: 'success',
           title: 'Successfully logged in!',
@@ -45,8 +47,8 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
   };
 
   return (
+    <div className="small-container">
       <form onSubmit={handleLogin}>
-        {/* <h1>Admin Login</h1> */}
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -65,9 +67,12 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <input type="submit" value="Login" name="Login" />
-        <input type="submit" value="Register" name="Register" />
+        <div>
+          <input type="submit" value="Login" name="Login" />
+          <input type="submit" value="Register" name="Register" />
+        </div>
       </form>
+      </div>
   );
 };
 

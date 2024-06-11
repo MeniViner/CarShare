@@ -7,7 +7,6 @@ import nightMapStyles from './components/design/nightMapStyles';
 import SideNavigation from './components/sideNavigation';
 import ListCars from './components/listCars';
 import { LocationButton, UserLocation } from './components/userLocation';
-// import UserLocation from './components/userLocation';
 import CarInfoWindow from './components/infoWindow'; 
 
 
@@ -17,10 +16,14 @@ const Map = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [mapCenter, setMapCenter] = useState({ lat: 31.795729, lng: 35.219848 });
   const [isDarkMode, setIsDarkMode] = useState(false);
-
   const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(true);
 
   const handleMarkerClick = (car) => {
+    setSelectedCar(car);
+    setIsInfoWindowOpen(true);
+  };
+
+  const handleCarClick = (car) => {
     setSelectedCar(car);
     setIsInfoWindowOpen(true);
   };
@@ -29,7 +32,6 @@ const Map = () => {
     setIsInfoWindowOpen(false);
   };
 
-  
 
   const getMapOptions = () => {
     return {
@@ -145,7 +147,7 @@ const Map = () => {
         <CarInfoWindow
           selectedCar={selectedCar}
           userLocation={userLocation}
-          onCloseClick={(handleCloseClick)}
+          onCloseClick={handleCloseClick}
         />
       )}
 
