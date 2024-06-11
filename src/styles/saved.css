@@ -16,7 +16,7 @@
     border-radius: 8px;
     margin-bottom: 20px;
     padding: 20px;
-    width: calc(33% - 40px);
+    width: 100%;
     max-width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s, transform 0.3s; 
@@ -28,7 +28,7 @@
 }
   
 .saved-car-item img {
-    width: 100%;
+    width: 75%;
     height: auto;
     border-radius: 8px;
 }
@@ -47,4 +47,8 @@
 .saved-car-details p {
     margin: 5px 0;
     color: #555;
+}
+
+.remove-bt {
+    align-self: start;
 }

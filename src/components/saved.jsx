@@ -96,15 +96,15 @@ const Saved = () => {
                             .filter(car => normalizedSavedCarIds.includes(String(car.id)))
                             .map((car) => (
                                 <div key={car.id} className="saved-car-item">
+                                    <button onClick={() => removeSavedCar(car.id)} className='saved-bt remove-bt'>
+                                        <MdBookmarkRemove />
+                                    </button>
                                     <img src={car.image} alt={`${car.brand} ${car.model}`} />
                                     <div className="saved-car-details">
                                         <h3>{`${car.brand} ${car.model}`}</h3>
                                         <p><span>{car.year}</span> • <span>{car.seats} seats</span></p>
                                         <p><span>{Math.floor(car.pricePerHour)} ₪/hour</span></p>
                                     </div>
-                                    <button onClick={() => removeSavedCar(car.id)} className='saved-bt'>
-                                        <MdBookmarkRemove />
-                                    </button>
                                 </div>
                             ))}    
                         </div>
