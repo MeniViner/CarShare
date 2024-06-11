@@ -64,19 +64,31 @@ const Saved = () => {
 
     return (
     <div>
-        {isLoading ? (
+
+        {/* הודעה למשתמשים לא מחוברים */}
+        {!auth.currentUser && (
+            <div className="separate">
+                <h2>To see your saved items, Connect with your account.</h2> 
+            </div>
+        )}
+
+        {(isLoading && auth.currentUser) ? (
             <LoadingPage />
         ) : (
             <>
                 {(normalizedSavedCarIds.length === 0 && auth.currentUser ) ? (
-                    <p>You haven't saved anything yet. Start adding some items and they will show up here!</p> 
+                    <div className="separate">
+                        <h3>You haven't saved anything yet. Start adding some items and they will show up here!</h3> 
+                    </div>
                 ) : (
                     <>
+                        {auth.currentUser && (
                         <div className="separate">
                             <div className="separate-line"></div>
                                 <h4>your saved cars.</h4> 
                             <div className="separate-line"></div>
                         </div>
+                        )}
 
                         {/* הצגת רכבים שמורים למשתמש המחובר */}
                         <div className="saved-container">
@@ -87,12 +99,8 @@ const Saved = () => {
                                     <img src={car.image} alt={`${car.brand} ${car.model}`} />
                                     <div className="saved-car-details">
                                         <h3>{`${car.brand} ${car.model}`}</h3>
-                                        <p>
-                                        <span>{car.year}</span> • <span>{car.seats} seats</span>
-                                        </p>
-                                        <p>
-                                        <span>{Math.floor(car.pricePerHour)} ₪/hour</span>
-                                        </p>
+                                        <p><span>{car.year}</span> • <span>{car.seats} seats</span></p>
+                                        <p><span>{Math.floor(car.pricePerHour)} ₪/hour</span></p>
                                     </div>
                                     <button onClick={() => removeSavedCar(car.id)} className='saved-bt'>
                                         <MdBookmarkRemove />
@@ -101,15 +109,6 @@ const Saved = () => {
                             ))}    
                         </div>
                     </>
-                )}
-
-                {/* הודעה למשתמשים לא מחוברים */}
-                {!auth.currentUser && (
-                    <div className="separate">
-                        <div className="separate-line"></div>
-                            <p>To see your saved cars, please log in.</p> 
-                        <div className="separate-line"></div>
-                    </div>
                 )}
             </>
         )}
