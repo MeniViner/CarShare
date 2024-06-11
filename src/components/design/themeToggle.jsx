@@ -30,7 +30,8 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
-import './themeToggle.css';
+import '../../styles/themeToggle.css';
+
 
 const ThemeToggle = ({ toggleTheme }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
