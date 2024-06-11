@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, memo, useState } from 'react';
-import { GoogleMap, Marker, InfoWindow, useLoadScript } from '@react-google-maps/api';
+import React, {useState } from 'react';
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 import './style.css';
 import cars from './data/carsData';
-import dayMapStyles from './components/design/dayMapStyles';
-import nightMapStyles from './components/design/nightMapStyles';
+// import dayMapStyles from './components/design/dayMapStyles';
+// import nightMapStyles from './components/design/nightMapStyles';
 import SideNavigation from './components/sideNavigation';
-import ListCars from './components/listCars';
-import { LocationButton, UserLocation } from './components/userLocation';
+import { LocationButton } from './components/userLocation';
 import CarInfoWindow from './components/infoWindow'; 
 import LoadingPage from './assets/LoadingPage';
 
@@ -17,7 +16,7 @@ const Map = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [mapCenter, setMapCenter] = useState({ lat: 31.795729, lng: 35.219848 });
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // const [isDarkMode, setIsDarkMode] = useState(false);
   const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(true);
 
   const handleMarkerClick = (car) => {
@@ -25,10 +24,10 @@ const Map = () => {
     setIsInfoWindowOpen(true);
   };
 
-  const handleCarClick = (car) => {
-    setSelectedCar(car);
-    setIsInfoWindowOpen(true);
-  };
+  // const handleCarClick = (car) => {
+  //   setSelectedCar(car);
+  //   setIsInfoWindowOpen(true);
+  // };
 
   const handleCloseClick = () => {
     setIsInfoWindowOpen(false);
@@ -50,13 +49,13 @@ const Map = () => {
       minZoom: 10,
       maxZoom: 20,
       clickableIcons: false,
-      styles: isDarkMode ? nightMapStyles : dayMapStyles,
+      // styles: isDarkMode ? nightMapStyles : dayMapStyles,
     };
   };
 
-  const toggleTheme = () => {
-    setIsDarkMode(prevMode => !prevMode);
-  };
+  // const toggleTheme = () => {
+  //   setIsDarkMode(prevMode => !prevMode);
+  // };
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyC8DxT2vSZIyutVKE4BcB66O2x4LHGLxq4',
@@ -72,6 +71,7 @@ const Map = () => {
     </div>;
   if (!isLoaded)
     return <LoadingPage />;
+
 
   const handleLocationButtonClick = () => {
     // Request user's location
