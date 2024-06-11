@@ -1,88 +1,52 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../data/firebaseConfig';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 
-// Import Firebase initialization and Firestore instance
-import { db } from '../../config/firestore'; // Assuming firebase.js is where you initialize Firebase
-
-import '../../styles/another.css';
-
-const EmailLogin = ({ setIsAuthenticated }) => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+const EmailLogin = ({ setIsAuthenticated, setUser }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    const action = e.target.name;
 
-    const auth = getAuth();
-
-    if (document.activeElement.name === 'Login') {
-      try {
-        await signInWithEmailAndPassword(auth, email, password);
+    try {
+      if (action === 'Login') {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        setUser(userCredential.user); 
         Swal.fire({
+          icon: 'success',
+          title: 'Successfully logged in!',
           timer: 1500,
           showConfirmButton: false,
-          willOpen: () => {
-            Swal.showLoading();
-          },
-          willClose: () => {
-            setIsAuthenticated(true);
-  
-            Swal.fire({
-              icon: 'success',
-              title: 'Successfully logged in!',
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          },
         });
-      } catch (error) {
+        setIsAuthenticated(true);
+      } else if (action === 'Register') {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        setUser(userCredential.user); 
         Swal.fire({
+          icon: 'success',
+          title: 'Successfully registered and logged in!',
           timer: 1500,
           showConfirmButton: false,
-          willOpen: () => {
-            Swal.showLoading();
-          },
-          willClose: () => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error!',
-              text: 'Incorrect email or password.',
-              showConfirmButton: true,
-            });
-          },
         });
+        setIsAuthenticated(true);
       }
-    } else if (document.activeElement.name === 'Register') {
-      try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        Swal.fire({
-          timer: 1500,
-          showConfirmButton: false,
-          willOpen: () => {
-            Swal.showLoading();
-          },
-          willClose: () => {
-            setIsAuthenticated(true);
-  
-            Swal.fire({
-              icon: 'success',
-              title: 'Successfully registered and logged in!',
-              showConfirmButton: false,
-              timer: 1500,
-            });
-          },
-        });
-      } catch (error) {
-        console.log(error);
-      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: action === 'Login' ? 'Incorrect email or password.' : 'Registration failed.',
+        showConfirmButton: true,
+      });
     }
   };
 
   return (
-    <div className="small-container">
       <form onSubmit={handleLogin}>
-        <h1>Login with your email</h1>
+        {/* <h1>Admin Login</h1> */}
         <label htmlFor="email">Email</label>
         <input
           id="email"
@@ -101,10 +65,9 @@ const EmailLogin = ({ setIsAuthenticated }) => {
           value={password}
           onChange={e => setPassword(e.target.value)}
         />
-        <input style={{ marginTop: '12px' }} type="submit" value="Login" name="Login" />
-        <input style={{ marginTop: '12px', marginLeft: '12px', backgroundColor: 'black' }} type="submit" value="Register" name="Register" />
+        <input type="submit" value="Login" name="Login" />
+        <input type="submit" value="Register" name="Register" />
       </form>
-    </div>
   );
 };
 

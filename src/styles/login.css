@@ -14,3 +14,28 @@ h5 {
     margin: 0;
     color: grey;
 }
+
+
+.google-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: 1px solid #4285F4;
+    color: #4285F4;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .google-btn:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .google-icon {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  

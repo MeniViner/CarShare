@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 
+const Top = () => {
 
-const Top = ({userName}) => {
 
     return (
         <>
             <div className="top">
-                <h3> wellcome back {"${UserName}"}</h3>
-                {/* <h1>Wellcome back {userName} </h1> */}
+
+                <h3 >car share app</h3>
             </div>    
         </>
     );

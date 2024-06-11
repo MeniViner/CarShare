@@ -17,7 +17,7 @@ const SideNavigation = () => {
         <br />
         2
         <br />
-        carShare 0.0.0.2
+        carShare 0.0.2.6
       </div>
 
       <div className="side-nav-bt">
