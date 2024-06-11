@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { db } from './firebaseConfig';
+import LoadingPage from '../assets/LoadingPage';
+
 
 const FetchCarsData = () => {
   const [cars, setCars] = useState([]);
@@ -25,7 +27,7 @@ const FetchCarsData = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingPage />;
   }
 
   if (error) {

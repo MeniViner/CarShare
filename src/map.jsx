@@ -8,6 +8,8 @@ import SideNavigation from './components/sideNavigation';
 import ListCars from './components/listCars';
 import { LocationButton, UserLocation } from './components/userLocation';
 import CarInfoWindow from './components/infoWindow'; 
+import LoadingPage from './assets/LoadingPage';
+
 
 
 const Map = () => {
@@ -68,7 +70,8 @@ const Map = () => {
       <b>your'e currently offline.</b> 
       <h4>please check your internet connections</h4>  
     </div>;
-  if (!isLoaded) return <div>Loading map...</div>;
+  if (!isLoaded)
+    return <LoadingPage />;
 
   const handleLocationButtonClick = () => {
     // Request user's location
@@ -98,12 +101,12 @@ const Map = () => {
             center={userLocation}
           />
         )}
-        
 
           <div className="side-nav-bt" >
             <SideNavigation/>
           </div>
-{/* 
+
+          {/* 
           <div className="list-cars-bt son-map-bt" >
             <ListCars/>
           </div> */}

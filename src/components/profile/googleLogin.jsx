@@ -48,4 +48,3 @@ const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
 };
 
 export default GoogleLogin;
-

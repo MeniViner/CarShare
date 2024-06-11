@@ -1,11 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faListUl, faArrowLeft, faLocationArrow } from '@fortawesome/free-solid-svg-icons';
+import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import cars from '../data/carsData';
 import '../styles/listCars.css';
+import Swal from 'sweetalert2';
+import { CiBookmarkPlus } from "react-icons/ci"; 
+import { MdBookmarkAdded } from "react-icons/md"; 
 
+import { collection, addDoc, query, getDocs, where } from "firebase/firestore"; 
+import { auth, db } from '../data/firebaseConfig'; 
 
 const ListCars = ({ distance }) => {
+
+  const [savedCarIds, setSavedCarIds] = useState([]); 
+
+  useEffect(() => {
+    const fetchSavedCarIds = async () => {
+      if (!auth.currentUser) {
+        return;
+      }
+      try {
+        const q = query(collection(db, 'savedCars'), where('userId', '==', auth.currentUser.uid)); 
+        const querySnapshot = await getDocs(q); 
+        const ids = querySnapshot.docs.map(doc => doc.data().carId); 
+        setSavedCarIds(ids); 
+      } catch (error) {
+        console.error('Error fetching saved car ids:', error);
+      }
+    };
+
+    const unsubscribe = auth.onAuthStateChanged(user => { 
+      if (user) {
+        fetchSavedCarIds();
+      } else {
+        setSavedCarIds([]);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []); 
+
+  const isCarSaved = (carId) => savedCarIds.includes(carId); 
+
+  const saveCar = async (carId) => {
+    if (!auth.currentUser) {
+      Swal.fire('Please log in', 'To save cars, please log in.', 'info'); 
+      return;
+    }
+    if (isCarSaved(carId)) {
+      Swal.fire('Already Saved', 'This car is already saved.', 'info');
+      return;
+    }
+    try {
+      await addDoc(collection(db, 'savedCars'), {
+        userId: auth.currentUser.uid,
+        carId
+      });
+      setSavedCarIds(prev => [...prev, carId]); // כדי לעדכן את הסטייט לאחר שמירת הרכב   
+      Swal.fire('Saved', 'Car saved successfully!', 'success'); 
+    } catch (error) {
+      console.error('Error saving car:', error);
+      Swal.fire('Error', 'Failed to save car.', 'error'); 
+    }
+  };
+
   return (
     <>
       <div className="cars-list">
@@ -23,9 +81,12 @@ const ListCars = ({ distance }) => {
               </p>
             </div>
             <div className='faLocationArrow'>
-                {distance}
-                <FontAwesomeIcon icon={faLocationArrow}/>
+              {distance}
+              <FontAwesomeIcon icon={faLocationArrow}/>
             </div>
+            <button onClick={() => saveCar(car.id)} className='saved-bt'>
+              {isCarSaved(car.id) ? <MdBookmarkAdded /> : <CiBookmarkPlus />}
+            </button>
           </div>
         ))}
 
@@ -35,5 +96,3 @@ const ListCars = ({ distance }) => {
 };
 
 export default ListCars;
-
-

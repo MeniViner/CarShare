@@ -1,6 +1,7 @@
 // ייבוא ספריות Firebase
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 // קובץ ההגדרות מ-Firebase
 const firebaseConfig = {
@@ -13,10 +14,8 @@ const firebaseConfig = {
   measurementId: "G-N41GZRXK22"
 };
 
-// אתחול אפליקציית Firebase
 const app = initializeApp(firebaseConfig);
-
-// קבלת שירות האימות
 const auth = getAuth(app);
+const db = getFirestore(app);
 
-export { auth };
+export { auth, db };
