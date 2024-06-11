@@ -1,78 +1,68 @@
 import React, { useState } from 'react';
-import Swal from 'sweetalert2';
 import { auth } from '../../data/firebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import '../../styles/emailLogin.css'; 
+import Swal from 'sweetalert2';
+import '../../styles/emailLogin.css';
 
 const EmailLogin = ({ setIsAuthenticated, setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLogin, setIsLogin] = useState(true); // true = login, false = register
 
-  const handleLogin = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const action = e.target.name;
 
     try {
-      if (action === 'Login') {
+      if (isLogin) {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        setUser(userCredential.user); 
+        setUser(userCredential.user);
         localStorage.setItem('user', JSON.stringify(userCredential.user));
-        Swal.fire({
-          icon: 'success',
-          title: 'Successfully logged in!',
-          timer: 1500,
-          showConfirmButton: false,
-        });
-        setIsAuthenticated(true);
-      } else if (action === 'Register') {
+        Swal.fire('Success', 'Logged in successfully', 'success');
+      } else {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        setUser(userCredential.user); 
-        Swal.fire({
-          icon: 'success',
-          title: 'Successfully registered and logged in!',
-          timer: 1500,
-          showConfirmButton: false,
-        });
-        setIsAuthenticated(true);
+        setUser(userCredential.user);
+        localStorage.setItem('user', JSON.stringify(userCredential.user));
+        Swal.fire('Success', 'Registered successfully', 'success');
       }
+      setIsAuthenticated(true);
     } catch (error) {
       console.error(error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: action === 'Login' ? 'Incorrect email or password.' : 'Registration failed.',
-        showConfirmButton: true,
-      });
+      if (error.code === 'auth/email-already-in-use') {
+        Swal.fire('Error', 'Email already in use. Please log in instead.', 'error');
+      } else if (error.code === 'auth/invalid-credential') {
+        Swal.fire('Error', 'We checked and we can\'t recognize you.\n try register instead', 'error');
+      } else {
+        Swal.fire('Error', error.message, 'error');
+      }
     }
   };
 
   return (
-    <div className="small-container">
-      <form onSubmit={handleLogin}>
+    <div className="login-container">
+      <form onSubmit={handleSubmit}>
+        <h2>{isLogin ? 'Login' : 'Register'}</h2>
         <label htmlFor="email">Email</label>
         <input
-          id="email"
           type="email"
-          name="email"
-          placeholder="admin@example.com"
+          id="email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <label htmlFor="password">Password</label>
         <input
-          id="password"
           type="password"
-          name="password"
-          placeholder="qwerty"
+          id="password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        <div>
-          <input type="submit" value="Login" name="Login" />
-          <input type="submit" value="Register" name="Register" />
-        </div>
+        <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
+        <p onClick={() => setIsLogin(!isLogin)}>
+          {isLogin ? 'Need an account? Register here.' : 'Have an account? Login here.'}
+        </p>
       </form>
-      </div>
+    </div>
   );
 };
 
