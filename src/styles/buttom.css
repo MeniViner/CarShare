@@ -30,3 +30,29 @@
     color: brown; 
     transform: translateY(-4px); 
 }
+
+
+/* top */
+
+/* Top.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500&display=swap');
+
+.top-section {
+    display: flex;
+    background-color: #f0f0f0; /* צבע רקע */
+    border-bottom: 1px solid #ddd; /* קו תחתון */
+    padding: 0 20px; /* רווח פנימי */
+  }
+  
+  .top-section span {
+    font-family: 'Roboto', sans-serif; /* משפחת גופן מודרנית */
+    font-family: 'Poppins', sans-serif; 
+    font-family: 'Nunito', sans-serif; /* משפחת גופן עגולה */
+    font-size: 1.3rem; /* גודל גופן בינוני */
+    color: #333; /* צבע טקסט */
+    font-weight: 1000; /* עובי גופן */
+    margin: 4px;
+  }
+  
