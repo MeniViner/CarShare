@@ -1,3 +1,4 @@
+  /* loadingPage.css */
 .loading-container {
     display: flex;
     flex-direction: column;
@@ -46,3 +47,41 @@
       opacity: 0;
     }
   }
+
+
+  /* OfflinePage.css */
+.offline-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f2f2f2;
+}
+
+.offline-icon {
+  color: #333;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.offline-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 16px;
+  color: #333;
+}
+
+.offline-message {
+  font-size: 16px;
+  color: #666;
+  margin-top: 8px;
+}
