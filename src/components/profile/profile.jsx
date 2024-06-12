@@ -36,7 +36,7 @@ const UserProfile = () => {
                     <GoogleLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
                 </div>
             ) : (
-                <div>Welcome {user?.displayName || user?.email}!</div>
+                <div>hello {user?.displayName || user?.email}!</div>
             )}
                             
             {isAuthenticated && (
