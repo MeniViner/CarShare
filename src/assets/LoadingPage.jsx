@@ -1,6 +1,5 @@
-// LoadingPage.jsx
 import React from 'react';
-import '../styles/loadingPage.css';
+import '../styles/loadingAndOffline.css';
 
 const LoadingPage = () => {
   return (
