@@ -65,8 +65,8 @@ const Map = () => {
     language: 'iw',
   });
 
-  if (loadError) 
-    return <OfflinePage />;
+  // if (loadError) 
+  //   return <OfflinePage />;
   if (!isLoaded)
     return <LoadingPage />;
 

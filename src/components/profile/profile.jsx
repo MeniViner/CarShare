@@ -1,4 +1,5 @@
 import React, { useEffect , useState } from "react";
+import withOfflineOverlay from "../../assets/withOfflineOverlay";
 import { auth } from '../../data/firebaseConfig';
 import Swal from 'sweetalert2';
 import EmailLogin from './emailLogin';
@@ -45,4 +46,4 @@ const UserProfile = () => {
     );
 }
 
-export default UserProfile;
+export default withOfflineOverlay(UserProfile);
