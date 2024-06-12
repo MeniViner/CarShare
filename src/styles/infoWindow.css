@@ -1,119 +1,5 @@
- /* .popup-window {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    max-width: 300px;
-    font-family: Arial, sans-serif;
-    text-align: center;
-}
-  
-.popup-window img {
-    height: 18vh;
-}
-  
-.popup-window h2 {
-    font-size: 30px;
-    margin-bottom: 10px;
-}
-  
-.popup-window p {
-    margin-bottom: 5px;
-}
-  
-.location-info {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-  
-.location-info span {
-    margin-right: 5px;
-}
-   
 
- */
-
-
-
-
-
-/* MapWithInfoWindow.css */
- /* .map-container {
-    position: relative;
-    width: 100%;
-    height: 100vh; 
-  } */
-   
-  /* CarInfoWindow.css */
-   /* .popup-window {
-    
-    position: absolute;
-    bottom: 2px;
-    left: 0;
-    right: 0;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    max-width: 300px;
-    max-height: 20vh;
-  }
-  
-  .popup-window img {
-    width: 40%;
-    height: auto;
-    margin-bottom: 1px;
-  }
-  
-  .popup-window h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .popup-window p {
-    margin-bottom: 5px;
-  }
-  
-  .location-info {
-    display: flex;
-    align-items: center;
-  }
-  
-  .location-info span {
-    margin-right: 5px;
-  }
-  
-  .close-button {
-    background-color: #f44336;
-    color: #fff;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .close-button:hover {
-    background-color: #d32f2f;
-  } */
-
-
-
-
-
-
-
-
-
-
-
-   /* .info-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-  }*/
-  
-  
- .vehicle-info {
+   .vehicle-info {
    margin: 10px 5px ;
    border-radius: 12px;
    position: absolute;
@@ -124,6 +10,7 @@
    padding: 10px;
    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
    z-index: 10;
+   margin-bottom: 3vh;
  } 
 
   
@@ -132,31 +19,18 @@
     flex-direction: row; 
     align-items: center;
     margin-bottom: 0px;
-    border: #ff5900 solid 1px;
     justify-content: space-between;
   }
   .vehicle-info-header img {
     margin-top: -10vh;
-    border: #007bff solid 1px;
-    margin-left: 20px
+    margin-left: -1vw;
   }
-  vehicle-info-header-text {
+  .vehicle-info-header-text {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     padding: 5px;
-  }
-  .vehicle-info-header-text h2  {
-    margin: 0;
-    font-weight: bold;
-    font-size: 1.1em;
-    border: #007bff solid 1px;
-    margin-bottom: 10px;
-  }
-  
-  .vehicle-info-header-text h3 {
-    font-size: 0.8em;
-    margin: 0px;
-
+    gap: 2vw;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
 
 
@@ -209,3 +83,85 @@
   .vehicle-info-footer button:hover {
     background-color: #0056b3;
   }
+
+
+
+
+
+/* infoWindow.css */
+
+.show-more-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 3vh;
+  transition: background-color 0.3s;
+}
+
+.show-more-button:hover {
+  background-color: #0056b3;
+}
+
+/* הנפשות לקרוסלה */
+.carousel-enter {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.carousel-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.carousel-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.carousel-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* imageCarousel.css */
+.carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+.carousel-image {
+  width: 70%;
+  border-radius: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
+.carousel-button {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 80%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.carousel-button.left {
+  left: 10px;
+}
+
+.carousel-button.right {
+  right: 10px;
+}
