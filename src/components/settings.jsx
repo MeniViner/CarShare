@@ -1,4 +1,5 @@
 import React from 'react';
+import withOfflineOverlay from '../assets/withOfflineOverlay';
 
 
 const Settings = () => {
@@ -13,4 +14,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default withOfflineOverlay(Settings);

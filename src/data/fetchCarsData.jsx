@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { db } from './firebaseConfig';
-import LoadingPage from '../assets/LoadingPage';
+import LoadingPage from '../assets/LoadingPage';s
 
 
 const FetchCarsData = () => {

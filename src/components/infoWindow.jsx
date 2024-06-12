@@ -211,22 +211,23 @@ const CarInfoWindow = ({ selectedCar, userLocation, onCloseClick  }) => {
           <p>Standard rate (km)</p>
           <p>{selectedCar.ratePerKm} {selectedCar.pricePerHour}€/km</p>
         </div>
-        {/* <div className="vehicle-info-rate">
-          <p>Unlock Fee</p>
-          <p>{selectedCar.unlockFee}€</p>
-        </div>
-        <div className="vehicle-info-rate">
-          <p>Parking minutes</p>
-          <p>{selectedCar.parkingMinutesRate}€</p>
-        </div>
-        <div className="vehicle-info-rate">
-          <p>Fuel</p>
-          <p>Free refueling at our partner gas stations</p>
-        </div> */}
-        <div className="vehicle-info-footer">
-          <p>66km (12%)</p>
-          <button>Reserve now</button>
-        </div>
+        <details>
+          <summary>more details</summary>
+          <div className="vehicle-info-rate">
+            <p>Unlock Fee</p>
+            <p>{selectedCar.unlockFee}€</p>
+          </div>
+          <div className="vehicle-info-rate">
+            <p>Parking minutes</p>
+            <p>{selectedCar.parkingMinutesRate}€</p>
+          </div>
+          <div className="vehicle-info-rate">
+            <p>Fuel</p>
+            <p>Free refueling at our partner gas stations</p>
+          </div>
+        </details>
+        <button>Reserve now</button>
+        
         <button className="close-button" onClick={onCloseClick}>Close</button>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
+import withOfflineOverlay from '../assets/withOfflineOverlay';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import cars from '../data/carsData';
@@ -95,4 +96,4 @@ const ListCars = ({ distance }) => {
   );
 };
 
-export default ListCars;
+export default withOfflineOverlay(ListCars);
