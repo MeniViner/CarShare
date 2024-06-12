@@ -17,8 +17,12 @@ const Map = () => {
   const [selectedCar, setSelectedCar] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [mapCenter, setMapCenter] = useState({ lat: 31.795729, lng: 35.219848 });
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // טען את מצב הנושא מ-localStorage אם קיים
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme ? savedTheme === 'dark' : false;
+  });
 
   const handleMarkerClick = (car) => {
     setSelectedCar(car);
@@ -54,8 +58,11 @@ const Map = () => {
     };
   };
 
-  const toggleTheme = () => {
-    setIsDarkMode(prevMode => !prevMode);
+  // const toggleTheme = () => {
+  //   setIsDarkMode(prevMode => !prevMode);
+  // };
+  const toggleTheme = (isDark) => {
+    setIsDarkMode(isDark);
   };
 
   const { isLoaded, loadError } = useLoadScript({

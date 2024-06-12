@@ -1,235 +1,102 @@
-// import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
-// import { mdiMapMarkerQuestionOutline, mdiCarSeat } from '@mdi/js';
-// import Icon from '@mdi/react';
+import React, { useState, useRef, useEffect } from 'react';
+import ImageCarousel from '../assets/ImageCarousel';
+import '../styles/infoWindow.css';
 
-// import ThemeToggle from './design/themeToggle';
-// import { calculateDistance } from '../utils/distanceCalculator';
-// import '../styles/infoWindow.css'
-
-// const CarInfoWindow = ({ selectedCar, toggleTheme, userLocation }) => {
-
-//   const distance = calculateDistance(userLocation, selectedCar.coordinates);
-
-//   return (
-//     <div className="popup-window">
-//       <img
-//         src={selectedCar.image}
-//         alt={`${selectedCar.brand} ${selectedCar.model}`}
-//       />
-//       <h2>{selectedCar.brand} {selectedCar.model}</h2>
-//       <p>Category: {selectedCar.category}</p>
-//       <p>Seats: {selectedCar.seats}</p>
-//       <p>Year: {selectedCar.year}</p>
-//       <p>Price per Hour: ${selectedCar.pricePerHour}</p>
-//       <div className="location-info">
-//         {distance ? (
-//           <>
-//             <span>Distance: {distance}</span>
-//             <FontAwesomeIcon icon={faLocationArrow} />
-//           </>
-//         ) : (
-//           <>
-//             <span>No distance available</span>
-//             <Icon path={mdiMapMarkerQuestionOutline} size={1} />
-//           </>
-//         )}
-//       </div>
-//       <ThemeToggle toggleTheme={toggleTheme} />
-//     </div>
-//   );
-// };
-
-// export default CarInfoWindow;
-
-
-
-
-
-// import React, { useState, useRef, useEffect } from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
-// import { mdiMapMarkerQuestionOutline } from '@mdi/js';
-// import Icon from '@mdi/react';
-
-// import ThemeToggle from './design/themeToggle';
-// import { calculateDistance } from '../utils/distanceCalculator';
-// import '../styles/infoWindow.css';
-
-// const CarInfoWindow = ({ selectedCar, userLocation, onCloseClick }) => {
-//   const distance = calculateDistance(userLocation, selectedCar.coordinates);
-//   const [isDragging, setIsDragging] = useState(false);
-//   const [position, setPosition] = useState({ x: 0, y: 0 });
-//   const ref = useRef(null);
-
-//   useEffect(() => {
-//     const handleClickOutside = (event) => {
-//       if (ref.current && !ref.current.contains(event.target)) {
-//         onCloseClick();
-//       }
-//     };
-
-//     document.body.addEventListener('click', handleClickOutside);
-
-//     return () => {
-//       document.body.removeEventListener('click', handleClickOutside);
-//     };
-//   }, [onCloseClick]);
-  
-//   // const handleMouseDown = (e) => {
-//   //   setIsDragging(true);
-//   //   setPosition({
-//   //     x: e.clientX - ref.current.getBoundingClientRect().left,
-//   //     y: e.clientY - ref.current.getBoundingClientRect().top,
-//   //   });
-//   // };
-
-//   // const handleMouseMove = (e) => {
-//   //   if (isDragging) {
-//   //     const newX = e.clientX - position.x;
-//   //     const newY = e.clientY - position.y;
-//   //     setPosition({ x: newX, y: newY });
-//   //   }
-//   // };
-
-//   // const handleMouseUp = () => {
-//   //   setIsDragging(false);
-//   // };
-
-//   return (
-//     <div
-//       className="popup-window"
-//       // className={`popup-window ${isDragging ? 'dragging' : ''}`}
-//       // ref={ref}
-//       // style={{ left: position.x, top: position.y }}
-//       // onMouseDown={handleMouseDown}
-//       // onMouseMove={handleMouseMove}
-//       // onMouseUp={handleMouseUp}
-//     >
-//       <img src={selectedCar.image} alt={`${selectedCar.brand} ${selectedCar.model}`} />
-
-//       <div className="info-content">
-//         <h2>{selectedCar.brand} {selectedCar.model}</h2>
-//         <p>Category: {selectedCar.category}</p>
-//         <p>Seats: {selectedCar.seats}</p>
-//         <p>Year: {selectedCar.year}</p>
-//         <p>Price per Hour: ${selectedCar.pricePerHour}</p>
-//         <div className="location-info">
-//           {distance ? (
-//             <>
-//               <span>Distance: {distance}</span>
-//               <FontAwesomeIcon icon={faLocationArrow} />
-//             </>
-//           ) : (
-//             <>
-//               <span>No distance available</span>
-//               <Icon path={mdiMapMarkerQuestionOutline} size={1} />
-//             </>
-//           )}
-//         </div>
-//       </div>
-//       <button className="close-button" onClick={onCloseClick}>Close</button>
-//       <ThemeToggle />
-//     </div>
-//   );
-// };
-
-// export default CarInfoWindow;
-
-
-
-
-
-
-
-
-
-
-
-import React, { useRef, useEffect } from 'react';
+//icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGasPump, faCog } from '@fortawesome/free-solid-svg-icons';
-import { mdiMapMarkerQuestionOutline, mdiCarSeat } from '@mdi/js';
-import Icon from '@mdi/react';
-import '../styles/infoWindow.css'
+import { BsFillFuelPumpFill } from "react-icons/bs";
+import { GiPathDistance } from "react-icons/gi";
+import { PiSeatFill } from "react-icons/pi";
+import { MdAirlineSeatReclineExtra, MdLocationOff } from "react-icons/md";
 import { calculateDistance } from '../utils/distanceCalculator';
 
-const CarInfoWindow = ({ selectedCar, userLocation, onCloseClick  }) => {
-  const ref = useRef(null);
+//animations
+import { useSpring, animated } from '@react-spring/web'; //animation for slow open the more details
+
+
+const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
 
   const distance = calculateDistance(userLocation, selectedCar.coordinates);
 
+  const [showMore, setShowMore] = useState(false);
+  const ref = useRef(null); 
 
-  useEffect(() => {
-      const handleClickOutside = (event) => {
-          if (ref.current && !ref.current.contains(event.target)) {
-              onCloseClick();
-          }
-      };
-
-      document.body.addEventListener('mousedown', handleClickOutside);
-
-      return () => {
-          document.body.removeEventListener('mousedown', handleClickOutside);
-      };
-  }, [onCloseClick]);
+  const carouselAnimation = useSpring({
+    opacity: showMore ? 1 : 0,
+    transform: showMore ? 'translateY(0)' : 'translateY(-20px)',
+    config: { duration: 300 },
+  });
   
 
+  // הוסף useEffect לזיהוי לחיצה מחוץ לחלון
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        onCloseClick(); 
+      }
+    };
+
+    document.body.addEventListener('mousedown', handleClickOutside); 
+    document.body.addEventListener('touchstart', handleClickOutside); 
+
+    return () => {
+      document.body.removeEventListener('mousedown', handleClickOutside); 
+      document.body.removeEventListener('touchstart', handleClickOutside); 
+    };
+  }, [onCloseClick]); // הוסף useEffect עם התלות ב-onCloseClick
+
   return (
-    <div ref={ref} >
-      <div className="vehicle-info">
-        <div className="vehicle-info-header">
-          <div className="vehicle-info-header-text">
-            <h2>{selectedCar.brand}</h2>
-            <h3>{selectedCar.model}</h3>
-          </div>
-          <img
-            src={selectedCar.image}
-            alt={`${selectedCar.brand} ${selectedCar.model}`}
-            className="vehicle-info-image"
-          />
+    <div ref={ref} className="vehicle-info"> {/* הוסף את ref ל-div הראשי */}
+      <div className="vehicle-info-header">
+        <div className="vehicle-info-header-text">
+          <h1 class="sticky">{selectedCar.brand}</h1>
+          <h1>{selectedCar.model}</h1>
         </div>
-        <div className="vehicle-info-details">
-
-          <p>Distance:{distance || 'No distance available'}</p>
-
-          <div>
-            <FontAwesomeIcon icon={faCog} />
-            <span>{selectedCar.transmission}</span>
-          </div>
-          <div>
-            <FontAwesomeIcon icon={faGasPump} />
-            <span>{selectedCar.fuel}</span>
-          </div>
-          <div>
-            <Icon path={mdiCarSeat} size={1} />
-            <span>{selectedCar.seats} seats</span>
-          </div>
-        </div>
-        <div className="vehicle-info-rate">
-          <p>Standard rate (km)</p>
-          <p>{selectedCar.ratePerKm} {selectedCar.pricePerHour}€/km</p>
-        </div>
-        <details>
-          <summary>more details</summary>
-          <div className="vehicle-info-rate">
-            <p>Unlock Fee</p>
-            <p>{selectedCar.unlockFee}€</p>
-          </div>
-          <div className="vehicle-info-rate">
-            <p>Parking minutes</p>
-            <p>{selectedCar.parkingMinutesRate}€</p>
-          </div>
-          <div className="vehicle-info-rate">
-            <p>Fuel</p>
-            <p>Free refueling at our partner gas stations</p>
-          </div>
-        </details>
-        <button>Reserve now</button>
         
-        <button className="close-button" onClick={onCloseClick}>Close</button>
+        
+        <img
+          src={selectedCar.image}
+          alt={`${selectedCar.brand} ${selectedCar.model}`}
+          className="vehicle-info-image"
+        />
       </div>
+      <div className="vehicle-info-details">
+          { (distance) ? ( //ask if ther is a distance set
+            <div>
+              <GiPathDistance />
+              <span>{distance}</span>
+            </div>
+          ) : ( 
+            <div>
+              <MdLocationOff />
+            </div>
+          )}
+
+          {selectedCar.fuel !== 'NaN' && ( // הסתרה אם הערך fuel הוא 'NaN'
+            <div>
+              <FontAwesomeIcon icon={faGasPump} />
+              <span>{selectedCar.fuel}</span>
+            </div>
+          )}
+          {selectedCar.battery !== 'NaN' && ( // הסתרה אם הערך battery הוא 'NaN'
+            <div>
+              <BsFillFuelPumpFill />
+              <span>{selectedCar.battery}</span>
+            </div>
+          )}
+          <div>
+          <PiSeatFill />
+            <span>{selectedCar.seats}</span>
+          </div>
+        </div>
+      <button onClick={() => setShowMore(!showMore)} className="show-more-button">more details</button>
+      {showMore && (
+        <animated.div style={carouselAnimation} className="carousel">
+          <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
+        </animated.div>
+      )}
+      <button className="close-button" onClick={onCloseClick}>Close</button>
     </div>
   );
 };
