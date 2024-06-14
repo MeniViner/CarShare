@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react'; 
+import { useNavigate  } from 'react-router-dom';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
+import { calculateDistance } from '../utils/distanceCalculator'; 
 import cars from '../data/carsData';
 import '../styles/listCars.css';
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import { CiBookmarkPlus } from "react-icons/ci"; 
-import { MdBookmarkAdded } from "react-icons/md"; 
+import { RiPinDistanceLine } from "react-icons/ri";
+import { MdBookmarkAdded, MdLocationOff } from "react-icons/md"; 
 
 import { collection, addDoc, query, getDocs, where } from "firebase/firestore"; 
 import { auth, db } from '../data/firebaseConfig'; 
 
 const ListCars = ({ distance }) => {
 
+  const navigate  = useNavigate(); 
   const [savedCarIds, setSavedCarIds] = useState([]); 
+  const [userLocation, setUserLocation] = useState(null); 
 
   useEffect(() => {
     const fetchSavedCarIds = async () => {
@@ -37,6 +42,13 @@ const ListCars = ({ distance }) => {
         setSavedCarIds([]);
       }
     });
+
+    //
+    const storedLocation = localStorage.getItem('userLocation');
+    if (storedLocation) {
+      setUserLocation(JSON.parse(storedLocation)); // עדכן את מצב מיקום המשתמש
+    }
+
 
     return () => unsubscribe();
   }, []); 
@@ -65,25 +77,51 @@ const ListCars = ({ distance }) => {
     }
   };
 
+  const handleCarClick = (car) => {
+    navigate(`/map?carId=${car.id}`); // הפניה לדף המפה עם carId כפרמטר
+  };
+
+  const calculateCarDistances = () => {
+    if (!userLocation) return cars.map(car => ({ ...car, distance: null }));
+    return cars.map(car => ({
+      ...car,
+      distance: calculateDistance(userLocation, car.coordinates) // חישוב המרחק עבור כל רכב
+    }));
+  };
+  
+
   return (
     <>
       <div className="cars-list">
         <h2>Vehicles nearby</h2>
-        {cars.map((car) => (
-          <div key={car.id} className="car-item">
+        {calculateCarDistances().map((car) => (
+
+
+          <div 
+            key={car.id} 
+            className="car-item"
+            onClick={() => handleCarClick(car)}
+          >
             <img src={car.image} alt={`${car.brand} ${car.model}`} />
             <div className="car-details">
               <h3>{`${car.brand} ${car.model}`}</h3>
-              <p>
-                <span>{car.year}</span> • <span>{car.seats} seats</span>
-              </p>
+
+              {car.distance ? (
+                <>
+                  <RiPinDistanceLine />
+                  <span>{car.distance} km</span>
+                </>
+              ) : (
+                <MdLocationOff /> // הצג אייקון של מיקום כבוי אם אין מיקום
+              )}
+
               <p>
                 <span>{Math.floor(car.pricePerHour)} ₪/hour</span>
               </p>
             </div>
-            <div className='faLocationArrow'>
-              {distance}
-              <FontAwesomeIcon icon={faLocationArrow}/>
+            
+            <div>
+              
             </div>
             <button onClick={() => saveCar(car.id)} className='saved-bt'>
               {isCarSaved(car.id) ? <MdBookmarkAdded /> : <CiBookmarkPlus />}

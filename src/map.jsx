@@ -1,4 +1,5 @@
-import React, {useState } from 'react';
+import React, {useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 import './style.css';
 import cars from './data/carsData';
@@ -13,7 +14,7 @@ import withOfflineOverlay from './assets/withOfflineOverlay';
 
 
 const Map = () => {
-
+  const location = useLocation(); 
   const [selectedCar, setSelectedCar] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
   const [mapCenter, setMapCenter] = useState({ lat: 31.795729, lng: 35.219848 });
@@ -23,6 +24,34 @@ const Map = () => {
     const savedTheme = localStorage.getItem('theme');
     return savedTheme ? savedTheme === 'dark' : false;
   });
+  const [isLocationSet, setIsLocationSet] = useState(false); // ניהול מצב האם מיקום שמור
+
+  useEffect(() => {
+    const storedLocation = localStorage.getItem('userLocation');
+    if (storedLocation) {
+      const parsedLocation = JSON.parse(storedLocation);
+      setUserLocation(parsedLocation);
+      setMapCenter(parsedLocation);
+      setIsLocationSet(true); // עדכון המצב אם יש מיקום שמור
+    }
+
+
+    // בדוק אם יש פרמטר carId ב-URL
+    const searchParams = new URLSearchParams(location.search);
+    const carId = searchParams.get('carId');
+    if (carId) {
+      const car = cars.find(c => c.id === parseInt(carId));
+      if (car) {
+        setSelectedCar(car);
+        setMapCenter(car.coordinates); // התרכז ברכב שנבחר
+        setIsInfoWindowOpen(true); // פתח את ה-infoWindow
+      }
+    }
+
+  }, [location]); // הפעל מחדש כש-location משתנה
+
+
+  
 
   const handleMarkerClick = (car) => {
     setSelectedCar(car);
@@ -58,33 +87,28 @@ const Map = () => {
     };
   };
 
-  // const toggleTheme = () => {
-  //   setIsDarkMode(prevMode => !prevMode);
-  // };
-  const toggleTheme = (isDark) => {
-    setIsDarkMode(isDark);
-  };
 
-  const { isLoaded, loadError } = useLoadScript({
+
+  const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyC8DxT2vSZIyutVKE4BcB66O2x4LHGLxq4',
     // googleMapsApiKey: process.env.APP_GOOGLE_MAPS_API_KEY,
     // libraries: ["places"],
     language: 'iw',
   });
 
-  // if (loadError) 
-  //   return <OfflinePage />;
-  if (!isLoaded)
-    return <LoadingPage />;
+
+  if (!isLoaded) return <LoadingPage />;
 
 
   const handleLocationButtonClick = () => {
-    // Request user's location
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        setMapCenter({ lat: latitude, lng: longitude });
-        setUserLocation({ lat: latitude, lng: longitude }); // Set user's location
+        const newLocation = { lat: latitude, lng: longitude }; // ערך חדש למיקום המשתמש
+        setMapCenter(newLocation);
+        setUserLocation(newLocation);
+        localStorage.setItem('userLocation', JSON.stringify(newLocation)); // שמור ב-localStorage
+        setIsLocationSet(true); // עדכון המצב אם המיקום נשמר
       },
       (error) => {
         console.error('Error getting user location:', error);
@@ -92,16 +116,17 @@ const Map = () => {
     );
   };
 
+
   return (
     <div className='map-app'>
       <GoogleMap
-        zoom={18}
+        zoom={16}
         center={mapCenter}
         mapContainerStyle={{ height: '100%', width: '100%' }}
         options={getMapOptions()}
       >
         {userLocation && (
-          <Marker
+          <Marker //window.google.maps.marker.AdvancedMarkerElement
             position={userLocation}
             center={userLocation}
           />
@@ -113,19 +138,15 @@ const Map = () => {
 
           <div className="location-button" onClick={handleLocationButtonClick}>
             <div className='location-button'>
-              <div className='fa-location'> {/*onClick={handleLocationButtonClick}*/}
+              <div className={`fa-location ${isLocationSet ? 'blue' : ''}`}>
                 <FontAwesomeIcon icon={faLocation} />
               </div>
             </div>
           </div>
 
-        
-        {/* <div className="toggle-track toggle-Theme">
-          <ThemeToggle toggleTheme={toggleTheme} />
-        </div> */}
 
         {cars.map((car) => (
-          <Marker
+          <Marker //window.google.maps.marker.AdvancedMarkerElement
             key={car.id}
             position={{ lat: car.coordinates.lat, lng: car.coordinates.lng }}
             onClick={() => handleMarkerClick(car)}
@@ -136,20 +157,6 @@ const Map = () => {
           />
         ))}
 
-        {/* {selectedCar && (
-          <InfoWindow
-            position={{ lat: selectedCar.coordinates.lat, lng: selectedCar.coordinates.lng }}
-            onCloseClick={() => setSelectedCar(null)}
-          >
-            <CarInfoWindow 
-              selectedCar={selectedCar} 
-              toggleTheme={toggleTheme} 
-              userLocation={userLocation}
-
-            />
-          </InfoWindow>
-        )} */}
-
         {(selectedCar && isInfoWindowOpen ) && (
           <CarInfoWindow
             selectedCar={selectedCar}
@@ -157,8 +164,8 @@ const Map = () => {
             onCloseClick={handleCloseClick}
           />
         )}
-
       </GoogleMap>
+
     </div>
   );
 };
