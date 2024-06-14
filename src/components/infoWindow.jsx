@@ -3,12 +3,11 @@ import ImageCarousel from '../assets/ImageCarousel';
 import '../styles/infoWindow.css';
 
 //icons
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGasPump, faCog } from '@fortawesome/free-solid-svg-icons';
-import { BsFillFuelPumpFill } from "react-icons/bs";
-import { GiPathDistance } from "react-icons/gi";
+import { BiSolidBatteryLow } from "react-icons/bi";
+import { BsFuelPumpFill } from "react-icons/bs";
+import { RiPinDistanceLine } from "react-icons/ri";
 import { PiSeatFill } from "react-icons/pi";
-import { MdAirlineSeatReclineExtra, MdLocationOff } from "react-icons/md";
+import { MdLocationOff } from "react-icons/md";
 import { calculateDistance } from '../utils/distanceCalculator';
 
 //animations
@@ -64,7 +63,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
       <div className="vehicle-info-details">
           { (distance) ? ( //ask if ther is a distance set
             <div>
-              <GiPathDistance />
+              <RiPinDistanceLine />
               <span>{distance}</span>
             </div>
           ) : ( 
@@ -75,13 +74,13 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
 
           {selectedCar.fuel !== 'NaN' && ( // הסתרה אם הערך fuel הוא 'NaN'
             <div>
-              <FontAwesomeIcon icon={faGasPump} />
+              <BsFuelPumpFill />
               <span>{selectedCar.fuel}</span>
             </div>
           )}
           {selectedCar.battery !== 'NaN' && ( // הסתרה אם הערך battery הוא 'NaN'
             <div>
-              <BsFillFuelPumpFill />
+              <BiSolidBatteryLow />
               <span>{selectedCar.battery}</span>
             </div>
           )}
@@ -96,7 +95,8 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
           <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
         </animated.div>
       )}
-      <button className="close-button" onClick={onCloseClick}>Close</button>
+      <button className="check-btn" onClick={onCloseClick}>check availebilty</button>
+      <button className="order-btn" onClick={onCloseClick}>order now</button>
     </div>
   );
 };

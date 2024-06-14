@@ -2,11 +2,6 @@
   margin: 0px;
   padding: 0px;
   height: 100dvh;
-  /* bottom: 0px;
-  right: 0px;
-  left: 0px;
-  top: 0px;
-  position: fixed;  */
 }
 
 .map-app {
@@ -42,12 +37,6 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 0;
 }
-
-/* .toggle-Theme {
-  z-index: 1;
-  margin-top: -68%;
-  margin-left: 1%;
-} */
 
 .side-nav-bt {
   position: fixed;
@@ -88,12 +77,6 @@
   justify-content: center;  
 }
 
-.top {
-  height: 5vh;
-  display: flex;
-  margin-bottom: 0.5vh;
-  box-shadow: 0px 5px 15px  rgb(0, 0, 0, 0.1);
-  font-family: "Arial Rounded MT Bold", sans-serif; 
-  align-items: center;
+.fa-location.blue {
+  color: #007bff;
 }
-
