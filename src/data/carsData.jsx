@@ -198,6 +198,28 @@ const cars = [
     image5: 'https://www.motortrend.com/uploads/sites/10/2024/01/2024-audi-a6-premium-plus-sport-4wd-sedan-front-view.png?fit=around%7C875:492',
     coordinates: { lat: 31.796729, lng: 35.220548 }
   },
+  {
+    id: 9,
+    category: 'business',
+    brand: 'Audi',
+    model: 'A6',
+    seats: 5,
+    year: 2024,
+    pricePerHour: 35,
+    pricePerDay: 380,
+    unlockFee: 5,
+    kmPrice: 2,
+    fuelType: 'Gasoline',
+    fuel: '61%',
+    battery: 'NaN',
+    image: 'https://www.motortrend.com/uploads/sites/10/2024/01/2024-audi-a6-premium-plus-sport-4wd-sedan-angular-front.png?fit=around%7C875:492',
+    image1: 'https://www.motortrend.com/uploads/sites/10/2024/01/2024-audi-a6-premium-plus-sport-4wd-sedan-side-view.png?fit=around%7C875:492',
+    image2: 'https://www.motortrend.com/uploads/sites/10/2024/01/2024-audi-a6-premium-plus-sport-4wd-sedan-doors.png?fit=around%7C875:492',
+    image3: 'https://www.motortrend.com/uploads/sites/10/2024/01/2024-audi-a6-premium-plus-sport-4wd-sedan-rear-view.png?fit=around%7C875:492',
+    image4: 'https://www.motortrend.com/uploads/sites/10/2024/01/2024-audi-a6-premium-plus-sport-4wd-sedan-trunk.png?fit=around%7C875:492',
+    image5: 'https://www.motortrend.com/uploads/sites/10/2024/01/2024-audi-a6-premium-plus-sport-4wd-sedan-front-view.png?fit=around%7C875:492',
+    coordinates: { lat: 31.783500, lng: 34.700132 }
+  },
   
 ];
 
