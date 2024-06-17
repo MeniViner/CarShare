@@ -5,8 +5,6 @@ import { calculateDistance } from '../utils/distanceCalculator';
 import cars from '../data/carsData';
 import '../styles/listCars.css';
 import Swal from 'sweetalert2';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 import { CiBookmarkPlus } from "react-icons/ci"; 
 import { RiPinDistanceLine } from "react-icons/ri";
 import { MdBookmarkAdded, MdLocationOff } from "react-icons/md"; 
@@ -14,7 +12,7 @@ import { MdBookmarkAdded, MdLocationOff } from "react-icons/md";
 import { collection, addDoc, query, getDocs, where } from "firebase/firestore"; 
 import { auth, db } from '../data/firebaseConfig'; 
 
-const ListCars = ({ distance }) => {
+const ListCars = () => {
 
   const navigate  = useNavigate(); 
   const [savedCarIds, setSavedCarIds] = useState([]); 
@@ -109,7 +107,7 @@ const ListCars = ({ distance }) => {
               {car.distance ? (
                 <>
                   <RiPinDistanceLine />
-                  <span>{car.distance} km</span>
+                  <span>{car.distance}</span>
                 </>
               ) : (
                 <MdLocationOff /> // הצג אייקון של מיקום כבוי אם אין מיקום
