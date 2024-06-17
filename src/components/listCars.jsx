@@ -133,3 +133,4 @@ const ListCars = () => {
 };
 
 export default withOfflineOverlay(ListCars);
+
