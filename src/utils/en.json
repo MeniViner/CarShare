@@ -1,7 +1,9 @@
 {
     "welcome": "Welcome back, user",
     "settings": "Settings",
-    "map-color": "map color"
+    "map-color": "map color",
+    "new-user": "hi new user"
+
 }
   
   
