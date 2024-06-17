@@ -4,10 +4,13 @@ import { auth } from '../../data/firebaseConfig';
 import Swal from 'sweetalert2';
 import EmailLogin from './emailLogin';
 import GoogleLogin from './googleLogin';
+import { useTranslation } from 'react-i18next';
+
 
 const UserProfile = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
+    const { t} = useTranslation();
     
         // פונקציה לטיפול בהתנתקות
     const handleLogout = () => {
@@ -32,6 +35,7 @@ const UserProfile = () => {
             {!isAuthenticated ? (
                 <div>
                     <h4>hi new user</h4>
+                    <h4>{t('new-user')}</h4>
                     <EmailLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
                     <GoogleLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
                 </div>
