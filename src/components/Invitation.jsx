@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { DatePicker, TimePicker } from 'react-rainbow-components'; // השתמש ברכיבי בחירה של תאריך ושעה
-import Swal from 'sweetalert2';
+import { Data } from '@react-google-maps/api';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 import '../styles/invitation.css';
 
 const Invitation = ({ selectedCar }) => {
@@ -14,15 +14,29 @@ const Invitation = ({ selectedCar }) => {
     setIsHourly(hourly);
   };
 
-  const handleHoursChange = (e) => {
-    const hours = Math.max(1, e.target.value);
-    setSelectedHours(hours);
+  const incrementHours = () => setSelectedHours(prev => prev + 1);
+  const decrementHours = () => setSelectedHours(prev => (prev > 1 ? prev - 1 : 1));
+
+  const incrementDays = () => {
+    setSelectedDays(prev => prev + 1);
+    const newEndDate = new Date(startDate);
+    newEndDate.setDate(newEndDate.getDate() + selectedDays + 1);
+    setEndDate(newEndDate);
+  };
+  const decrementDays = () => {
+    setSelectedDays(prev => (prev > 1 ? prev - 1 : 1));
+    const newEndDate = new Date(startDate);
+    newEndDate.setDate(newEndDate.getDate() + selectedDays - 1);
+    setEndDate(newEndDate);
   };
 
-  const handleDateChange = (field, date) => {
+  const handleDateChange = (field, value) => {
+    const date = new Date(value);
     if (field === 'start') {
       setStartDate(date);
-      setEndDate(new Date(date.getTime() + 24 * 60 * 60 * 1000));
+      const newEndDate = new Date(date);
+      newEndDate.setDate(newEndDate.getDate() + selectedDays);
+      setEndDate(newEndDate);
     } else {
       setEndDate(date);
       setSelectedDays(Math.ceil((date - startDate) / (24 * 60 * 60 * 1000)));
@@ -57,33 +71,48 @@ const Invitation = ({ selectedCar }) => {
       {isHourly ? (
         <div className="hourly-rental">
           <label>שעות</label>
-          <input 
-            type="number" 
-            min="1" 
-            value={selectedHours} 
-            onChange={handleHoursChange} 
-          />
+          <div className="input-group">
+            <button onClick={decrementHours}><FaMinus /></button>
+            <input 
+              type="number" 
+              min="1" 
+              value={selectedHours} 
+              onChange={(e) => setSelectedHours(Math.max(1, e.target.value))} 
+              readOnly
+            />
+            <button onClick={incrementHours}><FaPlus /></button>
+          </div>
         </div>
       ) : (
         <div className="daily-rental">
           <label>מתאריך</label>
-          <DatePicker
-            value={startDate}
-            onChange={(date) => handleDateChange('start', date)}
-            formatStyle="medium"
+          <input 
+            type="date" 
+            value={startDate.toISOString().substring(0, 10)}
+            onChange={(e) => handleDateChange('start', e.target.value)}
           />
           <label>עד תאריך</label>
-          <DatePicker
-            value={endDate}
-            onChange={(date) => handleDateChange('end', date)}
-            formatStyle="medium"
+          <input 
+            type="date" 
+            value={endDate.toISOString().substring(0, 10)}
+            onChange={(e) => handleDateChange('end', e.target.value)}
           />
+          <div className="input-group">
+            <button onClick={decrementDays}><FaMinus /></button>
+            <input 
+              type="number" 
+              min="1" 
+              value={selectedDays} 
+              onChange={(e) => setSelectedDays(Math.max(1, e.target.value))} 
+            />
+            <button onClick={incrementDays}><FaPlus /></button>
+          </div>
         </div>
       )}
 
       <div className="cost-summary">
         <p>סה"כ עלות: {calculateCost()} ₪</p>
-        <button onClick={() => Swal.fire('הזמנה', 'הזמנתך נשלחה בהצלחה!', 'success')}>הצג את הזמנתך</button>
+        <button>הצג את הזמנתך</button>
       </div>
     </div>
   );
