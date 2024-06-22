@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ImageCarousel from '../assets/ImageCarousel';
 import '../styles/infoWindow.css';
+import Invitation from './Invitation';
+import { calculateDistance } from '../utils/distanceCalculator';
 
 //icons
 import { BiSolidBatteryLow } from "react-icons/bi";
@@ -8,7 +10,6 @@ import { BsFuelPumpFill } from "react-icons/bs";
 import { RiPinDistanceLine } from "react-icons/ri";
 import { PiSeatFill } from "react-icons/pi";
 import { MdLocationOff } from "react-icons/md";
-import { calculateDistance } from '../utils/distanceCalculator';
 
 //animations
 import { useSpring, animated } from '@react-spring/web'; //animation for slow open the more details
@@ -20,6 +21,12 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
 
   const [showMore, setShowMore] = useState(false);
   const ref = useRef(null); 
+
+  const [showInvitation, setShowInvitation] = useState(false);
+  const handleOrderClick = () => {
+    setShowInvitation(true);
+    setShowMore(false); // הסתרת ה-"showMore" אם ה-Invitation מוצג
+  };
 
   const carouselAnimation = useSpring({
     opacity: showMore ? 1 : 0,
@@ -89,14 +96,21 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
             <span>{selectedCar.seats}</span>
           </div>
         </div>
-      <button onClick={() => setShowMore(!showMore)} className="show-more-button">more details</button>
-      {showMore && (
-        <animated.div style={carouselAnimation} className="carousel">
-          <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
-        </animated.div>
+      {!showInvitation && ( // הצגת כפתור "הזמן עכשיו" אם ה-Invitation לא מוצג
+        <button className="order-btn" onClick={handleOrderClick}>order now</button>
       )}
-      <button className="check-btn" onClick={onCloseClick}>check availebilty</button>
-      <button className="order-btn" onClick={onCloseClick}>order now</button>
+      {showInvitation ? ( // הצגת ה-Invitation אם ה-showInvitation הוא true
+        <Invitation selectedCar={selectedCar} />
+      ) : (
+        <>
+          <button onClick={() => setShowMore(!showMore)} className="show-more-button">more details</button>
+          {showMore && (
+            <animated.div style={carouselAnimation} className="carousel">
+              <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
+            </animated.div>
+          )}
+        </>
+      )}
     </div>
   );
 };
