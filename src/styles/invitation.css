@@ -1,0 +1,53 @@
+.invitation-container {
+    margin-top: 20px;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .tab {
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .tab.active {
+    border-bottom: 2px solid #007bff;
+  }
+  
+  .hourly-rental,
+  .daily-rental {
+    margin-bottom: 10px;
+  }
+  
+  .hourly-rental input,
+  .daily-rental input {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+  }
+  
+  .cost-summary {
+    margin-top: 10px;
+  }
+  
+  .cost-summary button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cost-summary button:hover {
+    background-color: #0056b3;
+  }
+  
