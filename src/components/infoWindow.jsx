@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import ImageCarousel from '../assets/ImageCarousel';
 import '../styles/infoWindow.css';
 import Invitation from './Invitation';
+import OrderView from './OrderView';
+import Swal from 'sweetalert2';
 import { calculateDistance } from '../utils/distanceCalculator';
 
 //icons
@@ -26,6 +28,30 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
   const handleOrderClick = () => {
     setShowInvitation(true);
     setShowMore(false); // הסתרת ה-"showMore" אם ה-Invitation מוצג
+  };
+
+
+  const [reservationData, setReservationData] = useState(null);
+
+  const handleCheckAvailability = (data) => {
+    const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+    const isAvailable = !storedReservations.some(reservation =>
+      reservation.carId === selectedCar.id &&
+      ((new Date(`${reservation.startDate}T${reservation.startTime}`) < new Date(`${reservation.endDate}T${reservation.endTime}`)) &&
+       (new Date(`${data.startDate}T${data.startTime}`) < new Date(`${data.endDate}T${data.endTime}`)))
+    );
+  
+    if (isAvailable) {
+      setReservationData(data);
+    } else {
+      Swal.fire('לא זמין', 'הרכב אינו זמין לתאריכים ולשעות שנבחרו', 'error');
+    }
+  };
+  
+
+  const handleConfirmOrder = () => {
+    setReservationData(null);
+    onCloseClick();
   };
 
   const carouselAnimation = useSpring({
@@ -99,18 +125,35 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
       {!showInvitation && ( // הצגת כפתור "הזמן עכשיו" אם ה-Invitation לא מוצג
         <button className="order-btn" onClick={handleOrderClick}>order now</button>
       )}
-      {showInvitation ? ( // הצגת ה-Invitation אם ה-showInvitation הוא true
-        <Invitation selectedCar={selectedCar} />
+
+    <div className="info-window">
+      {reservationData ? (
+        <OrderView 
+          selectedCar={selectedCar}
+          reservationData={reservationData}
+          onConfirmOrder={handleConfirmOrder}
+        />
       ) : (
         <>
-          <button onClick={() => setShowMore(!showMore)} className="show-more-button">more details</button>
-          {showMore && (
-            <animated.div style={carouselAnimation} className="carousel">
-              <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
-            </animated.div>
+          {showInvitation ? (
+            <Invitation 
+              selectedCar={selectedCar}
+              onCheckAvailability={handleCheckAvailability}
+            />
+          ) : (
+            <>
+              <button onClick={() => setShowMore(!showMore)} className="show-more-button">more details</button>
+              {showMore && (
+                <animated.div style={carouselAnimation} className="carousel">
+                  <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
+                </animated.div>
+              )}
+            </>
           )}
         </>
       )}
+    </div>
+
     </div>
   );
 };
