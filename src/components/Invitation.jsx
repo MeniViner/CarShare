@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Data } from '@react-google-maps/api';
+import React, { useState, useEffect } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import '../styles/invitation.css';
 
-const Invitation = ({ selectedCar }) => {
+const Invitation = ({ selectedCar, onCheckAvailability }) => {
   const [isHourly, setIsHourly] = useState(true);
   const [selectedHours, setSelectedHours] = useState(1);
   const [startDate, setStartDate] = useState(new Date());
+  const [startTime, setStartTime] = useState(new Date().toTimeString().slice(0, 5));
   const [endDate, setEndDate] = useState(new Date(new Date().setDate(new Date().getDate() + 1)));
+  const [endTime, setEndTime] = useState(new Date(Date.now() + 3600000).toTimeString().slice(0, 5));
   const [selectedDays, setSelectedDays] = useState(1);
 
   const handleTabClick = (hourly) => {
@@ -30,18 +31,73 @@ const Invitation = ({ selectedCar }) => {
     setEndDate(newEndDate);
   };
 
+  const increment = (type) => {
+    if (type === 'hours') {
+      setSelectedHours(prev => prev + 1);
+      const newEndTime = new Date(startDate);
+      newEndTime.setHours(newEndTime.getHours() + selectedHours + 1);
+      setEndTime(newEndTime.toTimeString().slice(0, 5));
+    } else if (type === 'days') {
+      setSelectedDays(prev => prev + 1);
+      const newEndDate = new Date(startDate);
+      newEndDate.setDate(newEndDate.getDate() + selectedDays + 1);
+      setEndDate(newEndDate);
+    }
+  };
+  
+  const decrement = (type) => {
+    if (type === 'hours') {
+      setSelectedHours(prev => (prev > 1 ? prev - 1 : 1));
+      const newEndTime = new Date(startDate);
+      newEndTime.setHours(newEndTime.getHours() + selectedHours - 1);
+      setEndTime(newEndTime.toTimeString().slice(0, 5));
+    } else if (type === 'days') {
+      setSelectedDays(prev => (prev > 1 ? prev - 1 : 1));
+      const newEndDate = new Date(startDate);
+      newEndDate.setDate(newEndDate.getDate() + selectedDays - 1);
+      setEndDate(newEndDate);
+    }
+  };
+
   const handleDateChange = (field, value) => {
+    if (isNaN(Date.parse(value))) {
+      return; // טיפול בתאריך לא תקין
+    }
+
+    
     const date = new Date(value);
     if (field === 'start') {
       setStartDate(date);
-      const newEndDate = new Date(date);
-      newEndDate.setDate(newEndDate.getDate() + selectedDays);
-      setEndDate(newEndDate);
+      if (date > endDate) {
+        setEndDate(date); // אם התאריך ההתחלתי גדול יותר, נעדכן גם את תאריך הסיום
+      }
     } else {
-      setEndDate(date);
+      if (date < startDate) {
+        setEndDate(startDate); // אם תאריך הסיום קטן מהתאריך ההתחלתי, נעדכן אותו לתאריך ההתחלתי
+      } else {
+        setEndDate(date);
+      }
       setSelectedDays(Math.ceil((date - startDate) / (24 * 60 * 60 * 1000)));
     }
   };
+  
+  const handleTimeChange = (field, value) => {
+    const [hours, minutes] = value.split(':').map(Number);
+    if (field === 'start') {
+      setStartTime(value);
+      if (new Date(`1970-01-01T${value}`) >= new Date(`1970-01-01T${endTime}`)) {
+        const newEndTime = `${(hours + 1).toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        setEndTime(newEndTime); // אם שעת ההתחלה גדולה משעת הסיום, נעדכן את שעת הסיום
+      }
+    } else {
+      if (new Date(`1970-01-01T${value}`) <= new Date(`1970-01-01T${startTime}`)) {
+        setEndTime(startTime); // אם שעת הסיום קטנה משעת ההתחלה, נעדכן את שעת הסיום לשעת ההתחלה
+      } else {
+        setEndTime(value);
+      }
+    }
+  };
+
 
   const calculateCost = () => {
     if (isHourly) {
@@ -51,6 +107,21 @@ const Invitation = ({ selectedCar }) => {
     }
   };
 
+  // בדיקת זמינות
+  const handleCheckAvailability = () => {
+    const reservationData = {
+      startDate: startDate.toISOString().split('T')[0],
+      startTime,
+      endDate: endDate.toISOString().split('T')[0],
+      endTime,
+      selectedHours,
+      selectedDays,
+    };
+    onCheckAvailability(reservationData);
+  };
+
+
+  
   return (
     <div className="invitation-container">
       <div className="tabs">
@@ -68,38 +139,53 @@ const Invitation = ({ selectedCar }) => {
         </button>
       </div>
 
+      <div className="date-time-selection">
+        <label>מתאריך</label>
+        <input 
+          type="date" 
+          value={startDate.toISOString().substring(0, 10)}
+          onChange={(e) => handleDateChange('start', e.target.value)}
+        />
+        <input 
+          type="time" 
+          value={startTime}
+          onChange={(e) => handleTimeChange('start', e.target.value)}
+        />
+        <label>עד תאריך</label>
+        <input 
+          type="date" 
+          value={endDate.toISOString().substring(0, 10)}
+          onChange={(e) => handleDateChange('end', e.target.value)}
+        />
+        <input 
+          type="time" 
+          value={endTime}
+          onChange={(e) => handleTimeChange('end', e.target.value)}
+        />
+      </div>
+
       {isHourly ? (
         <div className="hourly-rental">
           <label>שעות</label>
           <div className="input-group">
             <button onClick={decrementHours}><FaMinus /></button>
             <input 
+              class="no-spinner"
               type="number" 
               min="1" 
               value={selectedHours} 
               onChange={(e) => setSelectedHours(Math.max(1, e.target.value))} 
-              readOnly
             />
             <button onClick={incrementHours}><FaPlus /></button>
           </div>
         </div>
       ) : (
         <div className="daily-rental">
-          <label>מתאריך</label>
-          <input 
-            type="date" 
-            value={startDate.toISOString().substring(0, 10)}
-            onChange={(e) => handleDateChange('start', e.target.value)}
-          />
-          <label>עד תאריך</label>
-          <input 
-            type="date" 
-            value={endDate.toISOString().substring(0, 10)}
-            onChange={(e) => handleDateChange('end', e.target.value)}
-          />
+          <label>ימים</label>
           <div className="input-group">
             <button onClick={decrementDays}><FaMinus /></button>
             <input 
+              class="no-spinner"
               type="number" 
               min="1" 
               value={selectedDays} 
@@ -112,7 +198,7 @@ const Invitation = ({ selectedCar }) => {
 
       <div className="cost-summary">
         <p>סה"כ עלות: {calculateCost()} ₪</p>
-        <button>הצג את הזמנתך</button>
+        <button onClick={handleCheckAvailability}>בדוק זמינות</button>
       </div>
     </div>
   );
