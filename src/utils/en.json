@@ -2,8 +2,10 @@
     "welcome": "Welcome back, user",
     "settings": "Settings",
     "map-color": "map color",
-    "new-user": "hi new user"
-
+    "set-language": "change language",
+    "new-user": "hi new user",
+    "info-lang": "you can also save this setting by loggin in",
+    "lang-saved": "selected language saved"
 }
   
   
