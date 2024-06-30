@@ -10,7 +10,6 @@ const ProfileDetails = ({ user, onEdit }) => {
 
     const handleToggleSendReceipt = () => {
         setSendReceipt(prevSendReceipt => !prevSendReceipt);
-        // לוגיקה נוספת לשמירת העדכון בשרת או ב-LocalStorage כאן
     };
 
     const handleImageUpload = (e) => {
