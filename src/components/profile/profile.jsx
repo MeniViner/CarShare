@@ -51,7 +51,7 @@ const UserProfile = () => {
                 </div>
             ) : (
                 <>
-                    <div>hello {user?.displayName || user?.email}!</div>
+                    {/* <div>hello {user?.displayName || user?.email}!</div> */}
                     <ProfileDetails user={user} />
                     <button className="logout-button" onClick={handleLogout}>Logout</button>
                 </>
