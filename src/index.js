@@ -6,4 +6,4 @@ import './utils/i18next'; //this is for the translate
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 
-document.documentElement.dir = "rtl";
+// document.documentElement.dir = "rtl";
