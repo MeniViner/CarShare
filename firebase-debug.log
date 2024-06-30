@@ -1,0 +1,60 @@
+[debug] [2024-06-30T16:43:01.136Z] ----------------------------------------------------------------------
+[debug] [2024-06-30T16:43:01.138Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\MeniV\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2024-06-30T16:43:01.138Z] CLI Version:   13.11.4
+[debug] [2024-06-30T16:43:01.138Z] Platform:      win32
+[debug] [2024-06-30T16:43:01.138Z] Node Version:  v22.1.0
+[debug] [2024-06-30T16:43:01.138Z] Time:          Sun Jun 30 2024 19:43:01 GMT+0300 (שעון ישראל (קיץ))
+[debug] [2024-06-30T16:43:01.139Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-06-30T16:43:01.192Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-06-30T16:43:01.193Z] > authorizing via signed-in user (meniviner@gmail.com)
+[debug] [2024-06-30T16:43:01.193Z] [iam] checking project we-car-share for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-06-30T16:43:01.194Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/we-car-share:testIamPermissions [none]
+[debug] [2024-06-30T16:43:01.194Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/we-car-share:testIamPermissions x-goog-quota-user=projects/we-car-share
+[debug] [2024-06-30T16:43:01.194Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/we-car-share:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-06-30T16:43:02.221Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/we-car-share:testIamPermissions 200
+[debug] [2024-06-30T16:43:02.222Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/we-car-share:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-06-30T16:43:02.222Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/we-car-share [none]
+[debug] [2024-06-30T16:43:02.554Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/we-car-share 200
+[debug] [2024-06-30T16:43:02.555Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/we-car-share {"projectId":"we-car-share","projectNumber":"44167050649","displayName":"car-share","name":"projects/we-car-share","resources":{"hostingSite":"we-car-share","realtimeDatabaseInstance":"we-car-share-default-rtdb"},"state":"ACTIVE","etag":"1_5dbdbbe6-5a1f-4fcf-9c4b-bb28fb66a912"}
+[info] 
+[info] === Deploying to 'we-car-share'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2024-06-30T16:43:02.559Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/we-car-share/versions [none]
+[debug] [2024-06-30T16:43:02.559Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/we-car-share/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2024-06-30T16:43:03.943Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/we-car-share/versions 200
+[debug] [2024-06-30T16:43:03.943Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/we-car-share/versions {"name":"projects/44167050649/sites/we-car-share/versions/5a9faaa7980f74c4","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[we-car-share]: beginning deploy... 
+[info] i  hosting[we-car-share]: found 12 files in build 
+[debug] [2024-06-30T16:43:03.968Z] [hosting] uploading with 200 concurrency
+[debug] [2024-06-30T16:43:04.758Z] [hosting] hash cache [YnVpbGQ] stored for 12 files
+[debug] [2024-06-30T16:43:04.758Z] [hosting][hash queue][FINAL] {"max":785,"min":0,"avg":76,"active":0,"complete":12,"success":12,"errored":0,"retried":0,"total":12,"elapsed":788}
+[debug] [2024-06-30T16:43:04.758Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/44167050649/sites/we-car-share/versions/5a9faaa7980f74c4:populateFiles [none]
+[debug] [2024-06-30T16:43:04.758Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/44167050649/sites/we-car-share/versions/5a9faaa7980f74c4:populateFiles {"files":{"/robots.txt":"bfe106a3fb878dc83461c86818bf74fc1bdc7f28538ba613cd3e775516ce8b49","/manifest.json":"ee04fb47e525c67d8424ffe9b4d8a8a24e434504478afca4e0ca602146836d4c","/images\\nearby.png":"1c16a8856d7df03b04a11a479583533f73f3afa19a6d08b46c969e6566b5bb59","/images\\car-side-solid.svg":"23f2af9ebf1733a843ddd8daefc310d7e494d46fa37c04efce4892fd92a838bf","/index.html":"ef2bb11b8d78abdec5259cdc610d6be1ebc798b2f17d5a581a5ef81b55087f39","/asset-manifest.json":"3ace9c5218045cb073cbbe1bb39665f530960301b402b14c8a574f7edceb6152","/static\\js\\main.11ff1f48.js.LICENSE.txt":"e4bffa4cb692a2653680bfb58313e294580f41cd719bac73489e87c15b8c157e","/static\\css\\main.f6a8b5e6.css":"5b2a3895f2ba2f92284c74ccb4d6b19861180bfa328bdc21bf2bd773e3d64325","/static\\css\\main.f6a8b5e6.css.map":"bba9e260d48c0692778f342f025478b8afe9d3c29b270c69c32e8a73d0fe3435","/static\\js\\main.11ff1f48.js":"1081e5970aef799c75a19c564a090fd39bfc84aae10fd63645f1fbcfcf078944","/static\\media\\404.85fcc8f1ca5c05fe7fd1.mp4":"4ebf8ddf3969dfb4840e4351d0749abc7a26be52b9cb72285672a682db5b3fb7","/static\\js\\main.11ff1f48.js.map":"0cac6daab8c0bc34ce5e33b54d438aa26d9bf4f8b73cfecdaae15bcb733e3b75"}}
+[debug] [2024-06-30T16:43:05.060Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/44167050649/sites/we-car-share/versions/5a9faaa7980f74c4:populateFiles 200
+[debug] [2024-06-30T16:43:05.060Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/44167050649/sites/we-car-share/versions/5a9faaa7980f74c4:populateFiles {"uploadRequiredHashes":["5b2a3895f2ba2f92284c74ccb4d6b19861180bfa328bdc21bf2bd773e3d64325","1081e5970aef799c75a19c564a090fd39bfc84aae10fd63645f1fbcfcf078944","3ace9c5218045cb073cbbe1bb39665f530960301b402b14c8a574f7edceb6152","ef2bb11b8d78abdec5259cdc610d6be1ebc798b2f17d5a581a5ef81b55087f39","bba9e260d48c0692778f342f025478b8afe9d3c29b270c69c32e8a73d0fe3435","0cac6daab8c0bc34ce5e33b54d438aa26d9bf4f8b73cfecdaae15bcb733e3b75"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files"}
+[debug] [2024-06-30T16:43:05.062Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/5b2a3895f2ba2f92284c74ccb4d6b19861180bfa328bdc21bf2bd773e3d64325 [none]
+[debug] [2024-06-30T16:43:05.062Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/5b2a3895f2ba2f92284c74ccb4d6b19861180bfa328bdc21bf2bd773e3d64325 [stream]
+[debug] [2024-06-30T16:43:05.063Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/1081e5970aef799c75a19c564a090fd39bfc84aae10fd63645f1fbcfcf078944 [none]
+[debug] [2024-06-30T16:43:05.063Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/1081e5970aef799c75a19c564a090fd39bfc84aae10fd63645f1fbcfcf078944 [stream]
+[debug] [2024-06-30T16:43:05.064Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/3ace9c5218045cb073cbbe1bb39665f530960301b402b14c8a574f7edceb6152 [none]
+[debug] [2024-06-30T16:43:05.064Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/3ace9c5218045cb073cbbe1bb39665f530960301b402b14c8a574f7edceb6152 [stream]
+[debug] [2024-06-30T16:43:05.065Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/ef2bb11b8d78abdec5259cdc610d6be1ebc798b2f17d5a581a5ef81b55087f39 [none]
+[debug] [2024-06-30T16:43:05.065Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/ef2bb11b8d78abdec5259cdc610d6be1ebc798b2f17d5a581a5ef81b55087f39 [stream]
+[debug] [2024-06-30T16:43:05.066Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/bba9e260d48c0692778f342f025478b8afe9d3c29b270c69c32e8a73d0fe3435 [none]
+[debug] [2024-06-30T16:43:05.066Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/bba9e260d48c0692778f342f025478b8afe9d3c29b270c69c32e8a73d0fe3435 [stream]
+[debug] [2024-06-30T16:43:05.067Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/0cac6daab8c0bc34ce5e33b54d438aa26d9bf4f8b73cfecdaae15bcb733e3b75 [none]
+[debug] [2024-06-30T16:43:05.067Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/0cac6daab8c0bc34ce5e33b54d438aa26d9bf4f8b73cfecdaae15bcb733e3b75 [stream]
+[debug] [2024-06-30T16:43:05.067Z] [hosting][populate queue][FINAL] {"max":305,"min":305,"avg":305,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":310}
+[debug] [2024-06-30T16:43:05.068Z] [hosting] uploads queued: 6
+[debug] [2024-06-30T16:43:06.300Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/ef2bb11b8d78abdec5259cdc610d6be1ebc798b2f17d5a581a5ef81b55087f39 200
+[debug] [2024-06-30T16:43:06.301Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/ef2bb11b8d78abdec5259cdc610d6be1ebc798b2f17d5a581a5ef81b55087f39 [stream]
+[debug] [2024-06-30T16:43:06.398Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/bba9e260d48c0692778f342f025478b8afe9d3c29b270c69c32e8a73d0fe3435 200
+[debug] [2024-06-30T16:43:06.398Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/bba9e260d48c0692778f342f025478b8afe9d3c29b270c69c32e8a73d0fe3435 [stream]
+[debug] [2024-06-30T16:43:06.398Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/3ace9c5218045cb073cbbe1bb39665f530960301b402b14c8a574f7edceb6152 200
+[debug] [2024-06-30T16:43:06.398Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/3ace9c5218045cb073cbbe1bb39665f530960301b402b14c8a574f7edceb6152 [stream]
+[debug] [2024-06-30T16:43:06.692Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/5b2a3895f2ba2f92284c74ccb4d6b19861180bfa328bdc21bf2bd773e3d64325 200
+[debug] [2024-06-30T16:43:06.692Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/5b2a3895f2ba2f92284c74ccb4d6b19861180bfa328bdc21bf2bd773e3d64325 [stream]
+[debug] [2024-06-30T16:43:07.083Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/1081e5970aef799c75a19c564a090fd39bfc84aae10fd63645f1fbcfcf078944 200
+[debug] [2024-06-30T16:43:07.083Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/we-car-share/versions/5a9faaa7980f74c4/files/1081e5970aef799c75a19c564a090fd39bfc84aae10fd63645f1fbcfcf078944 [stream]
