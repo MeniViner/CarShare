@@ -49,28 +49,31 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
         <h2>{isLogin ? 'Login' : 'Register'}</h2>
         {!isLogin && ( // הצגת שדה השם רק בעת הרשמה
           <>
-            <label htmlFor="name">full name</label>
+            <label htmlFor="name"></label>
             <input
               type="text"
               id="name"
+              placeholder='Full name'
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
           </>
         )}
-        <label htmlFor="email">email addres</label>
+        <label htmlFor="email"></label>
         <input
           type="email"
           id="email"
+          placeholder='Email addres'
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <label htmlFor="password">strong password</label>
+        <label htmlFor="password"></label>
         <input
           type="password"
           id="password"
+          placeholder='Strong password'
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
