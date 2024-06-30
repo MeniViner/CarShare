@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import EmailLogin from './emailLogin';
 import GoogleLogin from './googleLogin';
 import { useTranslation } from 'react-i18next';
+import ProfileDetails from "./ profileDetails";
 
 
 const UserProfile = () => {
@@ -39,14 +40,13 @@ const UserProfile = () => {
                     <GoogleLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
                 </div>
             ) : (
-                <div>hello {user?.displayName || user?.email}!</div>
-            )}
-                            
-            {isAuthenticated && (
-                <button onClick={handleLogout}>Logout</button>
+                <>
+                    <div>hello {user?.displayName || user?.email}!</div>
+                    <button onClick={handleLogout}>Logout</button>
+                    <ProfileDetails user={user} />
+                </>
             )}
         </div>
     );
 }
-
 export default withOfflineOverlay(UserProfile);
