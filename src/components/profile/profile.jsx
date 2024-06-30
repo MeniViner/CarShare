@@ -12,7 +12,7 @@ import ProfileDetails from "./profileDetails";
 const UserProfile = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
-    const { t} = useTranslation();
+    const {t} = useTranslation();
 
     const handleLogout = () => {
         Swal.fire({
@@ -53,7 +53,7 @@ const UserProfile = () => {
                 </div>
             ) : (
                 <>
-                    <div>hello {user?.displayName || user?.email}!</div>
+                    <div>{t('hello')} {user?.displayName || user?.email}!</div>
                     <ProfileDetails user={user} />
                     <button className="logout-button" onClick={handleLogout}>Logout</button>
                 </>

@@ -4,8 +4,12 @@ import { auth } from '../../data/firebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import Swal from 'sweetalert2';
 import '../../styles/emailLogin.css';
+import { useTranslation } from 'react-i18next';
+
 
 const EmailLogin = ({ setIsAuthenticated, setUser }) => {
+  const {t} = useTranslation();
+
   const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,7 +60,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
               onChange={(e) => setName(e.target.value)}
               required
             />
-            <label htmlFor="name">Full name</label>
+            <label htmlFor="name">{t('full-name')}</label>
           </div>
         )}
         <div className="input-container">
@@ -68,7 +72,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label htmlFor="email">email address</label>
+          <label htmlFor="email">{t('email-address')}</label>
         </div>
         <div className="input-container">
           <input
@@ -79,7 +83,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <label htmlFor="password">strong password</label>
+          <label htmlFor="password">{t('strong-password')}</label>
         </div>
         <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
         <p onClick={() => setIsLogin(!isLogin)}>
