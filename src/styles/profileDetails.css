@@ -42,3 +42,18 @@
     transform: translateX(30px);
     border: 1px solid black;
 }
+
+.logout-button {
+    background-color: #dc3545; /* צבע רקע */
+    color: #fff; /* צבע טקסט */
+    border: none; /* ללא גבול */
+    padding: 10px 20px; /* גודל הריפוד */
+    border-radius: 5px; /* רדיוס פינות */
+    cursor: pointer; /* סמן העכבר */
+    font-size: 16px; /* גודל גופן */
+    transition: background-color 0.3s ease; /* אנימציה של שינוי צבע רקע */
+}
+
+.logout-button:hover {
+    background-color: #c82333; /* צבע רקע בעכבר מעל */
+}

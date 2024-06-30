@@ -14,13 +14,33 @@ const UserProfile = () => {
     const { t} = useTranslation();
     
         // פונקציה לטיפול בהתנתקות
-    const handleLogout = () => {
+    // const handleLogout = () => {
         auth.signOut(); // התנתקות מהאימות של Firebase
         setIsAuthenticated(false);
         setUser(null);
         localStorage.removeItem('user'); // מחיקת פרטי המשתמש מה-LocalStorage
         Swal.fire('Logged out', 'You have been logged out successfully.', 'success');
+    // };
+
+    const handleLogout = () => {
+        Swal.fire({
+            title: 'Are you sure you want to logout?',
+            text: 'You will be logged out from your account.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Logout',
+            cancelButtonText: 'Cancel',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                auth.signOut(); // התנתקות מהאימות של Firebase
+        setIsAuthenticated(false);
+        setUser(null);
+        localStorage.removeItem('user'); // מחיקת פרטי המשתמש מה-LocalStorage
+        Swal.fire('Logged out', 'You have been logged out successfully.', 'success');
+            }
+        });
     };
+
   
 
     useEffect(() => {
@@ -43,11 +63,11 @@ const UserProfile = () => {
                 <>
                     <div>hello {user?.displayName || user?.email}!</div>
                     <ProfileDetails user={user} />
-                    <button onClick={handleLogout}>Logout</button>
+                    <button className="logout-button" onClick={handleLogout}>Logout</button>
                 </>
             )}
         </div>
     );
-    
+
 }
 export default withOfflineOverlay(UserProfile);
