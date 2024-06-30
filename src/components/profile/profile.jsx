@@ -11,15 +11,6 @@ const UserProfile = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
     const { t} = useTranslation();
-    
-        // פונקציה לטיפול בהתנתקות
-    // const handleLogout = () => {
-        auth.signOut(); // התנתקות מהאימות של Firebase
-        setIsAuthenticated(false);
-        setUser(null);
-        localStorage.removeItem('user'); // מחיקת פרטי המשתמש מה-LocalStorage
-        Swal.fire('Logged out', 'You have been logged out successfully.', 'success');
-    // };
 
     const handleLogout = () => {
         Swal.fire({
@@ -32,10 +23,10 @@ const UserProfile = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 auth.signOut(); // התנתקות מהאימות של Firebase
-        setIsAuthenticated(false);
-        setUser(null);
-        localStorage.removeItem('user'); // מחיקת פרטי המשתמש מה-LocalStorage
-        Swal.fire('Logged out', 'You have been logged out successfully.', 'success');
+                setIsAuthenticated(false);
+                setUser(null);
+                localStorage.removeItem('user'); // מחיקת פרטי המשתמש מה-LocalStorage
+                Swal.fire('Logged out', 'You have been logged out successfully.', 'success');
             }
         });
     };
