@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
 import ThemeToggle from './design/themeToggle';
-import { US, IL } from 'country-flag-icons/react/3x2'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
@@ -80,33 +79,38 @@ const Settings = () => {
   const toggleTheme = () => {
     setIsDarkMode(prevMode => !prevMode);
     document.body.classList.toggle('dark-mode', !isDarkMode);
+    document.body.classList.toggle('light-mode', isDarkMode);
   };
 
   return (
     <div className="settings-container">
       <h2>{t('settings')}</h2>
 
-      <div>
-        <p>{t('welcome')}</p>
+      <div className="language-settings">
+        <p>{t('set-language')}</p>
+        <div className="language-buttons">
+          <button
+            className={`language-button ${language === 'en' ? 'active' : ''}`}
+            onClick={() => handleLanguageChange('en')}
+          >
+            English
+          </button>
+          <button
+            className={`language-button ${language === 'he' ? 'active' : ''}`}
+            onClick={() => handleLanguageChange('he')}
+          >
+            עברית
+          </button>
+        </div>
       </div>
 
-      <p>{t('set-language')}</p>
-      <div className="flag-icons ">
-        <US
-          className={`country-flag flag-icon ${language === 'en' ? 'active' : ''}`}
-          onClick={() => handleLanguageChange('en')}
-          style={{ width: '2em', height: '2em' }}
-        />
-        
-        <IL
-          className={` country-flag flag-icon ${language === 'he' ? 'active' : ''}`}
-          onClick={() => handleLanguageChange('he')}
-          style={{ width: '2em', height: '2em' }}
-        />
+      <div className="theme-settings">
+        <p>{t('map-color')}</p>
+        <div className={`theme-toggle-container ${language === 'he' ? 'rtl' : ''}`}>
+          <ThemeToggle toggleTheme={toggleTheme} />
+        </div>
       </div>
 
-      <p>{t('map-color')}</p>
-      <ThemeToggle toggleTheme={toggleTheme} />
       <ToastContainer />
     </div>
   );
