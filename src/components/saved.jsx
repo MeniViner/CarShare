@@ -67,7 +67,7 @@ const Saved = () => {
     }, []);
   
     return (
-        <div>
+        <>
         {isLoading ? ( 
             <LoadingPage /> 
         ) : (
@@ -112,7 +112,7 @@ const Saved = () => {
             )}
             </>
         )}
-        </div>
+        </>
     );
 };
 
