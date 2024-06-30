@@ -34,7 +34,7 @@ const UserProfile = () => {
   
 
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
+        const storedUser = localStorage.getItem('user'); //LocalStorage -קבלת פרטי המשתמש גם מה
         if (storedUser) {
             setUser(JSON.parse(storedUser));
             setIsAuthenticated(true);
