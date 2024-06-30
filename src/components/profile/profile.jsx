@@ -7,8 +7,6 @@ import GoogleLogin from './googleLogin';
 import { useTranslation } from 'react-i18next';
 import ProfileDetails from "./profileDetails";
 
-
-
 const UserProfile = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
@@ -53,7 +51,11 @@ const UserProfile = () => {
                 </div>
             ) : (
                 <>
+<<<<<<< HEAD
                     <div>{t('hello')} {user?.displayName || user?.email}!</div>
+=======
+                    {/* <div>hello {user?.displayName || user?.email}!</div> */}
+>>>>>>> 10b3683b9f065b8910ed3fb25b9383e0d8ec2809
                     <ProfileDetails user={user} />
                     <button className="logout-button" onClick={handleLogout}>Logout</button>
                 </>

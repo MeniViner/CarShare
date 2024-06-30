@@ -1,13 +1,80 @@
-.toggle-button {
-    width: 60px;
+.profile-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.profile-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.profile-label {
+    font-weight: bold;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.profile-photo {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-edit-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
     height: 30px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-edit-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.profile-divider {
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.toggle-button {
+    width: 40px;
+    height: 20px;
     background-color: #ddd;
-    border: 1px solid rgb(255, 220, 187);
-    border-radius: 15px;
+    border: rgb(255, 220, 187) solid 1px;
+    border-radius: 10px;
     position: relative;
     cursor: pointer;
-    margin-bottom: 3%;
-    transition: background-color 0.3s ease;
 }
 
 .toggle-track {
@@ -18,42 +85,40 @@
     left: 0;
     display: flex;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .toggle-thumb {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     background-color: #fff;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
-    border: 1px solid black;
 }
 
 .toggle-button.active .toggle-track {
-    background-color: #007bff; /* צבע כחול לאקטיב */
-    border: 1px solid black;
+    background-color: #0056b3;
 }
 
 .toggle-button.active .toggle-thumb {
-    transform: translateX(30px);
-    border: 1px solid black;
+    transform: translateX(20px);
 }
 
 .logout-button {
-    background-color: #dc3545; /* צבע רקע */
-    color: #fff; /* צבע טקסט */
-    border: none; /* ללא גבול */
-    padding: 10px 20px; /* גודל הריפוד */
-    border-radius: 5px; /* רדיוס פינות */
-    cursor: pointer; /* סמן העכבר */
-    font-size: 16px; /* גודל גופן */
-    transition: background-color 0.3s ease; /* אנימציה של שינוי צבע רקע */
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .logout-button:hover {
-    background-color: #c82333; /* צבע רקע בעכבר מעל */
+    background-color: #c9302c;
 }
