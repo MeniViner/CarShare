@@ -68,7 +68,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">email address</label>
         </div>
         <div className="input-container">
           <input
@@ -79,7 +79,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <label htmlFor="password">Strong password</label>
+          <label htmlFor="password">strong password</label>
         </div>
         <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
         <p onClick={() => setIsLogin(!isLogin)}>

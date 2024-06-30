@@ -51,7 +51,6 @@ label {
 }
 
 input:focus + label,
-input:hover + label,
 input:not(:placeholder-shown) + label {
   font-size: 12px;
   top: -10px;
