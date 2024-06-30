@@ -5,7 +5,7 @@
     "set-language": "change language",
     "new-user": "hi new user",
     "info-lang": "you can also save this setting by loggin in",
-    "lang-saved": "selected language saved"
+    "lang-saved": "selected language saved to the firebase collection: 'settings'"
 }
   
   
