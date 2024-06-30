@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import ProfileDetails from "./profileDetails";
 
 
+
 const UserProfile = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
