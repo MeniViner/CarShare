@@ -10,3 +10,4 @@ i18n.on('languageChanged', (lng) => {
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
