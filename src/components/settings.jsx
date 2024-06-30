@@ -42,7 +42,6 @@ const Settings = () => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState('en'); // 'en' עבור אנגלית, 'he' עבור עברית
 
-
   useEffect(() => {
     const fetchSettings = async () => {
       const storedLanguage = localStorage.getItem('language');
