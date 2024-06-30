@@ -34,7 +34,6 @@ const UserProfile = () => {
         <div className="profile-page">
             {!isAuthenticated ? (
                 <div>
-                    <h4>hi new user</h4>
                     <h4>{t('new-user')}</h4>
                     <EmailLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
                     <GoogleLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
