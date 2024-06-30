@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import '../../styles/profileDetails.css';
 import { MdModeEditOutline } from "react-icons/md";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const ProfileDetails = ({ user, onEdit }) => {
     const { displayName, email, phone, photoURL } = user || {};
@@ -27,7 +29,7 @@ const ProfileDetails = ({ user, onEdit }) => {
             }).then((result) => {
                 if (result.isConfirmed) {
                     setProfileImage(imageUrl);
-                    // לוגיקה נוספת להעלאת התמונה לשרת או לעדכון ב-LocalStorage כאן
+                    // Additional logic to upload the image to the server or update in LocalStorage can be added here
                     Swal.fire(
                         'Changed!',
                         'Your profile picture has been updated.',
@@ -46,7 +48,11 @@ const ProfileDetails = ({ user, onEdit }) => {
                     {profileImage ? (
                         <img src={profileImage} alt="Profile" />
                     ) : (
-                        <img src={photoURL} alt="Profile" />
+                        photoURL ? (
+                            <img src={photoURL} alt="Profile" />
+                        ) : (
+                            <FontAwesomeIcon icon={faUser} size="6x" />
+                        )
                     )}
                     <button id="editProfileButton" className="profile-edit-button" onClick={() => document.getElementById('fileInput').click()}>
                         <MdModeEditOutline />
