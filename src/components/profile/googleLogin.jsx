@@ -39,10 +39,11 @@ const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
           <div className="separate-line"></div>
       </div>
       
-      <button className="google-btn" onClick={handleGoogleLogin}>
+      <button className="google-btn center-button" onClick={handleGoogleLogin}>
         <FcGoogle className="google-icon" />
         Login with Google
       </button>
+
     </>
   );
 };

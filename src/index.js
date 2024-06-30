@@ -10,3 +10,8 @@ i18n.on('languageChanged', (lng) => {
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+<<<<<<< HEAD
+=======
+
+// document.documentElement.dir = "rtl";
+>>>>>>> c39b0f32c33d0522b2ac3ae763856c96391b50c0
