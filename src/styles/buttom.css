@@ -22,12 +22,12 @@
 
 .buttom-menu-bt {
     padding: 5vw;
-    color: burlywood; 
+    color: #357AE8; 
     transition: color 0.4s, transform 0.2s;
 }
 
 .buttom-menu-bt.active {
-    color: brown; 
+    color: #4285F4; 
     transform: translateY(-4px); 
 }
 
