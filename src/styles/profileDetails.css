@@ -30,12 +30,15 @@
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease;
+    border: 1px solid black;
 }
 
 .toggle-button.active .toggle-track {
     background-color: #007bff; /* צבע כחול לאקטיב */
+    border: 1px solid black;
 }
 
 .toggle-button.active .toggle-thumb {
     transform: translateX(30px);
+    border: 1px solid black;
 }

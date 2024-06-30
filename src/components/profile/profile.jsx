@@ -42,11 +42,12 @@ const UserProfile = () => {
             ) : (
                 <>
                     <div>hello {user?.displayName || user?.email}!</div>
-                    <button onClick={handleLogout}>Logout</button>
                     <ProfileDetails user={user} />
+                    <button onClick={handleLogout}>Logout</button>
                 </>
             )}
         </div>
     );
+    
 }
 export default withOfflineOverlay(UserProfile);
