@@ -24,7 +24,6 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
         Swal.fire('Success', 'Logged in successfully', 'success');
       } else {
         userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        // await userCredential.user.updateProfile({ displayName: name }); 
         await updateProfile(userCredential.user, { displayName: name });
         setUser(userCredential.user);
         localStorage.setItem('user', JSON.stringify(userCredential.user));
@@ -48,36 +47,40 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
       <form onSubmit={handleSubmit}>
         <h2>{isLogin ? 'Login' : 'Register'}</h2>
         {!isLogin && ( // הצגת שדה השם רק בעת הרשמה
-          <>
-            <label htmlFor="name"></label>
+          <div className="input-container">
             <input
               type="text"
               id="name"
-              placeholder='Full name'
+              placeholder=" " /* placeholder ריק עבור הטריק */
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
-          </>
+            <label htmlFor="name">Full name</label>
+          </div>
         )}
-        <label htmlFor="email"></label>
-        <input
-          type="email"
-          id="email"
-          placeholder='Email addres'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <label htmlFor="password"></label>
-        <input
-          type="password"
-          id="password"
-          placeholder='Strong password'
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <div className="input-container">
+          <input
+            type="email"
+            id="email"
+            placeholder=" " /* placeholder ריק עבור הטריק */
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <label htmlFor="email">Email address</label>
+        </div>
+        <div className="input-container">
+          <input
+            type="password"
+            id="password"
+            placeholder=" " /* placeholder ריק עבור הטריק */
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <label htmlFor="password">Strong password</label>
+        </div>
         <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
         <p onClick={() => setIsLogin(!isLogin)}>
           {isLogin ? 'Need an account? Register here.' : 'Have an account? Login here.'}

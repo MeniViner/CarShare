@@ -21,42 +21,64 @@
   margin-bottom: 20px;
 }
 
-/* עיצוב התוויות */
-.login-container label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #333;
+/* עיצוב שדות הקלט */
+.input-container {
+  position: relative;
+  margin-bottom: 1rem;
 }
 
-/* עיצוב שדות הקלט */
-.login-container input[type="text"],
-.login-container input[type="email"],
-.login-container input[type="password"] {
+input {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
   box-sizing: border-box;
-  margin-bottom: 1rem;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+label {
+  position: absolute;
+  top: 27%;
+  left: 8px;
+  font-size: 14px;
+  color: #999;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  background-color: #f4f4f4;
+  padding: 0 5px;
+  pointer-events: none;
+}
+
+input:focus + label,
+input:hover + label,
+input:not(:placeholder-shown) + label {
+  font-size: 12px;
+  top: -10px;
+  left: 10px;
+  color: blue;
+}
+
+input:focus {
+  border-color: blue;
+  outline: none;
+}
+
+input:hover {
+  border-color: blue;
+  outline: none;
 }
 
 /* עיצוב כפתור התחברות/הרשמה */
 .login-container button {
   padding: 0.6rem 1.1rem;
   width: calc(50% - 6px);
-  padding: 10px;
   border: none;
   border-radius: 5px;
   color: white;
   background-color: #007bff;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-/* עיצוב כפתור התחברות */
-.login-container button[type="submit"] {
-  background-color: #007bff;
-  color: #fff;
   margin-right: 0.5rem;
 }
 
