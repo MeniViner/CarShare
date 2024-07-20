@@ -91,8 +91,7 @@ const Map = () => {
 
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyC8DxT2vSZIyutVKE4BcB66O2x4LHGLxq4',
-    // googleMapsApiKey: process.env.APP_GOOGLE_MAPS_API_KEY,
+    googleMapsApiKey: process.env.APP_GOOGLE_MAPS_API_KEY,
     // libraries: ["places"],
     language: 'iw',
   });
