@@ -103,10 +103,15 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
       </div>
 
         <div className="vehicle-info-header">
-          <div className="vehicle-info-header-text">
-            <h1 className="sticky">{selectedCar.brand}</h1>
-            <h1>{selectedCar.model}</h1>
+          <div className="vehicle-info-header-name">
+            <div className="vehicle-info-header-brand">
+              <h1 className="sticky">{selectedCar.brand}</h1>
+            </div>
+            <div className="vehicle-info-header-model">
+              <h3>{selectedCar.model} {selectedCar.year}</h3>
+            </div>
           </div>
+
           
           <img
             src={selectedCar.image}
@@ -168,9 +173,15 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
                 <>
                   <button onClick={() => setShowMore(!showMore)} className="show-more-button">more details</button>
                   {showMore && (
+                    <>
+                    <div className="vehicle-info-details">
+                      
+                    </div>
+
                     <animated.div style={carouselAnimation} className="carousel">
                       <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
                     </animated.div>
+                    </>
                   )}
                 </>
               )}

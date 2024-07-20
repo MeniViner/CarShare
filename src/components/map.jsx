@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 
 import cars from '../data/carsData';
-import DayMapStyles from '../assets/dayMapStyles';
+import dayMapStyles from '../assets/dayMapStyles';
 // import DayMapStyles from './assets/dayMapStyles';
 import nightMapStyles from '../assets/nightMapStyles';
 import { TbCurrentLocation } from "react-icons/tb";
@@ -84,7 +84,7 @@ const Map = () => {
       minZoom: 10,
       maxZoom: 20,
       clickableIcons: false,
-      styles: isDarkMode ? nightMapStyles : DayMapStyles,
+      styles: isDarkMode ? nightMapStyles : dayMapStyles,
     };
   };
 
