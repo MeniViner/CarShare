@@ -1,0 +1,53 @@
+/* SearchResults.css */
+
+.search-results {
+    padding: 20px;
+    font-family: 'Roboto', sans-serif; /* שימוש בגופן Roboto */
+    color: #333; /* צבע טקסט כללי */
+  }
+  
+  .search-results h1 {
+    color: #8B0000; /* צבע אדום כהה לכותרת */
+  }
+  
+  .search-query {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  
+  .results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .result-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .result-item:hover {
+    background-color: #f5f5f5;
+    transform: translateY(-2px);
+    cursor: pointer;
+  }
+  
+  .result-item h2 {
+    margin: 0 0 10px;
+    color: #8B0000; /* צבע אדום כהה לכותרת התוצאה */
+  }
+  
+  .result-item p {
+    margin: 0;
+    color: #555;
+  }
+  
+  .no-results {
+    font-size: 1.2em;
+    color: #8B0000; /* צבע אדום כהה לטקסט של אין תוצאות */
+  }
+  

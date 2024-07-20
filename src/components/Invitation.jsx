@@ -170,7 +170,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
           <div className="input-group">
             <button onClick={decrementHours}><FaMinus /></button>
             <input 
-              class="no-spinner"
+              className="no-spinner"
               type="number" 
               min="1" 
               value={selectedHours} 
@@ -185,7 +185,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
           <div className="input-group">
             <button onClick={decrementDays}><FaMinus /></button>
             <input 
-              class="no-spinner"
+              className="no-spinner"
               type="number" 
               min="1" 
               value={selectedDays} 

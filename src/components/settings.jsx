@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
-import ThemeToggle from './design/themeToggle';
-import { ToastContainer, toast } from 'react-toastify';
+import ThemeToggle from '../assets/themeToggle';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
 import '../styles/settings.css'
@@ -9,11 +9,18 @@ import '../styles/settings.css'
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { auth, db } from '../data/firebaseConfig';
 
+
+
 const Settings = () => {
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { t, i18n } = useTranslation();
+  const [language, setLanguage] = useState('en'); 
+
 
   const saveUserSettings = async (settings) => {
     try {
-      const docRef = await addDoc(collection(db, 'settings'), {
+      await addDoc(collection(db, 'settings'), {
         userId: auth.currentUser.uid,
         ...settings,
       });
@@ -37,9 +44,6 @@ const Settings = () => {
     return 'en';
   };
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState('en'); // 'en' עבור אנגלית, 'he' עבור עברית
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -61,7 +65,7 @@ const Settings = () => {
 
   const handleLanguageChange = (lang) => {
     if (!auth.currentUser) {
-      console.log(t('info-lang'))
+      console.info(t('info-lang'))
     }
 
     setLanguage(lang);
@@ -70,7 +74,7 @@ const Settings = () => {
     i18n.changeLanguage(lang).then(() => {
       document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
       if (auth.currentUser) {
-        console.log(t('lang-saved'))
+        console.info(t('lang-saved'))
       }
     });
   };

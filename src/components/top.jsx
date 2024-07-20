@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../data/firebaseConfig"; // ייבא את auth מ-firebase
-import { onAuthStateChanged } from "firebase/auth"; // ייבא את onAuthStateChanged
+import { auth } from "../data/firebaseConfig"; 
+import { onAuthStateChanged } from "firebase/auth";
+import SideNavigation from "./sideNavigation";
+
 
 const Top = () => {
   const [userName, setUserName] = useState("");
@@ -21,9 +23,15 @@ const Top = () => {
   return (
     <>
       <div className="top-section">
-        <span>
-          {userName ? `welcome back, ${userName}.` : "welcome back user"} {/* הצג את שם המשתמש אם מחובר */}
-        </span>
+        {/* <Link to="/">
+          <IoMdArrowRoundBack />
+        </Link> */}
+        <div className="side-nav-bt" >
+            <SideNavigation/>
+          </div>
+        {/* <span>
+          {userName ? `welcome back, ${userName}.` : "welcome back user"} 
+        </span> */}
       </div>
     </>
   );

@@ -6,6 +6,7 @@ import EmailLogin from './emailLogin';
 import GoogleLogin from './googleLogin';
 import { useTranslation } from 'react-i18next';
 import ProfileDetails from "./profileDetails";
+import DeleteAccount from "./DeleteAccount";
 
 const UserProfile = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -31,8 +32,6 @@ const UserProfile = () => {
         });
     };
 
-  
-
     useEffect(() => {
         const storedUser = localStorage.getItem('user'); //LocalStorage -קבלת פרטי המשתמש גם מה
         if (storedUser) {
@@ -53,6 +52,7 @@ const UserProfile = () => {
                 <>
                     <ProfileDetails user={user} />
                     <button className="logout-button" onClick={handleLogout}>Logout</button>
+                    <DeleteAccount></DeleteAccount>
                 </>
             )}
         </div>

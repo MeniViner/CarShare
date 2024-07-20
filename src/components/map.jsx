@@ -1,16 +1,16 @@
 import React, {useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
-import './style.css';
-import cars from './data/carsData';
-import dayMapStyles from './components/design/dayMapStyles';
-import nightMapStyles from './components/design/nightMapStyles';
-import SideNavigation from './components/sideNavigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocation } from '@fortawesome/free-solid-svg-icons';
-import CarInfoWindow from './components/infoWindow'; 
-import LoadingPage from './assets/LoadingPage';
-import withOfflineOverlay from './assets/withOfflineOverlay';
+
+import cars from '../data/carsData';
+import DayMapStyles from '../assets/dayMapStyles';
+// import DayMapStyles from './assets/dayMapStyles';
+import nightMapStyles from '../assets/nightMapStyles';
+import { TbCurrentLocation } from "react-icons/tb";
+import CarInfoWindow from './infoWindow'; 
+import LoadingPage from '../assets/LoadingPage';
+import withOfflineOverlay from '../assets/withOfflineOverlay';
+import '../styles/map.css';
 
 
 const Map = () => {
@@ -19,7 +19,8 @@ const Map = () => {
   const [userLocation, setUserLocation] = useState(null);
   const [mapCenter, setMapCenter] = useState({ lat: 31.795729, lng: 35.219848 });
   const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
+  // const [isDarkMode, setIsDarkMode] = useState(() => {
+  const isDarkMode = useState(() => {
     // טען את מצב הנושא מ-localStorage אם קיים
     const savedTheme = localStorage.getItem('theme');
     return savedTheme ? savedTheme === 'dark' : false;
@@ -58,10 +59,10 @@ const Map = () => {
     setIsInfoWindowOpen(true);
   };
 
-  const handleCarClick = (car) => {
-    setSelectedCar(car);
-    setIsInfoWindowOpen(true);
-  };
+  // const handleCarClick = (car) => {
+  //   setSelectedCar(car);
+  //   setIsInfoWindowOpen(true);
+  // };
 
   const handleCloseClick = () => {
     setIsInfoWindowOpen(false);
@@ -79,11 +80,11 @@ const Map = () => {
       fullscreenControl: false,
       draggable: true,
       scrollwheel: true,
-      disableDoubleClickZoom: false,
+      disableDoubleClickZoom: true,
       minZoom: 10,
       maxZoom: 20,
       clickableIcons: false,
-      styles: isDarkMode ? nightMapStyles : dayMapStyles,
+      styles: isDarkMode ? nightMapStyles : DayMapStyles,
     };
   };
 
@@ -132,18 +133,15 @@ const Map = () => {
           />
         )}
 
-          <div className="side-nav-bt" >
+          {/* <div className="side-nav-bt" >
             <SideNavigation/>
-          </div>
+          </div> */}
 
-          <div className="location-button" onClick={handleLocationButtonClick}>
-            <div className='location-button'>
-              <div className={`fa-location ${isLocationSet ? 'blue' : ''}`}>
-                <FontAwesomeIcon icon={faLocation} />
-              </div>
+          <div className='location-button' onClick={handleLocationButtonClick}>
+            <div className={`fa-location ${isLocationSet ? 'blue' : ''}`}>
+              <TbCurrentLocation />
             </div>
           </div>
-
 
         {cars.map((car) => (
           <Marker //window.google.maps.marker.AdvancedMarkerElement

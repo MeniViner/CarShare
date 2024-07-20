@@ -5,7 +5,33 @@ import Swal from 'sweetalert2';
 import '../../styles/login.css'
 import { FcGoogle } from 'react-icons/fc';
 
+
+  import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+
+
 const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
+
+
+
+
+    const auth = getAuth();
+    
+    const handlePhoneSignIn = (phoneNumber) => {
+      const appVerifier = window.recaptchaVerifier;
+      signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+        .then((confirmationResult) => {
+          const verificationCode = window.prompt('Please enter the verification code that was sent to your mobile device.');
+          return confirmationResult.confirm(verificationCode);
+        })
+        .catch((error) => {
+          console.error('Error during phone sign-in:', error);
+        });
+    };
+
+
+
+
+
     const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
 
@@ -44,6 +70,8 @@ const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
         Login with Google
       </button>
 
+
+      
     </>
   );
 };

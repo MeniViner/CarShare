@@ -3,7 +3,7 @@
     "welcome": "Welcome back, user",
     "settings": "Settings",
     "map-color": "map color",
-    "set-language": "change language",
+    "set-language": "select language",
     "new-user": "hi new user",
     "info-lang": "you can also save this setting by loggin in",
     "lang-saved": "selected language saved to the firebase collection: 'settings'",

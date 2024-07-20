@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react'; 
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
 import { calculateDistance } from '../utils/distanceCalculator'; 
 import cars from '../data/carsData';
 import '../styles/listCars.css';
-import Swal from 'sweetalert2';
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 import { CiBookmarkPlus } from "react-icons/ci"; 
 import { RiPinDistanceLine } from "react-icons/ri";
 import { MdBookmarkAdded, MdLocationOff } from "react-icons/md"; 
-
 import { collection, addDoc, query, getDocs, where } from "firebase/firestore"; 
 import { auth, db } from '../data/firebaseConfig'; 
+
 
 const ListCars = () => {
 
   const navigate  = useNavigate(); 
   const [savedCarIds, setSavedCarIds] = useState([]); 
   const [userLocation, setUserLocation] = useState(null); 
+  const [sortKey, setSortKey] = useState('nearby'); 
+  const [sortOrder, setSortOrder] = useState('asc'); 
+
 
   useEffect(() => {
     const fetchSavedCarIds = async () => {
@@ -41,12 +45,10 @@ const ListCars = () => {
       }
     });
 
-    //
     const storedLocation = localStorage.getItem('userLocation');
     if (storedLocation) {
       setUserLocation(JSON.parse(storedLocation)); // עדכן את מצב מיקום המשתמש
     }
-
 
     return () => unsubscribe();
   }, []); 
@@ -55,11 +57,11 @@ const ListCars = () => {
 
   const saveCar = async (carId) => {
     if (!auth.currentUser) {
-      Swal.fire('Please log in', 'To save cars, please log in.', 'info'); 
+      toast.info('Please log in to save cars.'); 
       return;
     }
     if (isCarSaved(carId)) {
-      Swal.fire('Already Saved', 'This car is already saved.', 'info');
+      toast.info('This car is already saved.');
       return;
     }
     try {
@@ -68,10 +70,10 @@ const ListCars = () => {
         carId
       });
       setSavedCarIds(prev => [...prev, carId]); // כדי לעדכן את הסטייט לאחר שמירת הרכב   
-      Swal.fire('Saved', 'Car saved successfully!', 'success'); 
+      toast.success('Car saved successfully!'); 
     } catch (error) {
       console.error('Error saving car:', error);
-      Swal.fire('Error', 'Failed to save car.', 'error'); 
+      toast.error('Failed to save car.'); 
     }
   };
 
@@ -79,31 +81,62 @@ const ListCars = () => {
     navigate(`/map?carId=${car.id}`); // הפניה לדף המפה עם carId כפרמטר
   };
 
-  const calculateCarDistances = () => {
-    if (!userLocation) return cars.map(car => ({ ...car, distance: null }));
-    return cars.map(car => ({
-      ...car,
-      distance: calculateDistance(userLocation, car.coordinates) // חישוב המרחק עבור כל רכב
-    }));
+  const sortCars = (cars) => {
+    return cars.sort((a, b) => {
+      let compare = 0;
+      if (sortKey === 'nearby') {
+        compare = a.distance - b.distance;
+      } else if (sortKey === 'category') {
+        compare = a.category.localeCompare(b.category);
+      } else if (sortKey === 'seats') {
+        compare = a.seats - b.seats;
+      } else if (sortKey === 'year') {
+        compare = a.year - b.year;
+      } else if (sortKey === 'fuelType') {
+        compare = a.fuelType.localeCompare(b.fuelType);
+      } else if (sortKey === 'battery') {
+        compare = a.battery - b.battery;
+      }
+      return sortOrder === 'asc' ? compare : -compare;
+    });
   };
-  
+
+  const calculateCarDistances = () => {
+    let carsWithDistances = cars.map(car => ({
+      ...car,
+      distance: userLocation ? calculateDistance(userLocation, car.coordinates) : null
+    }));
+    return sortCars(carsWithDistances);
+  };
+
+  const isHybrid = (car) => {
+    return car.fuelType === 'Hybrid';
+  };
 
   return (
     <>
+      <ToastContainer />
+      <div className="sort-buttons">
+        <button onClick={() => setSortKey('nearby')}>Nearby</button>
+        <button onClick={() => setSortKey('category')}>Category</button>
+        <button onClick={() => setSortKey('seats')}>Seats</button>
+        <button onClick={() => setSortKey('year')}>Year</button>
+        <button onClick={() => setSortKey('fuelType')}>Fuel Type</button>
+        <button onClick={() => setSortKey('battery')}>Battery</button>
+        <select onChange={(e) => setSortOrder(e.target.value)} value={sortOrder}>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
       <div className="cars-list">
-        <h2>Vehicles nearby</h2>
         {calculateCarDistances().map((car) => (
-
-
-          <div 
-            key={car.id} 
-            className="car-item"
-            onClick={() => handleCarClick(car)}
-          >
-            <img src={car.image} alt={`${car.brand} ${car.model}`} />
-            <div className="car-details">
-              <h3>{`${car.brand} ${car.model}`}</h3>
-
+          <div key={car.id} className="car-item">
+            <div className="car-image-container" onClick={() => handleCarClick(car)}>
+              <img src={car.image} alt={`${car.brand} ${car.model}`} />
+              {isHybrid(car) && <img src='images/hybrid.png' alt="Hybrid" className="hybrid-badge" />}
+            </div>
+            <div className="car-details" onClick={() => handleCarClick(car)}  >
+              <h3>{`${car.brand} ${car.model}`} {car.year}</h3>
               {car.distance ? (
                 <>
                   <RiPinDistanceLine />
@@ -112,25 +145,18 @@ const ListCars = () => {
               ) : (
                 <MdLocationOff /> // הצג אייקון של מיקום כבוי אם אין מיקום
               )}
-
               <p>
                 <span>{Math.floor(car.pricePerHour)} ₪/hour</span>
               </p>
-            </div>
-            
-            <div>
-              
             </div>
             <button onClick={() => saveCar(car.id)} className='saved-bt'>
               {isCarSaved(car.id) ? <MdBookmarkAdded /> : <CiBookmarkPlus />}
             </button>
           </div>
         ))}
-
       </div> 
     </>
   );
 };
 
 export default withOfflineOverlay(ListCars);
-

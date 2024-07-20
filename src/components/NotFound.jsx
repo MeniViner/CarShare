@@ -13,6 +13,7 @@ const NotFound = () => {
           <a id="b">M</a>eni<a id="b">V</a>erse<a id="b">.</a>
         </h1>
       </div> */}
+      <h1>Car Share</h1>
       <h1 id="hmm" align="center">
         <b>Hmm... we can't find that!</b>
       </h1>
