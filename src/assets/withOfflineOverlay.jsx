@@ -25,9 +25,9 @@ const withOfflineOverlay = (WrappedComponent) => {
       <>
         {isOffline && 
             <div className="offline-container">
-                <FontAwesomeIcon icon={faWifi} size="5x" className="offline-icon" />
-                <h2 className="offline-text">You're currently Offline</h2>
-                <p className="offline-message">Please check your internet connection.</p>
+              <FontAwesomeIcon icon={faWifi} size="5x" className="offline-icon" />
+              <h2 className="offline-text">You're currently Offline</h2>
+              <p className="offline-message">Please check your internet connection.</p>
             </div>
         }
         <WrappedComponent {...props} />

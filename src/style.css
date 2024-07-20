@@ -46,17 +46,6 @@
   margin-left: 42dvw;
 }
 
-.location-button {
-  position: fixed;
-  display: flex;
-  z-index: 0;
-  margin-top: 28dvh;
-  margin-left: 42dvw;
-
-}
-
-
-
 .fa-location, 
 .faBarsStaggered {
   font-size: 18px;

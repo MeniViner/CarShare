@@ -165,3 +165,35 @@
 .carousel-button.right {
   right: 10px;
 }
+
+
+.process-steps {
+  position: absolute;
+  margin-top: -10vh;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  padding: 5px;
+}
+
+.process-steps .step {
+  align-items: flex-end;
+  width: 25vw;
+  background-color: rgba(240, 248, 255, 0.596);
+  border-radius: 15px;
+  display: flex;
+  justify-content: start;
+  align-self: center;
+}
+
+.step .icon {
+  /* display: flex;
+  justify-content: start;
+  align-self: center; */
+
+  padding: 3px;
+  background-color: #fdfdfd;
+  border-radius: 25px;
+  font-size: 24px;
+  color:#dd6b6b;
+}

@@ -7,11 +7,15 @@ import Swal from 'sweetalert2';
 import { calculateDistance } from '../utils/distanceCalculator';
 
 //icons
+
+import { CiLocationArrow1 } from "react-icons/ci";
 import { BiSolidBatteryLow } from "react-icons/bi";
 import { BsFuelPumpFill } from "react-icons/bs";
-import { RiPinDistanceLine } from "react-icons/ri";
 import { PiSeatFill } from "react-icons/pi";
-import { MdLocationOff } from "react-icons/md";
+import { MdLocationOff, MdOutlineCalendarMonth  } from "react-icons/md";
+import { FaLocationArrow } from "react-icons/fa";
+import { FaPersonWalking } from "react-icons/fa6";
+import { IoReceiptOutline } from "react-icons/io5";
 
 //animations
 import { useSpring, animated } from '@react-spring/web'; //animation for slow open the more details
@@ -79,24 +83,42 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
   }, [onCloseClick]); // הוסף useEffect עם התלות ב-onCloseClick
 
   return (
-    <div ref={ref} className="vehicle-info"> {/* הוסף את ref ל-div הראשי */}
-      <div className="vehicle-info-header">
-        <div className="vehicle-info-header-text">
-          <h1 class="sticky">{selectedCar.brand}</h1>
-          <h1>{selectedCar.model}</h1>
+    <>
+
+
+      <div ref={ref} className="vehicle-info"> {/* הוסף את ref ל-div הראשי */}
+
+      <div className="process-steps">
+        <div className="step">
+          <CiLocationArrow1 className='icon'/>
+        </div>
+        <div className="step">
+          <MdOutlineCalendarMonth className='icon'/>
+        </div>
+        <div className="step">
+          <IoReceiptOutline className='icon'/>
         </div>
         
         
-        <img
-          src={selectedCar.image}
-          alt={`${selectedCar.brand} ${selectedCar.model}`}
-          className="vehicle-info-image"
-        />
       </div>
-      <div className="vehicle-info-details">
+
+        <div className="vehicle-info-header">
+          <div className="vehicle-info-header-text">
+            <h1 className="sticky">{selectedCar.brand}</h1>
+            <h1>{selectedCar.model}</h1>
+          </div>
+          
+          <img
+            src={selectedCar.image}
+            alt={`${selectedCar.brand} ${selectedCar.model}`}
+            className="vehicle-info-image"
+          />
+        </div>
+        <div className="vehicle-info-details">
           { (distance) ? ( //ask if ther is a distance set
             <div>
-              <RiPinDistanceLine />
+              {/* <RiPinDistanceLine /> */}
+              <FaPersonWalking />
               <span>{distance}</span>
             </div>
           ) : ( 
@@ -118,43 +140,46 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
             </div>
           )}
           <div>
-          <PiSeatFill />
+            <PiSeatFill />
             <span>{selectedCar.seats}</span>
           </div>
-        </div>
-      {!showInvitation && ( // הצגת כפתור "הזמן עכשיו" אם ה-Invitation לא מוצג
-        <button className="order-btn" onClick={handleOrderClick}>order now</button>
-      )}
 
-    <div className="info-window">
-      {reservationData ? (
-        <OrderView 
-          selectedCar={selectedCar}
-          reservationData={reservationData}
-          onConfirmOrder={handleConfirmOrder}
-        />
-      ) : (
-        <>
-          {showInvitation ? (
-            <Invitation 
+        </div>
+
+        {!showInvitation && ( // הצגת כפתור "הזמן עכשיו" אם ה-Invitation לא מוצג
+          <button className="order-btn" onClick={handleOrderClick}>order now</button>
+        )}
+
+        <div className="info-window">
+          {reservationData ? (
+            <OrderView 
               selectedCar={selectedCar}
-              onCheckAvailability={handleCheckAvailability}
+              reservationData={reservationData}
+              onConfirmOrder={handleConfirmOrder}
             />
           ) : (
             <>
-              <button onClick={() => setShowMore(!showMore)} className="show-more-button">more details</button>
-              {showMore && (
-                <animated.div style={carouselAnimation} className="carousel">
-                  <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
-                </animated.div>
+              {showInvitation ? (
+                <Invitation 
+                  selectedCar={selectedCar}
+                  onCheckAvailability={handleCheckAvailability}
+                />
+              ) : (
+                <>
+                  <button onClick={() => setShowMore(!showMore)} className="show-more-button">more details</button>
+                  {showMore && (
+                    <animated.div style={carouselAnimation} className="carousel">
+                      <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
+                    </animated.div>
+                  )}
+                </>
               )}
             </>
           )}
-        </>
-      )}
-    </div>
+        </div>
 
-    </div>
+      </div>
+    </>
   );
 };
 

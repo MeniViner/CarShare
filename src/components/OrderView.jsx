@@ -10,14 +10,14 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
     const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
 
     const isOverlapping = storedReservations.some(reservation =>
-        reservation.carId === selectedCar.id &&
-        ((new Date(`${reservation.startDate}T${reservation.startTime}`) < new Date(`${reservation.endDate}T${reservation.endTime}`)) &&
-         (new Date(`${startDate}T${startTime}`) < new Date(`${endDate}T${endTime}`)))
+      reservation.carId === selectedCar.id &&
+      ((new Date(`${reservation.startDate}T${reservation.startTime}`) < new Date(`${reservation.endDate}T${reservation.endTime}`)) &&
+      (new Date(`${startDate}T${startTime}`) < new Date(`${endDate}T${endTime}`)))
     );
     
     if (isOverlapping) {
-        Swal.fire('התנגשות בזמנים', 'הרכב כבר הוזמן בתאריכים ובשעות שנבחרו', 'error');
-        return;
+      Swal.fire('התנגשות בזמנים', 'הרכב כבר הוזמן בתאריכים ובשעות שנבחרו', 'error');
+      return;
     }
 
     storedReservations.push({

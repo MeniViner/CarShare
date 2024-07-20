@@ -1,0 +1,56 @@
+.main-app {
+    margin: 0px;
+    padding: 0px;
+    height: 100dvh;
+  }
+  
+  .map-app {
+    position: relative;
+    display: flex;
+    z-index: 0;
+    height: 100vh;
+    height: 99svh;
+    outline: none;
+  }
+  
+  .gm-style iframe + div {
+    border: none !important;
+    outline: none !important;
+  }
+  
+  .location-button {
+    position: fixed;
+    display: flex;
+    z-index: 0;
+    /* margin-top: 38dvh;
+    margin-left: 42dvw; */
+    bottom: 160px;
+    right: 25px;
+  
+  }
+  
+  .fa-location, 
+  .faBarsStaggered {
+    font-size: 22px;
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    margin-top: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background-color .16s ease-out;
+    background: whitesmoke;
+    border: 0;
+    box-shadow: 0 3px 15px rgba(60,64,67,0.3),0 3px 5px 1px rgba(60,64,67,0.15);
+  }
+  
+  .fa-location,
+  .faBarsStaggered {
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+  }
+  
+  .fa-location.blue {
+    color: #007bff;
+  } 
