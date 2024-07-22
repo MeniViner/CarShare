@@ -107,9 +107,15 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
             <label htmlFor="password">{t('strong-password')}</label>
           </div>
           <div className="login-forum-buttons">
-            <button type="submit">{isLogin ? 'Login' : 'Register'}</button>
+            <button type="submit" id='log-btn'>{isLogin ? 'Login' : 'Register'}</button>
             {isLogin && 
-              <button type="button" onClick={() => setIsResetPassword(true)} className="reset-password-button">Forgot Password?</button>
+              <button 
+                type="button" 
+                onClick={() => setIsResetPassword(true)} 
+                className="reset-password-button"
+              >
+                Forgot Password?
+              </button>
             }
           </div>
           <p onClick={() => setIsLogin(!isLogin)}>
