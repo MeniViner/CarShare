@@ -19,7 +19,7 @@
 #           channelId: live
 #           projectId: we-car-share
 
-name: Build and Deploy to Firebase Hosting
+name: Build and Deploy
 
 on:
   push:
@@ -29,7 +29,6 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -39,8 +38,8 @@ jobs:
         with:
           node-version: '14'
 
-      # - name: Install dependencies
-      #   run: npm ci
+      - name: Install dependencies
+        run: npm ci
 
       - name: Build project
         run: npm run build
@@ -49,6 +48,5 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WE_CAR_SHARE }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           channelId: live
-          projectId: we-car-share
