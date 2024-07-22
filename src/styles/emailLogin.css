@@ -37,19 +37,6 @@ input {
   transition: all 0.3s ease;
 }
 
-/* label {
-  position: absolute;
-  top: 27%;
-  left: 8px;
-  font-size: 14px;
-  color: #999;
-  transform: translateY(-50%);
-  transition: all 0.3s ease;
-  background-color: #f4f4f4;
-  padding: 0 5px;
-  pointer-events: none;
-} */
-
 input:focus + label,
 input:not(:placeholder-shown) + label {
   font-size: 12px;
@@ -113,4 +100,10 @@ input:hover {
 .login-forum-buttons {
   display: flex;
   flex-direction: row;
+  font-family: 'Roboto', sans-serif; 
+
+}
+
+#log-btn {
+  font-size: 1.1rem;
 }
