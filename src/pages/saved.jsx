@@ -96,7 +96,7 @@ const Saved = () => {
                             <MdOutlineSaveAlt className="icon" />
                         </div>
                         <div className="text-container">
-                            <p>Nothing here 2</p>
+                            <p>Nothing here</p>
                             <h2>You haven't saved anything yet.</h2>
                             <h2> Start adding some items and they will show up here!</h2>
                             <Link to="/" className="sign-in-link">Go back</Link>
