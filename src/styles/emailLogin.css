@@ -1,7 +1,8 @@
 /* עיצוב כללי לטופס ההתחברות */
 .login-container {
   max-width: 400px;
-  margin: auto;
+  margin: 20px;
+  /* margin-top: 20vh; */
   padding: 20px;
   background-color: #f4f4f4;
   border-radius: 8px;
@@ -18,7 +19,6 @@
 /* עיצוב הכותרת */
 .login-container h2 {
   text-align: center;
-  margin-bottom: 20px;
 }
 
 /* עיצוב שדות הקלט */
@@ -29,15 +29,15 @@
 
 input {
   padding: 0.6rem;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   border-radius: 4px;
   width: 100%;
   box-sizing: border-box;
-  background: transparent;
+  /* background: transparent; */
   transition: all 0.3s ease;
 }
 
-label {
+/* label {
   position: absolute;
   top: 27%;
   left: 8px;
@@ -48,7 +48,7 @@ label {
   background-color: #f4f4f4;
   padding: 0 5px;
   pointer-events: none;
-}
+} */
 
 input:focus + label,
 input:not(:placeholder-shown) + label {
@@ -104,19 +104,6 @@ input:hover {
 
 .login-container p:hover {
   text-decoration: underline;
-}
-
-
-.reset-password-button {
-  margin-top: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .reset-password-button:hover {
