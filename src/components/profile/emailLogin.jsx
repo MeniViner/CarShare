@@ -14,7 +14,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin] = useState(true); // true = login, false = register
-  const [isResetPassword, setIsResetPassword] = useState(false); // מצב לשכחתי סיסמה
+  const [isResetPassword, setIsResetPassword] = useState(false); // הגדרת state לשכחתי סיסמה
   const [resetEmail, setResetEmail] = useState(''); // שדה מייל לשכחתי סיסמה
 
   const handleSubmit = async (e) => {
@@ -61,6 +61,13 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
   return (
     <div className="login-container">
       <ToastContainer />
+
+      <div className="separate-mail">
+        <div className="separate-line"></div>
+          <h5>or login by email</h5>
+        <div className="separate-line"></div>
+      </div>
+
       {!isResetPassword ? (
         <form onSubmit={handleSubmit}>
           <h2>{isLogin ? 'Login' : 'Register'}</h2>
@@ -69,7 +76,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
               <input
                 type="text"
                 id="name"
-                placeholder=" " /* placeholder ריק עבור הטריק */
+                placeholder=" " 
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -81,7 +88,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
             <input
               type="email"
               id="email"
-              placeholder=" " /* placeholder ריק עבור הטריק */
+              placeholder=" " 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -92,7 +99,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
             <input
               type="password"
               id="password"
-              placeholder=" " /* placeholder ריק עבור הטריק */
+              placeholder=" "
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -116,7 +123,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
             <input
               type="email"
               id="resetEmail"
-              placeholder=" " /* placeholder ריק עבור הטריק */
+              placeholder=" "
               value={resetEmail}
               onChange={(e) => setResetEmail(e.target.value)}
               required

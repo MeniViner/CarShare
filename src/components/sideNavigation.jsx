@@ -54,7 +54,7 @@ const SideNavigation = () => {
             <h2>Car Share</h2>
           </div>
 
-          <div className="side-menu-search">
+          {/* <div className="side-menu-search">
             <input
               type="text"
               placeholder={<><faSearch /> Search...</>}
@@ -62,9 +62,10 @@ const SideNavigation = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleSearch}
             />
-          </div>
+          </div> */}
 
           <div className="input-with-icon">
+            <IoSearch className='icon'/>
             <input
               type="text"
               placeholder="Search..."

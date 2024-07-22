@@ -43,10 +43,10 @@ const UserProfile = () => {
     return (
         <div className="profile-page">
             {!isAuthenticated ? (
-                <div>
-                    <h4>{t('new-user')}</h4>
-                    <EmailLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
+                <div className="profile-card">
                     <GoogleLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
+                    <EmailLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
+
                 </div>
             ) : (
                 <>
