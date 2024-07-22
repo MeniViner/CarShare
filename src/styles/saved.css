@@ -64,7 +64,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 93vh;
+  height: 93dvh;
   background-color: #f0f2f5;
   padding: 20px;
   text-align: center;
@@ -77,9 +78,9 @@
 }
 
 /* Styling for the icon */
-.icon {
+.saved-info-container .icon {
   font-size: 100px;
-  color: #007bff;
+  color: #8a634f;
 }
 
 /* Styling for the text container */
@@ -95,7 +96,7 @@
 .text-container p {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: #792121;
   margin-bottom: 20px;
   font-family: 'Montserrat', sans-serif; /* Use Montserrat for headings */
 }
@@ -103,7 +104,7 @@
 /* Styling for the h2 elements */
 .text-container h2 {
   font-size: 1.2rem;
-  color: #666;
+  color: #6d5555;
   margin-bottom: 15px;
 }
 
@@ -112,7 +113,7 @@
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #be4a4a;
   color: white;
   border-radius: 5px;
   text-decoration: none;

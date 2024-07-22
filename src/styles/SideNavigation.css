@@ -102,15 +102,11 @@
   text-decoration: none;
   color: #333;
   margin-bottom: 10px;
+
 }
 
-.smi2 {
-  margin-top: 18vh;
-}
-
-.side-menu-item h3 {
-  margin: 0 0 0 10px;
-  font-size: 1.2em;
+.side-menu-item.active:last-child {
+  margin-bottom: 30px;
 }
 
 .side-menu-item:hover {
@@ -118,8 +114,31 @@
   border-radius: 4px;
 }
 
+/* Add this to your existing CSS file */
+.side-menu-item.active {
+  margin-left: 0vw;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #c1a598; /* Change this to the desired active background color */
+  color: #5d4336; /* Change this to the desired active text color */
+}
+
+.side-menu-item.active .icon {
+  color: #5d4336;
+}
+
+
+.side-menu-item h3 {
+  margin: 0 0 0 10px;
+  font-size: 1.2em;
+}
+
 .side-menu-item .icon {
-  font-size: 26px;
+  font-size: 24px;
+}
+
+.smi2 {
+  margin-top: 18vh;
 }
 
 .side-menu-profile {
