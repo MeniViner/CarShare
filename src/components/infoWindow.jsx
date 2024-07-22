@@ -25,6 +25,15 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
 
   const distance = calculateDistance(userLocation, selectedCar.coordinates);
 
+  const formatDistance = (distance) => {
+    distance = distance.toString(); // Convert distance to string
+    if (parseFloat(distance) > 1000) {
+      return (parseFloat(distance) / 1000).toFixed(0) + " km";
+    } else {
+      return parseFloat(distance).toFixed(0) + " meter";
+    }
+  };  
+
   const [showMore, setShowMore] = useState(false);
   const ref = useRef(null); 
 
@@ -85,22 +94,19 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
   return (
     <>
 
-
       <div ref={ref} className="vehicle-info"> {/* הוסף את ref ל-div הראשי */}
 
-      <div className="process-steps">
-        <div className="step">
-          <CiLocationArrow1 className='icon'/>
+        <div className="process-steps">
+          <div className="step">
+            <CiLocationArrow1 className='icon'/>
+          </div>
+          <div className="step">
+            <MdOutlineCalendarMonth className='icon'/>
+          </div>
+          <div className="step">
+            <IoReceiptOutline className='icon'/>
+          </div>
         </div>
-        <div className="step">
-          <MdOutlineCalendarMonth className='icon'/>
-        </div>
-        <div className="step">
-          <IoReceiptOutline className='icon'/>
-        </div>
-        
-        
-      </div>
 
         <div className="vehicle-info-header">
           <div className="vehicle-info-header-name">
@@ -111,8 +117,6 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
               <h3>{selectedCar.model} {selectedCar.year}</h3>
             </div>
           </div>
-
-          
           <img
             src={selectedCar.image}
             alt={`${selectedCar.brand} ${selectedCar.model}`}
@@ -120,17 +124,17 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
           />
         </div>
         <div className="vehicle-info-details">
-          { (distance) ? ( //ask if ther is a distance set
-            <div>
-              {/* <RiPinDistanceLine /> */}
-              <FaPersonWalking />
-              <span>{distance}</span>
-            </div>
-          ) : ( 
-            <div>
-              <MdLocationOff />
-            </div>
-          )}
+          { distance ? ( //ask if ther is a distance set
+              <div>
+                <FaPersonWalking />
+                <span>{formatDistance(distance)}</span>
+              </div>
+            ) : ( 
+              <div>
+                <MdLocationOff />
+              </div>
+            ) 
+          }
 
           {selectedCar.fuel !== 'NaN' && ( // הסתרה אם הערך fuel הוא 'NaN'
             <div>

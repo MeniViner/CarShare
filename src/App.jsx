@@ -1,15 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import SearchResults from './utils/SearchResults'; // ייבוא רכיב החיפוש
-
-import Map from './components/map';
+import SearchResults from './utils/SearchResults';
+import Map from './pages/map';
 import Profile from './components/profile/profile'
 import ListCars from './components/listCars';
-import Saved from './components/saved';
-import Settings from './components/settings';
+import Saved from './pages/saved';
+import Settings from './pages/settings';
 import Top from './components/top';
-import NotFound from './components/NotFound'; 
+import NotFound from './utils/NotFound'; 
 import EditProfile from './components/profile/EditProfile';
 import Prices from './components/info/prices/prices';
 

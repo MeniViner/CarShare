@@ -1,4 +1,4 @@
-.invitation-container {
+/* .invitation-container {
   background-color: #ffffff;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
@@ -119,7 +119,6 @@ input[type="time"]:focus {
   -webkit-appearance: textfield;
 }
 
-/* עיצוב נוסף להוספת מודרניות */
 label {
   margin-top: 10px;
   font-weight: bold;
@@ -145,4 +144,97 @@ label {
 .date-time-selection input[type="time"]:focus {
   border-color: #007bff;
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+} */
+
+
+.invitation-container {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  color: #4A4A4A;
+}
+
+.date-time-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-group button {
+  background-color: #ffcc00;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.input-group button:hover {
+  background-color: #ff9900;
+}
+
+.input-group input {
+  width: 60px;
+  text-align: center;
+  border: none;
+  font-size: 16px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.field-group label {
+  font-weight: bold;
+  color: #6A1B9A;
+}
+
+input[type="date"],
+input[type="time"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #E0E0E0;
+  border-radius: 10px;
+  text-align: center;
+  transition: border-color 0.3s;
+}
+
+input[type="date"]:focus,
+input[type="time"]:focus {
+  border-color: #6A1B9A;
+}
+
+.submit-button {
+  background-color: #ffcc00;
+  border: none;
+  border-radius: 20px;
+  padding: 15px 30px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #ff9900;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

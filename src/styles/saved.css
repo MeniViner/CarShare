@@ -52,3 +52,74 @@
 .remove-bt {
     align-self: start;
 }
+
+
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap');
+
+/* General styling for the container */
+.saved-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Roboto', sans-serif; /* Use Roboto for the main content */
+}
+
+/* Styling for the icon container */
+.icon-container {
+  margin-bottom: 20px;
+}
+
+/* Styling for the icon */
+.icon {
+  font-size: 100px;
+  color: #007bff;
+}
+
+/* Styling for the text container */
+.text-container {
+  max-width: 600px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the paragraph */
+.text-container p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif; /* Use Montserrat for headings */
+}
+
+/* Styling for the h2 elements */
+.text-container h2 {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Styling for the link */
+.sign-in-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  font-family: 'Montserrat', sans-serif; /* Use Montserrat for the link */
+}
+
+.sign-in-link:hover {
+  background-color: #0056b3;
+}
