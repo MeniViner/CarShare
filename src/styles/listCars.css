@@ -1,10 +1,17 @@
-
-/* listCars.css */
-
+.page-header h1{
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 .cars-list {
     padding: 20px;
     background-color: #f8f9fa; /* צבע רקע בהיר לכל הרשימה */
+}
+
+.sort-buttons-container {
+    overflow-x: auto; /* מאפשר גלילה אופקית */
+    white-space: nowrap; /* שומר את הכפתורים בשורה אחת */
 }
 
 .sort-buttons {
@@ -15,18 +22,18 @@
     margin: 0 auto 20px;
     gap: 10px;
     padding: 10px;
-    background-color: #fff; /* צבע רקע לבן */
+    background-color: #fff; 
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* צל עדין */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
 }
 
 .sort-buttons button, .sort-buttons select {
     flex: 1;
     padding: 10px;
     margin: 0 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fff;
+    border: none;
+    border-radius: 7px;
+    background-color: #ededed;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -35,26 +42,46 @@
     background-color: #f1f1f1;
 }
 
+.sort-buttons button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
 .sort-buttons select {
     flex: 0.2; /* קח פחות מקום מהרוחב */
 }
 
-.car-item {
+.sort-order-button {
+    color: #007bff;
+    font-size: larger;
+}
+
+.sort-buttons button  {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
-    justify-content: space-between; 
+    gap: 5px;
+}
 
+
+.car-item {
+    margin-bottom: 2px;
     background-color: #fff; /* צבע רקע לבן לכל פריט */
     border-radius: 10px; /* פינות מעוגלות */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* צל עדין */
-    padding: 20px; /* ריווח פנימי */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* מעבר חלק */
 }
 
 .car-item:hover {
     transform: translateY(-5px); /* הרמה קלה בריחוף */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* צל מוגבר בריחוף */
+}
+
+.car-item-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    padding: 20px 20px 10px 20px; /* ריווח פנימי */
+
 }
 
 .car-item img {
@@ -106,6 +133,27 @@
     margin-right: 10px;
 }
 
+
+.more-details-in-list .items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding-bottom: 20px;
+}
+
+.more-details-in-list .item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    padding-left: 50px;
+    gap: 5px;
+    padding-bottom: 20px;
+
+}
+
+
 .car-item:not(:last-child) {
     margin-bottom: 20px; /* ריווח בין הפריטים */
 }
@@ -126,3 +174,5 @@
 .saved-bt:hover {
     color: #dc3545; /* צבע אדום כהה בריחוף */
 }
+
+

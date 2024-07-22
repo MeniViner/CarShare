@@ -6,11 +6,17 @@ import cars from '../data/carsData';
 import '../styles/listCars.css';
 import { ToastContainer, toast } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
+
 import { CiBookmarkPlus } from "react-icons/ci"; 
 import { RiPinDistanceLine } from "react-icons/ri";
-import { MdBookmarkAdded, MdLocationOff } from "react-icons/md"; 
+import { MdBookmarkAdded, MdDateRange, MdElectricCar, MdLocationOff, MdMyLocation } from "react-icons/md"; 
+import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaCarSide } from "react-icons/fa";
+import { PiSeatbeltFill } from "react-icons/pi";
+
 import { collection, addDoc, query, getDocs, where } from "firebase/firestore"; 
 import { auth, db } from '../data/firebaseConfig'; 
+import { BsFuelPumpFill } from 'react-icons/bs';
+
 
 
 const ListCars = () => {
@@ -81,6 +87,11 @@ const ListCars = () => {
     navigate(`/map?carId=${car.id}`); // הפניה לדף המפה עם carId כפרמטר
   };
 
+  const toggleSortOrder = () => {
+    setSortOrder(prevOrder => prevOrder === 'asc' ? 'desc' : 'asc');
+  };
+  
+
   const sortCars = (cars) => {
     return cars.sort((a, b) => {
       let compare = 0;
@@ -100,6 +111,7 @@ const ListCars = () => {
       return sortOrder === 'asc' ? compare : -compare;
     });
   };
+  
 
   const calculateCarDistances = () => {
     let carsWithDistances = cars.map(car => ({
@@ -109,6 +121,15 @@ const ListCars = () => {
     return sortCars(carsWithDistances);
   };
 
+  const formatDistance = (distance) => {
+    distance = distance.toString(); // Convert distance to string
+    if (parseFloat(distance) > 1000) {
+      return (parseFloat(distance) / 1000).toFixed(0) + " km";
+    } else {
+      return parseFloat(distance).toFixed(0) + " meter";
+    }
+  };
+  
   const isHybrid = (car) => {
     return car.fuelType === 'Hybrid';
   };
@@ -116,43 +137,85 @@ const ListCars = () => {
   return (
     <>
       <ToastContainer />
-      <div className="sort-buttons">
-        <button onClick={() => setSortKey('nearby')}>Nearby</button>
-        <button onClick={() => setSortKey('category')}>Category</button>
-        <button onClick={() => setSortKey('seats')}>Seats</button>
-        <button onClick={() => setSortKey('year')}>Year</button>
-        <button onClick={() => setSortKey('fuelType')}>Fuel Type</button>
-        <button onClick={() => setSortKey('battery')}>Battery</button>
-        <select onChange={(e) => setSortOrder(e.target.value)} value={sortOrder}>
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+      <div className="page-header list-cars-header">
+        <h1>cars list</h1> 
       </div>
+
+        <div className="sort-buttons-container">
+          <div className="sort-buttons">
+            <button 
+              className="sort-order-button " 
+              onClick={toggleSortOrder}
+            >
+              {sortOrder === 'asc' ? <FaRegArrowAltCircleUp/> : <FaRegArrowAltCircleDown/>}
+            </button>
+            <button 
+              className={sortKey === 'nearby' ? 'active' : ''} 
+              onClick={() => setSortKey('nearby')}
+            ><MdMyLocation /> Nearby </button>
+            <button 
+              className={sortKey === 'category' ? 'active' : ''} 
+              onClick={() => setSortKey('category')}
+            ><FaCarSide /> Category</button>
+            <button 
+              className={sortKey === 'seats' ? 'active' : ''} 
+              onClick={() => setSortKey('seats')}
+            ><PiSeatbeltFill/> Seats</button>
+            <button
+              className={sortKey === 'year' ? 'active' : ''}
+              onClick={() => setSortKey('year')}
+            ><MdDateRange />  Year
+            </button>
+            
+            <button 
+              className={sortKey === 'fuelType' ? 'active' : ''} 
+              onClick={() => setSortKey('fuelType')}
+            > <BsFuelPumpFill /> Fuel Type</button>
+            <button 
+              className={sortKey === 'battery' ? 'active' : ''} 
+              onClick={() => setSortKey('battery')}
+            > <MdElectricCar /> Battery</button>
+          </div>
+        </div>
+
       <div className="cars-list">
         {calculateCarDistances().map((car) => (
-          <div key={car.id} className="car-item">
-            <div className="car-image-container" onClick={() => handleCarClick(car)}>
-              <img src={car.image} alt={`${car.brand} ${car.model}`} />
-              {isHybrid(car) && <img src='images/hybrid.png' alt="Hybrid" className="hybrid-badge" />}
+          <>
+            <div key={car.id} className="car-item">
+              <div className="car-item-info">
+                <div className="car-image-container" onClick={() => handleCarClick(car)}>
+                  <img src={car.image} alt={`${car.brand} ${car.model}`} />
+                  {isHybrid(car) && <img src='images/hybrid.png' alt="Hybrid" className="hybrid-badge" />}
+                </div>
+                <div className="car-details" onClick={() => handleCarClick(car)}  >
+                  <h3>{`${car.brand} ${car.model}`} {car.year}</h3>
+                  {car.distance ? (
+                    <>
+                      <RiPinDistanceLine />
+                      <span>{formatDistance(car.distance)}</span>
+                      </>
+                  ) : (
+                    <MdLocationOff /> 
+                  )}
+                  <p>
+                    <span>{Math.floor(car.pricePerHour)} ₪/hour</span>
+                  </p>
+                </div>
+                <button onClick={() => saveCar(car.id)} className='saved-bt'>
+                  {isCarSaved(car.id) ? <MdBookmarkAdded /> : <CiBookmarkPlus />}
+                </button>
+              </div>
+              <div className="more-details-in-list">
+                {/* <div className='items'> */}
+                  <div className="item"><FaCarSide /><span>category type</span> {car.category} </div>
+                  <div className="item"><BsFuelPumpFill /> {car.fuelType}</div>
+                  <div className="item"><MdElectricCar /> {car.battery}</div>
+                  <div className="item"><PiSeatbeltFill/>  {car.seats}</div>
+                  <div className="item">{car.addres}</div>
+                {/* </div> */}
+              </div>
             </div>
-            <div className="car-details" onClick={() => handleCarClick(car)}  >
-              <h3>{`${car.brand} ${car.model}`} {car.year}</h3>
-              {car.distance ? (
-                <>
-                  <RiPinDistanceLine />
-                  <span>{car.distance}</span>
-                </>
-              ) : (
-                <MdLocationOff /> // הצג אייקון של מיקום כבוי אם אין מיקום
-              )}
-              <p>
-                <span>{Math.floor(car.pricePerHour)} ₪/hour</span>
-              </p>
-            </div>
-            <button onClick={() => saveCar(car.id)} className='saved-bt'>
-              {isCarSaved(car.id) ? <MdBookmarkAdded /> : <CiBookmarkPlus />}
-            </button>
-          </div>
+          </>
         ))}
       </div> 
     </>

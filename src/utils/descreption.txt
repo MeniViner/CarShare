@@ -1,2 +1,10 @@
 folder: /utils is a place where you can place small snippets you can use throughout the application.
  - Small functions to build bigger things with.
+
+
+from env
+ HTTPS=true
+
+https://console.firebase.google.com/u/0/project/we-car-share/authentication/providers - google:
+Web client ID = 44167050649-dtsppbl1jpklk5rem0fkcusneie830b9.apps.googleusercontent.com
+Web client secret = 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
