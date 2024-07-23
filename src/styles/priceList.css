@@ -10,7 +10,7 @@
   }
   
   .car-option {
-    background-color: #f3e5f5;
+    background-color: #dcd6d4;
     padding: 20px;
     border-radius: 8px;
     margin-bottom: 20px;
@@ -18,7 +18,7 @@
   }
   
   .car-option h2 {
-    color: #6a1b9a;
+    color: #8a634f;
     margin-bottom: 15px;
     font-size: 18px;
     font-weight: bold;
@@ -46,7 +46,7 @@
   
   .car-option li:before {
     content: "•";
-    color: #6a1b9a;
+    color: #8a634f;
     font-size: 20px;
     margin-left: 10px;
   }
