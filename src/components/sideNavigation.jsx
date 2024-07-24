@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../styles/SideNavigation.css';
 
+import { triggerHapticFeedback } from '../utils/hapticFeedback';
 import { RiMenu3Fill, RiMenuFoldLine } from "react-icons/ri";
 import { AiOutlineMessage } from "react-icons/ai";
 import { IoSettingsOutline, IoMapSharp, IoBookmarksOutline, IoListSharp,  IoPricetagsOutline, IoSearch } from "react-icons/io5";
 
 import { auth } from '../data/firebaseConfig';
+import VibrationTest from './VibrationTest'; // Import the VibrationTest component
 
 
 const SideNavigation = () => {
@@ -36,7 +38,14 @@ const SideNavigation = () => {
   }, []);
 
   const toggleSideNav = () => setIsSideNavOpen(prev => !prev);
-  const closeSideNav = () => setIsSideNavOpen(false);
+  const closeSideNav = () => {
+    // e.preventDefault();
+    // triggerHapticFeedback();
+    if (navigator.vibrate) {
+      navigator.vibrate(50); // Vibrate for 50ms
+    }
+    setIsSideNavOpen(false)
+  };
 
   const handleSearch = (e) => {
     if (e.key === 'Enter') {
@@ -53,16 +62,6 @@ const SideNavigation = () => {
           <div className="side-menu-header">
             <h2>Car Share</h2>
           </div>
-
-          {/* <div className="side-menu-search">
-            <input
-              type="text"
-              placeholder={<><faSearch /> Search...</>}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleSearch}
-            />
-          </div> */}
 
           <div className="input-with-icon">
             <IoSearch className='icon'/>
@@ -100,6 +99,7 @@ const SideNavigation = () => {
               <IoSettingsOutline className='icon' />
               <h3>Settings</h3>
             </Link>
+            <VibrationTest />
           </div>
 
           <div className="side-menu-profile">
@@ -131,6 +131,8 @@ const SideNavigation = () => {
       </div>
 
       {isSideNavOpen && <div className="overlay" onClick={toggleSideNav}></div>}
+
+      
     </>
   );
 };
