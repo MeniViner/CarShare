@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 
@@ -11,12 +11,8 @@ import { TbCurrentLocation } from "react-icons/tb";
 import CarInfoWindow from '../components/infoWindow'; 
 import LoadingPage from '../assets/LoadingPage';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
-import AnimatedLink from '../utils/AnimatedLink';
 import '../styles/map.css';
 import { IoListSharp } from 'react-icons/io5';
-
-
-import { CarListLink } from '../components/listCars';
 
 
 const Map = () => {
@@ -58,17 +54,10 @@ const Map = () => {
   }, [location]); // הפעל מחדש כש-location משתנה
 
 
-  
-
   const handleMarkerClick = (car) => {
     setSelectedCar(car);
-    setIsInfoWindowOpen(true);
+    setIsInfoWindowOpen(true);  
   };
-
-  // const handleCarClick = (car) => {
-  //   setSelectedCar(car);
-  //   setIsInfoWindowOpen(true);
-  // };
 
   const handleCloseClick = () => {
     setIsInfoWindowOpen(false);
@@ -76,6 +65,10 @@ const Map = () => {
 
 
   const getMapOptions = () => {
+
+    const savedTheme = localStorage.getItem('theme');
+    const isDarkMode = savedTheme ? savedTheme === 'dark' : false;
+    
     return {
       disableDefaultUI: true,
       zoomControl: false,
@@ -143,21 +136,13 @@ const Map = () => {
             </div>
           </div>
 
-          <CarListLink />
 
-
-          {/* <Link to={{ pathname: "/car-list", state: { fromRight: true } }} className="specialButton">
+          <Link to="/car-list">
             <div className='car-list-map fa-location'>
               <IoListSharp />
             </div>
-          </Link>
+          </Link> 
 
-
-          <AnimatedLink  to="/car-list" className="specialButton">
-            <div className='car-list-map fa-location' state={{ fromRight: true }}>
-              <IoListSharp/>
-            </div>
-          </AnimatedLink> */}
 
         {cars.map((car) => (
           <Marker //window.google.maps.marker.AdvancedMarkerElement

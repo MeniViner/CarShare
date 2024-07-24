@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
+import { IoMdMoon, IoMdSunny } from "react-icons/io";
 import '../styles/themeToggle.css';
 
 
@@ -19,16 +18,19 @@ const ThemeToggle = ({ toggleTheme }) => {
 
 
   const handleToggleTheme = () => {
-    const newTheme = !isDarkMode;
-    setIsDarkMode(newTheme);
-    toggleTheme(newTheme); 
+    setIsDarkMode(prevMode => {
+      const newMode = !prevMode;
+      localStorage.setItem('theme', newMode ? 'dark' : 'light');
+      return newMode;
+    });
   };
+  
 
   return (
     <div className={`theme-toggle ${isDarkMode ? 'dark' : 'light'}`} onClick={handleToggleTheme}>
       <div className="toggle-track">
         <div className={`toggle-thumb ${isDarkMode ? 'dark' : 'light'}`}>
-          <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} />
+          {isDarkMode ? <IoMdMoon /> : <IoMdSunny />}
         </div>
       </div>
     </div>

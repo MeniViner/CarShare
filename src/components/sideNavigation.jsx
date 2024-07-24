@@ -8,7 +8,6 @@ import { AiOutlineMessage } from "react-icons/ai";
 import { IoSettingsOutline, IoMapSharp, IoBookmarksOutline, IoListSharp,  IoPricetagsOutline, IoSearch } from "react-icons/io5";
 
 import { auth } from '../data/firebaseConfig';
-import VibrationTest from './VibrationTest'; // Import the VibrationTest component
 
 
 const SideNavigation = () => {
@@ -99,7 +98,6 @@ const SideNavigation = () => {
               <IoSettingsOutline className='icon' />
               <h3>Settings</h3>
             </Link>
-            <VibrationTest />
           </div>
 
           <div className="side-menu-profile">

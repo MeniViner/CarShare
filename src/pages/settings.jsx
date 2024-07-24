@@ -13,7 +13,11 @@ import { auth, db } from '../data/firebaseConfig';
 
 const Settings = () => {
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme ? savedTheme === 'dark' : false;
+  });
+  
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState('en'); 
 
@@ -60,7 +64,8 @@ const Settings = () => {
       }
     };
     fetchSettings();
-  }, [i18n]);
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+  }, [i18n, isDarkMode]);
 
 
   const handleLanguageChange = (lang) => {
@@ -82,8 +87,8 @@ const Settings = () => {
 
   const toggleTheme = () => {
     setIsDarkMode(prevMode => !prevMode);
-    document.body.classList.toggle('dark-mode', !isDarkMode);
-    document.body.classList.toggle('light-mode', isDarkMode);
+    // document.body.classList.toggle('dark-mode', !isDarkMode);
+    // document.body.classList.toggle('light-mode', isDarkMode);
   };
 
   return (
