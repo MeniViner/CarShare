@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'; 
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
 import { calculateDistance } from '../utils/distanceCalculator'; 
 import cars from '../data/carsData';
@@ -17,6 +18,14 @@ import { collection, addDoc, query, getDocs, where } from "firebase/firestore";
 import { auth, db } from '../data/firebaseConfig'; 
 import { BsFuelPumpFill } from 'react-icons/bs';
 
+export const CarListLink = () => (
+  
+    <Link to={{ pathname: "/car-list", state: { fromRight: true } }} className="specialButton">
+    <div className='car-list-map fa-location'>
+      gay      
+    </div>
+  </Link>
+);
 
 
 const ListCars = () => {
@@ -27,6 +36,9 @@ const ListCars = () => {
   const [sortKey, setSortKey] = useState('nearby'); 
   const [sortOrder, setSortOrder] = useState('asc'); 
 
+  //to open this page with animation from the right.
+  const location = useLocation(); // Use useLocation hook
+  const fromRight = location.state?.fromRight || false;
 
   useEffect(() => {
     const fetchSavedCarIds = async () => {
@@ -57,7 +69,7 @@ const ListCars = () => {
     }
 
     return () => unsubscribe();
-  }, []); 
+  }, [location]); 
 
   const isCarSaved = (carId) => savedCarIds.includes(carId); 
 
@@ -135,16 +147,22 @@ const ListCars = () => {
   };
 
   return (
-    <>
+    <div className={fromRight ? 'page-transition-right' : ''}>
       <ToastContainer />
       <div className="page-header list-cars-header">
-        <h1>cars list</h1> 
+        <h1><b>we</b> cars</h1> 
       </div>
+
+      {/* <Link to="/car-list" state={{ fromRight: true }}>
+        <div className='car-list-map fa-location'>
+          <FaCarSide/>
+        </div>
+      </Link> */}
 
         <div className="sort-buttons-container">
           <div className="sort-buttons">
             <button 
-              className="sort-order-button " 
+              className="sort-order-button" 
               onClick={toggleSortOrder}
             >
               {sortOrder === 'asc' ? <FaRegArrowAltCircleUp/> : <FaRegArrowAltCircleDown/>}
@@ -218,7 +236,7 @@ const ListCars = () => {
           </>
         ))}
       </div> 
-    </>
+    </div>
   );
 };
 

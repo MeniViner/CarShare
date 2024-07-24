@@ -47,13 +47,11 @@
     color: #fff;
 }
 
-.sort-buttons select {
-    flex: 0.2; /* קח פחות מקום מהרוחב */
-}
-
 .sort-order-button {
     color: #007bff;
-    font-size: larger;
+    font-size: 18px;
+    margin: 0px;
+
 }
 
 .sort-buttons button  {

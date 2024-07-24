@@ -1,4 +1,5 @@
 import React, {useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
 
@@ -10,7 +11,12 @@ import { TbCurrentLocation } from "react-icons/tb";
 import CarInfoWindow from '../components/infoWindow'; 
 import LoadingPage from '../assets/LoadingPage';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
+import AnimatedLink from '../utils/AnimatedLink';
 import '../styles/map.css';
+import { IoListSharp } from 'react-icons/io5';
+
+
+import { CarListLink } from '../components/listCars';
 
 
 const Map = () => {
@@ -89,7 +95,6 @@ const Map = () => {
   };
 
 
-
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     // libraries: ["places"],
@@ -122,8 +127,8 @@ const Map = () => {
       <GoogleMap
         zoom={16}
         center={mapCenter}
-        mapContainerStyle={{ height: '100%', width: '100%' }}
-        options={getMapOptions()}
+        mapContainerStyle={ { height: '100%', width: '100%' } }
+        options={ getMapOptions() }
       >
         {userLocation && (
           <Marker //window.google.maps.marker.AdvancedMarkerElement
@@ -132,15 +137,27 @@ const Map = () => {
           />
         )}
 
-          {/* <div className="side-nav-bt" >
-            <SideNavigation/>
-          </div> */}
-
           <div className='location-button' onClick={handleLocationButtonClick}>
             <div className={`fa-location ${isLocationSet ? 'blue' : ''}`}>
               <TbCurrentLocation />
             </div>
           </div>
+
+          <CarListLink />
+
+
+          {/* <Link to={{ pathname: "/car-list", state: { fromRight: true } }} className="specialButton">
+            <div className='car-list-map fa-location'>
+              <IoListSharp />
+            </div>
+          </Link>
+
+
+          <AnimatedLink  to="/car-list" className="specialButton">
+            <div className='car-list-map fa-location' state={{ fromRight: true }}>
+              <IoListSharp/>
+            </div>
+          </AnimatedLink> */}
 
         {cars.map((car) => (
           <Marker //window.google.maps.marker.AdvancedMarkerElement
