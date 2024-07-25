@@ -130,7 +130,7 @@ const SideNavigation = () => {
 
       {isSideNavOpen && <div className="overlay" onClick={toggleSideNav}></div>}
 
-      
+
     </div>
   );
 };
