@@ -55,7 +55,7 @@ const SideNavigation = () => {
   };
 
   return (
-    <>
+    <div className="side-navigation-page">
       <div className={`sidenav ${isSideNavOpen ? 'open' : ''}`}>
         <div className="side-menu">
           <div className="side-menu-header">
@@ -131,7 +131,7 @@ const SideNavigation = () => {
       {isSideNavOpen && <div className="overlay" onClick={toggleSideNav}></div>}
 
       
-    </>
+    </div>
   );
 };
 
