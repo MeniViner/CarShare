@@ -367,6 +367,29 @@ const cars = [
     image5: 'https://www.motortrend.com/uploads/sites/10/2022/01/2022-tesla-model-y-long-range-4wd-suv-front-view.png?fit=around%7C875:492',
     address: {city: 'TelAviv', street: 'kaplan 7'},
     coordinates: { lat: 32.074503, lng: 34.792577 }
+  },
+  {
+    id: 17,
+    category: 'SUV',
+    brand: 'Tesla',
+    model: 'Model Y',
+    seats: 5,
+    year: 2022,
+    pricePerHour: 40,
+    pricePerDay: 450,
+    unlockFee: 6,
+    kmPrice: 2.5,
+    fuelType: 'Electric',
+    fuel: 'NaN',
+    battery: '90%',
+    image:  'https://www.motortrend.com/uploads/sites/10/2022/01/2022-tesla-model-y-long-range-4wd-suv-angular-front.png?fit=around%7C875:492',
+    image1: 'https://www.motortrend.com/uploads/sites/10/2022/01/2022-tesla-model-y-long-range-4wd-suv-side-view.png?fit=around%7C875:492',
+    image2: 'https://www.motortrend.com/uploads/sites/10/2022/01/2022-tesla-model-y-long-range-4wd-suv-doors.png?fit=around%7C875:492',
+    image3: 'https://www.motortrend.com/uploads/sites/10/2022/01/2022-tesla-model-y-long-range-4wd-suv-rear-view.png?fit=around%7C875:492',
+    image4: 'https://www.motortrend.com/uploads/sites/10/2022/01/2022-tesla-model-y-long-range-4wd-suv-trunk.png?fit=around%7C875:492',
+    image5: 'https://www.motortrend.com/uploads/sites/10/2022/01/2022-tesla-model-y-long-range-4wd-suv-front-view.png?fit=around%7C875:492',
+    address: {city: 'Rishon LeZion', street: 'HaHistadrut 7'},
+    coordinates: { lat: 31.9632, lng: 34.7891 }
   }
 ];
 

@@ -41,7 +41,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
       <p>מתאריך: {new Date(startDate).toLocaleDateString()} בשעה: {startTime}</p>
       <p>עד תאריך: {new Date(endDate).toLocaleDateString()} בשעה: {endTime}</p>
       <p>שעות: {selectedHours}</p>
-      <p>ימים: {selectedDays}</p>
+      <p>ימים: {selectedDays}</p> 
       <button onClick={handleConfirmOrder}>הזמן עכשיו</button>
     </div>
   );

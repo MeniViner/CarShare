@@ -1,12 +1,16 @@
-/* .invitation-container {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
+.invitation-container {
+  /* border: 1px solid #e0e0e0;
   border-radius: 12px;
-  padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 450px;
   text-align: center;
-  margin: 0 auto;
+  margin: 0 auto; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
 }
 
 .tabs {
@@ -39,202 +43,211 @@
   margin-bottom: 20px;
 }
 
-.input-group {
+
+
+.date-time-selection {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  width: 100%;
 }
 
-.input-group button {
-  background: none;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  padding: 8px 12px;
-  cursor: pointer;
-  transition: background 0.3s, border-color 0.3s;
+.date-time-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
-.input-group button:hover {
-  background: #f0f0f0;
-  border-color: #007bff;
+.date-time-group label {
+  flex: 1;
+  text-align: center;
 }
 
 .input-group input {
-  width: 60px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.input-group input[type="date"],
+.input-group input[type="time"],
+.input-group input[type="number"] {
+  width: 100px;
   padding: 5px;
-  font-size: 16px;
-  transition: border-color 0.3s;
-}
-
-.input-group input:focus {
-  border-color: #007bff;
-}
-
-input[type="date"],
-input[type="time"] {
-  padding: 8px;
-  font-size: 15px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  margin: 0 5px;
   text-align: center;
-  width: 150px;
-  transition: border-color 0.3s;
+  background-color: #fdfcfc;
+  outline: none;
+}
+.input-group input[type="date"]:focus,
+.input-group input[type="time"]:focus,
+.input-group input[type="number"]:focus {
+  outline: none;
 }
 
-input[type="date"]:focus,
-input[type="time"]:focus {
-  border-color: #007bff;
+
+.rental-duration {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
+
+.duration-group {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+}
+
+
+
+.check-availability-button {
+  padding: 10px 20px;
+  background-color: #ffcc00;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.sum-rental-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: start;
+  gap: 40px;
+  padding-left: 40px;
+}
+
+
+
+.rental-period {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.period-group {
+  display: flex;
+  align-items: center;
+}
+
+.invitation-container .input-container {
+  display: flex;
+  align-items: center;
+  background: #fdfcfc;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  padding: 5px 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; 
+}
+
+.change-button {
+  background: none;
+  border: none;
+  color: #ff9800;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.rental-input {
+  width: 40px;
+  text-align: center;
+  border: none;
+  background: none;
+  font-size: 18px;
+  margin: 0 10px;
+}
+
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner {
+  -moz-appearance: textfield;
+}
+
+
+
+.invitation-container input[type="time"],
+.invitation-container input[type="date"] {
+  border: none; /* Remove inner border */
+  box-shadow: none; /* Remove default box shadow */
+}
+
+.invitation-container input[type="time"]:focus,
+.invitation-container input[type="date"]:focus {
+  outline: none; /* Remove the outline on focus */
+}
+
+
+
+
+/* For Webkit browsers (Chrome, Safari) */
+.invitation-container input[type="date"]::-webkit-calendar-picker-indicator,
+.invitation-container input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* For Firefox */
+.invitation-container input[type="date"]::-moz-calendar-picker-indicator,
+.invitation-container input[type="time"]::-moz-calendar-picker-indicator {
+  display: none;
+}
+
+/* For Internet Explorer and Edge */
+.invitation-container input[type="date"]::-ms-clear,
+.invitation-container input[type="date"]::-ms-clear {
+  display: none;
+}
+
+.invitation-container input[type="date"]::-ms-expand,
+.invitation-container input[type="time"]::-ms-expand {
+  display: none;
+}
+
+/* General input style */
+.invitation-container .input-group input[type="date"],
+.invitation-container .input-group input[type="time"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+
+
 
 .cost-summary {
-  margin-top: 25px;
   font-size: 1.4rem;
   font-weight: bold;
   color: #444;
 }
 
 .cost-summary button {
-  margin-top: 15px;
-  padding: 12px 25px;
+  font-size: 1.2rem;
+  width: 100%;
+  padding: 12px 90px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  text-align: center;
   transition: background 0.3s, box-shadow 0.3s;
+  text-align: center; 
+  white-space: nowrap; 
 }
 
 .cost-summary button:hover {
   background-color: #0056b3;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.no-spinner {
-  appearance: textfield;
-  -moz-appearance: textfield;
-  -webkit-appearance: textfield;
-}
-
-label {
-  margin-top: 10px;
-  font-weight: bold;
-  color: #666;
-}
-
-.date-time-selection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.date-time-selection input[type="date"],
-.date-time-selection input[type="time"] {
-  padding: 8px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.date-time-selection input[type="date"]:focus,
-.date-time-selection input[type="time"]:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
-} */
-
-
-.invitation-container {
-  background-color: #ffffff;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-  color: #4A4A4A;
-}
-
-.date-time-selection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.field-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-.input-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.input-group button {
-  background-color: #ffcc00;
-  border: none;
-  border-radius: 50%;
-  padding: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.input-group button:hover {
-  background-color: #ff9900;
-}
-
-.input-group input {
-  width: 60px;
-  text-align: center;
-  border: none;
-  font-size: 16px;
-  background-color: #f2f2f2;
-  border-radius: 10px;
-  padding: 5px;
-}
-
-.field-group label {
-  font-weight: bold;
-  color: #6A1B9A;
-}
-
-input[type="date"],
-input[type="time"] {
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid #E0E0E0;
-  border-radius: 10px;
-  text-align: center;
-  transition: border-color 0.3s;
-}
-
-input[type="date"]:focus,
-input[type="time"]:focus {
-  border-color: #6A1B9A;
-}
-
-.submit-button {
-  background-color: #ffcc00;
-  border: none;
-  border-radius: 20px;
-  padding: 15px 30px;
-  font-size: 18px;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.submit-button:hover {
-  background-color: #ff9900;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
