@@ -166,14 +166,14 @@
     border-radius: 10px;
 }
 
-.edit-profile-container .input-container {
+.profile-edit-section .input-container {
     position: relative;
     margin-bottom: 20px;
     width: 100%;
     max-width: 400px;
 }
 
-.edit-profile-container .input-container input {
+.profile-edit-section .input-container input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -182,7 +182,12 @@
     outline: none;
 }
 
-.edit-profile-container .input-container label {
+.profile-edit-section .input-container input:focus {
+    border: 1px solid #5376ea;
+    
+}
+
+.profile-edit-section .input-container label {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -192,8 +197,10 @@
     transition: 0.2s;
 }
 
-.edit-profile-container .input-container input:focus + label,
-.edit-profile-container .input-container input:not(:placeholder-shown) + label {
+
+
+.profile-edit-section .input-container input:focus + label,
+.profile-edit-section .input-container input:not(:placeholder-shown) + label {
     top: -15px;
     left: 10px;
     font-size: 12px;
