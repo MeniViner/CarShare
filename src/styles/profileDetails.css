@@ -166,14 +166,14 @@
     border-radius: 10px;
 }
 
-.input-container {
+.edit-profile-container .input-container {
     position: relative;
     margin-bottom: 20px;
     width: 100%;
     max-width: 400px;
 }
 
-.input-container input {
+.edit-profile-container .input-container input {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -182,7 +182,7 @@
     outline: none;
 }
 
-.input-container label {
+.edit-profile-container .input-container label {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -192,8 +192,8 @@
     transition: 0.2s;
 }
 
-.input-container input:focus + label,
-.input-container input:not(:placeholder-shown) + label {
+.edit-profile-container .input-container input:focus + label,
+.edit-profile-container .input-container input:not(:placeholder-shown) + label {
     top: -15px;
     left: 10px;
     font-size: 12px;

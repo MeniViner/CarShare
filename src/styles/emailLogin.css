@@ -22,12 +22,12 @@
 }
 
 /* עיצוב שדות הקלט */
-.input-container {
+.login-container .input-container {
   position: relative;
   margin-bottom: 1rem;
 }
 
-input {
+.login-container input {
   padding: 0.6rem;
   /* border: 1px solid #ccc; */
   border-radius: 4px;
@@ -37,20 +37,30 @@ input {
   transition: all 0.3s ease;
 }
 
-input:focus + label,
-input:not(:placeholder-shown) + label {
+.edit-profile-container .input-container label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #aaa;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+.login-container input:focus + label,
+.login-container input:not(:placeholder-shown) + label {
   font-size: 12px;
   top: -10px;
   left: 10px;
   color: blue;
 }
 
-input:focus {
+.login-container input:focus {
   border-color: blue;
   outline: none;
 }
 
-input:hover {
+.login-container input:hover {
   border-color: blue;
   outline: none;
 }
@@ -106,4 +116,41 @@ input:hover {
 
 #log-btn {
   font-size: 1.1rem;
+}
+
+
+
+
+.login-container .input-container {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-container .input-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.login-container .input-container label {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #aaa;
+  font-size: 16px;
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+.login-container .input-container input:focus + label,
+.login-container .input-container input:not(:placeholder-shown) + label {
+  top: -15px;
+  left: 10px;
+  font-size: 12px;
+  color: #333;
 }

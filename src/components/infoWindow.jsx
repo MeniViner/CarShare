@@ -181,6 +181,8 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
                     <div className="vehicle-info-details">
                       
                     </div>
+                      
+                    
 
                     <animated.div style={carouselAnimation} className="carousel">
                       <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
