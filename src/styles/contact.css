@@ -3,3 +3,67 @@
     margin-bottom: 5vh;
 }
 
+/* .contact-container {
+    max-width: 600px;
+    margin:  auto;
+    padding: 40px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.contact-container  .input-group {
+    margin-bottom: 15px;
+}
+
+
+.contact-container  .input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+.contact-container  .input-group input,
+.contact-container  .input-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+
+.contact-container  .input-group textarea {
+    resize: vertical;
+}
+
+
+.contact-container  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;    
+}
+
+
+.contact-container  button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+.contact-container  .status-message {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: red;
+} */
