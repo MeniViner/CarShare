@@ -242,9 +242,8 @@
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
-  transition: background 0.3s, box-shadow 0.3s;
-  text-align: center; 
   white-space: nowrap; 
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .cost-summary button:hover {

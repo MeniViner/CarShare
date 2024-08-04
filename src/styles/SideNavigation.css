@@ -66,10 +66,6 @@
   transform: 0.3 ease;
 }
 
-.input-with-icon input {
-  padding-left: 30px;
-}
-
 .input-with-icon .icon {
   position: absolute;
   left: 10px;
@@ -78,7 +74,14 @@
   color: #888;
 }
 
-
+.input-with-icon input {
+  padding: 0.6rem;
+  padding-left: 30px;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  width: 100%;
+  transition: all 0.3s ease;
+}
 
 .side-menu-search button {
   

@@ -11,6 +11,7 @@ import Top from './components/top';
 import NotFound from './utils/NotFound'; 
 import EditProfile from './components/profile/EditProfile';
 import Prices from './components/info/prices/prices';
+import ContactForm from './pages/Contact';
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
                     <Route path="/saved" element={<Saved />} />
                     <Route path="/prices" element={<Prices />} />
                     <Route path="/settings" element={<Settings />} />
+                    <Route path='/contact-info' element={<ContactForm />} />
                     <Route path="/utils/SearchResults" element={<SearchResults />} />
                     <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
                 </Routes>

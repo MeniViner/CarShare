@@ -7,15 +7,13 @@ import Swal from 'sweetalert2';
 import { calculateDistance } from '../utils/distanceCalculator';
 
 //icons
-
 import { CiLocationArrow1 } from "react-icons/ci";
 import { BiSolidBatteryLow } from "react-icons/bi";
 import { BsFuelPumpFill } from "react-icons/bs";
 import { PiSeatFill } from "react-icons/pi";
-import { MdLocationOff, MdOutlineCalendarMonth  } from "react-icons/md";
-import { FaLocationArrow } from "react-icons/fa";
 import { FaPersonWalking } from "react-icons/fa6";
 import { IoReceiptOutline } from "react-icons/io5";
+import { MdLocationOff, MdOutlineCalendarMonth  } from "react-icons/md";
 
 //animations
 import { useSpring, animated } from '@react-spring/web'; //animation for slow open the more details
@@ -41,6 +39,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
   const handleOrderClick = () => {
     setShowInvitation(true);
     setShowMore(false); // הסתרת ה-"showMore" אם ה-Invitation מוצג
+
   };
 
 
@@ -92,7 +91,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
   }, [onCloseClick]); // הוסף useEffect עם התלות ב-onCloseClick
 
   return (
-    <>
+    <div className='info-window-page'>
 
       <div ref={ref} className="vehicle-info"> {/* הוסף את ref ל-div הראשי */}
 
@@ -156,7 +155,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
         </div>
 
         {!showInvitation && ( // הצגת כפתור "הזמן עכשיו" אם ה-Invitation לא מוצג
-          <button className="order-btn" onClick={handleOrderClick}>order now</button>
+          <button className="order-btn" onClick={handleOrderClick}>ORDER NOW</button>
         )}
 
         <div className="info-window">
@@ -175,18 +174,20 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
                 />
               ) : (
                 <>
-                  <button onClick={() => setShowMore(!showMore)} className="show-more-button">more details</button>
+                  <button onClick={() => setShowMore(!showMore)} className="show-more-button">
+                    {showMore ? 'less details <' : 'more details >'}
+                  </button>
                   {showMore && (
                     <>
-                    <div className="vehicle-info-details">
+                      <div className="vehicle-info-details">
+                        
+                      </div>
+                        
                       
-                    </div>
-                      
-                    
 
-                    <animated.div style={carouselAnimation} className="carousel">
-                      <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
-                    </animated.div>
+                      <animated.div style={carouselAnimation} className="carousel">
+                        <ImageCarousel images={[selectedCar.image, selectedCar.image1, selectedCar.image2, selectedCar.image3, selectedCar.image4, selectedCar.image5]} />
+                      </animated.div>
                     </>
                   )}
                 </>
@@ -196,7 +197,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
         </div>
 
       </div>
-    </>
+    </div>
   );
 };
 
