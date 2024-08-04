@@ -39,52 +39,52 @@ const ContactForm = () => {
 
   return (
     <div className="contact-container">
-      <div className="contact-header">
-        <MdOutlineContactPage className="contact-icon" />
-        <h1>Contact Us</h1>
-      </div>
-      <form onSubmit={handleSubmit} className="contact-form">
-        <div className="input-group">
-          <FaUser className="input-icon" />
-          <input 
-            type="text" 
-            name="name" 
-            placeholder="Your Name" 
-            required 
-            onChange={handleChange}
-          />
+        <div className="contact-header">
+            <MdOutlineContactPage className="contact-icon" />
+            <h1>Contact Us</h1>
         </div>
-        <div className="input-group">
-          <FaEnvelope className="input-icon" />
-          <input 
-            type="email" 
-            name="email" 
-            placeholder="Your Email" 
-            required 
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input-group">
-          <FaPhone className="input-icon" />
-          <input 
-            type="text" 
-            name="phone" 
-            placeholder="Your Phone Number" 
-            required 
-            onChange={handleChange}
-          />
-        </div>
-        <div className="input-group">
-          <textarea 
-            name="message" 
-            placeholder="Your Message" 
-            rows="5" 
-            required 
-            onChange={handleChange}
-          ></textarea>
-        </div>
-        <button type="submit" className="submit-button">Send Message</button>
-      </form>
+        <form onSubmit={handleSubmit} className="contact-form">
+            <div className="input-group">
+                <FaUser className="input-icon" />
+                <input 
+                    type="text" 
+                    name="name" 
+                    placeholder="Your Name" 
+                    required 
+                    onChange={handleChange}
+                />
+                </div>
+                <div className="input-group">
+                <FaEnvelope className="input-icon" />
+                <input 
+                    type="email" 
+                    name="email" 
+                    placeholder="Your Email" 
+                    required 
+                    onChange={handleChange}
+                />
+                </div>
+                <div className="input-group">
+                <FaPhone className="input-icon" />
+                <input 
+                    type="text" 
+                    name="phone" 
+                    placeholder="Your Phone Number" 
+                    required 
+                    onChange={handleChange}
+                />
+                </div>
+                <div className="input-group">
+                <textarea 
+                    name="message" 
+                    placeholder="Your Message" 
+                    rows="5" 
+                    required 
+                    onChange={handleChange}
+                ></textarea>
+            </div>
+            <button type="submit" className="submit-button">Send Message</button>
+        </form>
     </div>
   );
 };
