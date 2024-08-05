@@ -134,58 +134,64 @@ const ProfileDetails = ({ user, onEdit }) => {
             <div className="profile-edit-section">
                 <h3>Edit Your Personal Info</h3>
                 <div className="input-container">
-                    <label htmlFor="firstName">First Name</label>
                     <input
                         type="text"
                         id="firstName"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
+                        placeholder=" "
                     />
+                    <label htmlFor="firstName">First Name</label>
                 </div>
                 <div className="input-container">
-                    <label htmlFor="lastName">Last Name</label>
                     <input
                         type="text"
                         id="lastName"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
+                        placeholder=" "
                     />
+                    <label htmlFor="lastName">Last Name</label>
                 </div>
                 <div className="input-container">
-                    <label htmlFor="phoneNumber">Phone Number</label>
                     <input
                         type="text"
                         id="phoneNumber"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder=" "
                     />
+                    <label htmlFor="phoneNumber">Phone Number</label>
                 </div>
                 <div className="input-container">
-                    <label htmlFor="address">Address</label>
                     <input
                         type="text"
                         id="address"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
+                        placeholder=" "
                     />
+                    <label htmlFor="address">Address</label>
                 </div>
                 <div className="input-container">
-                    <label htmlFor="drivingLicense">Driving License</label>
                     <input
                         type="text"
                         id="drivingLicense"
                         value={drivingLicense}
                         onChange={(e) => setDrivingLicense(e.target.value)}
+                        placeholder=" "
                     />
+                    <label htmlFor="drivingLicense">Driving License</label>
                 </div>
                 <div className="input-container">
-                    <label htmlFor="paymentMethod">Payment Method</label>
                     <input
                         type="text"
                         id="paymentMethod"
                         value={paymentMethod}
                         onChange={(e) => setPaymentMethod(e.target.value)}
+                        placeholder=" "
                     />
+                    <label htmlFor="paymentMethod">Payment Method</label>
                 </div>
                 <button onClick={handleSaveChanges} className="save-button">Save Changes</button>
             </div>
