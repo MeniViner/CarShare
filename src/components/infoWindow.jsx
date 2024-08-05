@@ -88,7 +88,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
       document.body.removeEventListener('mousedown', handleClickOutside); 
       document.body.removeEventListener('touchstart', handleClickOutside); 
     };
-  }, [onCloseClick]); // הוסף useEffect עם התלות ב-onCloseClick
+  }, [onCloseClick]);  
 
   return (
     <div className='info-window-page'>

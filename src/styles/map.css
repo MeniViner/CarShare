@@ -1,7 +1,7 @@
 .main-app {
   margin: 0px;
   padding: 0px;
-  height: 100dvh;
+  height: 97dvh;
 }
 
 .map-app {
@@ -9,10 +9,10 @@
   display: flex;
   z-index: 0;
   height: 100vh;
-  height: 99svh;
+  height: 97svh;
   outline: none;
-  border: #c0aa94 4px solid;
-  border-radius: 12px;
+  border: #978f8c 3px solid;
+  /* border-radius: 12px; */
 
 }
 
@@ -30,7 +30,6 @@
   margin-left: 42dvw; */
   bottom: 160px;
   right: 25px;
-
 }
 
 .fa-location, 
