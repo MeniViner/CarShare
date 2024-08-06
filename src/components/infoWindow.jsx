@@ -98,12 +98,15 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
         <div className="process-steps">
           <div className="step">
             <CiLocationArrow1 className='icon'/>
+            <p>step 1</p>
           </div>
           <div className="step">
             <MdOutlineCalendarMonth className='icon'/>
+            <p>step 2</p>
           </div>
           <div className="step">
             <IoReceiptOutline className='icon'/>
+            <p>step 3</p>
           </div>
         </div>
 

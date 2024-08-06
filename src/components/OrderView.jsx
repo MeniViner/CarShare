@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 import '../styles/orderView.css';
 
 const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
-  const { startDate, startTime, endDate, endTime, selectedHours, selectedDays } = reservationData;
+  const { startDate, startTime, endDate, endTime, selectedHours, selectedDays, totalCost } = reservationData;
 
   const handleConfirmOrder = () => {
     // עדכון הזמנים שבהם הרכב תפוס ב- localStorage
@@ -28,6 +28,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
       endTime,
       selectedHours,
       selectedDays,
+      totalCost,
     });
     
     localStorage.setItem('reservations', JSON.stringify(storedReservations));
@@ -42,6 +43,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
       <p>עד תאריך: {new Date(endDate).toLocaleDateString()} בשעה: {endTime}</p>
       <p>שעות: {selectedHours}</p>
       <p>ימים: {selectedDays}</p> 
+      <p>sum cost: {totalCost}</p>
       <button onClick={handleConfirmOrder}>הזמן עכשיו</button>
     </div>
   );

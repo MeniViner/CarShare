@@ -1,3 +1,10 @@
+:root {
+  --light-brown: #fffbf6;
+  --medium-brown: #8d6e63;
+  --dark-brown: #6d4c41;
+  --darker-brown: #3e2723;
+}
+
 .invitation-container {
   /* border: 1px solid #e0e0e0;
   border-radius: 12px;
@@ -54,7 +61,7 @@
 .date-time-group {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .date-time-group label {

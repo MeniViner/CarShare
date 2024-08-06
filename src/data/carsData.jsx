@@ -375,8 +375,8 @@ const cars = [
     model: 'Model Y',
     seats: 5,
     year: 2022,
-    pricePerHour: 40,
-    pricePerDay: 450,
+    pricePerHour: 10,
+    pricePerDay: 100,
     unlockFee: 6,
     kmPrice: 2.5,
     fuelType: 'Electric',
@@ -389,7 +389,7 @@ const cars = [
     image4: 'https://www.motortrend.com/uploads/sites/10/2022/01/2022-tesla-model-y-long-range-4wd-suv-trunk.png?fit=around%7C875:492',
     image5: 'https://www.motortrend.com/uploads/sites/10/2022/01/2022-tesla-model-y-long-range-4wd-suv-front-view.png?fit=around%7C875:492',
     address: {city: 'Rishon LeZion', street: 'HaHistadrut 7'},
-    coordinates: { lat: 31.9632, lng: 34.7891 }
+    coordinates: { lat: 31.9592, lng: 34.8089 }
   }
 ];
 
