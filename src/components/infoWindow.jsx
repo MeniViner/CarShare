@@ -39,19 +39,39 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
   const handleOrderClick = () => {
     setShowInvitation(true);
     setShowMore(false); // הסתרת ה-"showMore" אם ה-Invitation מוצג
-
   };
 
 
   const [reservationData, setReservationData] = useState(null);
 
+  // const handleCheckAvailability = (data) => {
+  //   const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
+  //   const isAvailable = !storedReservations.some(reservation =>
+  //     reservation.carId === selectedCar.id &&
+  //     ((new Date(`${reservation.startDate}T${reservation.startTime}`) < new Date(`${reservation.endDate}T${reservation.endTime}`)) &&
+  //      (new Date(`${data.startDate}T${data.startTime}`) < new Date(`${data.endDate}T${data.endTime}`)))
+  //   );
+  
+  //   if (isAvailable) {
+  //     setReservationData(data);
+  //   } else {
+  //     Swal.fire('לא זמין', 'הרכב אינו זמין לתאריכים ולשעות שנבחרו', 'error');
+  //   }
+  // };
+
   const handleCheckAvailability = (data) => {
     const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
-    const isAvailable = !storedReservations.some(reservation =>
-      reservation.carId === selectedCar.id &&
-      ((new Date(`${reservation.startDate}T${reservation.startTime}`) < new Date(`${reservation.endDate}T${reservation.endTime}`)) &&
-       (new Date(`${data.startDate}T${data.startTime}`) < new Date(`${data.endDate}T${data.endTime}`)))
-    );
+    const newStartTime = new Date(`${data.startDate}T${data.startTime}`);
+    const newEndTime = new Date(`${data.endDate}T${data.endTime}`);
+  
+    const isAvailable = !storedReservations.some(reservation => {
+      if (reservation.carId !== selectedCar.id) return false;
+  
+      const reservationStart = new Date(`${reservation.startDate}T${reservation.startTime}`);
+      const reservationEnd = new Date(`${reservation.endDate}T${reservation.endTime}`);
+  
+      return (newStartTime < reservationEnd && newEndTime > reservationStart);
+    });
   
     if (isAvailable) {
       setReservationData(data);
@@ -125,6 +145,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
             className="vehicle-info-image"
           />
         </div>
+
         <div className="vehicle-info-details">
           { distance ? ( //ask if ther is a distance set
               <div>

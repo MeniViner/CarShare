@@ -17,19 +17,17 @@
   padding: 10px;
   box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
   z-index: 10;
-  margin-bottom: 3vh;
 } 
 
 .vehicle-info-header {
   display: flex;
   flex-direction: row; 
   align-items: center;
-  margin-bottom: 0px;
   justify-content: space-between;
 }
 
 .vehicle-info-header img {
-  margin-top: -10vh;
+  margin-top: -11vh;
   margin-left: -1vw;
 }
 
@@ -124,11 +122,12 @@
   background-color: #ffffff00;
   color: var(--dark-brown);
   border: 2px solid var(--dark-brown);
-  padding: 8px 12px;
+  padding: 11px 2px 11px 2px;
   font-size: 1.1rem;
-  border-radius: 18px;
+  border-radius: 8px;
+  width: 40%;
   cursor: pointer;
-  margin-top: 3vh;
+  margin-top: 2.485vh;
   transition: background-color 0.3s;
 }
 
