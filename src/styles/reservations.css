@@ -1,0 +1,102 @@
+/* Define the color palette */
+:root {
+  --primary-color: #8B5A2B;
+  --secondary-color: #D2B48C;
+  --accent-color: #A0522D;
+  --text-color: #333;
+  --background-color: #F5F5F5;
+}
+
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* Color Palette */
+/* :root {
+  --primary-color: #8B5742;
+  --secondary-color: #B8886E;
+  --accent-color: #D9C8C0;
+  --background-color: #F5F2F0;
+  --text-color: #333333;
+} */
+
+/* General Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+/* Reservations Page Styles */
+.my-reservations {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.reservation-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.reservation-card .car-image {
+  /* width: 100px; */
+  height: 150px;
+  /* object-fit: cover; */
+  /* border-radius: 4px; */
+  /* margin-right: 20px; */
+  /* right: 0; */
+  display: flex;
+  margin-left: 35vw;
+  position: absolute;
+  margin-top: 8vh;
+}
+
+.reservation-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.reservation-card p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.reservation-card button {
+  background-color: #b63a11;
+  color: #fff;
+  border: none;
+  width: 40vw;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.reservation-card button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

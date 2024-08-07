@@ -6,6 +6,7 @@ import { triggerHapticFeedback } from '../utils/hapticFeedback';
 import { RiMenu3Fill, RiMenuFoldLine } from "react-icons/ri";
 import { AiOutlineMessage } from "react-icons/ai";
 import { IoSettingsOutline, IoMapSharp, IoBookmarksOutline, IoListSharp,  IoPricetagsOutline, IoSearch } from "react-icons/io5";
+import { LuCalendarCheck } from "react-icons/lu";
 
 import { auth } from '../data/firebaseConfig';
 
@@ -77,18 +78,23 @@ const SideNavigation = () => {
             <IoMapSharp className='icon' />
             <h3>Map</h3>
           </Link>
+          {/* <Link to="/car-list" className={`side-menu-item ${location.pathname === '/car-list' ? 'active' : ''}`} onClick={closeSideNav}>
+            <IoListSharp className='icon' />
+            <h3>Car List</h3>
+          </Link> */}
           <Link to="/saved" className={`side-menu-item ${location.pathname === '/saved' ? 'active' : ''}`} onClick={closeSideNav}>
             <IoBookmarksOutline className='icon' />
             <h3>Saved</h3>
-          </Link>
-          <Link to="/car-list" className={`side-menu-item ${location.pathname === '/car-list' ? 'active' : ''}`} onClick={closeSideNav}>
-            <IoListSharp className='icon' />
-            <h3>Car List</h3>
           </Link>
           <Link to="/prices" className={`side-menu-item ${location.pathname === '/prices' ? 'active' : ''}`} onClick={closeSideNav}>
             <IoPricetagsOutline className='icon' />
             <h3>Prices</h3>
           </Link>
+          <Link to="/my-reservations" className={`side-menu-item ${location.pathname === '/my-reservations' ? 'active' : ''}`} onClick={closeSideNav}>
+            <LuCalendarCheck className='icon' />
+            <h3>Reservation</h3>
+          </Link>
+
           <div className="smi2">
             <Link to="/contact-info" className={`side-menu-item ${location.pathname === '/contact-info' ? 'active' : ''}`} onClick={closeSideNav}>
               <AiOutlineMessage className='icon' />

@@ -100,8 +100,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
       <h3>פרטי הזמנה עבור {selectedCar.brand} {selectedCar.model}</h3>
       <p>מתאריך: {new Date(startDate).toLocaleDateString()} בשעה: {startTime}</p>
       <p>עד תאריך: {new Date(endDate).toLocaleDateString()} בשעה: {endTime}</p>
-      <p>שעות: {selectedHours}</p>
-      <p>ימים: {selectedDays}</p>
+      <p>ימים: {selectedDays}   שעות: {selectedHours}</p>
       <p>סה"כ עלות: {totalCost}</p>
       <button onClick={handleConfirmOrder}>הזמן עכשיו</button>
     </div>

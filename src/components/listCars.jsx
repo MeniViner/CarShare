@@ -134,7 +134,7 @@ const ListCars = () => {
   };
 
   return (
-    <>
+    <div className='listCars-container'>
       <ToastContainer />
       <div className="page-header list-cars-header">
         <h1><b>we</b> cars</h1> 
@@ -151,29 +151,39 @@ const ListCars = () => {
             <button 
               className={sortKey === 'nearby' ? 'active' : ''} 
               onClick={() => setSortKey('nearby')}
-            ><MdMyLocation /> Nearby </button>
+            >
+              <MdMyLocation /> Nearby 
+            </button>
             <button 
               className={sortKey === 'category' ? 'active' : ''} 
               onClick={() => setSortKey('category')}
-            ><FaCarSide /> Category</button>
+            >
+              <FaCarSide /> Category
+            </button>
             <button 
               className={sortKey === 'seats' ? 'active' : ''} 
               onClick={() => setSortKey('seats')}
-            ><PiSeatbeltFill/> Seats</button>
+            >
+              <PiSeatbeltFill/> Seats
+            </button>
             <button
               className={sortKey === 'year' ? 'active' : ''}
               onClick={() => setSortKey('year')}
-            ><MdDateRange />  Year
+            >
+              <MdDateRange />  Year
             </button>
-            
             <button 
               className={sortKey === 'fuelType' ? 'active' : ''} 
               onClick={() => setSortKey('fuelType')}
-            > <BsFuelPumpFill /> Fuel Type</button>
+            > 
+              <BsFuelPumpFill /> Fuel Type
+            </button>
             <button 
               className={sortKey === 'battery' ? 'active' : ''} 
               onClick={() => setSortKey('battery')}
-            > <MdElectricCar /> Battery</button>
+            > 
+              <MdElectricCar /> Battery
+            </button>
           </div>
         </div>
 
@@ -217,7 +227,7 @@ const ListCars = () => {
           </>
         ))}
       </div> 
-    </>
+    </div>
   );
 };
 
