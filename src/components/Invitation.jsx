@@ -652,7 +652,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
             <input 
               className="no-spinner rental-input"
               type="number" 
-              readOnly
+              // readOnly
               value={selectedHours} 
             />
             <button onClick={() => increment('hours')} className="change-button"><FaPlus /></button>
@@ -665,7 +665,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
             <input 
               className="no-spinner rental-input"
               type="number" 
-              readOnly
+              // readOnly
               value={selectedDays} 
             />
             <button onClick={() => increment('days')} className="change-button"><FaPlus /></button>
