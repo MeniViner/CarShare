@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { t } from 'i18next';
 import ImageCarousel from '../assets/ImageCarousel';
 import '../styles/infoWindow.css';
 import Invitation from './Invitation';
@@ -76,7 +77,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
     if (isAvailable) {
       setReservationData(data);
     } else {
-      Swal.fire('לא זמין', 'הרכב אינו זמין לתאריכים ולשעות שנבחרו', 'error');
+      Swal.fire(t('not available'), t('car not available for selected dates and times'), 'error');
     }
   };
   
@@ -118,15 +119,15 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
         <div className="process-steps">
           <div className="step">
             <CiLocationArrow1 className='icon'/>
-            <p>step 1</p>
+            <p>{t('step 1')}</p>
           </div>
           <div className="step">
             <MdOutlineCalendarMonth className='icon'/>
-            <p>step 2</p>
+            <p>{t('step 2')}</p>
           </div>
           <div className="step">
             <IoReceiptOutline className='icon'/>
-            <p>step 3</p>
+            <p>{t('step 3')}</p>
           </div>
         </div>
 
@@ -179,7 +180,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
         </div>
 
         {!showInvitation && ( // הצגת כפתור "הזמן עכשיו" אם ה-Invitation לא מוצג
-          <button className="order-btn" onClick={handleOrderClick}>ORDER NOW</button>
+          <button className="order-btn" onClick={handleOrderClick}>{t('order now')}</button>
         )}
 
         <div className="info-window">
@@ -199,7 +200,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
               ) : (
                 <>
                   <button onClick={() => setShowMore(!showMore)} className="show-more-button">
-                    {showMore ? 'less details <' : 'more details >'}
+                    {showMore ? t('less details') : t('more details')}
                   </button>
                   {showMore && (
                     <>

@@ -439,6 +439,7 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { t } from 'i18next';
 import { format, addHours, addDays, isBefore, isAfter, setHours, setMinutes, differenceInHours, differenceInDays } from 'date-fns';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import '../styles/invitation.css';
@@ -543,7 +544,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
       setSelectedDays(Math.ceil((date - startDate) / (24 * 60 * 60 * 1000)));
     }
     // setTotalCost(calculateCost()); 
-        updateSelectedDaysAndHours(field === 'start' ? date : startDate, field === 'end' ? date : endDate);
+    updateSelectedDaysAndHours(field === 'start' ? date : startDate, field === 'end' ? date : endDate);
 
   };
   
@@ -554,8 +555,6 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
         // const now = new Date();
 
     if (field === 'start') {
-        
-
       setStartTime(value);
       if (new Date(`1970-01-01T${value}`) >= new Date(`1970-01-01T${endTime}`)) {
         const newEndTime = `${(hours + 1).toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
@@ -569,9 +568,8 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
       }
     }
     setTotalCost(calculateCost()); 
+    updateSelectedDaysAndHours(field === 'start' ? value : startTime, field === 'end' ? value : endTime);
         // updateSelectedDaysAndHours(startDate, field === 'start' ? newDate : endDate);
-
-        // updateSelectedDaysAndHours(field === 'start' ? date : startDate, field === 'end' ? date : endDate);
 
   };
 
@@ -647,18 +645,18 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
           className={`tab ${isHourly ? 'active' : ''}`} 
           onClick={() => handleTabClick(true)}
         >
-          לפי שעה
+          <p>{t('hourly')}</p>
         </button>
         <button 
           className={`tab ${!isHourly ? 'active' : ''}`} 
           onClick={() => handleTabClick(false)}
         >
-          לפי יום
+          <p>{t('daily')}</p>
         </button>
       </div>
 
       <div className="date-time-selection">
-        <label>התחלה</label>
+        <label>{t('start')}</label>
         <div className="date-time-group">
           <div className="input-group">
             <div className="input-container">
@@ -677,7 +675,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
             </div>
           </div>
         </div>
-        <label>סיום</label>
+        <label>{t('end')}</label>
         <div className="date-time-group">
           <div className="input-group">
             <div className="input-container">
@@ -699,8 +697,8 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
       </div>
 
       <div className="sum-rental-label">
-        <label>סה"כ שעות</label>
-        <label>סה"כ ימים</label>
+        <label>{t('total hours')}</label>
+        <label>{t('total days')}</label>
       </div>
 
       <div className="rental-period">
@@ -732,8 +730,8 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
       </div>
 
       <div className="cost-summary">
-        <p>₪סה"כ: {totalCost} </p>
-        <button onClick={handleCheckAvailability}>בדוק זמינות</button>
+        <p>{t('total cost')} ₪{totalCost} </p>
+        <button onClick={handleCheckAvailability}>{t('check availability')}</button>
       </div>
 
     </div>

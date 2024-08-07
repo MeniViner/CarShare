@@ -1,43 +1,5 @@
-// import React from 'react';
-// import '../../../styles/additionalCharges.css';
-
-// const AdditionalCharges = () => {
-//   return (
-//     <div className="additional-charges">
-//       <div className="charge-item">
-//         <h3>אי החזרת רכב לתחנה ממנה נלקח</h3>
-//         <p>עד דקת הליכה: ללא חיוב</p>
-//         <p>יותר מדקה הליכה ועד למרחק 500 מטר: 250 ₪</p>
-//         <p>מעבר לכך: 250 ₪ + 3 ₪ לכל ק"מ*</p>
-//       </div>
-//       <div className="charge-item">
-//         <h3>איחור בהחזרת רכב</h3>
-//         <p>עד 10 דקות איחור: 1.5 ₪ לדקה</p>
-//         <p>מעל 10 דקות איחור: 50 ₪ + 1.5 ₪ לכל דקת איחור</p>
-//         <p>חובה לעדכן את המוקד הטלפוני על כל איחור!</p>
-//       </div>
-//       <div className="charge-item">
-//         <h3>ביטול הזמנה</h3>
-//         <p>עד שעתיים לפני מועד ההשכרה: ללא עלות</p>
-//         <p>פחות משעתיים לפני מועד ההשכרה: 50% מסכום ההזמנה</p>
-//         <p>החל מתחילת מועד ההשכרה: חיוב מלא על סכום ההזמנה</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AdditionalCharges;
-
-
-
-
-
-
-
-
-
-
 import React from 'react';
+import { t } from 'i18next';
 import '../../../styles/additionalCharges.css';
 
 
@@ -45,24 +7,38 @@ const AdditionalCharges = () => {
   return (
     <div className="additional-charges">
       <div className="charge-item">
-        <h3>אי החזרת רכב לתחנה ממנה נלקח</h3>
-        <p>עד דקה הליכה: ללא חיוב</p>
-        <p>יותר מדקה הליכה ועד למרחק 500 מטר: 250 ₪*</p>
-        <p>מעבר לזה: 250 ₪ + 3 ₪ לק"מ *</p>
+        <h3>{t('non return to original station')}</h3>
+        <p>{t('within one minute walk: no charge')}</p>
+        <p>{t('more than one minute: up to 500 meters')}: 250₪</p>
+        <p>{t('beyond that')} 250 ₪ + 3 ₪ {t('per km')} *</p>
       </div>
 
       <div className="charge-item">
-        <h3>איחור בהחזרת רכב</h3>
-        <p>עד 10 דקות איחור: 1.5 ₪ לדקה</p>
-        <p>מעל 10 דקות איחור: 50 ₪ + 1.5 ₪ לכל דקת איחור</p>
-        <p>חובה לעדכן את המוקד הטלפוני על כל איחור! בלי קשר לתשלום</p>
+        <h3>{t('late return')}</h3>
+        <p>{t('up to 10 minutes')} 1.5 ₪ {t('per minute')}</p>
+        <p>{t('more than 10 minutes')} 50 ₪ + 1.5 ₪ {t('per minute late')}</p>
+        <p>{t('must inform call center')}</p>
       </div>
 
       <div className="charge-item">
-        <h3>ביטול הזמנה</h3>
-        <p>עד שעתיים לפני מועד ההשכרה: ללא עלות</p>
-        <p>פחות משעתיים לפני מועד ההשכרה: חיוב מלא</p>
-        <p>50% מסכום ההזמנה יחול מתחילת מועד ההשכרה: חיוב מלא על סכום ההזמנה</p>
+        <h3>{t('reservation cancellation')}</h3>
+        <p>{t('up to 2 hours before')}</p>
+        <p>{t('less than 2 hours before')}</p>
+        <p>{t('50% of the reservation amount')}</p>
+      </div>
+
+      <div className="charge-item">
+        <h3>{t('reservation cancellation')}</h3>
+        <p>{t('up to 2 hours before')}</p>
+        <p>{t('less than 2 hours before')}</p>
+        <p>{t('50% of the reservation amount')}</p>
+      </div>
+
+      <div className="charge-item">
+        <h3>{t('reservation cancellation')}</h3>
+        <p>{t('up to 2 hours before')}</p>
+        <p>{t('less than 2 hours before')}</p>
+        <p>{t('50% of the reservation amount')}</p>
       </div>
     </div>
   );

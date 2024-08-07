@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Swal from 'sweetalert2';
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { t } from 'i18next';
 import { auth, db } from '../../data/firebaseConfig';
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import Swal from 'sweetalert2';
+
 
 const EditProfile = () => {
     const [userInfo, setUserInfo] = useState({
@@ -61,23 +63,24 @@ const EditProfile = () => {
                 });
             }
 
-            Swal.fire('Success', 'Your information has been updated.', 'success');
+            Swal.fire(t('success'), t('information updated'), 'success');
         } catch (error) {
             console.error('Error updating document: ', error);
-            Swal.fire('Error', 'Failed to update your information.', 'error');
+            Swal.fire(t('error'), t('failed to update information'), 'error');
         }
     };
 
+    
     return (
         <div className="edit-profile-container">
-            <h2>Edit Your Personal Info</h2>
+            <h2>{t('edit your personal info')}</h2>
             <div className="edit-profile-photo">
                 {profileImage ? (
-                    <img src={profileImage} alt="Profile" />
+                    <img src={profileImage} alt={t('profile')} />
                 ) : (
                     <label className="upload-label">
                         <input type="file" onChange={handleImageUpload} accept="image/*" />
-                        <span>Upload Profile Image</span>
+                        <span>{t('upload profile image')}</span>
                     </label>
                 )}
             </div>
@@ -89,7 +92,7 @@ const EditProfile = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <label>First Name</label>
+                <label>{t('first name')}</label>
             </div>
             <div className="input-container">
                 <input
@@ -99,17 +102,17 @@ const EditProfile = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <label>Last Name</label>
+                <label>{t('last name')}</label>
             </div>
             <div className="input-container">
                 <input
                     type="date" 
                     name="birthDate"
-                    value={userInfo.birth}
+                    value={userInfo.birthDate}
                     onChange={handleInputChange}
                     required
                 />
-                <label>data of birth</label>
+                <label>{t('date of birth')}</label>
             </div>
             <div className="input-container">
                 <input
@@ -119,7 +122,7 @@ const EditProfile = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <label>Phone Number</label>
+                <label>{t('phone number')}</label>
             </div>
             <div className="input-container">
                 <input
@@ -129,7 +132,7 @@ const EditProfile = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <label>Address</label>
+                <label>{t('address')}</label>
             </div>
             <div className="input-container">
                 <input
@@ -139,7 +142,7 @@ const EditProfile = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <label>Driving License</label>
+                <label>{t('driving license')}</label>
             </div>
             <div className="input-container">
                 <input
@@ -149,9 +152,9 @@ const EditProfile = () => {
                     onChange={handleInputChange}
                     required
                 />
-                <label>Payment Method</label>
+                <label>{t('payment method')}</label>
             </div>
-            <button onClick={handleSaveChanges} className="save-button">Save Changes</button>
+            <button onClick={handleSaveChanges} className="save-button">{t('save changes')}</button>
         </div>
     );
 };
