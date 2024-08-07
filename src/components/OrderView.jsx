@@ -64,6 +64,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
     
     const newStartTime = new Date(`${startDate}T${startTime}`);
     const newEndTime = new Date(`${endDate}T${endTime}`);
+    const reservationId = Date.now().toString(36) + Math.random().toString(36).substr(2);
 
     const isOverlapping = storedReservations.some(reservation => {
       if (reservation.carId !== selectedCar.id) return false;
@@ -80,6 +81,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
     }
 
     storedReservations.push({
+      reservationId,
       carId: selectedCar.id,
       startDate,
       startTime,
