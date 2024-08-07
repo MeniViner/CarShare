@@ -20,7 +20,7 @@
 } */
 
 /* General Styles */
-body {
+.reservations-container {
   font-family: 'Roboto', sans-serif;
   color: var(--text-color);
   background-color: var(--background-color);
@@ -28,11 +28,16 @@ body {
   padding: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.reservations-container h2,
+.reservations-container p {
+  text-align: center;
+}
+
+/* h1, h2, h3, h4, h5, h6 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   margin-top: 0;
-}
+} */
 
 /* Reservations Page Styles */
 .my-reservations {
@@ -89,8 +94,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--secondary-color);
 }
 
-/* Animations */
-@keyframes fadeIn {
+/* @keyframes fadeIn {
   0% {
     opacity: 0;
     transform: translateY(20px);
@@ -99,4 +103,4 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
     transform: translateY(0);
   }
-}
+} */
