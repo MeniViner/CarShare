@@ -1,4 +1,5 @@
 import React from 'react';
+import { t } from 'i18next';
 import { useNavigate } from 'react-router-dom';
 import { deleteUser } from "firebase/auth";
 import { doc, deleteDoc } from "firebase/firestore";
@@ -46,7 +47,7 @@ const DeleteAccount = () => {
   return (
     <div className="delete-account">
       <ToastContainer />
-      <button onClick={deleteAccount} className="delete-account-button">Delete My Account</button>
+      <button onClick={deleteAccount} className="delete-account-button">{t('delete my account')}</button>
     </div>
   );
 };

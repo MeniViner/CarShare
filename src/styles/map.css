@@ -1,7 +1,7 @@
 .main-app {
   margin: 0px;
   padding: 0px;
-  height: 97dvh;
+  height: 99.2dvh;
 }
 
 .map-app {
@@ -9,7 +9,7 @@
   display: flex;
   z-index: 0;
   height: 100vh;
-  height: 97svh;
+  height: 99.2svh;
   outline: none;
   border: #978f8c 3px solid;
   /* border-radius: 12px; */

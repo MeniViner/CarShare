@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { t } from 'i18next';
 import { auth } from '../../data/firebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, sendPasswordResetEmail, updateProfile } from "firebase/auth";
+import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
 import '../../styles/emailLogin.css';
-import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 
 const EmailLogin = ({ setIsAuthenticated, setUser }) => {
-  const { t } = useTranslation();
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -27,23 +26,23 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
         userCredential = await signInWithEmailAndPassword(auth, email, password);
         setUser(userCredential.user);
         localStorage.setItem('user', JSON.stringify(userCredential.user));
-        Swal.fire('Success', 'Logged in successfully', 'success');
+        Swal.fire(t('success'), t('logged in successfully'), 'success');
       } else {
         userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCredential.user, { displayName: name });
         setUser(userCredential.user);
         localStorage.setItem('user', JSON.stringify(userCredential.user));
-        Swal.fire('Success', 'Registered successfully', 'success');
+        Swal.fire(t('success'), t('registered successfully'), 'success');
       }
       setIsAuthenticated(true);
     } catch (error) {
       console.error(error);
       if (error.code === 'auth/email-already-in-use') {
-        Swal.fire('Error', 'Email already in use. Please log in instead.', 'error');
+        Swal.fire(t('error'), t('email already in use'), 'error');
       } else if (error.code === 'auth/invalid-credential') {
-        Swal.fire('Error', 'We checked and we can\'t recognize you.\n try register instead', 'error');
+        Swal.fire(t('error'), t('invalid credential'), 'error');
       } else {
-        Swal.fire('Error', error.message, 'error');
+        Swal.fire(t('error'), error.message, 'error');
       }
     }
   };
@@ -52,7 +51,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
     const auth = getAuth();
     try {
       await sendPasswordResetEmail(auth, resetEmail);
-      toast.success('if the email');
+      toast.success(t('A password reset email will be sent to the provided email address if it exists'));
     } catch (error) {
       toast.error(error.message);
     }
@@ -64,13 +63,13 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
 
       <div className="separate-mail">
         <div className="separate-line"></div>
-          <h5>or login by email</h5>
+          <h5>{t('or login by email')}</h5>
         <div className="separate-line"></div>
       </div>
 
       {!isResetPassword ? (
         <form onSubmit={handleSubmit}>
-          <h2>{isLogin ? 'Login' : 'Register'}</h2>
+          <h2>{isLogin ? t('login') : t('register')}</h2>
           {!isLogin && ( // הצגת שדה השם רק בעת הרשמה
             <div className="input-container">
               <input
@@ -81,7 +80,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
                 onChange={(e) => setName(e.target.value)}
                 required
               />
-              <label htmlFor="name">{t('full-name')}</label>
+              <label htmlFor="name">{t('full name')}</label>
             </div>
           )}
           <div className="input-container">
@@ -93,7 +92,7 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <label htmlFor="email">{t('email-address')}</label>
+            <label htmlFor="email">{t('email address')}</label>
           </div>
           <div className="input-container">
             <input
@@ -104,27 +103,27 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <label htmlFor="password">{t('strong-password')}</label>
+            <label htmlFor="password">{t('strong password')}</label>
           </div>
           <div className="login-forum-buttons">
-            <button type="submit" id='log-btn'>{isLogin ? 'Login' : 'Register'}</button>
+            <button type="submit" id='log-btn'>{isLogin ? t('login') : t('register')}</button>
             {isLogin && 
               <button 
                 type="button" 
                 onClick={() => setIsResetPassword(true)} 
                 className="reset-password-button"
               >
-                Forgot Password?
+                <p>{t('forgot password')}?</p>
               </button>
             }
           </div>
           <p onClick={() => setIsLogin(!isLogin)}>
-            {isLogin ? 'Need an account? Register here.' : 'Have an account? Login here.'}
+            {isLogin ? t('need an account? register here') : t('already have an account? Sign in here')}
           </p>
         </form>
       ) : (
         <div className="reset-password-container">
-          <h2>Reset Password</h2>
+          <h2>{t('reset password')}</h2>
           <div className="input-container">
             <input
               type="email"
@@ -134,11 +133,21 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
               onChange={(e) => setResetEmail(e.target.value)}
               required
             />
-            <label htmlFor="resetEmail">Enter your email</label>
+            <label htmlFor="resetEmail">{t('enter your email')}</label>
           </div>
           <div className="login-forum-buttons">
-            <button onClick={handleResetPassword} className="reset-password-button">Send Reset Email</button>
-            <button onClick={() => setIsResetPassword(false)} className="reset-password-button">Back to Login</button>
+            <button 
+              onClick={handleResetPassword} 
+              className="reset-password-button"
+            >
+              {t('send reset email')}
+            </button>
+            <button 
+              onClick={() => setIsResetPassword(false)} 
+              className="reset-password-button"
+            >
+              {t('back to login')}
+            </button>
           </div>
         </div>
       )}

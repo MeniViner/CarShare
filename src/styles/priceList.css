@@ -1,12 +1,14 @@
 .price-list {
     font-family: Arial, sans-serif;
+    margin-top: 150px;
+
   }
   
   .update-info {
     font-style: italic;
     color: #666;
     margin-bottom: 20px;
-    font-size: 14px;
+    font-size: 18px;
   }
   
   .car-option {
@@ -20,7 +22,7 @@
   .car-option h2 {
     color: #8a634f;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: bold;
   }
   
@@ -39,7 +41,7 @@
   
   .car-option li {
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 17px;
     display: flex;
     align-items: center;
   }
@@ -47,6 +49,7 @@
   .car-option li:before {
     content: "•";
     color: #8a634f;
-    font-size: 20px;
-    margin-left: 10px;
+    font-size: 25px;
+    margin-left: 15px;
+    margin-right: 5px;
   }

@@ -1,34 +1,6 @@
-/* .additional-charges {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.charge-item {
-  padding: 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.charge-item h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #6200ea;
-}
-
-.charge-item p {
-  margin-bottom: 8px;
-  font-size: 16px;
-  color: #333;
-} */
-
-
-
-
 .additional-charges {
     font-family: Arial, sans-serif;
+    margin-top: 150px;
   }
   
   .charge-item {
@@ -42,13 +14,13 @@
   .charge-item h3 {
     color: #8a634f;
     margin-bottom: 15px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
   }
   
   .charge-item p {
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 17px;
     line-height: 1.4;
   }
   

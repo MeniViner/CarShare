@@ -1,27 +1,25 @@
-/* עיצוב כללי לטופס ההתחברות */
 .login-container {
   max-width: 400px;
   margin: 20px;
-  /* margin-top: 20vh; */
   padding: 20px;
   background-color: #f4f4f4;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* עיצוב הטופס */
 .login-container form {
   display: flex;
   flex-direction: column;
   font-family: Arial, sans-serif;
 }
 
-/* עיצוב הכותרת */
 .login-container h2 {
+  margin-top: 20px;
   text-align: center;
+  font-size: x-large;
+  font-size: 2rem;
 }
 
-/* עיצוב שדות הקלט */
 .login-container .input-container {
   position: relative;
   margin-bottom: 1rem;
@@ -29,11 +27,9 @@
 
 .login-container input {
   padding: 0.6rem;
-  /* border: 1px solid #ccc; */
   border-radius: 4px;
   width: 100%;
   box-sizing: border-box;
-  /* background: transparent; */
   transition: all 0.3s ease;
 }
 
@@ -65,10 +61,10 @@
   outline: none;
 }
 
-/* עיצוב כפתור התחברות/הרשמה */
 .login-container button {
-  padding: 0.6rem 1.1rem;
-  width: calc(50% - 6px);
+  padding: 8px;
+  width: 100%;
+  margin-left: 10px;
   border: none;
   border-radius: 5px;
   color: white;
@@ -82,7 +78,6 @@
   background-color: #0056b3;
 }
 
-/* עיצוב כפתור הרשמה */
 .login-container button[type="button"] {
   background-color: #000;
   color: #fff;
@@ -92,11 +87,13 @@
   background-color: #218838;
 }
 
-/* עיצוב הקישור להחלפת מצב התחברות/הרשמה */
 .login-container p {
+  margin-top: 25px;
+  margin-bottom: 5px;
   text-align: center;
   color: #007bff;
   cursor: pointer;
+  font-size: larger;
 }
 
 .login-container p:hover {
@@ -117,7 +114,6 @@
 #log-btn {
   font-size: 1.1rem;
 }
-
 
 
 
