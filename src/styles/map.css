@@ -26,24 +26,19 @@
   position: fixed;
   display: flex;
   z-index: 0;
-  /* margin-top: 38dvh;
-  margin-left: 42dvw; */
-  bottom: 160px;
+  bottom: 130px;
   right: 25px;
 }
 
 .fa-location, 
 .faBarsStaggered {
-  font-size: 22px;
-  border-radius: 50%;
+  padding: 8px;
+  font-size: 25px;
+  border-radius: 35%;
   width: 34px;
   height: 34px;
-  margin-top: 10px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: background-color .16s ease-out;
+  color: #333;
   background: whitesmoke;
-  border: 0;
   box-shadow: 0 3px 15px rgba(60,64,67,0.3),0 3px 5px 1px rgba(60,64,67,0.15);
 }
 
@@ -68,17 +63,3 @@
   right: 25px;
 }
 
-@keyframes slideInFromRight {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.page-transition-right {
-  animation: slideInFromRight 0.5s forwards;
-}

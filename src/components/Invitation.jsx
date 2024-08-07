@@ -318,46 +318,46 @@
 //   };
 
 
-//   const handleDateChange = (field, value) => {
-//     // const date = parseDDMMYYToDate(value);
-//     if (isNaN(Date.parse(value))) {
-//       return; // Handle invalid date
-//     }
+  // const handleDateChange = (field, value) => {
+  //   // const date = parseDDMMYYToDate(value);
+  //   if (isNaN(Date.parse(value))) {
+  //     return; // Handle invalid date
+  //   }
   
-//     const date = new Date(value);
-//     if (field === 'start') {
-//       setStartDate(date);
-//       if (date > endDate) {
-//         setEndDate(date);
-//       }
-//     } else {
-//       if (date < startDate) {
-//         setEndDate(startDate); 
-//       } else {
-//         setEndDate(date);
-//       }
-//       setSelectedDays(Math.ceil((date - startDate) / (24 * 60 * 60 * 1000)));
-//     }
-//     setTotalCost(calculateCost()); 
-//   };
+  //   const date = new Date(value);
+  //   if (field === 'start') {
+  //     setStartDate(date);
+  //     if (date > endDate) {
+  //       setEndDate(date);
+  //     }
+  //   } else {
+  //     if (date < startDate) {
+  //       setEndDate(startDate); 
+  //     } else {
+  //       setEndDate(date);
+  //     }
+  //     setSelectedDays(Math.ceil((date - startDate) / (24 * 60 * 60 * 1000)));
+  //   }
+  //   setTotalCost(calculateCost()); 
+  // };
   
-//   const handleTimeChange = (field, value) => {
-//     const [hours, minutes] = value.split(':').map(Number);
-//     if (field === 'start') {
-//       setStartTime(value);
-//       if (new Date(`1970-01-01T${value}`) >= new Date(`1970-01-01T${endTime}`)) {
-//         const newEndTime = `${(hours + 1).toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-//         setEndTime(newEndTime); 
-//       }
-//     } else {
-//       if (new Date(`1970-01-01T${value}`) <= new Date(`1970-01-01T${startTime}`)) {
-//         setEndTime(startTime);
-//       } else {
-//         setEndTime(value);
-//       }
-//     }
-//     setTotalCost(calculateCost()); 
-//   };
+  // const handleTimeChange = (field, value) => {
+  //   const [hours, minutes] = value.split(':').map(Number);
+  //   if (field === 'start') {
+  //     setStartTime(value);
+  //     if (new Date(`1970-01-01T${value}`) >= new Date(`1970-01-01T${endTime}`)) {
+  //       const newEndTime = `${(hours + 1).toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+  //       setEndTime(newEndTime); 
+  //     }
+  //   } else {
+  //     if (new Date(`1970-01-01T${value}`) <= new Date(`1970-01-01T${startTime}`)) {
+  //       setEndTime(startTime);
+  //     } else {
+  //       setEndTime(value);
+  //     }
+  //   }
+  //   setTotalCost(calculateCost()); 
+  // };
 
 
 //   const increment = (type) => {
@@ -466,57 +466,115 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     setIsHourly(hourly);
   };
 
+  // const handleDateChange = (field, value) => {
+  //   const date = new Date(value);
+  //   const now = new Date();
+  //   now.setHours(0, 0, 0, 0);
+
+  //   if (isBefore(date, now)) {
+  //     return; // Prevent selecting past dates
+  //   }
+
+  //   if (field === 'start') {
+  //     setStartDate(date);
+  //     if (isBefore(endDate, date)) {
+  //       setEndDate(date);
+  //     }
+  //   } else {
+  //     if (isBefore(date, startDate)) {
+  //       setEndDate(startDate);
+  //     } else {
+  //       setEndDate(date);
+  //     }
+  //   }
+  //   updateSelectedDaysAndHours(field === 'start' ? date : startDate, field === 'end' ? date : endDate);
+  // };
+
+  // const handleTimeChange = (field, value) => {
+  //   const [hours, minutes] = value.split(':').map(Number);
+  //   let newDate = field === 'start' ? new Date(startDate) : new Date(endDate);
+  //   newDate = setHours(setMinutes(newDate, minutes), hours);
+
+  //   const now = new Date();
+
+  //   if (field === 'start') {
+  //     if (isBefore(newDate, now)) {
+  //       return; // Prevent selecting past times
+  //     }
+  //     setStartTime(value);
+  //     setStartDate(newDate);
+  //     // if (isAfter(newDate, new Date(endDate.setHours(hours, minutes)))) {
+  //     // if (isAfter(newDate, endDate)) {
+  //     //   const newEndDate = addHours(newDate, 1);
+  //     //   setEndTime(format(newEndDate, 'HH:mm'));
+  //     //   setEndDate(newEndDate);
+  //     // }
+  //   } else {
+  //     // if (isBefore(newDate, new Date(startDate))) {
+  //     if (isBefore(newDate, startDate)) {
+  //       return; // Prevent end time before start time
+  //     }
+  //     setEndTime(value);
+  //     setEndDate(newDate);
+  //   }
+  //   // updateSelectedDaysAndHours(startDate, newDate);
+  //   // updateSelectedDaysAndHours(startDate, field === 'start' ? newDate : endDate);
+  //   updateSelectedDaysAndHours(field === 'start' ? newDate : startDate, field === 'end' ? newDate : endDate);
+  // };
+
   const handleDateChange = (field, value) => {
-    const date = new Date(value);
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-
-    if (isBefore(date, now)) {
-      return; // Prevent selecting past dates
+    // const date = parseDDMMYYToDate(value);
+    if (isNaN(Date.parse(value))) {
+      return; // Handle invalid date
     }
-
+  
+    const date = new Date(value);
     if (field === 'start') {
       setStartDate(date);
-      if (isBefore(endDate, date)) {
+      if (date > endDate) {
         setEndDate(date);
       }
     } else {
-      if (isBefore(date, startDate)) {
-        setEndDate(startDate);
+      if (date < startDate) {
+        setEndDate(startDate); 
       } else {
         setEndDate(date);
       }
+      setSelectedDays(Math.ceil((date - startDate) / (24 * 60 * 60 * 1000)));
     }
-    updateSelectedDaysAndHours(field === 'start' ? date : startDate, field === 'end' ? date : endDate);
-  };
+    // setTotalCost(calculateCost()); 
+        updateSelectedDaysAndHours(field === 'start' ? date : startDate, field === 'end' ? date : endDate);
 
+  };
+  
   const handleTimeChange = (field, value) => {
     const [hours, minutes] = value.split(':').map(Number);
-    let newDate = field === 'start' ? new Date(startDate) : new Date(endDate);
-    newDate = setHours(setMinutes(newDate, minutes), hours);
-
-    const now = new Date();
+        // let newDate = field === 'start' ? new Date(startDate) : new Date(endDate);
+        // newDate = setHours(setMinutes(newDate, minutes), hours);
+        // const now = new Date();
 
     if (field === 'start') {
-      if (isBefore(newDate, now)) {
-        return; // Prevent selecting past times
-      }
+        
+
       setStartTime(value);
-      setStartDate(newDate);
-      if (isAfter(newDate, new Date(endDate.setHours(hours, minutes)))) {
-        const newEndDate = addHours(newDate, 1);
-        setEndTime(format(newEndDate, 'HH:mm'));
-        setEndDate(newEndDate);
+      if (new Date(`1970-01-01T${value}`) >= new Date(`1970-01-01T${endTime}`)) {
+        const newEndTime = `${(hours + 1).toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        setEndTime(newEndTime); 
       }
     } else {
-      if (isBefore(newDate, new Date(startDate))) {
-        return; // Prevent end time before start time
+      if (new Date(`1970-01-01T${value}`) <= new Date(`1970-01-01T${startTime}`)) {
+        setEndTime(startTime);
+      } else {
+        setEndTime(value);
       }
-      setEndTime(value);
-      setEndDate(newDate);
     }
-    updateSelectedDaysAndHours(startDate, newDate);
+    setTotalCost(calculateCost()); 
+        // updateSelectedDaysAndHours(startDate, field === 'start' ? newDate : endDate);
+
+        // updateSelectedDaysAndHours(field === 'start' ? date : startDate, field === 'end' ? date : endDate);
+
   };
+
 
   const updateSelectedDaysAndHours = (start, end) => {
     const days = differenceInDays(end, start);
@@ -652,7 +710,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
             <input 
               className="no-spinner rental-input"
               type="number" 
-              // readOnly
+              readOnly
               value={selectedHours} 
             />
             <button onClick={() => increment('hours')} className="change-button"><FaPlus /></button>
@@ -665,7 +723,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
             <input 
               className="no-spinner rental-input"
               type="number" 
-              // readOnly
+              readOnly
               value={selectedDays} 
             />
             <button onClick={() => increment('days')} className="change-button"><FaPlus /></button>
@@ -674,7 +732,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
       </div>
 
       <div className="cost-summary">
-        <p>₪סה"כ עלות: {totalCost} </p>
+        <p>₪סה"כ: {totalCost} </p>
         <button onClick={handleCheckAvailability}>בדוק זמינות</button>
       </div>
 

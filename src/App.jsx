@@ -12,6 +12,7 @@ import NotFound from './utils/NotFound';
 import EditProfile from './components/profile/EditProfile';
 import Prices from './components/info/prices/prices';
 import ContactForm from './pages/Contact';
+import Reservations from './pages/reservations';
 
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
 
                     <Route path="/" element={<Map />} />
                     <Route path="/map" element={<Map />} />
+                    <Route path="/my-reservations" element={<Reservations />} />
                     <Route path="/car-list" element={<ListCars />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/saved" element={<Saved />} />
