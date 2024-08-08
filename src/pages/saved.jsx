@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
 import { MdBookmarkRemove, MdNoAccounts, MdOutlineSaveAlt } from "react-icons/md"; 
 import '../styles/saved.css'
 
-
 const Saved = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [savedCarIds, setSavedCarIds] = useState([]); 
