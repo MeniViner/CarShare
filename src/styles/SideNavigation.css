@@ -42,6 +42,7 @@
 }
 
 .side-menu-header h2 {
+  color: #5b0000b0;
   font-size: 1.8em;
   margin: 0;
 }
@@ -234,3 +235,12 @@
 .sidenav.open .left-icon svg {
   transform: rotate(360deg);
 }
+
+
+
+
+
+
+
+
+

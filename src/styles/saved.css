@@ -124,3 +124,61 @@
 .sign-in-link:hover {
   background-color: #0056b3;
 }
+
+
+/* animations */
+
+
+@keyframes fadeInGrow {
+  from {transform: scale(0.8); opacity: 0;}
+  to {transform: scale(1);  opacity: 1;}
+}
+
+.text-container {
+  animation: fadeInGrow 1s ease-in-out forwards;
+}
+
+
+
+.sign-in-link {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background: linear-gradient(145deg, #5a8eb3, #275b9a);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease-in-out;
+  user-select: none; /* Prevent text selection on double-click */
+  -webkit-tap-highlight-color: transparent; /* Remove highlight on mobile */
+  position: relative;
+  overflow: hidden;
+}
+
+.sign-in-link:active {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  transform: translateY(2px);
+}
+
+@keyframes shine {
+  0% {
+    transform: translate(-100%, -100%) rotate(120deg);
+  }
+  100% {
+    transform: translate(100%, 100%) rotate(170deg);
+  }
+}
+
+.sign-in-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120%;
+  height: 150%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.1));
+  transform: translate(-100%, -100%) rotate(45deg);
+  animation: shine 4s infinite linear;
+}
+

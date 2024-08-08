@@ -1,152 +1,99 @@
 .contact-header {
-    margin-top: 8vh;
-    margin-bottom: 5vh;
+  margin-top: 8vh;
+  margin-bottom: 5vh;
 }
 
 
 .contact-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    background-color: #fff; 
-    font-family: Arial, sans-serif;
-    text-align: center;
-  }
-  
-  .contact-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .contact-icon {
-    font-size: 50px;
-    color: #8c5e2c; 
-  }
-  
-  .contact-header h1 {
-    font-size: 24px;
-    color: #8c5e2c; 
-    margin-top: 10px;
-  }
-  
-  .contact-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .input-group {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 15px;
-    background-color: #f2f2f2; 
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .input-icon {
-    font-size: 20px;
-    color: #8c5e2c; 
-    margin-right: 10px;
-  }
-  
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    background-color: #f2f2f2; 
-  }
-  
-  .contact-form textarea {
-    resize: none;
-  }
-  
-  .submit-button {
-    background-color: #8c5e2c; 
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 18px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s, box-shadow 0.3s;
-  }
-  
-  .submit-button:hover {
-    background-color: #6b4a1c; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-
-/* .contact-container {
-    max-width: 600px;
-    margin:  auto;
-    padding: 40px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff; 
+  font-family: Arial, sans-serif;
+  text-align: center;
 }
 
-.contact-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.contact-icon {
+  font-size: 50px;
+  color: #8c5e2c; 
+}
+
+.contact-header h1 {
+  font-size: 24px;
+  color: #8c5e2c; 
+  margin-top: 10px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 15px;
+  background-color: #f2f2f2; 
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.input-icon {
+  font-size: 20px;
+  color: #8c5e2c; 
+  margin-right: 10px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  background-color: #f2f2f2; 
+}
+
+.contact-form textarea {
+  resize: none;
+}
+
+.submit-button {
+  background-color: #8c5e2c; 
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #6b4a1c; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 
-.contact-container  .input-group {
-    margin-bottom: 15px;
+
+/* animations */
+
+@keyframes side-menu-header {
+  from {transform: translateY(20%); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
 }
 
-
-.contact-container  .input-group label {
-    display: block;
-    margin-bottom: 5px;
+.input-group  {
+  animation: side-menu-header 1s ease-in-out backwards;
 }
-
-
-.contact-container  .input-group input,
-.contact-container  .input-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-
-.contact-container  .input-group textarea {
-    resize: vertical;
-}
-
-
-.contact-container  button[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;    
-}
-
-
-.contact-container  button[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-
-.contact-container  .status-message {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-    color: red;
-} */

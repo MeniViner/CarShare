@@ -14,6 +14,9 @@ import withOfflineOverlay from '../assets/withOfflineOverlay';
 import '../styles/map.css';
 import { IoListSharp } from 'react-icons/io5';
 
+import car from '../images/moving-car.gif'
+
+
 
 const Map = () => {
   const location = useLocation(); 
@@ -150,7 +153,8 @@ const Map = () => {
             position={{ lat: car.coordinates.lat, lng: car.coordinates.lng }}
             onClick={() => handleMarkerClick(car)}
             icon={{
-              url: 'images/car-side-solid.svg',
+              // url: 'images/car-side-solid.svg',
+              url: 'images/moving-car.gif',
               scaledSize: new window.google.maps.Size(25, 25),
             }}
           />
