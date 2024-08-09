@@ -260,8 +260,8 @@ const Reservations = () => {
 
           <div className="text-container">
             <p>אין היסטוריית הזמנות</p>
-            <h2>אין היסטוריית הזמנות.</h2>
-            <h2>אין היסטוריית הזמנות.</h2>
+            <h2>אין היסטוריית הזמנות. 1</h2>
+            <h2>אין היסטוריית הזמנות. 2</h2>
             <Link to="/map" className="sign-in-link">lets order</Link>
           </div>
 
