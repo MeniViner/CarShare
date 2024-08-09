@@ -97,7 +97,20 @@
 // };
 
 // export default Reservations;
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import '../styles/reservations.css';
 import cars from '../data/carsData';
@@ -164,10 +177,11 @@ const Reservations = () => {
 
   const deleteFromHistory = (reservationId) => {
     const updatedPastReservations = pastReservations.filter(res => res.reservationId !== reservationId);
-    localStorage.setItem('reservations', JSON.stringify([...activeReservations, ...updatedPastReservations]));
-    loadReservations();
+    const updatedAllReservations = [...activeReservations, ...updatedPastReservations];
+    localStorage.setItem('reservations', JSON.stringify(updatedAllReservations));
+    setPastReservations(updatedPastReservations);
   };
-
+  
   const clearAllHistory = () => {
     Swal.fire({
       title: 'האם אתה בטוח?',
@@ -181,7 +195,7 @@ const Reservations = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.setItem('reservations', JSON.stringify(activeReservations));
-        loadReservations();
+        setPastReservations([]);
         Swal.fire(
           'נמחק!',
           'היסטוריית ההזמנות נמחקה.',
@@ -190,6 +204,7 @@ const Reservations = () => {
       }
     });
   };
+
 
   const ReservationCard = ({ reservation, isActive }) => (
     <div className="reservation-card">
@@ -223,7 +238,13 @@ const Reservations = () => {
       <div className="reservations-list">
         <h2>ההזמנות הפעילות שלי</h2>
         {activeReservations.length === 0 ? (
-          <p className="no-reservations-message">אין הזמנות פעילות כרגע</p>
+          <div className="text-container">
+          <p>אין הזמנות פעילות כרגע</p>
+          <h2>אין הזמנות פעילות כרגע 1.</h2>
+          <h2>אין הזמנות פעילות כרגע 2.</h2>
+          <Link to="/map" className="sign-in-link">go order</Link>
+        </div>
+
         ) : (
           <>
             {activeReservations.map(reservation => (
@@ -236,7 +257,14 @@ const Reservations = () => {
       <div className="reservations-list">
         <h2>היסטוריית הזמנות</h2>
         {pastReservations.length === 0 ? (
-          <p className="no-reservations-message">אין היסטוריית הזמנות</p>
+
+          <div className="text-container">
+            <p>אין היסטוריית הזמנות</p>
+            <h2>אין היסטוריית הזמנות.</h2>
+            <h2>אין היסטוריית הזמנות.</h2>
+            <Link to="/map" className="sign-in-link">lets order</Link>
+          </div>
+
         ) : (
           <>
             <button onClick={clearAllHistory}><h2>מחק את כל ההיסטוריה</h2></button>
