@@ -21,7 +21,7 @@ const cars = [
     image4: 'https://www.motortrend.com/uploads/sites/10/2018/04/2018-smart-fortwo-electric-drive-prime-coupe-micro-car-trunk.png?fit=around%7C875:492',
     image5: 'https://www.motortrend.com/uploads/sites/10/2018/04/2018-smart-fortwo-electric-drive-prime-coupe-micro-car-front-view.png?fit=around%7C875:492',
     address: {city: 'TelAviv', street: 'קפלן 7'},
-    coordinates: { lat: 31.794829, lng: 35.220848 },
+    coordinates: { lat: 31.791929, lng: 35.220848 },
   },
   {
     id: 2,
@@ -44,7 +44,7 @@ const cars = [
     image4: 'https://www.motortrend.com/uploads/sites/10/2015/11/2013-fiat-500-lounge-hatchback-trunk.png?fit=around%7C875:492',
     image5: 'https://www.motortrend.com/uploads/sites/10/2015/11/2013-fiat-500-lounge-hatchback-front-view.png?fit=around%7C875:492',
     address: {city: 'TelAviv', street: 'קפלן 7'},
-    coordinates: { lat: 31.795129, lng: 35.219448 }
+    coordinates: { lat: 31.795229, lng: 35.218548 }
   },
   {
     id: 3,
@@ -67,7 +67,7 @@ const cars = [
     image4: 'https://www.motortrend.com/uploads/sites/10/2023/07/2024-mini-hardtop-2-door-cooper-s-signature-3door-hatchback-trunk.png?fit=around%7C875:492',
     image5: 'https://www.motortrend.com/uploads/sites/10/2023/07/2024-mini-hardtop-2-door-cooper-s-signature-3door-hatchback-front-view.png?fit=around%7C875:492',
     address: {city: 'TelAviv', street: 'קפלן 7'},
-    coordinates: { lat: 31.796329, lng: 35.220148 }
+    coordinates: { lat: 31.798329, lng: 35.220148 }
   },
   {
     id: 4,
@@ -90,7 +90,7 @@ const cars = [
     image4: 'https://www.motortrend.com/uploads/sites/10/2023/06/2023-toyota-prius-limited-5door-hatchback-trunk.png?fit=around%7C875:492',
     image5: 'https://www.motortrend.com/uploads/sites/10/2023/06/2023-toyota-prius-limited-5door-hatchback-front-view.png?fit=around%7C875:492',
     address: {city: 'TelAviv', street: 'קפלן 7'},
-    coordinates: { lat: 31.796129, lng: 35.218548 }
+    coordinates: { lat: 31.796229, lng: 35.217148 }
   },
   {
     id: 5,
@@ -113,7 +113,7 @@ const cars = [
     image4: 'https://www.motortrend.com/uploads/sites/10/2023/10/2024-honda-civic-sport-sedan-trunk.png?fit=around%7C875:492',
     image5: 'https://www.motortrend.com/uploads/sites/10/2023/10/2024-honda-civic-sport-sedan-front-view.png?fit=around%7C875:492',
     address: {city: 'TelAviv', street: 'קפלן 7'},
-    coordinates: { lat: 31.795529, lng: 35.221348 }
+    coordinates: { lat: 31.801100, lng: 35.221348 }
   },
   {
     id: 6,
@@ -136,7 +136,7 @@ const cars = [
     image4: 'https://www.motortrend.com/uploads/sites/10/2018/06/2018-volkswagen-golf-r-4wd-5door-hatchback-trunk.png?fit=around%7C875:492',
     image5: 'https://www.motortrend.com/uploads/sites/10/2018/06/2018-volkswagen-golf-r-4wd-5door-hatchback-front-view.png?fit=around%7C875:492',
     address: {city: 'TelAviv', street: 'קפלן 7'},
-    coordinates: { lat: 31.794729, lng: 35.220648 }
+    coordinates: { lat: 31.790829, lng: 35.216648 }
   },
   {
     id: 7,
@@ -159,7 +159,7 @@ const cars = [
     image4: 'https://www.motortrend.com/uploads/sites/10/2021/12/2022-mercedes-benz-e-class-e350-sedan-angular-trunk.png?fit=around%7C875:492',
     image5: 'https://www.motortrend.com/uploads/sites/10/2021/12/2022-mercedes-benz-e-class-e350-sedan-angular-front-view.png?fit=around%7C875:492',
     address: {city: 'TelAviv', street: 'קפלן 7'},
-    coordinates: { lat: 31.795929, lng: 35.219948 }
+    coordinates: { lat: 31.790929, lng: 35.211948 }
   },
   {
     id: 8,

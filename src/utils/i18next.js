@@ -28,7 +28,7 @@ i18n.use(initReactI18next).init({
         "step 1": "שלב 1",
         "step 2": "שלב 2",
         "step 3": "שלב 3",
-        "order now": "הזמן עכשיו",
+        "confirm order": "אשר הזמנה",
         "more details": "פרטים נוספים",
         "less details": "פחות פרטים",
 
