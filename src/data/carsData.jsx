@@ -324,7 +324,7 @@ const cars = [
   },
   {
     id: 15,
-    category: 'sedan',
+    category: 'SUV',
     brand: 'Ford',
     model: 'Mustang',
     seats: 4,

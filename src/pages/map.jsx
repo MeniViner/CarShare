@@ -1,11 +1,11 @@
 import React, {useState, useEffect } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
+// import { AdvancedMarkerElement } from '@googlemaps/markerclusterer';
 
 import cars from '../data/carsData';
 import dayMapStyles from '../assets/dayMapStyles';
-// import DayMapStyles from './assets/dayMapStyles';
 import nightMapStyles from '../assets/nightMapStyles';
 import { TbCurrentLocation } from "react-icons/tb";
 import CarInfoWindow from '../components/infoWindow'; 
@@ -14,7 +14,12 @@ import withOfflineOverlay from '../assets/withOfflineOverlay';
 import '../styles/map.css';
 import { IoListSharp } from 'react-icons/io5';
 
-import car from '../images/moving-car.gif'
+
+
+import miniCarIcon from '../images/mini-car.svg';
+import familyCarIcon from '../images/family-car-icon.svg';
+import businessCarIcon from '../images/business-car-icon.svg';
+import suvCarIcon from '../images/suv-car-icon.svg';
 
 
 
@@ -90,6 +95,21 @@ const Map = () => {
     };
   };
 
+  const getCarIcon = (category) => {
+    switch (category) {
+      case 'mini':
+        return miniCarIcon;
+      case 'family':
+        return familyCarIcon;
+      case 'business':
+        return businessCarIcon;
+      case 'SUV':
+        return suvCarIcon;
+      default:
+        return '../images/car-side-solid.svg';
+    }
+  };
+
 
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -146,19 +166,21 @@ const Map = () => {
             </div>
           </Link> 
 
-
-        {cars.map((car) => (
-          <Marker //window.google.maps.marker.AdvancedMarkerElement
-            key={car.id}
-            position={{ lat: car.coordinates.lat, lng: car.coordinates.lng }}
-            onClick={() => handleMarkerClick(car)}
-            icon={{
-              // url: 'images/car-side-solid.svg',
-              url: 'images/moving-car.gif',
-              scaledSize: new window.google.maps.Size(40, 40),
-            }}
-          />
-        ))}
+        {cars.map((car) => {
+          const icon = getCarIcon(car.category);
+          return (
+            <Marker
+              key={car.id}
+              position={{ lat: car.coordinates.lat, lng: car.coordinates.lng }}
+              onClick={() => handleMarkerClick(car)}
+              title={car.name}
+              icon={{
+                url: icon,
+                scaledSize: new window.google.maps.Size(40, 40),
+              }}
+            />
+          );
+        })}
 
         {(selectedCar && isInfoWindowOpen ) && (
           <CarInfoWindow

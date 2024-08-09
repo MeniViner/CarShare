@@ -730,8 +730,8 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
       </div>
 
       <div className="cost-summary">
-        <p> ₪{totalCost} </p>
         <button onClick={handleCheckAvailability}>{t('check availability')}</button>
+        <p> ₪{totalCost} </p>
       </div>
 
     </div>

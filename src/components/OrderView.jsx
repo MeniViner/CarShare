@@ -105,7 +105,9 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
       <p>{t('until')} {new Date(endDate).toLocaleDateString()} {t('at')} {endTime}</p>
       <p>{t('so, you have')} {selectedDays} {t('days and')} {selectedHours} {t('hours')}</p>
       <p>{t('and your total cost will be')} {totalCost}₪</p>
-      <button onClick={handleConfirmOrder}>{t('order now')}</button>
+      <div className="ovc-btn">
+        <button onClick={handleConfirmOrder}>{t('confirm order')}</button>
+      </div>
     </div>
   );
 };
