@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { CiBookmarkPlus } from "react-icons/ci"; 
 import { RiPinDistanceLine } from "react-icons/ri";
-import { MdBookmarkAdded, MdDateRange, MdElectricCar, MdLocationOff, MdMyLocation } from "react-icons/md"; 
+import { MdBookmarkAdded, MdDateRange, MdElectricCar, MdLocationOff, MdMyLocation, MdKeyboardDoubleArrowRight } from "react-icons/md"; 
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaCarSide } from "react-icons/fa";
 import { PiSeatbeltFill } from "react-icons/pi";
 
@@ -136,9 +136,10 @@ const ListCars = () => {
   return (
     <div className='listCars-container'>
       <ToastContainer />
-      <div className="page-header list-cars-header">
-        <h1><b>we</b> cars</h1> 
-      </div>
+      <div className="listCars-header">
+        <div className="page-header list-cars-header">
+          <h1><strong>we</strong> cars</h1> 
+        </div>
 
         <div className="sort-buttons-container">
           <div className="sort-buttons">
@@ -187,6 +188,8 @@ const ListCars = () => {
           </div>
         </div>
 
+      </div>
+
       <div className="cars-list">
         {calculateCarDistances().map((car) => (
           <>
@@ -202,7 +205,7 @@ const ListCars = () => {
                     <>
                       <RiPinDistanceLine />
                       <span>{formatDistance(car.distance)}</span>
-                      </>
+                    </>
                   ) : (
                     <MdLocationOff /> 
                   )}
@@ -216,11 +219,16 @@ const ListCars = () => {
               </div>
               <div className="more-details-in-list">
                 {/* <div className='items'> */}
-                  <div className="item"><FaCarSide /><span>category type</span> {car.category} </div>
+                  <div className="item"><FaCarSide /> {car.category} </div>
                   <div className="item"><BsFuelPumpFill /> {car.fuelType}</div>
                   <div className="item"><MdElectricCar /> {car.battery}</div>
                   <div className="item"><PiSeatbeltFill/>  {car.seats}</div>
                   <div className="item">{car.addres}</div>
+                  {/* <div className='more-det-btn' onClick >more <MdKeyboardDoubleArrowRight className='mdbi'/></div> */}
+                  {/* <div class="more-det-btn">Details <span class="icon">»</span></div> */}
+                  <div class="more-details-btn">
+                      more details <span class="icon"><MdKeyboardDoubleArrowRight /></span>
+                  </div>
                 {/* </div> */}
               </div>
             </div>
