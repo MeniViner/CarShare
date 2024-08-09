@@ -1,114 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import Swal from 'sweetalert2';
-// import '../styles/reservations.css';
-// import cars from '../data/carsData'; // Import the cars data
-
-// const Reservations = () => {
-//   const [activeReservations, setActiveReservations] = useState([]);
-//   const [pastReservations, setPastReservations] = useState([]);
-
-//   useEffect(() => {
-//     loadReservations();
-//   }, []);
-
-//   const loadReservations = () => {
-//     const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
-//     const now = new Date();
-
-//     // Add car details to each reservation
-//     const reservationsWithCarDetails = storedReservations.map(reservation => {
-//       const car = cars.find(car => car.id === reservation.carId);
-//       return {
-//         ...reservation,
-//         carDetails: car ? {
-//           brand: car.brand,
-//           model: car.model,
-//           year: car.year,
-//           image: car.image
-//         } : null
-//       };
-//     });
-
-//     const active = reservationsWithCarDetails.filter(reservation => 
-//       new Date(`${reservation.endDate}T${reservation.endTime}`) > now
-//     );
-//     const past = reservationsWithCarDetails.filter(reservation => 
-//       new Date(`${reservation.endDate}T${reservation.endTime}`) <= now
-//     );
-
-//     setActiveReservations(active);
-//     setPastReservations(past);
-//   };
-
-//   const cancelReservation = (reservationId) => {
-//     Swal.fire({
-//       title: 'האם אתה בטוח?',
-//       text: "לא תוכל לבטל פעולה זו!",
-//       icon: 'warning',
-//       showCancelButton: true,
-//       confirmButtonColor: '#3085d6',
-//       cancelButtonColor: '#d33',
-//       confirmButtonText: 'כן, בטל הזמנה!',
-//       cancelButtonText: 'ביטול'
-//     }).then((result) => {
-//       if (result.isConfirmed) {
-//         const updatedReservations = activeReservations.filter(res => res.id !== reservationId);
-//         localStorage.setItem('reservations', JSON.stringify([...updatedReservations, ...pastReservations]));
-//         loadReservations();
-//         Swal.fire(
-//           'בוטל!',
-//           'ההזמנה שלך בוטלה.',
-//           'success'
-//         );
-//       }
-//     });
-//   };
-
-//   const ReservationCard = ({ reservation, isActive }) => (
-//     <div className="reservation-card">
-//       {reservation.carDetails && (
-//         <>
-//           <img src={reservation.carDetails.image} alt={`${reservation.carDetails.brand} ${reservation.carDetails.model}`} className="car-image" />
-//           <h3>{reservation.carDetails.brand} {reservation.carDetails.model} ({reservation.carDetails.year})</h3>
-//         </>
-//       )}
-//       <p>מתאריך: {new Date(reservation.startDate).toLocaleDateString()} בשעה: {reservation.startTime}</p>
-//       <p>עד תאריך: {new Date(reservation.endDate).toLocaleDateString()} בשעה: {reservation.endTime}</p>
-//       <p>שעות: {reservation.selectedHours}</p>
-//       <p>ימים: {reservation.selectedDays}</p>
-//       <p>סה"כ עלות: {reservation.totalCost}</p>
-//       {isActive && <button onClick={() => cancelReservation(reservation.id)}>בטל הזמנה</button>}
-//     </div>
-//   );
-
-//   return (
-//     <div className="my-reservations">
-//       <h2>ההזמנות הפעילות שלי</h2>
-//       {activeReservations.map(reservation => (
-//         <ReservationCard key={reservation.id} reservation={reservation} isActive={true} />
-//       ))}
-
-//       <h2>היסטוריית הזמנות</h2>
-//       {pastReservations.map(reservation => (
-//         <ReservationCard key={reservation.id} reservation={reservation} isActive={false} />
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default Reservations;
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -116,6 +5,7 @@ import '../styles/reservations.css';
 import cars from '../data/carsData';
 
 const Reservations = () => {
+  const [activeTab, setActiveTab] = useState('active'); // Manage which tab is active
   const [activeReservations, setActiveReservations] = useState([]);
   const [pastReservations, setPastReservations] = useState([]);
 
@@ -234,47 +124,68 @@ const Reservations = () => {
 
   return (
     <div className="reservations-container">
-
-      <div className="reservations-list">
-        <h2>ההזמנות הפעילות שלי</h2>
-        {activeReservations.length === 0 ? (
-          <div className="text-container">
-          <p>אין הזמנות פעילות כרגע</p>
-          <h2>אין הזמנות פעילות כרגע 1.</h2>
-          <h2>אין הזמנות פעילות כרגע 2.</h2>
-          <Link to="/map" className="sign-in-link">go order</Link>
+      <header className="reservations-header">
+        <h1>הזמנות</h1>
+        <div className="tabs">
+          <button 
+            className={activeTab === 'active' ? 'active' : ''} 
+            onClick={() => setActiveTab('active')}
+          >
+            הזמנות פעילות
+          </button>
+          <button 
+            className={activeTab === 'history' ? 'active' : ''} 
+            onClick={() => setActiveTab('history')}
+          >
+            היסטוריית הזמנות
+          </button>
         </div>
+      </header>
 
-        ) : (
-          <>
-            {activeReservations.map(reservation => (
-              <ReservationCard key={reservation.reservationId} reservation={reservation} isActive={true} />
-            ))}
-          </>
-        )}
-      </div>
+      <div className="reservations-content">
 
-      <div className="reservations-list">
-        <h2>היסטוריית הזמנות</h2>
-        {pastReservations.length === 0 ? (
-
-          <div className="text-container">
-            <p>אין היסטוריית הזמנות</p>
-            <h2>אין היסטוריית הזמנות. 1</h2>
-            <h2>אין היסטוריית הזמנות. 2</h2>
-            <Link to="/map" className="sign-in-link">lets order</Link>
+        {activeTab === 'active' && (
+          <div className="reservations-list">
+            {activeReservations.length === 0 ? (
+              <div className="text-container no-reservations">
+                <p>אין הזמנות פעילות כרגע</p>
+                <h4>ברגע שיהיה לך הזמנה פעילה</h4>
+                <h4>היא תופיע פה</h4>
+                <div className="n-r-btn">
+                  <Link to="/map" className="sign-in-link">הזמן עכשיו</Link>
+                </div>
+              </div>
+            ) : (
+              <>
+                {activeReservations.map(reservation => (
+                  <ReservationCard key={reservation.reservationId} reservation={reservation} isActive={true} />
+                ))}
+              </>
+            )}
           </div>
+        )}
 
-        ) : (
-          <>
-            <button onClick={clearAllHistory}><h2>מחק את כל ההיסטוריה</h2></button>
-            {pastReservations.map(reservation => (
-              <ReservationCard key={reservation.reservationId} reservation={reservation} isActive={false} />
-            ))}
-          </>
+        {activeTab === 'history' && (
+          <div className="reservations-list">
+            {pastReservations.length === 0 ? (
+              <div className="text-container no-reservations">
+                <p>אין היסטוריית הזמנות</p>
+                <h4>רכבים שהשכרת בעבר יופיעו פה</h4>
+                <div className="n-r-btn">
+                  <Link to="/map" className="sign-in-link">הזמן עכשיו</Link>
+                </div>
+              </div>
+            ) : (
+              <>
+                <button onClick={clearAllHistory}><h2>מחק את כל ההיסטוריה</h2></button>
+                {pastReservations.map(reservation => (
+                  <ReservationCard key={reservation.reservationId} reservation={reservation} isActive={false} />
+                ))}
+              </>
+            )}
+          </div>
         )}
       </div>
-
     </div>
   );
 };

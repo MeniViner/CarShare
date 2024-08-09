@@ -33,11 +33,66 @@
   text-align: center;
 }
 
-/* h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  margin-top: 0;
-} */
+
+
+/* Header and Tabs */
+.reservations-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  background-color: var(--background-color);
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  text-align: center;
+}
+
+.reservations-header h1 {
+  margin: 0;
+  padding-top: 25PX;
+  padding-bottom: 20px;
+  font-size: 34px;
+}
+
+.reservations-header .tabs {
+  gap: 30px;
+}
+
+.reservations-header .tabs button {
+  background: none;
+  border: none;
+  padding-bottom: 10px ;
+  font-size: 18px;
+  color: rgba(124, 124, 124, 0.872);
+  border-bottom: 2px solid rgba(204, 204, 204, 0.53);
+  transition: all 0.3s ease;
+}
+
+.reservations-header .tabs button.active {
+  color: var(--accent-color);
+  border-bottom: 2px solid var(--primary-color);
+  font-weight: 300;
+}
+
+.reservations-header .tabs button:hover {
+  color: var(--primary-color);
+}
+
+.no-reservations h4 {
+  font-weight: 300;
+  /* text-align: end; */
+}
+
+.n-r-btn {
+  text-align: center;
+}
+
+.reservations-list {
+  margin-top: 20vh;
+}
+
 
 /* Reservations Page Styles */
 .my-reservations {
@@ -56,12 +111,7 @@
 }
 
 .reservation-card .car-image {
-  /* width: 100px; */
   height: 150px;
-  /* object-fit: cover; */
-  /* border-radius: 4px; */
-  /* margin-right: 20px; */
-  /* right: 0; */
   display: flex;
   margin-left: 35vw;
   position: absolute;
@@ -94,13 +144,3 @@
   background-color: var(--secondary-color);
 }
 
-/* @keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-} */

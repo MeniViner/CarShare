@@ -12,7 +12,6 @@
   left: 0;
   z-index: 3;
   background-color: #f5f5f5;
-
 }
 
 .prices-header h1 {
@@ -22,7 +21,7 @@
 
 }
 
-.tab-header {
+.prices-container .tab-header {
   display: flex;
   justify-content: space-between;
   background-color: white;
@@ -36,7 +35,7 @@
   background-color: #f5f5f5;
 }
 
-.tab-button {
+.prices-container .tab-button {
   flex: 1;
   padding: 10px 11px;
   cursor: pointer;
@@ -47,21 +46,21 @@
   transition: all 0.3s ease;
 }
 
-.tab-button.active {
+.prices-container .tab-button.active {
   color: #8a5d46;
   border-bottom: 2px solid #8a634f;
     /* font-weight: bold; */
 }
 
-.tab-button {
+.prices-container .tab-button {
   border-bottom: 2px solid transparent;
 }
 
-.tab-button:hover {
+.prices-container .tab-button:hover {
   background-color: #f0f0f0;
 }
 
-.tab-content {
+.prices-container .tab-content {
   padding: 20px;
   background-color: white;
 }

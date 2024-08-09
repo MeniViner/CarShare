@@ -20,13 +20,13 @@
   padding: 20px;
 }
 
-.tabs {
+.invitation-container .tabs {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
 }
 
-.tab {
+.invitation-container .tab {
   padding: 10px 25px;
   margin: 0 10px;
   border: none;
@@ -37,7 +37,7 @@
   transition: color 0.3s, border-bottom 0.3s;
 }
 
-.tab.active {
+.invitation-container .tab.active {
   border-bottom: 3px solid #007bff;
   color: #007bff;
 }
