@@ -191,33 +191,6 @@
     color: #dc3545; /* צבע אדום כהה בריחוף */
 }
 
-/* .more-det-btn {
-    font: optional;
-    margin-top: -80px;   
-    margin-left: 62%;
-    color: #ededed;
-    font-weight: 900;
-
-    font-size: 1.2rem;
-    text-align: center;
-    width: 20%;
-    padding: 12px;
-    background-color: #6c757d;
-    border-radius: 25px;
-    margin-bottom: 20px; 
-}
-
-.mdbi {
-    padding: 12px;
-    border-radius: 50%;
-    border: #dc3545 1px;
-}
- */
-
-
-
-
-
 
 
 
@@ -238,14 +211,9 @@
 
 
 @keyframes slideInForCars {
-    from {
-        transform: translateX(-30%);
-        opacity: 0;
-}
-    to {
-        transform: translateX(0);
-        opacity: 1;
-}
+    from { transform: translateX(-30%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+       
 }
 
 .cars-list {
@@ -291,32 +259,59 @@ h1, h2, h3 {
 
 
 
-.more-details-btn {
-    background-color: #666666; /* The background color of the button */
-    color: white; /* Text color */
-    padding: 10px 20px; /* Padding inside the button */
-    border-radius: 50px; /* Rounds the corners to make the button oval-shaped */
-    display: inline-flex; /* Allows items inside to be aligned properly */
-    align-items: center; /* Centers the text and icon vertically */
-    font-size: 16px; /* Adjust the font size */
-    cursor: pointer; /* Changes cursor to pointer when hovering */
-    border: none; /* Removes the default button border */
-    outline: none; /* Removes the outline when the button is focused */
-    transition: background-color 0.3s ease; /* Smooth transition effect for hover state */
-    position: relative; /* Allows positioning of the icon */
+
+.more-details-button {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
 }
 
-.more-details-btn .icon {
-    margin-left: 15px; /* Adds some space between text and icon */
-    font-size: 18px; /* Adjust the size of the icon */
-    background-color: white; /* White background for the circle */
-    color: #666666; /* Same color as the button background for the arrow */
-    border-radius: 50%; /* Makes the background a circle */
-    padding: 10px; /* Space inside the circle */
-    display: inline-flex; /* Ensures the icon is centered */
-    align-items: center; /* Centers the icon vertically */
-    justify-content: center; /* Centers the icon horizontally */
-    position: relative; /* Positioning relative to the button */
+.cssbuttons-io-button {
+background: #a370f0;
+color: white;
+font-family: inherit;
+padding: 0.35em;
+padding-left: 1.2em;
+font-size: 18px;
+font-weight: 500;
+border-radius: 0.9em;
+border: none;
+letter-spacing: 0.05em;
+display: flex;
+align-items: center;
+box-shadow: inset 0 0 1.6em -0.6em #714da6;
+overflow: hidden;
+position: relative;
+height: 2.8em;
+padding-right: 3.3em;
+cursor: pointer;
 }
+
+.cssbuttons-io-button .icon {
+background: white;
+margin-left: 1em;
+position: absolute;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 2.2em;
+width: 2.2em;
+border-radius: 0.7em;
+box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+right: 0.3em;
+transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon,
+.cssbuttons-io-button:active .icon {
+width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+width: 1.1em;
+color: #7b52b9;
+}
+  
 
 

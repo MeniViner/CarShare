@@ -156,7 +156,8 @@
   overflow: hidden;
 }
 
-.sign-in-link:active {
+.sign-in-link:active,
+.cssbuttons-io-button:active {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   transform: translateY(2px);
 }

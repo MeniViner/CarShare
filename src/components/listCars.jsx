@@ -218,19 +218,20 @@ const ListCars = () => {
                 </button>
               </div>
               <div className="more-details-in-list">
-                {/* <div className='items'> */}
-                  <div className="item"><FaCarSide /> {car.category} </div>
-                  <div className="item"><BsFuelPumpFill /> {car.fuelType}</div>
-                  <div className="item"><MdElectricCar /> {car.battery}</div>
-                  <div className="item"><PiSeatbeltFill/>  {car.seats}</div>
-                  <div className="item">{car.addres}</div>
-                  {/* <div className='more-det-btn' onClick >more <MdKeyboardDoubleArrowRight className='mdbi'/></div> */}
-                  {/* <div class="more-det-btn">Details <span class="icon">»</span></div> */}
-                  <div class="more-details-btn">
-                      more details <span class="icon"><MdKeyboardDoubleArrowRight /></span>
-                  </div>
-                {/* </div> */}
+                <div className="item"><FaCarSide /> {car.category} </div>
+                <div className="item"><BsFuelPumpFill /> {car.fuelType}</div>
+                <div className="item"><MdElectricCar /> {car.battery}</div>
+                <div className="item"><PiSeatbeltFill/>  {car.seats}</div>
+                <div className="item">{car.addres}</div>
               </div>
+
+              <div className="more-details-button">
+                <button class="cssbuttons-io-button">
+                  more details
+                  <div class="icon"><svg height="24" width="24"viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg></div>
+                </button>
+              </div>
+
             </div>
           </>
         ))}
