@@ -98,7 +98,7 @@ i18n.use(initReactI18next).init({
         "failed to update information": "עדכון המידע נכשל.",
 
 
-        //EmailLogin
+        // EmailLogin
         "or login by email": "או התחבר באמצעות מייל",
         "login": "התחבר",
         "register": "הרשם",
@@ -118,7 +118,25 @@ i18n.use(initReactI18next).init({
         "error": "שגיאה",
         "email already in use": "כתובת המייל כבר בשימוש. אנא התחבר במקום.",
         "invalid credential": "לא הצלחנו לזהות אותך. נסה להרשם במקום",
-        "A password reset email will be sent to the provided email address if it exists": "אם כתובת המייל קיימת, נשלח מייל לאיפוס"
+        "A password reset email will be sent to the provided email address if it exists": "אם כתובת המייל קיימת, נשלח מייל לאיפוס",
+      
+
+        // OrderView
+        "time conflict": "התנגשות בזמנים",
+        "car already reserved": "הרכב כבר הוזמן בתאריכים ובשעות שנבחרו",
+        "order confirmed": "הזמנה אושרה",
+        "car reserved successfully": "הרכב הוזמן בהצלחה!",
+        "order details for": "פרטי הזמנה עבור",
+        "from": "מתאריך",
+        "at": "בשעה",
+        "until": "עד תאריך",
+        "so, you have": "אז, יש לך",
+        "days and": "ימים ו",
+        "hours": "שעות",
+        "and your total cost will be": "והעלות הכוללת שלך תהיה",
+        "order now": "הזמן עכשיו",
+
+        
       }
     }
   },

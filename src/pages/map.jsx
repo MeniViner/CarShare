@@ -155,7 +155,7 @@ const Map = () => {
             icon={{
               // url: 'images/car-side-solid.svg',
               url: 'images/moving-car.gif',
-              scaledSize: new window.google.maps.Size(25, 25),
+              scaledSize: new window.google.maps.Size(40, 40),
             }}
           />
         ))}
@@ -167,6 +167,7 @@ const Map = () => {
             onCloseClick={handleCloseClick}
           />
         )}
+
       </GoogleMap>
 
     </div>

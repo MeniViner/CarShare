@@ -1,67 +1,67 @@
 .prices-container {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    
-  }
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
   
-  .prices-header {
-    text-align: center;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 3;
-    background-color: #f5f5f5;
+}
 
-  }
-  
-  .prices-header h1 {
-    color: #333;
-    margin-top: 22px;
-    font-size: 2.5rem;
+.prices-header {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  background-color: #f5f5f5;
 
-  }
-  
-  .tab-header {
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    border-bottom: 1px solid #e0e0e0;
+}
 
-    position: fixed;
-    top: 95px;
-    right: 0;
-    left: 0;
-    z-index: 3;
-    background-color: #f5f5f5;
-  }
-  
-  .tab-button {
-    flex: 1;
-    padding: 10px 20px;
-    cursor: pointer;
-    border: none;
-    font-size: 18px;
-    color: #929292;
-    background-color: #fff;
-    transition: all 0.3s ease;
-  }
-  
-  .tab-button.active {
-    color: #8a5d46;
-    border-bottom: 2px solid #8a634f;
-      /* font-weight: bold; */
-  }
-  
-  .tab-button {
-    border-bottom: 2px solid transparent;
-  }
-  
-  .tab-button:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .tab-content {
-    padding: 20px;
-    background-color: white;
-  }
+.prices-header h1 {
+  color: #333;
+  margin-top: 22px;
+  font-size: 2.5rem;
+
+}
+
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+
+  position: fixed;
+  top: 95px;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  background-color: #f5f5f5;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px 11px;
+  cursor: pointer;
+  border: none;
+  font-size: 18px;
+  color: #929292;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  color: #8a5d46;
+  border-bottom: 2px solid #8a634f;
+    /* font-weight: bold; */
+}
+
+.tab-button {
+  border-bottom: 2px solid transparent;
+}
+
+.tab-button:hover {
+  background-color: #f0f0f0;
+}
+
+.tab-content {
+  padding: 20px;
+  background-color: white;
+}

@@ -53,6 +53,7 @@
 
 
 import React from 'react';
+import { t } from 'i18next';
 import Swal from 'sweetalert2';
 import '../styles/orderView.css';
 
@@ -76,7 +77,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
     });
 
     if (isOverlapping) {
-      Swal.fire('התנגשות בזמנים', 'הרכב כבר הוזמן בתאריכים ובשעות שנבחרו', 'error');
+      Swal.fire(t('time conflict'), t('car already reserved'), 'error');
       return;
     }
 
@@ -93,18 +94,18 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
     });
 
     localStorage.setItem('reservations', JSON.stringify(storedReservations));
-    Swal.fire('הזמנה אושרה', 'הרכב הוזמן בהצלחה!', 'success');
+    Swal.fire(t('order confirmed'), t('car reserved successfully'), 'success');
     onConfirmOrder();
   };
 
   return (
     <div className="order-view-container">
-      <h3>פרטי הזמנה עבור {selectedCar.brand} {selectedCar.model}</h3>
-      <p>מתאריך: {new Date(startDate).toLocaleDateString()} בשעה: {startTime}</p>
-      <p>עד תאריך: {new Date(endDate).toLocaleDateString()} בשעה: {endTime}</p>
-      <p>ימים: {selectedDays}   שעות: {selectedHours}</p>
-      <p>סה"כ עלות: {totalCost}</p>
-      <button onClick={handleConfirmOrder}>הזמן עכשיו</button>
+      <h3>{t('order details for')} {selectedCar.brand} {selectedCar.model}</h3>
+      <p>{t('from')} {new Date(startDate).toLocaleDateString()} {t('at')} {startTime}</p>
+      <p>{t('until')} {new Date(endDate).toLocaleDateString()} {t('at')} {endTime}</p>
+      <p>{t('so, you have')} {selectedDays} {t('days and')} {selectedHours} {t('hours')}</p>
+      <p>{t('and your total cost will be')} {totalCost}₪</p>
+      <button onClick={handleConfirmOrder}>{t('order now')}</button>
     </div>
   );
 };

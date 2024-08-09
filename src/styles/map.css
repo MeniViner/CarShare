@@ -1,7 +1,7 @@
 .main-app {
   margin: 0px;
   padding: 0px;
-  height: 99.2dvh;
+  height: 97.5dvh;
 }
 
 .map-app {
@@ -9,11 +9,10 @@
   display: flex;
   z-index: 0;
   height: 100vh;
-  height: 99.2svh;
+  height: 97.5svh;
   outline: none;
   border: #978f8c 3px solid;
   /* border-radius: 12px; */
-
 }
 
 /* REMOVE THE BLUE annoying when map active*/
