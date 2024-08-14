@@ -444,6 +444,9 @@ import { format, addHours, addDays, isBefore, isAfter, setHours, setMinutes, dif
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import '../styles/invitation.css';
 
+// import DateTimePicker from '../utils/DateTimePicker'
+
+
 const Invitation = ({ selectedCar, onCheckAvailability }) => {
   const calculateCost = (days, hours) => {
     const totalHours = days * 24 + hours;
@@ -625,15 +628,19 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
   };
 
   useEffect(() => {
-    // Set the timezone to Israel
     const options = { timeZone: 'Asia/Jerusalem' };
     const now = new Date(new Date().toLocaleString('he-IL', options));
-    setStartDate(now);
-    setStartTime(format(now, 'HH:mm'));
-    const oneHourLater = addHours(now, 1);
-    setEndDate(oneHourLater);
-    setEndTime(format(oneHourLater, 'HH:mm'));
-    updateSelectedDaysAndHours(now, oneHourLater);
+    if (!isNaN(now)) {
+      setStartDate(now);
+      setStartTime(format(now, 'HH:mm'));
+      const oneHourLater = addHours(now, 1);
+      
+      if (!isNaN(oneHourLater)) {
+        setEndDate(oneHourLater);
+        setEndTime(format(oneHourLater, 'HH:mm'));
+        updateSelectedDaysAndHours(now, oneHourLater);
+      }
+    }
   }, []);
 
 
@@ -654,7 +661,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
           <p>{t('daily')}</p>
         </button>
       </div>
-
+      {/* <DateTimePicker/> */}
       <div className="date-time-selection">
         <label>{t('start')}</label>
         <div className="date-time-group">

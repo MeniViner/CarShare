@@ -139,6 +139,7 @@
 
 
 .info-window-page {
+  direction: ltr !important;
   font-family: 'Roboto', sans-serif;
 }
 
