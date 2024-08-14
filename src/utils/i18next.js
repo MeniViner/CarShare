@@ -7,6 +7,10 @@ i18n.use(initReactI18next).init({
     he: {
       translation: {
 
+        //loading 
+        "please wait": "אנא המתן",
+        "Loading Data": "טוען נתונים",
+
         //settings page
         "set-language": "בחר שפה",
         "map-color": "צבעי המפה",

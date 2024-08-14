@@ -211,29 +211,23 @@
 
 
 
-.process-steps {
+/* .process-steps {
   position: absolute;
   margin-top: -10vh;
   display: flex;
   flex-direction: row;
   gap:10px;
-  /* padding: 5px; */
-
 }
 
 .process-steps .step {
   display: flex;
   margin-left: -5px;
-  /* align-items: start; */
   width: 28vw;
   background-color: rgba(240, 248, 255, 0.596);
   background-color: var(--light-brown);
   background-color: #fffbf6b9;
   border-radius: 25px;
-  /* justify-content: start; */
-  /* align-self: center; */
   border: 0.5px solid var(--darker-brown);
-
 }
 
 .step .icon {
@@ -251,4 +245,27 @@
   display: flex;
   margin-left: 10px;
   font: 1.2em ;
+} */
+
+.step {
+  cursor: pointer;
+  padding: 10px;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.step.active-step {
+  border-bottom: 2px solid #007bff; /* Active step border color */
+  font-weight: bold; /* Optional: Make the active step text bold */
+  color: #007bff; /* Active step text color */
+}
+
+.step p {
+  margin: 0;
+}
+
+.icon {
+  font-size: 24px;
+  margin-right: 8px;
+  vertical-align: middle;
 }

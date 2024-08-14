@@ -1,4 +1,5 @@
 import React, {useState, useEffect } from 'react';
+import { t } from 'i18next';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api';
@@ -116,7 +117,6 @@ const Map = () => {
     // libraries: ["places"],
     language: 'iw',
   });
-
 
   if (!isLoaded) return <LoadingPage />;
 

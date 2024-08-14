@@ -33,7 +33,7 @@
     font-weight: bold;
     margin-top: 16px;
     color: #333;
-    animation: fadeInOut 2s infinite;
+    animation: fadeInOut 3s infinite;
   }
   
   @keyframes fadeInOut {

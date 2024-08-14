@@ -45,6 +45,12 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
 
   const [reservationData, setReservationData] = useState(null);
 
+
+  const [currentStep, setCurrentStep] = useState(1);
+  const handleStepClick = (step) => {
+    setCurrentStep(step);
+  };
+
   // const handleCheckAvailability = (data) => {
   //   const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
   //   const isAvailable = !storedReservations.some(reservation =>
@@ -116,7 +122,7 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
 
       <div ref={ref} className="vehicle-info"> {/* הוסף את ref ל-div הראשי */}
 
-        <div className="process-steps">
+        {/* <div className="process-steps">
           <div className="step">
             <CiLocationArrow1 className='icon'/>
             <p>{t('step 1')}</p>
@@ -126,6 +132,31 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
             <p>{t('step 2')}</p>
           </div>
           <div className="step">
+            <IoReceiptOutline className='icon'/>
+            <p>{t('step 3')}</p>
+          </div>
+        </div> */}
+
+
+        <div className="process-steps">
+          <div 
+            className={`step ${currentStep === 1 ? 'active-step' : ''}`} 
+            onClick={() => handleStepClick(1)}
+          >
+            <CiLocationArrow1 className='icon'/>
+            <p>{t('step 1')}</p>
+          </div>
+          <div 
+            className={`step ${currentStep === 2 ? 'active-step' : ''}`} 
+            onClick={() => handleStepClick(2)}
+          >
+            <MdOutlineCalendarMonth className='icon'/>
+            <p>{t('step 2')}</p>
+          </div>
+          <div 
+            className={`step ${currentStep === 3 ? 'active-step' : ''}`} 
+            onClick={() => handleStepClick(3)}
+          >
             <IoReceiptOutline className='icon'/>
             <p>{t('step 3')}</p>
           </div>
@@ -179,11 +210,11 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
 
         </div>
 
-        {!showInvitation && ( // הצגת כפתור "הזמן עכשיו" אם ה-Invitation לא מוצג
+        {/* {!showInvitation && ( // הצגת כפתור "הזמן עכשיו" אם ה-Invitation לא מוצג
           <button className="order-btn" onClick={handleOrderClick}>{t('order now')}</button>
-        )}
+        )} */}
 
-        <div className="info-window">
+        {/* <div className="info-window">
           {reservationData ? (
             <OrderView 
               selectedCar={selectedCar}
@@ -219,7 +250,73 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
               )}
             </>
           )}
+        </div> */}
+
+
+        <div className="process-steps">
+          <div 
+            className={`step ${currentStep === 1 ? 'active-step' : ''}`} 
+            onClick={() => handleStepClick(1)}
+          >
+            <CiLocationArrow1 className='icon'/>
+            <p>{t('step 1')}</p>
+          </div>
+          <div 
+            className={`step ${currentStep === 2 ? 'active-step' : ''}`} 
+            onClick={() => handleStepClick(2)}
+          >
+            <MdOutlineCalendarMonth className='icon'/>
+            <p>{t('step 2')}</p>
+          </div>
+          <div 
+            className={`step ${currentStep === 3 ? 'active-step' : ''}`} 
+            onClick={() => handleStepClick(3)}
+          >
+            <IoReceiptOutline className='icon'/>
+            <p>{t('step 3')}</p>
+          </div>
         </div>
+
+        <div className="info-window">
+          {currentStep === 1 && (
+            <>
+              {/* Show step 1 content: Vehicle details and more details */}
+              {!showInvitation ? (
+                <>
+                  <button onClick={() => setShowMore(!showMore)} className="show-more-button">
+                    {showMore ? t('less details') : t('more details')}
+                  </button>
+                  {showMore && (
+                    <animated.div style={carouselAnimation} className="carousel">
+                      <ImageCarousel images={[selectedCar.image5, selectedCar.image4, selectedCar.image3, selectedCar.image2, selectedCar.image1, selectedCar.image]} />
+                    </animated.div>
+                  )}
+                </>
+              ) : (
+                <Invitation 
+                  selectedCar={selectedCar}
+                  onCheckAvailability={handleCheckAvailability}
+                />
+              )}
+            </>
+          )}
+          
+          {currentStep === 2 && reservationData && (
+            <Invitation 
+              selectedCar={selectedCar}
+              onCheckAvailability={handleCheckAvailability}
+            />
+          )}
+          
+          {currentStep === 3 && reservationData && (
+            <OrderView 
+              selectedCar={selectedCar}
+              reservationData={reservationData}
+              onConfirmOrder={handleConfirmOrder}
+            />
+          )}
+        </div>
+
 
       </div>
     </div>
