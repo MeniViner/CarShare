@@ -1,4 +1,4 @@
-:root {
+.info-window-page {
   --light-brown: #fffbf6;
   --medium-brown: #8d6e63;
   --dark-brown: #6d4c41;
@@ -97,7 +97,7 @@
   background-color: var(--dark-brown);
 }
 
-.order-btn {
+.info-window-page .order-btn {
   margin: 0px 0px 0px 45%;
   margin-top: 6%;
   position: absolute;
@@ -112,12 +112,12 @@
   transition: background 0.3s, box-shadow 0.3s;
 }
 
-.order-btn:hover {
+.info-window-page .order-btn:hover {
   background-color: var(--dark-brown);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.show-more-button {
+.info-window-page .show-more-button {
   font-family: 'Roboto', sans-serif;
   background-color: #ffffff00;
   color: var(--dark-brown);

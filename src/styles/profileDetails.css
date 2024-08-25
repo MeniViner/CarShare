@@ -1,4 +1,4 @@
-.profile-container {
+/* .profile-container {
     max-width: 400px;
     margin: auto;
     padding: 20px;
@@ -113,8 +113,6 @@
 }
 
 .logout-button {
-    /* position: absolute;
-    margin-bottom: 40px; */
     margin-bottom: -20px;
     background-color: #d9534f;
     color: #fff;
@@ -130,18 +128,6 @@
     background-color: #c9302c;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/* editProfile.css */
 
 .edit-profile-container {
     display: flex;
@@ -202,12 +188,7 @@
     font-size: 16px;
     pointer-events: none;
     transition: 0.2s;
-    /* transform: translateY(-50%); */
 }
-
-
-
-
 
 .save-button {
     width: 100%;
@@ -237,4 +218,184 @@
   top: -20px;
   font-size: 12px;
   color: #333;
+}
+
+ */
+
+
+
+
+
+
+ .profile-container {
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 12px;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.profile-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 28px;
+}
+
+.profile-container .profile-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-direction: column;
+}
+
+.profile-label {
+    font-weight: 500;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+.profile-photo {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-edit-button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 36px;
+    height: 36px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-edit-button:hover {
+    background-color: #0056b3;
+}
+
+.profile-divider {
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
+.profile-edit-section {
+    margin-top: 30px;
+}
+
+.profile-edit-section h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.profile-container .input-container {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.profile-container .input-container input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.profile-container .input-container input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.profile-container .input-container label {
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    color: #777;
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.profile-container .input-container input:focus + label,
+.profile-container .input-container input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #007bff;
+    background-color: white;
+    padding: 0 5px;
+}
+
+.profile-container .save-button {
+    width: 100%;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-container .save-button:hover {
+    background-color: #218838;
+}
+
+@media (max-width: 480px) {
+    .profile-container .profile-container {
+        padding: 15px;
+    }
+
+    .profile-container h2 {
+        font-size: 24px;
+    }
+
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-edit-button {
+        width: 30px;
+        height: 30px;
+    }
+
+    .profile-edit-section h3 {
+        font-size: 20px;
+    }
+
+    .profile-container .input-container input {
+        font-size: 14px;
+    }
+
+    .profile-container .save-button {
+        font-size: 16px;
+        padding: 10px 16px;
+    }
 }

@@ -169,9 +169,56 @@ i18n.use(initReactI18next).init({
         "reserve now": "הזמן עכשיו",
         "reservation history empty": "היסטוריית ההזמנות שלך ריקה",
         "past rented cars appear here": "רכבים שהשכרת בעבר יופיעו פה",
-        "delete all history": "מחק את כל ההיסטוריה"
+        "delete all history": "מחק את כל ההיסטוריה",
 
-        
+
+        //SideNavigation
+        "main navigation": "ניווט ראשי",
+        "car share": "שיתוף רכב",
+        "search": "חיפוש",
+        "map": "מפה",
+        "saved": "שמורים",
+        "prices": "מחירים",
+        "reservation": "הזמנה",
+        "contact": "צור קשר",
+        "settings": "הגדרות",
+        "user avatar": "תמונת משתמש",
+        "guest avatar": "תמונת אורח",
+        "hi guest": "שלום אורח",
+        "log in here": "התחבר כאן",
+        "close menu": "סגור תפריט",
+        "open menu": "פתח תפריט",
+
+        //profile and related
+        "welcome": "ברוך הבא",
+        "or": "או",
+        "logout": "התנתק",
+        "logout confirmation title": "האם אתה בטוח?",
+        "logout confirmation text": "אתה תתנתק מהחשבון שלך.",
+        "logged out": "התנתקת",
+        "logged out success": "התנתקת בהצלחה.",
+        "user profile": "פרופיל משתמש",
+        "profile": "פרופיל",
+        "email": "אימייל",
+        "phone number": "מספר טלפון",
+        "edit your personal info": "ערוך את המידע האישי שלך",
+        "first name": "שם פרטי",
+        "last name": "שם משפחה",
+        "address": "כתובת",
+        "driving license": "רישיון נהיגה",
+        "payment method": "אמצעי תשלום",
+        "save changes": "שמור שינויים",
+        "change profile picture": "שנה תמונת פרופיל",
+        "change profile picture confirmation": "האם אתה רוצה לשנות את תמונת הפרופיל שלך?",
+        "yes change it": "כן, שנה אותה!",
+        "cancel": "ביטול",
+        "changed": "שונה!",
+        "profile picture updated": "תמונת הפרופיל שלך עודכנה.",
+        "success": "הצלחה",
+        "information updated": "המידע שלך עודכן.",
+        "error": "שגיאה",
+        "failed to update information": "נכשל בעדכון המידע שלך.",
+
       }
     }
   },

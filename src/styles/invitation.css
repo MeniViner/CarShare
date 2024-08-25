@@ -1,17 +1,10 @@
-:root {
+.invitation-container {
   --light-brown: #fffbf6;
   --medium-brown: #8d6e63;
   --dark-brown: #6d4c41;
   --darker-brown: #3e2723;
-}
 
-.invitation-container {
-  /* border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 450px;
-  text-align: center;
-  margin: 0 auto; */
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,37 +44,37 @@
 
 
 
-.date-time-selection {
+.invitation-container .date-time-selection {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.date-time-group {
+.invitation-container .date-time-group {
   display: flex;
   justify-content: space-between;
   /* margin-bottom: 10px; */
 }
 
-.date-time-group label {
+.invitation-container .date-time-group label {
   flex: 1;
   text-align: center;
 }
 
-.input-group input {
+.invitation-container .input-group input {
   box-sizing: border-box;
 }
 
-.input-group {
+.invitation-container .input-group {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
 
-.input-group input[type="date"],
-.input-group input[type="time"],
-.input-group input[type="number"] {
+.invitation-container .input-group input[type="date"],
+.invitation-container .input-group input[type="time"],
+.invitation-container .input-group input[type="number"] {
   width: 100px;
   padding: 5px;
   margin: 0 5px;
@@ -89,9 +82,10 @@
   background-color: #fdfcfc;
   outline: none;
 }
-.input-group input[type="date"]:focus,
-.input-group input[type="time"]:focus,
-.input-group input[type="number"]:focus {
+
+.invitation-container .input-group input[type="date"]:focus,
+.invitation-container .input-group input[type="time"]:focus,
+.invitation-container .input-group input[type="number"]:focus {
   outline: none;
 }
 
@@ -167,14 +161,14 @@
   margin: 0 10px;
 }
 
-.no-spinner::-webkit-outer-spin-button,
-.no-spinner::-webkit-inner-spin-button {
+.invitation-container .no-spinner::-webkit-outer-spin-button,
+.invitation-container .no-spinner::-webkit-inner-spin-button {
   
   -webkit-appearance: none;
   margin: 0;
 }
 
-.no-spinner {
+.invitation-container .no-spinner {
   -moz-appearance: textfield;
 }
 
@@ -230,7 +224,7 @@
 
 
 
-.cost-summary {
+.invitation-container .cost-summary {
   display: grid;
   grid-template-columns: repeat(2, auto); /* Create two columns */
   gap: 20px; 
@@ -239,7 +233,7 @@
   margin-bottom: -20px;
 }
 
-.cost-summary p {
+.invitation-container .cost-summary p {
   padding: 10px;
   border-radius: 8px;
   border: dashed #555 1px ;
@@ -248,7 +242,7 @@
   font-size: 1.4rem;
 }
 
-.cost-summary button {
+.invitation-container .cost-summary button {
   font-size: 1.2rem;
   padding: 12px 20px;
   background-color: #007bff;
@@ -259,7 +253,7 @@
   transition: background 0.3s, box-shadow 0.3s;
 }
 
-.cost-summary button:hover {
+.invitation-container .cost-summary button:hover {
   background-color: #0056b3;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
