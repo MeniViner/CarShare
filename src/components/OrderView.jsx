@@ -1,4 +1,7 @@
+
+
 // import React from 'react';
+// import { t } from 'i18next';
 // import Swal from 'sweetalert2';
 // import '../styles/orderView.css';
 
@@ -6,21 +9,28 @@
 //   const { startDate, startTime, endDate, endTime, selectedHours, selectedDays, totalCost } = reservationData;
 
 //   const handleConfirmOrder = () => {
-//     // עדכון הזמנים שבהם הרכב תפוס ב- localStorage
 //     const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
-
-//     const isOverlapping = storedReservations.some(reservation =>
-//       reservation.carId === selectedCar.id &&
-//       ((new Date(`${reservation.startDate}T${reservation.startTime}`) < new Date(`${reservation.endDate}T${reservation.endTime}`)) &&
-//       (new Date(`${startDate}T${startTime}`) < new Date(`${endDate}T${endTime}`)))
-//     );
     
+//     const newStartTime = new Date(`${startDate}T${startTime}`);
+//     const newEndTime = new Date(`${endDate}T${endTime}`);
+//     const reservationId = Date.now().toString(36) + Math.random().toString(36).substr(2);
+
+//     const isOverlapping = storedReservations.some(reservation => {
+//       if (reservation.carId !== selectedCar.id) return false;
+
+//       const reservationStart = new Date(`${reservation.startDate}T${reservation.startTime}`);
+//       const reservationEnd = new Date(`${reservation.endDate}T${reservation.endTime}`);
+
+//       return (newStartTime < reservationEnd && newEndTime > reservationStart);
+//     });
+
 //     if (isOverlapping) {
-//       Swal.fire('התנגשות בזמנים', 'הרכב כבר הוזמן בתאריכים ובשעות שנבחרו', 'error');
+//       Swal.fire(t('time conflict'), t('car already reserved'), 'error');
 //       return;
 //     }
 
 //     storedReservations.push({
+//       reservationId,
 //       carId: selectedCar.id,
 //       startDate,
 //       startTime,
@@ -30,21 +40,22 @@
 //       selectedDays,
 //       totalCost,
 //     });
-    
+
 //     localStorage.setItem('reservations', JSON.stringify(storedReservations));
-//     Swal.fire('הזמנה אושרה', 'הרכב הוזמן בהצלחה!', 'success');
+//     Swal.fire(t('order confirmed'), t('car reserved successfully'), 'success');
 //     onConfirmOrder();
 //   };
 
 //   return (
 //     <div className="order-view-container">
-//       <h3>פרטי הזמנה עבור {selectedCar.brand} {selectedCar.model}</h3>
-//       <p>מתאריך: {new Date(startDate).toLocaleDateString()} בשעה: {startTime}</p>
-//       <p>עד תאריך: {new Date(endDate).toLocaleDateString()} בשעה: {endTime}</p>
-//       <p>שעות: {selectedHours}</p>
-//       <p>ימים: {selectedDays}</p> 
-//       <p>sum cost: {totalCost}</p>
-//       <button onClick={handleConfirmOrder}>הזמן עכשיו</button>
+//       <h3>{t('order details for')} {selectedCar.brand} {selectedCar.model}</h3>
+//       <p>{t('from')} {new Date(startDate).toLocaleDateString()} {t('at')} {startTime}</p>
+//       <p>{t('until')} {new Date(endDate).toLocaleDateString()} {t('at')} {endTime}</p>
+//       <p>{t('so, you have')} {selectedDays} {t('days and')} {selectedHours} {t('hours')}</p>
+//       <p>{t('and your total cost will be')} {totalCost}₪</p>
+//       <div className="ovc-btn">
+//         <button onClick={handleConfirmOrder}>{t('confirm order')}</button>
+//       </div>
 //     </div>
 //   );
 // };
@@ -52,15 +63,43 @@
 // export default OrderView;
 
 
-import React from 'react';
-import { t } from 'i18next';
+
+
+
+
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Swal from 'sweetalert2';
+import { format, differenceInHours, differenceInDays } from 'date-fns';
 import '../styles/orderView.css';
 
 const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
-  const { startDate, startTime, endDate, endTime, selectedHours, selectedDays, totalCost } = reservationData;
+  const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
+  const { startDate, startTime, endDate, endTime, selectedHours, selectedDays, totalCost, isHourly } = reservationData;
 
-  const handleConfirmOrder = () => {
+  const calculateActualCost = () => {
+    const start = new Date(`${startDate}T${startTime}`);
+    const end = new Date(`${endDate}T${endTime}`);
+    const hoursDiff = differenceInHours(end, start);
+    const daysDiff = differenceInDays(end, start);
+
+    let cost = 0;
+    if (isHourly) {
+      cost = hoursDiff * selectedCar.pricePerHour;
+    } else {
+      cost = daysDiff * selectedCar.pricePerDay;
+      const remainingHours = hoursDiff % 24;
+      cost += remainingHours * selectedCar.pricePerHour;
+    }
+
+    return Math.max(cost + selectedCar.unlockFee, 0);
+  };
+
+  const actualCost = calculateActualCost();
+
+  const handleConfirmOrder = async () => {
+    setIsLoading(true);
     const storedReservations = JSON.parse(localStorage.getItem('reservations')) || [];
     
     const newStartTime = new Date(`${startDate}T${startTime}`);
@@ -77,6 +116,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
     });
 
     if (isOverlapping) {
+      setIsLoading(false);
       Swal.fire(t('time conflict'), t('car already reserved'), 'error');
       return;
     }
@@ -90,24 +130,41 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
       endTime,
       selectedHours,
       selectedDays,
-      totalCost,
+      totalCost: actualCost,
     });
 
     localStorage.setItem('reservations', JSON.stringify(storedReservations));
-    Swal.fire(t('order confirmed'), t('car reserved successfully'), 'success');
-    onConfirmOrder();
+    
+    setTimeout(() => {
+      setIsLoading(false);
+      Swal.fire(t('order confirmed'), t('car reserved successfully'), 'success');
+      onConfirmOrder();
+    }, 1500);
   };
 
   return (
     <div className="order-view-container">
       <h3>{t('order details for')} {selectedCar.brand} {selectedCar.model}</h3>
-      <p>{t('from')} {new Date(startDate).toLocaleDateString()} {t('at')} {startTime}</p>
-      <p>{t('until')} {new Date(endDate).toLocaleDateString()} {t('at')} {endTime}</p>
-      <p>{t('so, you have')} {selectedDays} {t('days and')} {selectedHours} {t('hours')}</p>
-      <p>{t('and your total cost will be')} {totalCost}₪</p>
-      <div className="ovc-btn">
-        <button onClick={handleConfirmOrder}>{t('confirm order')}</button>
+      <div className="order-details">
+        <p><strong>{t('from')}:</strong> {format(new Date(startDate), 'dd/MM/yyyy')} {t('at')} {startTime}</p>
+        <p><strong>{t('until')}:</strong> {format(new Date(endDate), 'dd/MM/yyyy')} {t('at')} {endTime}</p>
+        <p><strong>{t('duration')}:</strong> {selectedDays} {t('days')} {t('and')} {selectedHours} {t('hours')}</p>
+        <p><strong>{t('unlock fee')}:</strong> ₪{selectedCar.unlockFee}</p>
+        <p className="total-cost">
+          <strong>{t('total cost')}:</strong> ₪{actualCost}
+        </p>
       </div>
+      <button 
+        className="confirm-button"
+        onClick={handleConfirmOrder}
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <div className="loading-spinner" />
+        ) : (
+          t('confirm order')
+        )}
+      </button>
     </div>
   );
 };

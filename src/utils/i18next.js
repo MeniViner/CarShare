@@ -140,6 +140,17 @@ i18n.use(initReactI18next).init({
         "hours": "שעות",
         "and your total cost will be": "והעלות הכוללת שלך תהיה",
         "order now": "הזמן עכשיו",
+        "order details for": "פרטי הזמנה עבור",
+        "duration": "משך",
+        "days": "ימים",
+        "and": "ו",
+        "unlock fee": "דמי פתיחה",
+        "total cost": "עלות כוללת",
+        "confirm order": "אשר הזמנה",
+        "time conflict": "התנגשות זמנים",
+        "car already reserved": "הרכב כבר מוזמן לפרק הזמן שנבחר.",
+        "order confirmed": "ההזמנה אושרה",
+        
 
         //reservations
         "reservations": "הזמנות",
@@ -218,6 +229,8 @@ i18n.use(initReactI18next).init({
         "information updated": "המידע שלך עודכן.",
         "error": "שגיאה",
         "failed to update information": "נכשל בעדכון המידע שלך.",
+
+
 
       }
     }

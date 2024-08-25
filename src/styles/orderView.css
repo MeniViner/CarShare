@@ -1,5 +1,5 @@
 /* orderView.css */
-.order-view-container {
+/* .order-view-container {
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -36,4 +36,106 @@
 
 .order-view-container button:hover {
   background-color: #0056b3;
+} */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+.order-view-container {
+  font-family: 'Roboto', sans-serif;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 100%;
+  width: 90%;
+}
+
+.order-view-container h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.order-details {
+  margin-bottom: 20px;
+}
+
+.order-details p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-details p strong {
+  font-weight: 500;
+  color: #333;
+}
+
+.total-cost {
+  font-size: 1.2rem;
+  color: #007bff;
+  font-weight: 700;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.confirm-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.confirm-button:hover {
+  background-color: #0056b3;
+}
+
+.confirm-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+@media (max-width: 480px) {
+  .order-view-container {
+    padding: 15px;
+    width: 95%;
+  }
+
+  .order-view-container h3 {
+    font-size: 1.3rem;
+  }
+
+  .order-details p {
+    font-size: 0.9rem;
+  }
+
+  .total-cost {
+    font-size: 1.1rem;
+  }
+
+  .confirm-button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
 }
