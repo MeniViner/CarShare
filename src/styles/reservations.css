@@ -1,144 +1,11 @@
-/* reservations-container{
-  --primary-color: #8B5A2B;
-  --secondary-color: #D2B48C;
-  --accent-color: #A0522D;
-  --text-color: #333;
-  --background-color: #F5F5F5;
-}
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
-
-.reservations-container {
-  font-family: 'Roboto', sans-serif;
-  color: var(--text-color);
-  background-color: var(--background-color);
-  margin: 0;
-  padding: 0;
-}
-
-.reservations-container h2,
-.reservations-container p {
-  text-align: center;
-}
-
-
-
-.reservations-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 3;
-  background-color: var(--background-color);
-  padding: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 10;
-  text-align: center;
-}
-
-.reservations-header h1 {
-  margin: 0;
-  padding-top: 25PX;
-  padding-bottom: 20px;
-  font-size: 34px;
-}
-
-.reservations-header .tabs {
-  gap: 30px;
-}
-
-.reservations-header .tabs button {
-  background: none;
-  border: none;
-  padding-bottom: 10px ;
-  font-size: 18px;
-  color: rgba(124, 124, 124, 0.872);
-  border-bottom: 2px solid rgba(204, 204, 204, 0.53);
-  transition: all 0.3s ease;
-}
-
-.reservations-header .tabs button.active {
-  color: var(--accent-color);
-  border-bottom: 2px solid var(--primary-color);
-  font-weight: 300;
-}
-
-.reservations-header .tabs button:hover {
-  color: var(--primary-color);
-}
-
-.no-reservations h4 {
-  font-weight: 300;
-}
-
-.n-r-btn {
-  text-align: center;
-}
-
-.reservations-list {
-  margin-top: 20vh;
-}
-
-
-.my-reservations {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-
-.reservation-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-bottom: 20px;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.reservation-card .car-image {
-  height: 150px;
-  display: flex;
-  margin-left: 35vw;
-  position: absolute;
-  margin-top: 8vh;
-}
-
-.reservation-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.reservation-card p {
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.reservation-card button {
-  background-color: #b63a11;
-  color: #fff;
-  border: none;
-  width: 40vw;
-  border-radius: 4px;
-  padding: 8px 16px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.reservation-card button:hover {
-  background-color: var(--secondary-color);
-}
- */
-
-
-/* reservations.css */
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap');
 
 .reservations-container {
   --primary-color: #8B4513;
   --secondary-color: #D2691E;
   --accent-color: #CD853F;
-  --background-color: #fcf8ea;
+  --background-color: #FFF8DC;
   --text-color: #3E2723;
   --card-background: #FAEBD7;
   --shadow-color: rgba(139, 69, 19, 0.2);
@@ -215,7 +82,7 @@
   padding: 20px;
   margin-bottom: 20px;
   transition: all 0.3s ease;
-  opacity: 0;
+  /* opacity: 0; */
   transform: translateY(20px);
 }
 
@@ -260,6 +127,7 @@
 
 .reservations-container .icon {
   margin-right: 10px;
+  margin-left: 10px;
   font-size: 18px;
 }
 
@@ -337,16 +205,6 @@
   transform: translateY(-2px);
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 .reservations-container .reservation-card {
   animation: fadeInUp 0.5s ease-out;

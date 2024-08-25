@@ -141,6 +141,36 @@ i18n.use(initReactI18next).init({
         "and your total cost will be": "והעלות הכוללת שלך תהיה",
         "order now": "הזמן עכשיו",
 
+        //reservations
+        "reservations": "הזמנות",
+        "active reservations": "הזמנות פעילות",
+        "reservation history": "היסטוריית הזמנות",
+        "are you sure": "האם אתה בטוח?",
+        "cannot undo action": "לא תוכל לבטל פעולה זו!",
+        "yes cancel reservation": "כן, בטל הזמנה!",
+        "cancel": "ביטול",
+        "cancelled": "בוטל!",
+        "reservation cancelled": "ההזמנה שלך בוטלה.",
+        "delete all history warning": "פעולה זו תמחק את כל היסטוריית ההזמנות!",
+        "yes delete all": "כן, מחק הכל!",
+        "deleted": "נמחק!",
+        "reservation history deleted": "היסטוריית ההזמנות נמחקה.",
+        "from date": "מתאריך",
+        "to date": "עד תאריך",
+        "at time": "בשעה",
+        "hours": "שעות",
+        "days": "ימים",
+        "total cost": "סה\"כ עלות",
+        "cancel reservation": "בטל הזמנה",
+        "delete from history": "מחק מההיסטוריה",
+        "no active reservations": "אין הזמנות פעילות כרגע",
+        "when you have active reservation": "ברגע שיהיה לך הזמנה פעילה",
+        "it will appear here": "היא תופיע פה",
+        "reserve now": "הזמן עכשיו",
+        "reservation history empty": "היסטוריית ההזמנות שלך ריקה",
+        "past rented cars appear here": "רכבים שהשכרת בעבר יופיעו פה",
+        "delete all history": "מחק את כל ההיסטוריה"
+
         
       }
     }
