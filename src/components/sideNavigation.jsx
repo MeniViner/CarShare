@@ -38,20 +38,20 @@ const SideNavigation = () => {
 
   const toggleSideNav = () => setIsSideNavOpen(prev => !prev);
 
-  // const closeSideNav = () => {
-  //   if (navigator.vibrate) {
-  //     navigator.vibrate(50); // Vibrate for 50ms
-  //   }
-  //   setIsSideNavOpen(false)
-  // };
-
   const closeSideNav = () => {
-    const vibrationEnabled = localStorage.getItem('vibrationEnabled');
-    if (vibrationEnabled === 'true' && navigator.vibrate) {
+    if (navigator.vibrate) {
       navigator.vibrate(50); // Vibrate for 50ms
     }
-    setIsSideNavOpen(false);
+    setIsSideNavOpen(false)
   };
+
+  // const closeSideNav = () => {
+  //   const vibrationEnabled = localStorage.getItem('vibrationEnabled');
+  //   if (vibrationEnabled === 'true' && navigator.vibrate) {
+  //     navigator.vibrate(50); // Vibrate for 50ms
+  //   }
+  //   setIsSideNavOpen(false);
+  // };
 
   const handleSearch = (e) => {
     if (e.key === 'Enter') {
