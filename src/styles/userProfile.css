@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+.profile-container-page .profile-page {
+    font-family: 'Roboto', sans-serif;
+    max-width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-container-page .profile-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.profile-container-page .profile-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.profile-container-page .divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #777;
+    margin: 20px 0;
+}
+
+.profile-container-page .divider::before,
+.profile-container-page .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-container-page .divider::before {
+    margin-right: 10px;
+}
+
+.profile-container-page .divider::after {
+    margin-left: 10px;
+}
+
+.profile-container-page .logout-button {
+    margin-top: 20px;
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-container-page .logout-button:hover {
+    background-color: #d32f2f;
+}
+
+@media (max-width: 480px) {
+    .profile-container-page .profile-card {
+        padding: 20px;
+    }
+
+    .profile-container-page .profile-card h2 {
+        font-size: 20px;
+    }
+
+    .profile-container-page .logout-button {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+}

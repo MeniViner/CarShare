@@ -37,7 +37,7 @@ import { getAuth } from "firebase/auth";
   };
 
   return (
-    <>
+    <div className='login-with-google-page'>
       <div className="profile-page-header">
         <MdAccountCircle className="icon" />
         <h1>Let's Connect</h1>
@@ -56,7 +56,7 @@ import { getAuth } from "firebase/auth";
         </button>
         
       </div>
-    </>
+    </div>
   );
 };
 

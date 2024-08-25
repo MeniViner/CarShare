@@ -39,7 +39,7 @@
   align-items: center;
 }
 
-.input-group {
+.contact-container .input-group {
   display: flex;
   align-items: center;
   width: 100%;
@@ -49,7 +49,7 @@
   border-radius: 5px;
 }
 
-.input-icon {
+.contact-container .input-icon {
   font-size: 20px;
   color: #8c5e2c; 
   margin-right: 10px;
@@ -69,7 +69,7 @@
   resize: none;
 }
 
-.submit-button {
+.contact-container .submit-button {
   background-color: #8c5e2c; 
   border: none;
   border-radius: 5px;
@@ -80,7 +80,7 @@
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
-.submit-button:hover {
+.contact-container .submit-button:hover {
   background-color: #6b4a1c; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -94,6 +94,6 @@
   to {transform: translateY(0); opacity: 1;}
 }
 
-.input-group  {
+.contact-container .input-group  {
   animation: side-menu-header 1s ease-in-out backwards;
 }

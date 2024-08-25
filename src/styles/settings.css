@@ -63,13 +63,13 @@
     justify-content: flex-end;
 }
 
-.dark-mode {
+.settings-container .dark-mode {
     --background-color: #333;
     --text-color: #fff;
     --primary-color: #00aaff;
 }
 
-.light-mode {
+.settings-container .light-mode {
     --background-color: #fff;
     --text-color: #000;
     --primary-color: #007bff;
@@ -132,29 +132,29 @@
   transform: scale(1.05);
 }
 
-.theme-toggle-container {
+.settings-container .theme-toggle-container {
   display: flex;
   justify-content: flex-start;
 }
 
-.theme-toggle-container.rtl {
+.settings-container .theme-toggle-container.rtl {
   justify-content: flex-end;
 }
 
-.toggle-switch {
+.settings-container .toggle-switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
 }
 
-.toggle-switch input {
+.settings-container .toggle-switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.slider {
+.settings-container .slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -166,7 +166,7 @@
   border-radius: 34px;
 }
 
-.slider:before {
+.settings-container .slider:before {
   position: absolute;
   content: "";
   height: 26px;
@@ -178,11 +178,11 @@
   border-radius: 50%;
 }
 
-input:checked + .slider {
+.settings-container input:checked + .slider {
   background-color: var(--primary-color);
 }
 
-input:checked + .slider:before {
+.settings-container input:checked + .slider:before {
   transform: translateX(26px);
 }
 
@@ -198,14 +198,14 @@ input:checked + .slider:before {
 }
 
 /* Font size classes */
-.font-size-small {
+.settings-container .font-size-small {
   font-size: 14px;
 }
 
-.font-size-medium {
+.settings-container .font-size-medium {
   font-size: 16px;
 }
 
-.font-size-large {
+.settings-container .font-size-large {
   font-size: 18px;
 }
