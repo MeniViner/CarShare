@@ -176,7 +176,7 @@ const Map = () => {
               title={car.name}
               icon={{
                 url: icon,
-                scaledSize: new window.google.maps.Size(60, 60),
+                scaledSize: new window.google.maps.Size(35, 35),
               }}
             />
           );
