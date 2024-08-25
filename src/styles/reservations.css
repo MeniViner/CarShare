@@ -1,5 +1,4 @@
-/* Define the color palette */
-:root {
+/* reservations-container{
   --primary-color: #8B5A2B;
   --secondary-color: #D2B48C;
   --accent-color: #A0522D;
@@ -7,19 +6,8 @@
   --background-color: #F5F5F5;
 }
 
-/* Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap');
 
-/* Color Palette */
-/* :root {
-  --primary-color: #8B5742;
-  --secondary-color: #B8886E;
-  --accent-color: #D9C8C0;
-  --background-color: #F5F2F0;
-  --text-color: #333333;
-} */
-
-/* General Styles */
 .reservations-container {
   font-family: 'Roboto', sans-serif;
   color: var(--text-color);
@@ -35,7 +23,6 @@
 
 
 
-/* Header and Tabs */
 .reservations-header {
   position: fixed;
   top: 0;
@@ -82,7 +69,6 @@
 
 .no-reservations h4 {
   font-weight: 300;
-  /* text-align: end; */
 }
 
 .n-r-btn {
@@ -94,7 +80,6 @@
 }
 
 
-/* Reservations Page Styles */
 .my-reservations {
   max-width: 1200px;
   margin: 0 auto;
@@ -143,4 +128,226 @@
 .reservation-card button:hover {
   background-color: var(--secondary-color);
 }
+ */
 
+
+/* reservations.css */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap');
+
+.reservations-container {
+  --primary-color: #8B4513;
+  --secondary-color: #D2691E;
+  --accent-color: #CD853F;
+  --background-color: #fcf8ea;
+  --text-color: #3E2723;
+  --card-background: #FAEBD7;
+  --shadow-color: rgba(139, 69, 19, 0.2);
+
+  font-family: 'Heebo', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.reservations-container .reservations-header {
+  background-color: var(--primary-color);
+  color: var(--card-background);
+  padding: 20px;
+  text-align: center;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.reservations-container .reservations-header.scrolled {
+  padding: 10px;
+  background-color: rgba(139, 69, 19, 0.9);
+}
+
+.reservations-container .reservations-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  transition: font-size 0.3s ease;
+}
+
+.reservations-container .reservations-header.scrolled h1 {
+  font-size: 24px;
+}
+
+.reservations-container .tabs {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.reservations-container .tabs button {
+  background: none;
+  border: none;
+  color: var(--card-background);
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.reservations-container .tabs button.active {
+  border-bottom: 2px solid var(--accent-color);
+  font-weight: 500;
+}
+
+.reservations-container .reservations-content {
+  margin-top: 30px;
+  padding: 0 20px;
+}
+
+.reservations-container .reservation-card {
+  background-color: var(--card-background);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px var(--shadow-color);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reservations-container .reservation-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reservations-container .reservation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px var(--shadow-color);
+}
+
+.reservations-container .car-image-container {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.reservations-container .car-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.reservations-container .car-image:hover {
+  transform: scale(1.05);
+}
+
+.reservations-container .reservation-card h3 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: var(--primary-color);
+}
+
+.reservations-container .reservation-details p {
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.reservations-container .icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.reservations-container .cancel-button,
+.reservations-container .delete-button {
+  background-color: var(--accent-color);
+  color: var(--card-background);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.reservations-container .cancel-button:hover,
+.reservations-container .delete-button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.reservations-container .clear-history-button {
+  background-color: var(--primary-color);
+  color: var(--card-background);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.reservations-container .clear-history-button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.reservations-container .no-reservations {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.reservations-container .no-reservations p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.reservations-container .no-reservations h4 {
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 5px;
+}
+
+.reservations-container .n-r-btn {
+  margin-top: 20px;
+}
+
+.reservations-container .sign-in-link {
+  background-color: var(--accent-color);
+  color: var(--card-background);
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+.reservations-container .sign-in-link:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reservations-container .reservation-card {
+  animation: fadeInUp 0.5s ease-out;
+}

@@ -20,12 +20,12 @@
 
 .cars-list {
     padding: 20px;
-    background-color: #f8f9fa; /* צבע רקע בהיר לכל הרשימה */
+    background-color: #f8f9fa;
 }
 
 .sort-buttons-container {
-    overflow-x: auto; /* מאפשר גלילה אופקית */
-    white-space: nowrap; /* שומר את הכפתורים בשורה אחת */
+    overflow-x: auto;
+    white-space: nowrap; 
 }
 
 .sort-buttons {
@@ -81,22 +81,22 @@
 
 .car-item {
     margin-bottom: 2px;
-    background-color: #fff; /* צבע רקע לבן לכל פריט */
-    border-radius: 10px; /* פינות מעוגלות */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* צל עדין */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* מעבר חלק */
+    background-color: #fff; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .car-item:hover {
-    transform: translateY(-5px); /* הרמה קלה בריחוף */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* צל מוגבר בריחוף */
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
 
 .car-item-info {
     display: flex;
     align-items: center;
     justify-content: space-between; 
-    padding: 20px 20px 10px 20px; /* ריווח פנימי */
+    padding: 20px 20px 10px 20px; 
 
 }
 
@@ -108,11 +108,11 @@
     margin-right: 10px;
     margin-left: -2px;
     cursor: pointer;
-    transition: transform 0.3s ease; /* מעבר חלק לתמונה */
+    transition: transform 0.3s ease;
 }
 
 .car-item img:hover {
-    transform: scale(1.2); /* הגדלה קלה בריחוף */
+    transform: scale(1.2); 
 }
 
 .car-image-container {
@@ -124,7 +124,7 @@
     position: absolute;
     bottom: 40px;
     left: -15px;
-    width: 50px; /* גודל התמונה */
+    width: 50px;
     height: auto;
 }
 
@@ -171,9 +171,8 @@
 
 
 .car-item:not(:last-child) {
-    margin-bottom: 20px; /* ריווח בין הפריטים */
+    margin-bottom: 20px;
 }
-
 .faLocationArrow {
     margin-left: auto; 
 }
@@ -184,11 +183,11 @@
     background-color: rgba(255, 255, 255, 0);
     font-size: 25px;
     cursor: pointer;
-    transition: color 0.3s ease; /* מעבר חלק לצבע הכפתור */
+    transition: color 0.3s ease; 
 }
 
 .saved-bt:hover {
-    color: #dc3545; /* צבע אדום כהה בריחוף */
+    color: #dc3545; 
 }
 
 
@@ -258,7 +257,7 @@ h1, h2, h3 {
 
 
 
-
+/* 
 
 .more-details-button {
     display: flex;
@@ -314,4 +313,4 @@ color: #7b52b9;
 }
   
 
-
+ */

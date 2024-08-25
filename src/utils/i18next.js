@@ -45,6 +45,7 @@ i18n.use(initReactI18next).init({
         "start": "התחלה",
         "end": "סיום",
         "check availability": "בדוק זמינות",
+        "go back": "חזור אחורה",
 
         //AdditionalCharges
         "non return to original station": "אי החזרת רכב לתחנה ממנה נלקח",

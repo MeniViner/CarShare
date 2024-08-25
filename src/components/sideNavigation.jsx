@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import '../styles/SideNavigation.css';
 
-import { triggerHapticFeedback } from '../utils/hapticFeedback';
 import { RiMenu3Fill, RiMenuFoldLine } from "react-icons/ri";
 import { AiOutlineMessage } from "react-icons/ai";
 import { IoSettingsOutline, IoMapSharp, IoBookmarksOutline, IoListSharp,  IoPricetagsOutline, IoSearch } from "react-icons/io5";
@@ -38,13 +37,20 @@ const SideNavigation = () => {
   }, []);
 
   const toggleSideNav = () => setIsSideNavOpen(prev => !prev);
+
+  // const closeSideNav = () => {
+  //   if (navigator.vibrate) {
+  //     navigator.vibrate(50); // Vibrate for 50ms
+  //   }
+  //   setIsSideNavOpen(false)
+  // };
+
   const closeSideNav = () => {
-    // e.preventDefault();
-    // triggerHapticFeedback();
-    if (navigator.vibrate) {
+    const vibrationEnabled = localStorage.getItem('vibrationEnabled');
+    if (vibrationEnabled === 'true' && navigator.vibrate) {
       navigator.vibrate(50); // Vibrate for 50ms
     }
-    setIsSideNavOpen(false)
+    setIsSideNavOpen(false);
   };
 
   const handleSearch = (e) => {
