@@ -17,22 +17,44 @@ const Reservations = () => {
   const [cars, setCars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const fetchedCars = await fetchCarsFromFirebase();
+  //       setCars(fetchedCars);
+  //       await loadReservations(fetchedCars);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //       Swal.fire(t('error'), t('Please refresh the page and try again'), 'warning');
+
+  //     } finally {
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [t]);
+
   useEffect(() => {
     const fetchData = async () => {
+      console.log("Fetching data started..."); // לוג כדי לראות מתי התהליך מתחיל
       try {
         const fetchedCars = await fetchCarsFromFirebase();
+        console.log("Cars fetched: ", fetchedCars); // לוג להצגת התוצאות
         setCars(fetchedCars);
         await loadReservations(fetchedCars);
       } catch (error) {
         console.error("Error fetching data:", error);
-        Swal.fire(t('error'), t('failed to load data'), 'error');
+        Swal.fire(t('error'), t('Please refresh the page and try again'), 'warning');
       } finally {
         setIsLoading(false);
+        console.log("Fetching data ended."); // לוג כדי לוודא שהתהליך הסתיים
       }
     };
-
+  
     fetchData();
   }, [t]);
+  
 
   const loadReservations = async (carData) => {
     const now = new Date();
