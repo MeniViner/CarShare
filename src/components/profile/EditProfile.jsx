@@ -17,13 +17,57 @@ const EditProfile = () => {
     });
     const [profileImage, setProfileImage] = useState(null);
 
+    // useEffect(() => {
+    //     const fetchUserInfo = async () => {
+    //         try {
+    //             const userDoc = doc(db, "userInfo", auth.currentUser.uid);
+    //             const userSnapshot = await getDoc(userDoc);
+    //             if (userSnapshot.exists()) {
+    //                 setUserInfo(userSnapshot.data());
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching user info: ', error);
+    //         }
+    //     };
+
+    //     fetchUserInfo();
+    // }, []);
+
+
+    // const handleSaveChanges = async () => {
+    //     try {
+    //         const userDoc = doc(db, "userInfo", auth.currentUser.uid);
+    //         const userSnapshot = await getDoc(userDoc);
+
+    //         if (userSnapshot.exists()) {
+    //             await updateDoc(userDoc, {
+    //                 ...userInfo,
+    //                 photoURL: profileImage || userSnapshot.data().photoURL,
+    //             });
+    //         } else {
+    //             await setDoc(userDoc, {
+    //                 ...userInfo,
+    //                 photoURL: profileImage || '',
+    //             });
+    //         }
+
+    //         Swal.fire(t('success'), t('information updated'), 'success');
+    //     } catch (error) {
+    //         console.error('Error updating document: ', error);
+    //         Swal.fire(t('error'), t('failed to update information'), 'error');
+    //     }
+    // };
+
+
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const userDoc = doc(db, "userInfo", auth.currentUser.uid);
+                const userDoc = doc(db, "users", auth.currentUser.uid);
                 const userSnapshot = await getDoc(userDoc);
                 if (userSnapshot.exists()) {
-                    setUserInfo(userSnapshot.data());
+                    const userData = userSnapshot.data();
+                    setUserInfo(userData);
+                    setProfileImage(userData.photoURL || '');
                 }
             } catch (error) {
                 console.error('Error fetching user info: ', error);
@@ -32,6 +76,30 @@ const EditProfile = () => {
 
         fetchUserInfo();
     }, []);
+
+    const handleSaveChanges = async () => {
+        try {
+            const userDoc = doc(db, "users", auth.currentUser.uid);
+            const userSnapshot = await getDoc(userDoc);
+
+            const userData = {
+                ...userInfo,
+                photoURL: profileImage || userInfo.photoURL,
+            };
+
+            if (userSnapshot.exists()) {
+                await updateDoc(userDoc, userData);
+            } else {
+                await setDoc(userDoc, userData);
+            }
+
+            Swal.fire(t('success'), t('information updated'), 'success');
+        } catch (error) {
+            console.error('Error updating document: ', error);
+            Swal.fire(t('error'), t('failed to update information'), 'error');
+        }
+    };
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -46,29 +114,6 @@ const EditProfile = () => {
         }
     };
 
-    const handleSaveChanges = async () => {
-        try {
-            const userDoc = doc(db, "userInfo", auth.currentUser.uid);
-            const userSnapshot = await getDoc(userDoc);
-
-            if (userSnapshot.exists()) {
-                await updateDoc(userDoc, {
-                    ...userInfo,
-                    photoURL: profileImage || userSnapshot.data().photoURL,
-                });
-            } else {
-                await setDoc(userDoc, {
-                    ...userInfo,
-                    photoURL: profileImage || '',
-                });
-            }
-
-            Swal.fire(t('success'), t('information updated'), 'success');
-        } catch (error) {
-            console.error('Error updating document: ', error);
-            Swal.fire(t('error'), t('failed to update information'), 'error');
-        }
-    };
 
     
     return (

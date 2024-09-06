@@ -57,11 +57,11 @@
   text-align: center;
 }
 
-.order-details {
+.order-view-container .order-details {
   margin-bottom: 20px;
 }
 
-.order-details p {
+.order-view-container .order-details p {
   font-size: 1rem;
   color: #555;
   margin-bottom: 10px;
@@ -69,12 +69,12 @@
   justify-content: space-between;
 }
 
-.order-details p strong {
+.order-view-container .order-details p strong {
   font-weight: 500;
   color: #333;
 }
 
-.total-cost {
+.order-view-container .total-cost {
   font-size: 1.2rem;
   color: #007bff;
   font-weight: 700;
@@ -83,7 +83,7 @@
   border-top: 1px solid #eee;
 }
 
-.confirm-button {
+.order-view-container .confirm-button {
   background-color: #007bff;
   color: #fff;
   border: none;
@@ -97,16 +97,16 @@
   margin-top: 20px;
 }
 
-.confirm-button:hover {
+.order-view-container .confirm-button:hover {
   background-color: #0056b3;
 }
 
-.confirm-button:disabled {
+.order-view-container .confirm-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.loading-spinner {
+.order-view-container .loading-spinner {
   width: 20px;
   height: 20px;
   border: 2px solid #fff;
@@ -130,11 +130,11 @@
     font-size: 0.9rem;
   }
 
-  .total-cost {
+  .order-view-container .total-cost {
     font-size: 1.1rem;
   }
 
-  .confirm-button {
+  .order-view-container .confirm-button {
     font-size: 0.9rem;
     padding: 10px 20px;
   }

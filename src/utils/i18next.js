@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import Invitation from '../components/Invitation';
 
+
 i18n.use(initReactI18next).init({
   resources: {
     he: {
@@ -185,7 +186,6 @@ i18n.use(initReactI18next).init({
 
         //SideNavigation
         "main navigation": "ניווט ראשי",
-        "car share": "שיתוף רכב",
         "search": "חיפוש",
         "map": "מפה",
         "saved": "שמורים",
@@ -230,6 +230,47 @@ i18n.use(initReactI18next).init({
         "error": "שגיאה",
         "failed to update information": "נכשל בעדכון המידע שלך.",
 
+
+        //Saved
+          "You're not connected": "אתה לא מחובר",
+          "Connect with your account to access and manage your saved items seamlessly.": "התחבר לחשבונך כדי לגשת ולנהל את הפריטים השמורים שלך בצורה חלקה.",
+          "Stay connected and never lose track of your preferences and saved content.": "הישאר מחובר ולעולם אל תאבד את ההעדפות והתוכן השמור שלך.",
+          "Sign in now": "התחבר עכשיו",
+          "Nothing here yet": "אין כאן כלום עדיין",
+          "You haven't saved anything yet.": "עדיין לא שמרת כלום.",
+          "Start adding some items and they will show up here!": "התחל להוסיף פריטים והם יופיעו כאן!",
+          "Explore Cars": "גלה מכוניות",
+          "your garage": "המוסך שלך",
+          "{{brand}} {{model}}": "{{brand}} {{model}}",
+          "{{seats}} seats": "{{seats}} מושבים",
+          "{{price}} ₪/hour": "{{price}} ₪/שעה",
+          "{{price}} ₪/day": "{{price}} ₪/יום",
+          "Please log in": "אנא התחבר",
+          "To remove cars, please log in.": "כדי להסיר מכוניות, אנא התחבר.",
+          "Removed": "הוסר",
+          "Car removed successfully!": "המכונית הוסרה בהצלחה!",
+          "Error": "שגיאה",
+          "Failed to remove car.": "הסרת המכונית נכשלה.",
+
+          //ListCars
+            "Nearby": "בקרבתך",
+            "Category": "קטגוריה",
+            "Seats": "מושבים",
+            "Year": "שנה",
+            "Fuel Type": "סוג דלק",
+            "Battery": "סוללה",
+            "{{brand}} {{model}}": "{{brand}} {{model}}",
+            "Hybrid": "היברידי",
+            "{{brand}} {{model}} {{year}}": "{{brand}} {{model}} {{year}}",
+            "{{distance}} km": "{{distance}} ק\"מ",
+            "{{distance}} meter": "{{distance}} מטר",
+            "{{price}} ₪/hour": "{{price}} ₪/שעה",
+            "{{seats}} seats": "{{seats}} מושבים",
+            "Please log in to save cars.": "אנא התחבר כדי לשמור מכוניות.",
+            "Car removed from saved list.": "המכונית הוסרה מרשימת השמורים.",
+            "Car saved successfully!": "המכונית נשמרה בהצלחה!",
+            "Failed to update car save status.": "עדכון סטטוס שמירת המכונית נכשל.",
+        
 
 
       }

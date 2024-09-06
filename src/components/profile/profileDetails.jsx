@@ -229,10 +229,63 @@ const ProfileDetails = ({ user }) => {
     const [drivingLicense, setDrivingLicense] = useState('');
     const [paymentMethod, setPaymentMethod] = useState('');
 
+    // useEffect(() => {
+    //     const fetchUserInfo = async () => {
+    //         try {
+    //             const userDoc = doc(db, "userInfo", auth.currentUser.uid);
+    //             const userSnapshot = await getDoc(userDoc);
+    //             if (userSnapshot.exists()) {
+    //                 const userData = userSnapshot.data();
+    //                 setFirstName(userData.firstName || '');
+    //                 setLastName(userData.lastName || '');
+    //                 setPhoneNumber(userData.phoneNumber || '');
+    //                 setAddress(userData.address || '');
+    //                 setDrivingLicense(userData.drivingLicense || '');
+    //                 setPaymentMethod(userData.paymentMethod || '');
+    //                 setProfileImage(userData.photoURL || '');
+    //             }
+    //         } catch (error) {
+    //             console.error('Error fetching user info: ', error);
+    //         }
+    //     };
+
+    //     fetchUserInfo();
+    // }, []);
+
+    
+    // const handleSaveChanges = async () => {
+    //     try {
+    //         const userDoc = doc(db, "userInfo", auth.currentUser.uid);
+    //         const userSnapshot = await getDoc(userDoc);
+            
+    //         const userData = {
+    //             firstName,
+    //             lastName,
+    //             phoneNumber,
+    //             address,
+    //             drivingLicense,
+    //             paymentMethod,
+    //             photoURL: profileImage || photoURL,
+    //         };
+            
+    //         if (userSnapshot.exists()) {
+    //             await updateDoc(userDoc, userData);
+    //         } else {
+    //             await setDoc(userDoc, userData);
+    //         }
+
+    //         Swal.fire(t('success'), t('information updated'), 'success');
+    //     } catch (error) {
+    //         console.error('Error updating document: ', error);
+    //         Swal.fire(t('error'), t('failed to update information'), 'error');
+    //     }
+    // };
+
+
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const userDoc = doc(db, "userInfo", auth.currentUser.uid);
+                const userDoc = doc(db, "users", auth.currentUser.uid);
                 const userSnapshot = await getDoc(userDoc);
                 if (userSnapshot.exists()) {
                     const userData = userSnapshot.data();
@@ -252,6 +305,37 @@ const ProfileDetails = ({ user }) => {
         fetchUserInfo();
     }, []);
 
+    const handleSaveChanges = async () => {
+        try {
+            const userDoc = doc(db, "users", auth.currentUser.uid);
+            const userSnapshot = await getDoc(userDoc);
+
+            const userData = {
+                firstName,
+                lastName,
+                phoneNumber,
+                address,
+                drivingLicense,
+                paymentMethod,
+                photoURL: profileImage || photoURL,
+            };
+
+            if (userSnapshot.exists()) {
+                await updateDoc(userDoc, userData);
+            } else {
+                await setDoc(userDoc, userData);
+            }
+
+            Swal.fire(t('success'), t('information updated'), 'success');
+        } catch (error) {
+            console.error('Error updating document: ', error);
+            Swal.fire(t('error'), t('failed to update information'), 'error');
+        }
+    };
+
+
+    
+    
     const handleImageUpload = (e) => {
         const imageFile = e.target.files[0];
         if (imageFile) {
@@ -278,33 +362,6 @@ const ProfileDetails = ({ user }) => {
         }
     };
 
-    const handleSaveChanges = async () => {
-        try {
-            const userDoc = doc(db, "userInfo", auth.currentUser.uid);
-            const userSnapshot = await getDoc(userDoc);
-
-            const userData = {
-                firstName,
-                lastName,
-                phoneNumber,
-                address,
-                drivingLicense,
-                paymentMethod,
-                photoURL: profileImage || photoURL,
-            };
-
-            if (userSnapshot.exists()) {
-                await updateDoc(userDoc, userData);
-            } else {
-                await setDoc(userDoc, userData);
-            }
-
-            Swal.fire(t('success'), t('information updated'), 'success');
-        } catch (error) {
-            console.error('Error updating document: ', error);
-            Swal.fire(t('error'), t('failed to update information'), 'error');
-        }
-    };
 
     return (
         <motion.div 
@@ -337,16 +394,8 @@ const ProfileDetails = ({ user }) => {
                 </div>
                 <input id="fileInput" type="file" onChange={handleImageUpload} accept="image/*" style={{ display: 'none' }} />
                 <p className="profile-label">{displayName || email}</p>
+                <p className="profile-label"> {email}</p>
             </div>
-            <hr className="profile-divider" />
-            <div className="profile-item">
-                <p className="profile-label">{t('email')}: {email}</p>
-            </div>
-            <hr className="profile-divider" />
-            <div className="profile-item">
-                <p className="profile-label">{t('phone number')}: {phone}</p>
-            </div>
-            <hr className="profile-divider" />
 
             <motion.div 
                 className="profile-edit-section"
