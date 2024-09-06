@@ -1,0 +1,250 @@
+.car-manager {
+    max-width: 100%;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+  }
+  
+  .car-manager h1 {
+    margin-top: 70px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .car-manager .loading {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .car-manager .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .car-manager .logout-btn {
+    margin-top: 60px;
+
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .car-manager .login-form {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .car-manager .login-btn {
+
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  
+
+  .car-manager .car-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .car-manager .add-car-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .car-manager .car-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 4px;
+  }
+  
+  .car-manager .car-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .car-manager .car-info img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .car-manager .car-info h2 {
+    font-size: 1rem;
+    margin: 0;
+  }
+  
+  .car-manager .car-info p {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+  }
+  
+  .car-manager .edit-btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .car-manager .car-edit {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 4px;
+  }
+  
+  .car-manager .back-btn {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+  
+  .car-manager .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .car-manager .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .car-manager .form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .car-manager .form-group.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .car-manager .form-group.checkbox input {
+    width: auto;
+  }
+  
+  .car-manager .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  
+  .car-manager .form-actions button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .car-manager .form-actions button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .car-manager .delete-btn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .car-manager .delete-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .car-manager .delete-dialog-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 4px;
+    max-width: 90%;
+  }
+  
+  .car-manager .delete-dialog h2 {
+    margin-top: 0;
+  }
+  
+  .car-manager .delete-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .car-manager .delete-dialog-actions button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .car-manager .delete-dialog-actions button:first-child {
+    background-color: #f1f1f1;
+  }
+  
+  .car-manager .delete-dialog-actions button:last-child {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  @media (max-width: 480px) {
+    .car-manager .car-info h2 {
+      font-size: 0.9rem;
+    }
+  
+    .car-manager .car-info p {
+      font-size: 0.7rem;
+    }
+  
+    .car-manager .edit-btn,
+    .car-manager .back-btn {
+      font-size: 0.7rem;
+      padding: 0.4rem 0.8rem;
+    }
+  
+    .car-manager .form-actions button {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+  

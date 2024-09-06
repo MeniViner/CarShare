@@ -158,6 +158,7 @@ import { IoSettingsOutline, IoMapSharp, IoBookmarksOutline, IoPricetagsOutline, 
 import { LuCalendarCheck } from "react-icons/lu";
 
 import { auth } from '../data/firebaseConfig';
+import { MdManageAccounts } from 'react-icons/md';
 
 const SideNavigation = () => {
   const { t } = useTranslation();
@@ -240,6 +241,11 @@ const SideNavigation = () => {
             <LuCalendarCheck className='icon' aria-hidden="true" />
             <h3>{t('reservation')}</h3>
           </Link>
+          <Link to="/manage" className={`side-menu-item ${location.pathname === '/manage' ? 'active' : ''}`} onClick={closeSideNav}>
+            <MdManageAccounts className='icon' aria-hidden="true" />
+            <h3>{t('manage page')}</h3>
+          </Link>
+
 
           <div className="smi2">
             <Link to="/contact-info" className={`side-menu-item ${location.pathname === '/contact-info' ? 'active' : ''}`} onClick={closeSideNav}>

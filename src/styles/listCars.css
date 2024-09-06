@@ -1,4 +1,4 @@
-.listCars-header {
+.listCars-container .listCars-header {
     position: sticky;
     top: 0;
     right: 0;
@@ -23,12 +23,12 @@
     background-color: #f8f9fa;
 }
 
-.sort-buttons-container {
+.listCars-container .sort-buttons-container {
     overflow-x: auto;
     white-space: nowrap; 
 }
 
-.sort-buttons {
+.listCars-container .sort-buttons {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,7 +39,8 @@
     border-radius: 10px;
 }
 
-.sort-buttons button, .sort-buttons select {
+.listCars-container .sort-buttons button, 
+.listCars-container .sort-buttons select {
 
     flex: 1;
     padding: 10px;
@@ -51,35 +52,33 @@
     transition: background-color 0.3s;
 }
 
-.sort-buttons button:hover, .sort-buttons select:hover {
+.listCars-container .sort-buttons button:hover, 
+.listCars-container .sort-buttons select:hover {
     background-color: #f1f1f1;
 }
 
-.sort-buttons button.active {
+.listCars-container .sort-buttons button.active {
     background-color: #007bff;
     color: #fff;
 }
 
-.sort-buttons button {
+.listCars-container .sort-buttons button {
     border: 0.1px solid rgb(202, 221, 255);
 }
 
-.sort-order-button {
-
+.listCars-container .sort-order-button {
     color: #007bff;
     font-size: 18px;
     margin: 0px;
-
 }
 
-.sort-buttons button  {
+.listCars-container .sort-buttons button  {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-
-.car-item {
+.listCars-container .car-item {
     margin-bottom: 2px;
     background-color: #fff; 
     border-radius: 10px; 
@@ -87,20 +86,19 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.car-item:hover {
+.listCars-container .car-item:hover {
     transform: translateY(-5px); 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
 
-.car-item-info {
+.listCars-container .car-item-info {
     display: flex;
     align-items: center;
     justify-content: space-between; 
     padding: 20px 20px 10px 20px; 
-
 }
 
-.car-item img {
+.listCars-container .car-item img {
     width: 100px;
     height: 60px;
     object-fit: cover;
@@ -111,16 +109,16 @@
     transition: transform 0.3s ease;
 }
 
-.car-item img:hover {
+.listCars-container .car-item img:hover {
     transform: scale(1.2); 
 }
 
-.car-image-container {
+.listCars-container .car-image-container {
     position: relative;
     display: inline-block;
 }
 
-.car-image-container .hybrid-badge {
+.listCars-container .car-image-container .hybrid-badge {
     position: absolute;
     bottom: 40px;
     left: -15px;
@@ -128,29 +126,28 @@
     height: auto;
 }
 
-.car-details {
+.listCars-container .car-details {
     flex: 1;
     cursor: pointer;
 }
 
-.car-details h3 {
+.listCars-container .car-details h3 {
     font-size: 18px;
     margin-bottom: 5px;
     color: #495057;
 }
 
-.car-details p {
+.listCars-container .car-details p {
     font-size: 14px;
     color: #6c757d; 
     margin-bottom: 5px;
 }
 
-.car-details p span {
+.listCars-container .car-details p span {
     margin-right: 10px;
 }
 
-
-.more-details-in-list .items {
+.listCars-container .more-details-in-list .items {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -158,7 +155,7 @@
     padding-bottom: 20px;
 }
 
-.more-details-in-list .item {
+.listCars-container .more-details-in-list .item {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -166,18 +163,17 @@
     padding-left: 50px;
     gap: 5px;
     padding-bottom: 20px;
-
 }
 
-
-.car-item:not(:last-child) {
+.listCars-container .car-item:not(:last-child) {
     margin-bottom: 20px;
 }
-.faLocationArrow {
+
+.listCars-container .faLocationArrow {
     margin-left: auto; 
 }
 
-.saved-bt {
+.listCars-container .saved-bt {
     padding: 2vw;
     border: none;
     background-color: rgba(255, 255, 255, 0);
@@ -186,41 +182,33 @@
     transition: color 0.3s ease; 
 }
 
-.saved-bt:hover {
+.listCars-container .saved-bt:hover {
     color: #dc3545; 
 }
-
-
-
 
 @keyframes slideInFromRight {
     from {
         transform: translateX(100%);
         opacity: 0;
-}
+    }
     to {
         transform: translateX(0);
         opacity: 1;
-}
+    }
 }
 
 .listCars-container {
     animation: slideInFromRight 0.5s ease-out forwards;
 }
 
-
 @keyframes slideInForCars {
     from { transform: translateX(-30%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-       
+    to { transform: translateX(0); opacity: 1; }  
 }
 
-.cars-list {
+.listCars-container .cars-list {
     animation: slideInForCars 0.7s ease-out forwards;
 }
-
-
-
 
 @keyframes slideInForSort {
     from {
@@ -237,13 +225,9 @@
     animation: slideInForSort 2s ease-in-out backwards;
 }
 
-
-
-
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&family=Oswald&display=swap');
 
-.listCars-container  {
+.listCars-container {
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -257,62 +241,10 @@
   font-family: 'Oswald', sans-serif;
 }
 
-
-
-/* 
-
-.more-details-button {
+.listCars-container .loading-container {
     display: flex;
     justify-content: center;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
+    align-items: center;
+    margin-top: -60px;
+    /* min-height: 400px;  */
 }
-
-.cssbuttons-io-button {
-background: #a370f0;
-color: white;
-font-family: inherit;
-padding: 0.35em;
-padding-left: 1.2em;
-font-size: 18px;
-font-weight: 500;
-border-radius: 0.9em;
-border: none;
-letter-spacing: 0.05em;
-display: flex;
-align-items: center;
-box-shadow: inset 0 0 1.6em -0.6em #714da6;
-overflow: hidden;
-position: relative;
-height: 2.8em;
-padding-right: 3.3em;
-cursor: pointer;
-}
-
-.cssbuttons-io-button .icon {
-background: white;
-margin-left: 1em;
-position: absolute;
-display: flex;
-align-items: center;
-justify-content: center;
-height: 2.2em;
-width: 2.2em;
-border-radius: 0.7em;
-box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
-right: 0.3em;
-transition: all 0.3s;
-}
-
-.cssbuttons-io-button:hover .icon,
-.cssbuttons-io-button:active .icon {
-width: calc(100% - 0.6em);
-}
-
-.cssbuttons-io-button .icon svg {
-width: 1.1em;
-color: #7b52b9;
-}
-  
-
- */
