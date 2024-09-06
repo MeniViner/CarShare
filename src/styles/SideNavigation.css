@@ -4,11 +4,11 @@
   direction: ltr !important;
 }
 
-.side-menu {
+.side-navigation-page .side-menu {
   font-family: 'Roboto', sans-serif;
 }
 
-.sidenav {
+.side-navigation-page .sidenav {
   position: fixed;
   top: 0;
   left: 0;
@@ -22,43 +22,40 @@
   z-index: 1000;
 }
 
-.sidenav.open {
+.side-navigation-page .sidenav.open {
   transform: translateX(0);
 }
 
-.side-menu {
+.side-navigation-page .side-menu {
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 20px;
 }
 
-.side-menu-header {
+.side-navigation-page .side-menu-header {
   display: flex;
-  /* align-items: center;
-  justify-content: space-between; */
   margin-left: 6vh;
   margin-bottom: 2vh;
 }
 
-.side-menu-header h2 {
+.side-navigation-page .side-menu-header h2 {
   color: #5b0000b0;
   font-size: 1.8em;
   margin: 0;
 }
 
-.input-with-icon input::placeholder {
+.side-navigation-page .input-with-icon input::placeholder {
   font-family: sans-serif; 
 }
 
-.input-with-icon input:focus,
-.input-with-icon input:focus .icon
- {
+.side-navigation-page .input-with-icon input:focus,
+.side-navigation-page .input-with-icon input:focus .icon {
   outline: none;
   border-color: #5b0000;
 }
 
-.input-with-icon {
+.side-navigation-page .input-with-icon {
   display: flex;
   align-items: center;
   margin-top: 5px;
@@ -67,7 +64,7 @@
   transform: 0.3 ease;
 }
 
-.input-with-icon .icon {
+.side-navigation-page .input-with-icon .icon {
   position: absolute;
   left: 10px;
   top: 50%;
@@ -75,7 +72,7 @@
   color: #888;
 }
 
-.input-with-icon input {
+.side-navigation-page .input-with-icon input {
   padding: 0.6rem;
   padding-left: 30px;
   /* border: 1px solid #ccc; */
@@ -84,8 +81,7 @@
   transition: all 0.3s ease;
 }
 
-.side-menu-search button {
-  
+.side-navigation-page .side-menu-search button { 
   height: 35px;
   padding: 10px;
   border: 1px solid #ddd;
@@ -97,11 +93,11 @@
   display: flex;
 }
 
-.side-menu-search button:hover {
+.side-navigation-page .side-menu-search button:hover {
   background-color: #5C0000; /* צבע חום כהה יותר בעת ריחוף */
 }
 
-.side-menu-search svg {
+.side-navigation-page .side-menu-search svg {
   margin-right: -5px;
   position: absolute;
   right: 10px;
@@ -110,7 +106,7 @@
 }
 
 
-.side-menu-item {
+.side-navigation-page .side-menu-item {
   display: flex;
   align-items: center;
   padding: 10px 0;
@@ -118,53 +114,51 @@
   text-decoration: none;
   color: #333;
   margin-bottom: 10px;
-
 }
 
-.side-menu-item.active:last-child {
+.side-navigation-page .side-menu-item.active:last-child {
   margin-bottom: 30px;
 }
 
-.side-menu-item:hover {
+.side-navigation-page .side-menu-item:hover {
   background-color: #f0f0f0;
   border-radius: 4px;
 }
 
-/* Add this to your existing CSS file */
-.side-menu-item.active {
+.side-navigation-page .side-menu-item.active {
   margin-left: 0vw;
   padding: 10px;
   border-radius: 8px;
-  background-color: #c1a598; /* Change this to the desired active background color */
-  color: #5d4336; /* Change this to the desired active text color */
+  background-color: #c1a598;
+  color: #5d4336; 
 }
 
-.side-menu-item.active .icon {
+.side-navigation-page .side-menu-item.active .icon {
   color: #5d4336;
 }
 
 
-.side-menu-item h3 {
+.side-navigation-page .side-menu-item h3 {
   margin: 0 0 0 10px;
   font-size: 1.2em;
 }
 
-.side-menu-item .icon {
+.side-navigation-page .side-menu-item .icon {
   font-size: 24px;
 }
 
-.smi2 {
+.side-navigation-page .smi2 {
   margin-top: 12vh;
 }
 
-.side-menu-profile {
+.side-navigation-page .side-menu-profile {
   padding-top: 20px;
   border-top: 1px solid #ddd;
   display: flex;
   align-items: center;
 }
 
-.side-menu-profile img {
+.side-navigation-page .side-menu-profile img {
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -172,39 +166,37 @@
   display: inline-block;
 }
 
-.side-menu-profile .profile-details {
+.side-navigation-page .side-menu-profile .profile-details {
   display: inline-block;
   vertical-align: top;
 }
 
-.side-menu-profile .profile-name {
+.side-navigation-page .side-menu-profile .profile-name {
   font-weight: bold;
   font-size: 1.2em;
   margin: 0;
 }
 
-.side-menu-profile .profile-email {
+.side-navigation-page .side-menu-profile .profile-email {
   font-size: 0.9em;
   margin: 0;
 }
 
-/* עדכון עיצוב ה-Link לפרופיל */
-.side-menu-profile a {
+.side-navigation-page .side-menu-profile a {
   text-decoration: none;
   color: inherit;
   display: flex;
   align-items: center;
 }
 
-
-.side-nav-bt {
+.side-navigation-page .side-nav-bt {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 1001;
 }
 
-.overlay {
+.side-navigation-page .overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -214,7 +206,7 @@
   z-index: 999;
 }
 
-.left-icon {
+.side-navigation-page .left-icon {
   margin-top: 1.8vh;
   display: flex;
   align-items: center;
@@ -226,13 +218,13 @@
   transition: opacity 3s ease;
 }
 
-.left-icon svg {
+.side-navigation-page .left-icon svg {
   color: rgb(254, 246, 231);
   margin: 5px;
   transition: transform 3s ease;
 }
 
-.sidenav.open .left-icon svg {
+.side-navigation-page .sidenav.open .left-icon svg {
   transform: rotate(360deg);
 }
 

@@ -209,3 +209,7 @@
 .reservations-container .reservation-card {
   animation: fadeInUp 0.5s ease-out;
 }
+
+.reservations-content .loading-container {
+  margin-top: -50%;
+}
