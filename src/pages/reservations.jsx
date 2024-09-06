@@ -7,6 +7,7 @@ import { getAuth } from 'firebase/auth';
 import { db } from '../data/firebaseConfig';
 import '../styles/reservations.css';
 import { fetchCarsFromFirebase } from '../data/fetchCars';
+import LoadingPage from '../assets/LoadingPage';
 
 const Reservations = () => {
   const { t } = useTranslation();
@@ -176,10 +177,6 @@ const Reservations = () => {
     </div>
   );
 
-  if (isLoading) {
-    return <div>{t('Loading...')}</div>;
-  }
-
   return (
     <div className="reservations-container">
       <header className="reservations-header">
@@ -201,44 +198,50 @@ const Reservations = () => {
       </header>
 
       <div className="reservations-content">
-        {activeTab === 'active' && (
-          <div className="reservations-list">
-            {activeReservations.length === 0 ? (
-              <div className="text-container no-reservations">
-                <p>{t('no active reservations')}</p>
-                <h4>{t('when you have active reservation')}</h4>
-                <h4>{t('it will appear here')}</h4>
-                <div className="n-r-btn">
-                  <Link to="/map" className="sign-in-link">{t('reserve now')}</Link>
-                </div>
+        {isLoading ? (
+          <LoadingPage />
+        ) : (
+          <>
+            {activeTab === 'active' && (
+              <div className="reservations-list">
+                {activeReservations.length === 0 ? (
+                  <div className="text-container no-reservations">
+                    <p>{t('no active reservations')}</p>
+                    <h4>{t('when you have active reservation')}</h4>
+                    <h4>{t('it will appear here')}</h4>
+                    <div className="n-r-btn">
+                      <Link to="/map" className="sign-in-link">{t('reserve now')}</Link>
+                    </div>
+                  </div>
+                ) : (
+                  activeReservations.map(reservation => (
+                    <ReservationCard key={reservation.id} reservation={reservation} isActive={true} />
+                  ))
+                )}
               </div>
-            ) : (
-              activeReservations.map(reservation => (
-                <ReservationCard key={reservation.id} reservation={reservation} isActive={true} />
-              ))
             )}
-          </div>
-        )}
 
-        {activeTab === 'history' && (
-          <div className="reservations-list">
-            {pastReservations.length === 0 ? (
-              <div className="text-container no-reservations">
-                <p>{t('reservation history empty')}</p>
-                <h4>{t('past rented cars appear here')}</h4>
-                <div className="n-r-btn">
-                  <Link to="/map" className="sign-in-link">{t('reserve now')}</Link>
-                </div>
+            {activeTab === 'history' && (
+              <div className="reservations-list">
+                {pastReservations.length === 0 ? (
+                  <div className="text-container no-reservations">
+                    <p>{t('reservation history empty')}</p>
+                    <h4>{t('past rented cars appear here')}</h4>
+                    <div className="n-r-btn">
+                      <Link to="/map" className="sign-in-link">{t('reserve now')}</Link>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <button className="clear-history-button" onClick={clearAllHistory}>{t('delete all history')}</button>
+                    {pastReservations.map(reservation => (
+                      <ReservationCard key={reservation.id} reservation={reservation} isActive={false} />
+                    ))}
+                  </>
+                )}
               </div>
-            ) : (
-              <>
-                <button className="clear-history-button" onClick={clearAllHistory}>{t('delete all history')}</button>
-                {pastReservations.map(reservation => (
-                  <ReservationCard key={reservation.id} reservation={reservation} isActive={false} />
-                ))}
-              </>
             )}
-          </div>
+          </>
         )}
       </div>
     </div>
