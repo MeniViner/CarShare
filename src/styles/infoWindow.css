@@ -1,12 +1,16 @@
 .info-window-page {
+  direction: ltr !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.info-window-page {
   --light-brown: #fffbf6;
   --medium-brown: #8d6e63;
   --dark-brown: #6d4c41;
   --darker-brown: #3e2723;
 }
 
-
-.vehicle-info {
+.info-window-page .vehicle-info {
   margin: -3px 5px;
   border-radius: 12px;
   position: absolute;
@@ -19,72 +23,72 @@
   z-index: 10;
 } 
 
-.vehicle-info-header {
+.info-window-page .vehicle-info-header {
   display: flex;
   flex-direction: row; 
   align-items: center;
   justify-content: space-between;
 }
 
-.vehicle-info-header img {
+.info-window-page .vehicle-info-header img {
   margin-top: -11vh;
   margin-left: -1vw;
 }
 
-.vehicle-info-header-name {
+.info-window-page .vehicle-info-header-name {
   gap: 0px;
   padding: 0;
 }
 
-.vehicle-info-header-brand {
+.info-window-page .vehicle-info-header-brand {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: var(--medium-brown);
 }
 
-.vehicle-info-header-model {
+.info-window-page .vehicle-info-header-model {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: var(--medium-brown);
 }
   
-.vehicle-info-image {
+.info-window-page .vehicle-info-image {
   width: 150px;
   height: 100px;
   margin-right: 10px;
 }
 
-.vehicle-info-details {
+.info-window-page .vehicle-info-details {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.vehicle-info-details div {
+.info-window-page .vehicle-info-details div {
   display: flex;
   align-items: center;
   margin-right: 10px;
 }
 
-.vehicle-info-details div span {
+.info-window-page .vehicle-info-details div span {
   margin-left: 5px;
   color: var(--dark-brown);
 }
 
-.vehicle-info-rate {
+.info-window-page .vehicle-info-rate {
   margin-bottom: 10px;
 }
 
-.vehicle-info-rate p {
+.info-window-page .vehicle-info-rate p {
   margin: 0;
   color: var(--dark-brown);
 }
 
-.vehicle-info-footer {
+.info-window-page .vehicle-info-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.vehicle-info-footer button {
+.info-window-page .vehicle-info-footer button {
   background-color: var(--medium-brown);
   color: #fff;
   border: none;
@@ -93,7 +97,7 @@
   cursor: pointer;
 }
 
-.vehicle-info-footer button:hover {
+.info-window-page .vehicle-info-footer button:hover {
   background-color: var(--dark-brown);
 }
 
@@ -131,21 +135,14 @@
   transition: background-color 0.3s;
 }
 
-.show-more-button:hover {
+.info-window-page .show-more-button:hover {
   color: whitesmoke;
   background-color: var(--dark-brown);
   border: 2px solid var(--darkere-brown);
 }
 
 
-.info-window-page {
-  direction: ltr !important;
-  font-family: 'Roboto', sans-serif;
-}
-
-
-/* additional car info sryle: */
-.carousel {
+.info-window-page .carousel {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,12 +152,12 @@
   margin: 20px auto;
 }
 
-.carousel-image {
+.info-window-page .carousel-image {
   width: 70%;
   border-radius: 10px;
 }
 
-.carousel-button {
+.info-window-page .carousel-button {
   background-color: rgba(0, 0, 0, 0);
   border: none;
   color: rgba(0, 0, 0, 0.5);
@@ -173,40 +170,38 @@
   z-index: 1;
 }
 
-.carousel-button.left {
+.info-window-page .carousel-button.left {
   left: 10px;
 }
 
-.carousel-button.right {
+.info-window-page .carousel-button.right {
   right: 10px;
 }
 
-.carousel-enter {
+.info-window-page .carousel-enter {
   opacity: 0;
   transform: translateY(-20px);
 }
 
-.carousel-enter-active {
+.info-window-page .carousel-enter-active {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 300ms, transform 300ms;
 }
 
-.carousel-exit {
+.info-window-page .carousel-exit {
   opacity: 1;
   transform: translateY(0);
 }
 
-.carousel-exit-active {
+.info-window-page .carousel-exit-active {
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 300ms, transform 300ms;
 }
 
 
-
-
-.process-steps {
+.info-window-page .process-steps {
   position: absolute;
   margin-top: -10vh;
   display: flex;
@@ -214,7 +209,7 @@
   gap:10px;
 }
 
-.process-steps .step {
+.info-window-page .process-steps .step {
   display: flex;
   margin-left: -5px;
   width: 28vw;
@@ -225,7 +220,7 @@
   border: 0.5px solid var(--darker-brown);
 }
 
-.step .icon {
+.info-window-page .step .icon {
   padding: 3px;
   margin-left: -1px;
   background-color: #fdfdfd;
@@ -236,7 +231,7 @@
   border: 0.5px solid var(--darker-brown);
 }
 
-.step p {
+.info-window-page .step p {
   display: flex;
   margin-left: 10px;
   font: 1.2em ;
