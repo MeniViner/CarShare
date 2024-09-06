@@ -247,11 +247,262 @@
 
 
 
+// import React, { useState, useEffect } from 'react';
+// import { useTranslation } from 'react-i18next';
+// import { format, addHours, addDays, differenceInHours, differenceInDays } from 'date-fns';
+// import { FaPlus, FaMinus } from 'react-icons/fa';
+// import '../styles/invitation.css';
+
+// const Invitation = ({ selectedCar, onCheckAvailability }) => {
+//   const { t } = useTranslation();
+//   const [isHourly, setIsHourly] = useState(true);
+//   const [startDate, setStartDate] = useState(new Date());
+//   const [startTime, setStartTime] = useState(format(new Date(), 'HH:mm'));
+//   const [endDate, setEndDate] = useState(new Date());
+//   const [endTime, setEndTime] = useState(format(addHours(new Date(), 1), 'HH:mm'));
+//   const [selectedDays, setSelectedDays] = useState(0);
+//   const [selectedHours, setSelectedHours] = useState(1);
+//   const [totalCost, setTotalCost] = useState(0);
+
+//   const calculateCost = (start, end) => {
+//     const hoursDiff = differenceInHours(end, start);
+//     const daysDiff = differenceInDays(end, start);
+
+//     let cost = 0;
+//     if (isHourly) {
+//       cost = hoursDiff * selectedCar.pricePerHour;
+//     } else {
+//       cost = daysDiff * selectedCar.pricePerDay;
+//       const remainingHours = hoursDiff % 24;
+//       cost += remainingHours * selectedCar.pricePerHour;
+//     }
+
+//     return Math.max(cost + selectedCar.unlockFee, 0);
+//   };
+
+//   useEffect(() => {
+//     const start = new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`);
+//     const end = new Date(`${format(endDate, 'yyyy-MM-dd')}T${endTime}`);
+//     const cost = calculateCost(start, end);
+//     setTotalCost(cost);
+//   }, [startDate, startTime, endDate, endTime, isHourly]);
+
+//   const handleTabClick = (hourly) => {
+//     setIsHourly(hourly);
+//   };
+
+//   const handleDateChange = (field, value) => {
+//     const date = new Date(value);
+//     if (isNaN(date.getTime())) return;
+
+//     if (field === 'start') {
+//       setStartDate(date);
+//       if (date > endDate) {
+//         setEndDate(date);
+//       }
+//     } else {
+//       if (date < startDate) {
+//         setEndDate(startDate);
+//       } else {
+//         setEndDate(date);
+//       }
+//     }
+//     updateSelectedDaysAndHours();
+//   };
+
+//   const handleTimeChange = (field, value) => {
+//     const [hours, minutes] = value.split(':').map(Number);
+//     const date = field === 'start' ? startDate : endDate;
+//     const newDate = new Date(date);
+//     newDate.setHours(hours, minutes);
+
+//     if (field === 'start') {
+//       setStartTime(value);
+//       if (newDate >= new Date(`${format(endDate, 'yyyy-MM-dd')}T${endTime}`)) {
+//         setEndTime(format(addHours(newDate, 1), 'HH:mm'));
+//       }
+//     } else {
+//       if (newDate <= new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`)) {
+//         setEndTime(startTime);
+//       } else {
+//         setEndTime(value);
+//       }
+//     }
+//     updateSelectedDaysAndHours();
+//   };
+
+//   const updateSelectedDaysAndHours = () => {
+//     const start = new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`);
+//     const end = new Date(`${format(endDate, 'yyyy-MM-dd')}T${endTime}`);
+//     const days = differenceInDays(end, start);
+//     const hours = differenceInHours(end, start) % 24;
+//     setSelectedDays(days);
+//     setSelectedHours(hours);
+//   };
+
+//   const increment = (type) => {
+//     let newEndDate = new Date(endDate);
+//     if (type === 'days') {
+//       newEndDate = addDays(newEndDate, 1);
+//     } else if (type === 'hours') {
+//       newEndDate = addHours(newEndDate, 1);
+//     }
+//     setEndDate(newEndDate);
+//     setEndTime(format(newEndDate, 'HH:mm'));
+//     updateSelectedDaysAndHours();
+//   };
+
+//   const decrement = (type) => {
+//     let newEndDate = new Date(endDate);
+//     if (type === 'days' && selectedDays > 0) {
+//       newEndDate = addDays(newEndDate, -1);
+//     } else if (type === 'hours' && (selectedDays > 0 || selectedHours > 1)) {
+//       newEndDate = addHours(newEndDate, -1);
+//     } else {
+//       return;
+//     }
+    
+//     if (newEndDate > startDate) {
+//       setEndDate(newEndDate);
+//       setEndTime(format(newEndDate, 'HH:mm'));
+//       updateSelectedDaysAndHours();
+//     }
+//   };
+
+//   const handleCheckAvailability = () => {
+//     const reservationData = {
+//       startDate: format(startDate, 'yyyy-MM-dd'),
+//       startTime,
+//       endDate: format(endDate, 'yyyy-MM-dd'),
+//       endTime,
+//       selectedHours,
+//       selectedDays,
+//       totalCost,
+//       isHourly
+//     };
+//     onCheckAvailability(reservationData);
+//   };
+
+//   return (
+//     <div className="invitation-container">
+//       <div className="tabs">
+//         <button 
+//           className={`tab ${isHourly ? 'active' : ''}`} 
+//           onClick={() => handleTabClick(true)}
+//         >
+//           <p>{t('hourly')}</p>
+//         </button>
+//         <button 
+//           className={`tab ${!isHourly ? 'active' : ''}`} 
+//           onClick={() => handleTabClick(false)}
+//         >
+//           <p>{t('daily')}</p>
+//         </button>
+//       </div>
+//       <div className="date-time-selection">
+//         <label>{t('start')}</label>
+//         <div className="date-time-group">
+//           <div className="input-group">
+//             <div className="input-container">
+//               <input 
+//                 type="time" 
+//                 value={startTime}
+//                 onChange={(e) => handleTimeChange('start', e.target.value)}
+//               />
+//             </div>
+//             <div className="input-container">
+//               <input 
+//                 type="date" 
+//                 value={format(startDate, 'yyyy-MM-dd')}
+//                 onChange={(e) => handleDateChange('start', e.target.value)}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//         <label>{t('end')}</label>
+//         <div className="date-time-group">
+//           <div className="input-group">
+//             <div className="input-container">
+//               <input 
+//                 type="time" 
+//                 value={endTime}
+//                 onChange={(e) => handleTimeChange('end', e.target.value)}
+//               />
+//             </div>
+//             <div className="input-container">
+//               <input 
+//                 type="date" 
+//                 value={format(endDate, 'yyyy-MM-dd')}
+//                 onChange={(e) => handleDateChange('end', e.target.value)}
+//               />
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className="sum-rental-label">
+//         <label>{t('total hours')}</label>
+//         <label>{t('total days')}</label>
+//       </div>
+
+//       <div className="rental-period">
+//         <div className="period-group">
+//           <div className="input-container">
+//             <button onClick={() => decrement('hours')} className="change-button"><FaMinus /></button>
+//             <input 
+//               className="no-spinner rental-input"
+//               type="number" 
+//               readOnly
+//               value={selectedHours} 
+//             />
+//             <button onClick={() => increment('hours')} className="change-button"><FaPlus /></button>
+//           </div>
+//         </div>
+
+//         <div className="period-group">
+//           <div className="input-container">
+//             <button onClick={() => decrement('days')} className="change-button"><FaMinus /></button>
+//             <input 
+//               className="no-spinner rental-input"
+//               type="number" 
+//               readOnly
+//               value={selectedDays} 
+//             />
+//             <button onClick={() => increment('days')} className="change-button"><FaPlus /></button>
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className="cost-summary">
+//         <button onClick={handleCheckAvailability}>{t('check availability')}</button>
+//         <p>₪{totalCost.toFixed(2)}</p>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Invitation;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { format, addHours, addDays, differenceInHours, differenceInDays } from 'date-fns';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import '../styles/invitation.css';
+
 
 const Invitation = ({ selectedCar, onCheckAvailability }) => {
   const { t } = useTranslation();
@@ -263,6 +514,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
   const [selectedDays, setSelectedDays] = useState(0);
   const [selectedHours, setSelectedHours] = useState(1);
   const [totalCost, setTotalCost] = useState(0);
+
 
   const calculateCost = (start, end) => {
     const hoursDiff = differenceInHours(end, start);
@@ -383,99 +635,92 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     onCheckAvailability(reservationData);
   };
 
-  return (
+return (
     <div className="invitation-container">
-      <div className="tabs">
+      <div className="rental-type-tabs">
         <button 
           className={`tab ${isHourly ? 'active' : ''}`} 
           onClick={() => handleTabClick(true)}
         >
-          <p>{t('hourly')}</p>
+          {t('hourly')}
         </button>
         <button 
           className={`tab ${!isHourly ? 'active' : ''}`} 
           onClick={() => handleTabClick(false)}
         >
-          <p>{t('daily')}</p>
+          {t('daily')}
         </button>
       </div>
-      <div className="date-time-selection">
-        <label>{t('start')}</label>
-        <div className="date-time-group">
-          <div className="input-group">
-            <div className="input-container">
-              <input 
-                type="time" 
-                value={startTime}
-                onChange={(e) => handleTimeChange('start', e.target.value)}
-              />
-            </div>
-            <div className="input-container">
-              <input 
-                type="date" 
-                value={format(startDate, 'yyyy-MM-dd')}
-                onChange={(e) => handleDateChange('start', e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-        <label>{t('end')}</label>
-        <div className="date-time-group">
-          <div className="input-group">
-            <div className="input-container">
-              <input 
-                type="time" 
-                value={endTime}
-                onChange={(e) => handleTimeChange('end', e.target.value)}
-              />
-            </div>
-            <div className="input-container">
-              <input 
-                type="date" 
-                value={format(endDate, 'yyyy-MM-dd')}
-                onChange={(e) => handleDateChange('end', e.target.value)}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="sum-rental-label">
-        <label>{t('total hours')}</label>
-        <label>{t('total days')}</label>
-      </div>
-
-      <div className="rental-period">
-        <div className="period-group">
-          <div className="input-container">
-            <button onClick={() => decrement('hours')} className="change-button"><FaMinus /></button>
+      
+      <div className="datetime-selection">
+        <div className="datetime-group">
+          <label>{t('start')}</label>
+          <div className="input-wrapper">
             <input 
-              className="no-spinner rental-input"
+              type="time" 
+              value={startTime}
+              onChange={(e) => handleTimeChange('start', e.target.value)}
+            />
+            <input 
+              type="date" 
+              value={format(startDate, 'yyyy-MM-dd')}
+              onChange={(e) => handleDateChange('start', e.target.value)}
+            />
+          </div>
+        </div>
+        
+        <div className="datetime-group">
+          <label>{t('end')}</label>
+          <div className="input-wrapper">
+            <input 
+              type="time" 
+              value={endTime}
+              onChange={(e) => handleTimeChange('end', e.target.value)}
+            />
+            <input 
+              type="date" 
+              value={format(endDate, 'yyyy-MM-dd')}
+              onChange={(e) => handleDateChange('end', e.target.value)}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div className="duration-selection">
+        <div className="duration-group">
+          <label>{t('total hours')}</label>
+          <div className="counter">
+            <button onClick={() => decrement('hours')} className="counter-button"><FaMinus /></button>
+            <input 
+              className="counter-input"
               type="number" 
               readOnly
               value={selectedHours} 
             />
-            <button onClick={() => increment('hours')} className="change-button"><FaPlus /></button>
+            <button onClick={() => increment('hours')} className="counter-button"><FaPlus /></button>
           </div>
         </div>
 
-        <div className="period-group">
-          <div className="input-container">
-            <button onClick={() => decrement('days')} className="change-button"><FaMinus /></button>
+        <div className="duration-group">
+          <label>{t('total days')}</label>
+          <div className="counter">
+            <button onClick={() => decrement('days')} className="counter-button"><FaMinus /></button>
             <input 
-              className="no-spinner rental-input"
+              className="counter-input"
               type="number" 
               readOnly
               value={selectedDays} 
             />
-            <button onClick={() => increment('days')} className="change-button"><FaPlus /></button>
+            <button onClick={() => increment('days')} className="counter-button"><FaPlus /></button>
           </div>
         </div>
       </div>
 
-      <div className="cost-summary">
-        <button onClick={handleCheckAvailability}>{t('check availability')}</button>
-        <p>₪{totalCost.toFixed(2)}</p>
+      <div className="summary">
+        <button onClick={handleCheckAvailability} className="check-availability-btn">
+          {t('check availability')}
+        </button>
+        <div className="total-cost">₪{totalCost.toFixed(2)}</div>
       </div>
     </div>
   );
