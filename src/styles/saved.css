@@ -693,7 +693,7 @@
     padding: 20px;
 }
 
-saved-page .saved-info-container {
+.saved-page .saved-info-container {
     display: flex;
     flex-direction: column;
     align-items: center;

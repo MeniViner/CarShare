@@ -1,17 +1,21 @@
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
-import cars from './carsData';
-import { db } from './firebaseConfig';
+// import { collection, addDoc } from 'firebase/firestore';
+// import { db } from './firebaseConfig';
+// import cars from './carsData';
 
-const uploadCarsData = async () => {
-  try {
-    const carsCollection = collection(db, 'cars');
-    for (const car of cars) {
-      await addDoc(carsCollection, car);
-    }
-    console.log('Cars data added successfully!');
-  } catch (error) {
-    console.error('Error adding cars data: ', error);
-  }
-};
+// export const uploadCarsToFirebase = async () => {
+//   const carsCollection = collection(db, 'cars');
 
-uploadCarsData();
+//   for (const car of cars) {
+//     try {
+//       await addDoc(carsCollection, car);
+//       console.log(`Car ${car.id} uploaded successfully`);
+//     } catch (error) {
+//       console.error(`Error uploading car ${car.id}:`, error);
+//     }
+//   }
+
+//   console.log('All cars uploaded to Firebase');
+// };
+
+// // Run this function once to upload all cars
+// uploadCarsToFirebase();

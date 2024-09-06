@@ -1,379 +1,21 @@
-// // import React, { useState, useEffect } from 'react';
-// // import { Link } from 'react-router-dom';
-// // import withOfflineOverlay from '../assets/withOfflineOverlay';
-// // import cars from '../data/carsData';
-// // import LoadingPage from '../assets/LoadingPage';
-// // import { auth, db } from '../data/firebaseConfig';
-// // import { collection, getDocs, query, where, deleteDoc } from "firebase/firestore";
-// // import Swal from 'sweetalert2';
-// // import { MdBookmarkRemove, MdNoAccounts, MdOutlineSaveAlt } from "react-icons/md"; 
-// // import '../styles/saved.css'
-
-// // const Saved = () => {
-// //     const [isLoading, setIsLoading] = useState(true);
-// //     const [savedCarIds, setSavedCarIds] = useState([]); 
-
-// //     const fetchSavedCarIds = async () => {
-// //         if (!auth.currentUser) {
-// //           return;
-// //         }
-// //         try {
-// //           const q = query(collection(db, 'savedCars'), where('userId', '==', auth.currentUser.uid)); 
-// //           const querySnapshot = await getDocs(q); 
-// //           const ids = querySnapshot.docs.map(doc => doc.data().carId); 
-// //           setSavedCarIds(ids); 
-// //           setIsLoading(false);
-// //         } catch (error) {
-// //           console.error('Error fetching saved car ids:', error);
-// //         }
-// //     };
-
-
-// //     // פונקציה להסרת רכב שמור
-// //     const removeSavedCar = async (carId) => {
-// //         if (!auth.currentUser) {
-// //             Swal.fire('Please log in', 'To remove cars, please log in.', 'info'); 
-// //             return;
-// //         }
-// //         try {
-// //             const q = query(collection(db, 'savedCars'), where('userId', '==', auth.currentUser.uid), where('carId', '==', carId)); 
-// //             const querySnapshot = await getDocs(q); 
-// //             querySnapshot.forEach(async (doc) => {
-// //                 await deleteDoc(doc.ref);  
-// //             });
-// //             fetchSavedCarIds(); // רענן את הרשימה לאחר הסרת הרכב
-// //             Swal.fire('Removed', 'Car removed successfully!', 'success'); 
-// //         } catch (error) {
-// //             console.error('Error removing car:', error);
-// //             Swal.fire('Error', 'Failed to remove car.', 'error'); 
-// //         }
-// //     };
-
-// //     const normalizedSavedCarIds = savedCarIds.map(id => String(id));
-
-
-// //     useEffect(() => {
-// //         setIsLoading(true); 
-// //         const unsubscribe = auth.onAuthStateChanged(user => { 
-// //         if (user) {
-// //             fetchSavedCarIds();
-// //         } else {
-// //             setSavedCarIds([]); 
-// //             setIsLoading(false); 
-// //         }
-// //         });
-    
-// //         return () => unsubscribe(); 
-// //     }, []);
-  
-// //     return (
-// //         <>
-// //         {isLoading ? ( 
-// //             <LoadingPage /> 
-// //         ) : (
-// //             <>
-// //             {!auth.currentUser ? (
-// //                 <div className="saved-info-container">
-// //                     <div className="icon-container">
-// //                         <MdNoAccounts className="icon" />
-// //                     </div>
-// //                     <div className="text-container">
-// //                         <p>You're not connected</p>
-// //                         <h2>Connect with your account to access and manage your saved items seamlessly.</h2>
-// //                         <h2>Stay connected and never lose track of your preferences and saved content.</h2>
-// //                         <Link to="/profile" className="sign-in-link">Sign in  now</Link>
-// //                     </div>
-// //                 </div>
-// //             ) : (
-// //                 <>
-// //                 {normalizedSavedCarIds.length === 0 ? (
-// //                     // <div className="separate">
-// //                     //     <h3>You haven't saved anything yet. Start adding some items and they will show up here!</h3> 
-// //                     // </div>
-// //                     <div className="saved-info-container">
-// //                         <div className="icon-container">
-// //                             <MdOutlineSaveAlt className="icon" />
-// //                         </div>
-// //                         <div className="text-container">
-// //                             <p>Nothing here</p>
-// //                             <h2>You haven't saved anything yet.</h2>
-// //                             <h2> Start adding some items and they will show up here!</h2>
-// //                             <Link to="/" className="sign-in-link">Go back</Link>
-// //                         </div>
-// //                     </div>
-                
-
-
-// //                 ) : (
-// //                     <>
-// //                     <div className="separate">
-// //                         <div className="separate-line"></div>
-// //                         <h4>Your saved cars</h4> 
-// //                         <div className="separate-line"></div>
-// //                     </div>
-// //                     <div className="saved-container">
-// //                         {cars
-// //                         .filter(car => normalizedSavedCarIds.includes(String(car.id)))
-// //                         .map((car) => (
-// //                         <div key={car.id} className="saved-car-item">
-// //                             <button onClick={() => removeSavedCar(car.id)} className='saved-bt remove-bt'>
-// //                                 <MdBookmarkRemove />
-// //                             </button>
-// //                             <img src={car.image} alt={`${car.brand} ${car.model}`} />
-// //                             <div className="saved-car-details">
-// //                             <h3>{`${car.brand} ${car.model}`}</h3>
-// //                             <p><span>{car.year}</span> • <span>{car.seats} seats</span></p>
-// //                             <p><span>{Math.floor(car.pricePerHour)} ₪/hour</span></p>
-// //                             </div>
-// //                         </div>
-// //                         ))}    
-// //                     </div>
-// //                     </>
-// //                 )}
-// //                 </>
-// //             )}
-// //             </>
-// //         )}
-// //         </>
-// //     );
-// // };
-
-// // export default withOfflineOverlay(Saved);
-
-
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Link } from 'react-router-dom';
-// import withOfflineOverlay from '../assets/withOfflineOverlay';
-// import cars from '../data/carsData';
-// import LoadingPage from '../assets/LoadingPage';
-// import { auth, db } from '../data/firebaseConfig';
-// import { doc, getDoc, arrayRemove, updateDoc } from "firebase/firestore";
-
-// import Swal from 'sweetalert2';
-// import { MdBookmarkRemove, MdNoAccounts, MdOutlineSaveAlt, MdElectricCar, MdLocalGasStation } from "react-icons/md";
-// import { FaCar, FaChargingStation } from "react-icons/fa";
-// import '../styles/saved.css'
-
-// const Saved = () => {
-//     const [isLoading, setIsLoading] = useState(true);
-//     const [savedCarIds, setSavedCarIds] = useState([]);
-
-//     // const fetchSavedCarIds = async () => {
-//     //     if (!auth.currentUser) {
-//     //         return;
-//     //     }
-//     //     try {
-//     //         const q = query(collection(db, 'savedCars'), where('userId', '==', auth.currentUser.uid));
-//     //         const querySnapshot = await getDocs(q);
-//     //         const ids = querySnapshot.docs.map(doc => doc.data().carId);
-//     //         setSavedCarIds(ids);
-//     //         setIsLoading(false);
-//     //     } catch (error) {
-//     //         console.error('Error fetching saved car ids:', error);
-//     //     }
-//     // };
-
-//     // const removeSavedCar = async (carId) => {
-//     //     if (!auth.currentUser) {
-//     //         Swal.fire('Please log in', 'To remove cars, please log in.', 'info');
-//     //         return;
-//     //     }
-//     //     try {
-//     //         const q = query(collection(db, 'savedCars'), where('userId', '==', auth.currentUser.uid), where('carId', '==', carId));
-//     //         const querySnapshot = await getDocs(q);
-//     //         querySnapshot.forEach(async (doc) => {
-//     //             await deleteDoc(doc.ref);
-//     //         });
-//     //         fetchSavedCarIds();
-//     //         Swal.fire('Removed', 'Car removed successfully!', 'success');
-//     //     } catch (error) {
-//     //         console.error('Error removing car:', error);
-//     //         Swal.fire('Error', 'Failed to remove car.', 'error');
-//     //     }
-//     // };
-
-//     const fetchSavedCarIds = async () => {
-//         if (!auth.currentUser) {
-//             return;
-//         }
-//         try {
-//             const userDoc = doc(db, 'users', auth.currentUser.uid);
-//             const userSnapshot = await getDoc(userDoc);
-//             if (userSnapshot.exists()) {
-//                 const userData = userSnapshot.data();
-//                 setSavedCarIds(userData.savedCars || []);
-//             }
-//             setIsLoading(false);
-//         } catch (error) {
-//             console.error('Error fetching saved car ids:', error);
-//         }
-//     };
-
-//     const removeSavedCar = async (carId) => {
-//         if (!auth.currentUser) {
-//             Swal.fire('Please log in', 'To remove cars, please log in.', 'info');
-//             return;
-//         }
-//         try {
-//             const userDoc = doc(db, 'users', auth.currentUser.uid);
-//             await updateDoc(userDoc, {
-//                 savedCars: arrayRemove(carId)
-//             });
-//             fetchSavedCarIds();
-//             Swal.fire('Removed', 'Car removed successfully!', 'success');
-//         } catch (error) {
-//             console.error('Error removing car:', error);
-//             Swal.fire('Error', 'Failed to remove car.', 'error');
-//         }
-//     };
-
-//     const normalizedSavedCarIds = savedCarIds.map(id => String(id));
-
-//     useEffect(() => {
-//         setIsLoading(true);
-//         const unsubscribe = auth.onAuthStateChanged(user => {
-//             if (user) {
-//                 fetchSavedCarIds();
-//             } else {
-//                 setSavedCarIds([]);
-//                 setIsLoading(false);
-//             }
-//         });
-
-//         return () => unsubscribe();
-//     }, []);
-
-//     return (
-//         <div className="saved-page">
-//             {isLoading ? (
-//                 <LoadingPage />
-//             ) : (
-//                 <>
-//                     {!auth.currentUser ? (
-//                         <div className="saved-info-container">
-//                             <div className="icon-container">
-//                                 <MdNoAccounts className="icon pulse" />
-//                             </div>
-//                             <div className="text-container">
-//                                 <h1 className="glow-text">You're not connected</h1>
-//                                 <p>Connect with your account to access and manage your saved items seamlessly.</p>
-//                                 <p>Stay connected and never lose track of your preferences and saved content.</p>
-//                                 <Link to="/profile" className="sign-in-link">
-//                                     Sign in now
-//                                     <span className="shine"></span>
-//                                 </Link>
-//                             </div>
-//                         </div>
-//                     ) : (
-//                         <>
-//                             {normalizedSavedCarIds.length === 0 ? (
-//                                 <div className="saved-info-container">
-//                                     <div className="icon-container">
-//                                         <MdOutlineSaveAlt className="icon bounce" />
-//                                     </div>
-//                                     <div className="text-container">
-//                                         <h1 className="glow-text">Nothing here yet</h1>
-//                                         <p>You haven't saved anything yet.</p>
-//                                         <p>Start adding some items and they will show up here!</p>
-//                                         <Link to="/" className="sign-in-link">
-//                                             Explore Cars
-//                                             <span className="shine"></span>
-//                                         </Link>
-//                                     </div>
-//                                 </div>
-//                             ) : (
-//                                 <>
-//                                     <div className="saved-header">
-//                                         <h1 className="glow-text">your garage</h1>
-//                                         <div className="underline"></div>
-//                                     </div>
-//                                     <div className="saved-container">
-//                                         {cars
-//                                             .filter(car => normalizedSavedCarIds.includes(String(car.id)))
-//                                             .map((car) => (
-//                                                 <div key={car.id} className="saved-car-item">
-//                                                     <div className="car-image-container">
-//                                                         <img src={car.image} alt={`${car.brand} ${car.model}`} />
-//                                                         <button onClick={() => removeSavedCar(car.id)} className='remove-button'>
-//                                                             <MdBookmarkRemove />
-//                                                         </button>
-//                                                     </div>
-//                                                     <div className="saved-car-details">
-//                                                         <h2>{`${car.brand} ${car.model}`}</h2>
-//                                                         <div className="car-info">
-//                                                             <span><FaCar /> {car.year}</span>
-//                                                             <span><MdElectricCar /> {car.seats} seats</span>
-//                                                             {car.fuelType === 'Electric' ? (
-//                                                                 <span><FaChargingStation /> {car.battery}</span>
-//                                                             ) : (
-//                                                                 <span><MdLocalGasStation /> {car.fuel}</span>
-//                                                             )}
-//                                                         </div>
-//                                                         <div className="price-info">
-//                                                             <span>{Math.floor(car.pricePerHour)} ₪/hour</span>
-//                                                             <span>{car.pricePerDay} ₪/day</span>
-//                                                         </div>
-//                                                     </div>
-//                                                 </div>
-//                                             ))}
-//                                     </div>
-//                                 </>
-//                             )}
-//                         </>
-//                     )}
-//                 </>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default withOfflineOverlay(Saved);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
-import cars from '../data/carsData';
 import LoadingPage from '../assets/LoadingPage';
 import { auth, db } from '../data/firebaseConfig';
 import { doc, getDoc, arrayRemove, updateDoc } from "firebase/firestore";
 import Swal from 'sweetalert2';
 import { MdBookmarkRemove, MdNoAccounts, MdOutlineSaveAlt, MdElectricCar, MdLocalGasStation } from "react-icons/md";
 import { FaCar, FaChargingStation } from "react-icons/fa";
-import '../styles/saved.css'
+import '../styles/saved.css';
+import { fetchCarsFromFirebase } from '../data/fetchCars';
 
 const Saved = () => {
     const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(true);
     const [savedCarIds, setSavedCarIds] = useState([]);
+    const [cars, setCars] = useState([]);
 
     const fetchSavedCarIds = async () => {
         if (!auth.currentUser) {
@@ -386,9 +28,18 @@ const Saved = () => {
                 const userData = userSnapshot.data();
                 setSavedCarIds(userData.savedCars || []);
             }
-            setIsLoading(false);
         } catch (error) {
             console.error('Error fetching saved car ids:', error);
+        }
+    };
+
+    const fetchCars = async () => {
+        try {
+            const fetchedCars = await fetchCarsFromFirebase();
+            setCars(fetchedCars);
+        } catch (error) {
+            console.error('Error fetching cars:', error);
+            Swal.fire(t('Error'), t('Failed to load cars.'), 'error');
         }
     };
 
@@ -410,21 +61,22 @@ const Saved = () => {
         }
     };
 
-    const normalizedSavedCarIds = savedCarIds.map(id => String(id));
-
     useEffect(() => {
         setIsLoading(true);
-        const unsubscribe = auth.onAuthStateChanged(user => {
+        const unsubscribe = auth.onAuthStateChanged(async user => {
             if (user) {
-                fetchSavedCarIds();
+                await Promise.all([fetchSavedCarIds(), fetchCars()]);
             } else {
                 setSavedCarIds([]);
-                setIsLoading(false);
+                setCars([]);
             }
+            setIsLoading(false);
         });
 
         return () => unsubscribe();
     }, []);
+
+    const normalizedSavedCarIds = savedCarIds.map(id => String(id));
 
     return (
         <div className="saved-page">

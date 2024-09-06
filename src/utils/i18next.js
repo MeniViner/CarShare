@@ -270,6 +270,7 @@ i18n.use(initReactI18next).init({
             "Car removed from saved list.": "המכונית הוסרה מרשימת השמורים.",
             "Car saved successfully!": "המכונית נשמרה בהצלחה!",
             "Failed to update car save status.": "עדכון סטטוס שמירת המכונית נכשל.",
+            "Failed to load cars. Please try again.": "טעינת המכוניות נכשלה. אנא נסה שוב.",
         
 
 

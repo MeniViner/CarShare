@@ -13,6 +13,8 @@ import EditProfile from './components/profile/EditProfile';
 import Prices from './components/info/prices/prices';
 import ContactForm from './pages/Contact';
 import Reservations from './pages/reservations';
+import CarManager from './components/CarManager';
+// import UploadCars from './data/UploadCars';
 
 
 export default function App() {
@@ -21,6 +23,7 @@ export default function App() {
             <div className='main-app'>
                 <Top />
                 <Routes>
+                    {/* <UploadCars /> */}
                     <Route path='edit-profile' element={<EditProfile />} />
 
                     <Route path="/" element={<Map />} />
@@ -32,6 +35,7 @@ export default function App() {
                     <Route path="/prices" element={<Prices />} />
                     <Route path="/settings" element={<Settings />} />
                     <Route path='/contact-info' element={<ContactForm />} />
+                    <Route path='/manage' element={<CarManager />} />
                     <Route path="/utils/SearchResults" element={<SearchResults />} />
                     <Route path="*" element={<NotFound />} /> {/* Catch-all route */}
                 </Routes>

@@ -812,11 +812,12 @@
 
 
 import React, { useState, useEffect } from 'react';
+import { fetchCarsFromFirebase } from '../data/fetchCars';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
 import { calculateDistance } from '../utils/distanceCalculator';
-import cars from '../data/carsData';
+// import cars from '../data/carsData';
 import '../styles/listCars.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -826,18 +827,40 @@ import { RiPinDistanceLine } from "react-icons/ri";
 import { MdBookmarkAdded, MdDateRange, MdElectricCar, MdLocationOff, MdMyLocation } from "react-icons/md";
 import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaCarSide } from "react-icons/fa";
 import { PiSeatbeltFill } from "react-icons/pi";
+import LoadingPage from '../assets/LoadingPage';
 
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from '../data/firebaseConfig';
 import { BsFuelPumpFill } from 'react-icons/bs';
 
 const ListCars = () => {
+  const [cars, setCars] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [savedCarIds, setSavedCarIds] = useState([]);
   const [userLocation, setUserLocation] = useState(null);
   const [sortKey, setSortKey] = useState('nearby');
   const [sortOrder, setSortOrder] = useState('asc');
+
+
+  useEffect(() => {
+    const fetchCars = async () => {
+      try {
+        const fetchedCars = await fetchCarsFromFirebase();
+        setCars(fetchedCars);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching cars:", error);
+        setIsLoading(false);
+        toast.error(t('Failed to load cars. Please try again.'));
+      }
+    };
+  
+    fetchCars();
+  }, [t]);
+
 
   useEffect(() => {
     const fetchSavedCarIds = async () => {
@@ -985,6 +1008,7 @@ const ListCars = () => {
     return car.fuelType === 'Hybrid';
   };
 
+  
   return (
     <div className='listCars-container'>
       <ToastContainer />
@@ -1041,44 +1065,49 @@ const ListCars = () => {
         </div>
       </div>
 
-      <div className="cars-list">
-        {calculateCarDistances().map((car) => (
-          <div key={car.id} className="car-item">
-            <div className="car-item-info">
-              <div className="car-image-container" onClick={() => handleCarClick(car)}>
-                <img src={car.image} alt={t('{{brand}} {{model}}', { brand: car.brand, model: car.model })} />
-                {isHybrid(car) && <img src='images/hybrid.png' alt={t('Hybrid')} className="hybrid-badge" />}
+      {isLoading ? (
+        <div className="loading-container">
+          <LoadingPage />
+        </div>
+      ) : (
+        <div className="cars-list">
+          {calculateCarDistances().map((car) => (
+            <div key={car.id} className="car-item">
+              <div className="car-item-info">
+                <div className="car-image-container" onClick={() => handleCarClick(car)}>
+                  <img src={car.image} alt={t('{{brand}} {{model}}', { brand: car.brand, model: car.model })} />
+                  {isHybrid(car) && <img src='images/hybrid.png' alt={t('Hybrid')} className="hybrid-badge" />}
+                </div>
+                <div className="car-details" onClick={() => handleCarClick(car)}>
+                  <h3>{t('{{brand}} {{model}} {{year}}', { brand: car.brand, model: car.model, year: car.year })}</h3>
+                  {car.distance ? (
+                    <>
+                      <RiPinDistanceLine />
+                      <span>{formatDistance(car.distance)}</span>
+                    </>
+                  ) : (
+                    <MdLocationOff /> 
+                  )}
+                  <p>
+                    <span>{t('{{price}} ₪/hour', { price: Math.floor(car.pricePerHour) })}</span>
+                  </p>
+                </div>
+                <button onClick={() => saveCar(car.id)} className='saved-bt'>
+                  {isCarSaved(car.id) ? <MdBookmarkAdded /> : <CiBookmarkPlus />}
+                </button>
               </div>
-              <div className="car-details" onClick={() => handleCarClick(car)}>
-                <h3>{t('{{brand}} {{model}} {{year}}', { brand: car.brand, model: car.model, year: car.year })}</h3>
-                {car.distance ? (
-                  <>
-                    <RiPinDistanceLine />
-                    <span>{formatDistance(car.distance)}</span>
-                  </>
-                ) : (
-                  <MdLocationOff /> 
-                )}
-                <p>
-                  <span>{t('{{price}} ₪/hour', { price: Math.floor(car.pricePerHour) })}</span>
-                </p>
+              <div className="more-details-in-list">
+                <div className="item"><FaCarSide /> {t(car.category)} </div>
+                <div className="item"><BsFuelPumpFill /> {t(car.fuelType)}</div>
+                <div className="item"><MdElectricCar /> {car.battery}</div>
+                <div className="item"><PiSeatbeltFill/> {t('{{seats}} seats', { seats: car.seats })}</div>
+                <div className="item">{t(car.addres)}</div>
               </div>
-              <button onClick={() => saveCar(car.id)} className='saved-bt'>
-                {isCarSaved(car.id) ? <MdBookmarkAdded /> : <CiBookmarkPlus />}
-              </button>
             </div>
-            <div className="more-details-in-list">
-              <div className="item"><FaCarSide /> {t(car.category)} </div>
-              <div className="item"><BsFuelPumpFill /> {t(car.fuelType)}</div>
-              <div className="item"><MdElectricCar /> {car.battery}</div>
-              <div className="item"><PiSeatbeltFill/> {t('{{seats}} seats', { seats: car.seats })}</div>
-              <div className="item">{t(car.addres)}</div>
-            </div>
-          </div>
-        ))}
-      </div> 
+          ))}
+        </div>
+      )}
     </div>
   );
 };
-
 export default withOfflineOverlay(ListCars);
