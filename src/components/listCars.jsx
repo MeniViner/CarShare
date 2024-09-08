@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
 import { calculateDistance } from '../utils/distanceCalculator';
-import '../styles/listCars.css';
+import { TfiLocationPin } from "react-icons/tfi";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../styles/listCars.css';
+
 
 import { CiBookmarkPlus } from "react-icons/ci";
 import { RiPinDistanceLine } from "react-icons/ri";
@@ -215,6 +217,7 @@ const ListCars = () => {
           <p>
             <span>{t('{{price}} ₪/hour', { price: Math.floor(car.pricePerHour) })}</span>
           </p>
+          <h4 className="itemi"><TfiLocationPin/>{car.address ? t(car.address.street + ', ' + car.address.city) : t('Address not available')}</h4>
         </div>
         <button onClick={() => saveCar(car.id)} className='saved-bt'>
           {isCarSaved(car.id) ? <MdBookmarkAdded /> : <CiBookmarkPlus />}
@@ -225,7 +228,6 @@ const ListCars = () => {
         <div className="item"><BsFuelPumpFill /> {t(car.fuelType)}</div>
         <div className="item"><MdElectricCar /> {car.battery}</div>
         <div className="item"><PiSeatbeltFill/> {t('{{seats}} seats', { seats: car.seats })}</div>
-        <div className="item">{car.address ? t(car.address.street + ', ' + car.address.city) : t('Address not available')}</div>
       </div>
     </div>
   ), [t, handleCarClick, isHybrid, formatDistance, saveCar, isCarSaved]);
