@@ -42,13 +42,13 @@
   font-weight: 400;
 }
 
-.login-container .input-container {
+.login-container .g-input-container {
   position: relative;
   margin-bottom: 24px;
 }
 
-.login-container .input-container input {
-  width: 100%;
+.login-container .g-input-container input {
+  width:85%;
   padding: 12px 16px;
   font-size: 16px;
   border: 1px solid #e0e0e0;
@@ -56,12 +56,12 @@
   transition: all 0.3s ease;
 }
 
-.login-container .input-container input:focus {
+.login-container .g-input-container input:focus {
   border-color: #2196f3;
   box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
 }
 
-.login-container .input-container label {
+.login-container .g-input-container label {
   position: absolute;
   top: 50%;
   left: 16px;
@@ -72,8 +72,8 @@
   transition: all 0.3s ease;
 }
 
-.login-container .input-container input:focus + label,
-.login-container .input-container input:not(:placeholder-shown) + label {
+.login-container .g-input-container input:focus + label,
+.login-container .g-input-container input:not(:placeholder-shown) + label {
   top: 0;
   font-size: 12px;
   color: #2196f3;
@@ -81,11 +81,13 @@
   padding: 0 4px;
 }
 
-.login-container.login-forum-buttons {
+.login-container .login-forum-buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 8px;
 }
+
+
 
 .login-container button {
   padding: 12px 24px;
@@ -101,7 +103,6 @@
   background-color: #2196f3;
   color: #ffffff;
   flex-grow: 1;
-  margin-right: 8px;
 }
 
 .login-container #log-btn:hover {

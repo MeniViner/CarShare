@@ -5,20 +5,20 @@ import SideNavigation from "./sideNavigation";
 
 
 const Top = () => {
-  const [userName, setUserName] = useState("");
+  // const [userName, setUserName] = useState("");
 
-  useEffect(() => {
-    // מאזין לשינויים במצב המשתמש
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserName(user.displayName || user.email); // הגדר את שם המשתמש או הדוא"ל
-      } else {
-        setUserName(""); // אם אין משתמש מחובר
-      }
-    });
+  // useEffect(() => {
+  //   // מאזין לשינויים במצב המשתמש
+  //   const unsubscribe = onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setUserName(user.displayName || user.email); // הגדרת שם המשתמש או הדוא"ל
+  //     } else {
+  //       setUserName(""); // אם אין משתמש מחובר
+  //     }
+  //   });
 
-    return () => unsubscribe(); // נקה את המאזין כשהקומפוננטה מוסרת
-  }, []);
+  //   return () => unsubscribe(); // ניקוי  כשהקומפוננטה מוסרת
+  // }, []);
 
   return (
     <>

@@ -1,55 +1,233 @@
-.price-list {
-    font-family: Arial, sans-serif;
-    margin-top: 150px;
+/* 
+.price-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 40%;
+  padding: 20px;
+  background-color: #f5f0e1;
+  color: #3c2f2f;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+.price-list-title {
+  color: #8b4513;
+  text-align: center;
+  font-size: 2.5em;
+  margin-top: 0px;
+  border-bottom: 2px solid #d2b48c;
+  padding-bottom: 10px;
+}
+
+.price-list-container .update-info {
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 30px;
+  color: #6b4226;
+}
+
+.price-list-container .car-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.price-list-container .car-option {
+  background-color: #fff9e6;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.price-list-container .car-option:hover {
+  transform: translateY(-5px);
+}
+
+.price-list-container .car-option h2 {
+  color: #8b4513;
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.price-list-container .car-option img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.price-list-container .price-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.price-list-container .price-item {
+  background-color: #f5e1d3;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.price-list-container .price-label {
+  font-weight: bold;
+  color: #6b4226;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.price-list-container .price-value {
+  color: #8b4513;
+  font-size: 1.1em;
+}
+
+.price-list-container .car-description {
+  font-size: 0.9em;
+  color: #5a3921;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .price-list-container .car-options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+ */
+
+
+ 
+
+
+
+
+
+
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap');
+
+.price-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f0e1;
+  color: #3c2f2f;
+  font-family: 'Roboto', Arial, sans-serif;
+  line-height: 1.6;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.price-list-title {
+  font-family: 'Playfair Display', serif;
+  color: #8b4513;
+  text-align: center;
+  font-size: 2.5em;
+  margin-top: 0;
+  border-bottom: 2px solid #d2b48c;
+  padding-bottom: 10px;
+}
+
+.update-info {
+  text-align: center;
+  font-style: italic;
+  margin-bottom: 30px;
+  color: #6b4226;
+}
+
+.car-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.car-option {
+  background-color: #fff9e6;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-option:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.car-option h2 {
+  font-family: 'Playfair Display', serif;
+  color: #8b4513;
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.car-option img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.car-option:hover img {
+  transform: scale(1.05);
+}
+
+.price-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.price-item {
+  background-color: #f5e1d3;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.price-item:hover {
+  background-color: #e6c9b3;
+}
+
+.price-label {
+  font-weight: bold;
+  color: #6b4226;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.price-value {
+  color: #8b4513;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.car-description {
+  font-size: 0.9em;
+  color: #5a3921;
+  text-align: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #d2b48c;
+}
+
+@media (max-width: 768px) {
+  .car-options-grid {
+    grid-template-columns: 1fr;
   }
   
-  .update-info {
-    font-style: italic;
-    color: #666;
-    margin-bottom: 20px;
-    font-size: 18px;
+  .price-list-container {
+    padding: 10px;
   }
   
-  .car-option {
-    background-color: #dcd6d4;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  .price-list-title {
+    font-size: 2em;
   }
-  
-  .car-option h2 {
-    color: #8a634f;
-    margin-bottom: 15px;
-    font-size: 21px;
-    font-weight: bold;
-  }
-  
-  .car-option img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 15px;
-    border-radius: 4px;
-  }
-  
-  .car-option ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .car-option li {
-    margin-bottom: 10px;
-    font-size: 17px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .car-option li:before {
-    content: "•";
-    color: #8a634f;
-    font-size: 25px;
-    margin-left: 15px;
-    margin-right: 5px;
-  }
+}
