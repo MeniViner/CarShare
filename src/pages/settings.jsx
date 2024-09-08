@@ -347,7 +347,237 @@
 
 
 
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
+// import withOfflineOverlay from '../assets/withOfflineOverlay';
+// import ThemeToggle from '../assets/themeToggle';
+// import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import { useTranslation } from 'react-i18next';
+// import '../styles/settings.css'
+
+// import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+// import { auth, db } from '../data/firebaseConfig';
+
+// const Settings = () => {
+//   const [isDarkMode, setIsDarkMode] = useState(() => {
+//     const savedTheme = localStorage.getItem('theme');
+//     return savedTheme ? savedTheme === 'dark' : false;
+//   });
+  
+//   const { t, i18n } = useTranslation();
+//   const [language, setLanguage] = useState('en');
+//   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+//   const [vibrationEnabled, setVibrationEnabled] = useState(true);
+//   const [fontSize, setFontSize] = useState('medium');
+
+//   const saveUserSettings = async (settings) => {
+//     if (!auth.currentUser) {
+//       toast.error(t('please-login'));
+//       return;
+//     }
+//     try {
+//       const userRef = doc(db, 'users', auth.currentUser.uid);
+//       await updateDoc(userRef, {
+//         settings: {
+//           ...settings,
+//           isDarkMode,
+//           language,
+//           notificationsEnabled,
+//           vibrationEnabled,
+//           fontSize
+//         }
+//       });
+//       toast.success(t('settings-saved'), {
+//         position: "top-center",  // מיקום במרכז העליון של המסך
+//         autoClose: 1500,  // ההודעה תיסגר לאחר 2 שניות (2000 מילישניות)
+//         hideProgressBar: true,  // הסתרת בר התקדמות
+//         closeOnClick: true,  // סגירה על קליק
+//         pauseOnHover: true,  // השהייה כאשר מעבירים את העכבר
+//         draggable: true,  // מאפשר גרירה
+//         progress: undefined,  // הגדרה דינמית של התקדמות
+//       });
+//     } catch (e) {
+//       console.error('Error updating document: ', e);
+//       toast.error(t('error-saving-settings'));
+//     }
+//   };
+
+//   const getUserSettings = async () => {
+//     if (!auth.currentUser) {
+//       return {
+//         language: 'en',
+//         notificationsEnabled: false,
+//         vibrationEnabled: true,
+//         fontSize: 'medium',
+//         isDarkMode: false
+//       };
+//     }
+//     try {
+//       const userRef = doc(db, 'users', auth.currentUser.uid);
+//       const userDoc = await getDoc(userRef);
+//       if (userDoc.exists()) {
+//         const userData = userDoc.data();
+//         return userData.settings || {
+//           language: 'en',
+//           notificationsEnabled: false,
+//           vibrationEnabled: true,
+//           fontSize: 'medium',
+//           isDarkMode: false
+//         };
+//       }
+//     } catch (e) {
+//       console.error('Error getting document: ', e);
+//     }
+//     return {
+//       language: 'en',
+//       notificationsEnabled: false,
+//       vibrationEnabled: true,
+//       fontSize: 'medium',
+//       isDarkMode: false
+//     };
+//   };
+
+//   useEffect(() => {
+//     const fetchSettings = async () => {
+//       const storedSettings = await getUserSettings();
+//       setLanguage(storedSettings.language);
+//       setNotificationsEnabled(storedSettings.notificationsEnabled);
+//       setVibrationEnabled(storedSettings.vibrationEnabled);
+//       setFontSize(storedSettings.fontSize);
+//       setIsDarkMode(storedSettings.isDarkMode);
+//       i18n.changeLanguage(storedSettings.language);
+//       document.documentElement.dir = storedSettings.language === 'he' ? 'rtl' : 'ltr';
+//       document.body.className = `font-size-${storedSettings.fontSize}`;
+//       document.documentElement.setAttribute('data-theme', storedSettings.isDarkMode ? 'dark' : 'light');
+//     };
+//     fetchSettings();
+//   }, [i18n]);
+
+//   const handleLanguageChange = (lang) => {
+//     setLanguage(lang);
+//     saveUserSettings({ language: lang });
+//     i18n.changeLanguage(lang).then(() => {
+//       document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+//     });
+//   };
+
+//   const toggleTheme = () => {
+//     const newDarkMode = !isDarkMode;
+//     setIsDarkMode(newDarkMode);
+//     saveUserSettings({ isDarkMode: newDarkMode });
+//     document.documentElement.setAttribute('data-theme', newDarkMode ? 'dark' : 'light');
+//     localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
+//   };
+
+//   const handleNotificationToggle = () => {
+//     const newNotificationsEnabled = !notificationsEnabled;
+//     setNotificationsEnabled(newNotificationsEnabled);
+//     saveUserSettings({ notificationsEnabled: newNotificationsEnabled });
+//   };
+
+//   const handleVibrationToggle = () => {
+//     const newVibrationEnabled = !vibrationEnabled;
+//     setVibrationEnabled(newVibrationEnabled);
+//     saveUserSettings({ vibrationEnabled: newVibrationEnabled });
+//     localStorage.setItem('vibrationEnabled', newVibrationEnabled.toString());
+//   };
+
+//   const handleFontSizeChange = (size) => {
+//     setFontSize(size);
+//     saveUserSettings({ fontSize: size });
+//     document.body.className = `font-size-${size}`;
+//     localStorage.setItem('fontSize', size);
+//   };
+
+//   return (
+//     <div className="settings-container">
+//       <h2>{t('settings')}</h2>
+
+//       <div className="setting-section">
+//         <h3>{t('language')}</h3>
+//         <div className="setting-buttons">
+//           <button
+//             className={`setting-button ${language === 'en' ? 'active' : ''}`}
+//             onClick={() => handleLanguageChange('en')}
+//           >
+//             English
+//           </button>
+//           <button
+//             className={`setting-button ${language === 'he' ? 'active' : ''}`}
+//             onClick={() => handleLanguageChange('he')}
+//           >
+//             עברית
+//           </button>
+//         </div>
+//       </div>
+
+//       <div className="setting-section">
+//         <h3>{t('theme')}</h3>
+//         <div className={`theme-toggle-container ${language === 'he' ? 'rtl' : ''}`}>
+//           <ThemeToggle toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+//         </div>
+//       </div>
+
+//       <div className="setting-section">
+//         <h3>{t('notifications')}</h3>
+//         <label className="toggle-switch">
+//           <input
+//             type="checkbox"
+//             checked={notificationsEnabled}
+//             onChange={handleNotificationToggle}
+//           />
+//           <span className="slider round"></span>
+//         </label>
+//       </div>
+
+//       <div className="setting-section">
+//         <h3>{t('vibration')}</h3>
+//         <label className="toggle-switch">
+//           <input
+//             type="checkbox"
+//             checked={vibrationEnabled}
+//             onChange={handleVibrationToggle}
+//           />
+//           <span className="slider round"></span>
+//         </label>
+//       </div>
+
+//       <div className="setting-section">
+//         <h3>{t('font-size')}</h3>
+//         <div className="setting-buttons">
+//           <button
+//             className={`setting-button ${fontSize === 'small' ? 'active' : ''}`}
+//             onClick={() => handleFontSizeChange('small')}
+//           >
+//             {t('small')}
+//           </button>
+//           <button
+//             className={`setting-button ${fontSize === 'medium' ? 'active' : ''}`}
+//             onClick={() => handleFontSizeChange('medium')}
+//           >
+//             {t('medium')}
+//           </button>
+//           <button
+//             className={`setting-button ${fontSize === 'large' ? 'active' : ''}`}
+//             onClick={() => handleFontSizeChange('large')}
+//           >
+//             {t('large')}
+//           </button>
+//         </div>
+//       </div>
+
+//       <ToastContainer />
+//     </div>
+//   );
+// };
+
+// export default withOfflineOverlay(Settings);
+
+
+
+
+
+import React, { useState, useEffect, useCallback } from 'react';
 import withOfflineOverlay from '../assets/withOfflineOverlay';
 import ThemeToggle from '../assets/themeToggle';
 import { ToastContainer, toast } from 'react-toastify';
@@ -359,135 +589,93 @@ import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from '../data/firebaseConfig';
 
 const Settings = () => {
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme ? savedTheme === 'dark' : false;
-  });
-  
   const { t, i18n } = useTranslation();
-  const [language, setLanguage] = useState('en');
-  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
-  const [vibrationEnabled, setVibrationEnabled] = useState(true);
-  const [fontSize, setFontSize] = useState('medium');
+  const [settings, setSettings] = useState({
+    isDarkMode: false,
+    language: 'en',
+    notificationsEnabled: false,
+    vibrationEnabled: true,
+    fontSize: 'medium'
+  });
 
-  const saveUserSettings = async (settings) => {
+  const saveUserSettings = useCallback(async (newSettings) => {
     if (!auth.currentUser) {
       toast.error(t('please-login'));
       return;
     }
     try {
       const userRef = doc(db, 'users', auth.currentUser.uid);
-      await updateDoc(userRef, {
-        settings: {
-          ...settings,
-          isDarkMode,
-          language,
-          notificationsEnabled,
-          vibrationEnabled,
-          fontSize
-        }
-      });
+      await updateDoc(userRef, { settings: newSettings });
       toast.success(t('settings-saved'), {
-        position: "top-center",  // מיקום במרכז העליון של המסך
-        autoClose: 1500,  // ההודעה תיסגר לאחר 2 שניות (2000 מילישניות)
-        hideProgressBar: true,  // הסתרת בר התקדמות
-        closeOnClick: true,  // סגירה על קליק
-        pauseOnHover: true,  // השהייה כאשר מעבירים את העכבר
-        draggable: true,  // מאפשר גרירה
-        progress: undefined,  // הגדרה דינמית של התקדמות
+        position: "top-center",
+        autoClose: 1500,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     } catch (e) {
       console.error('Error updating document: ', e);
       toast.error(t('error-saving-settings'));
     }
-  };
+  }, [t]);
 
-  const getUserSettings = async () => {
+  const getUserSettings = useCallback(async () => {
     if (!auth.currentUser) {
-      return {
-        language: 'en',
-        notificationsEnabled: false,
-        vibrationEnabled: true,
-        fontSize: 'medium',
-        isDarkMode: false
-      };
+      return settings;
     }
     try {
       const userRef = doc(db, 'users', auth.currentUser.uid);
       const userDoc = await getDoc(userRef);
       if (userDoc.exists()) {
         const userData = userDoc.data();
-        return userData.settings || {
-          language: 'en',
-          notificationsEnabled: false,
-          vibrationEnabled: true,
-          fontSize: 'medium',
-          isDarkMode: false
-        };
+        return userData.settings || settings;
       }
     } catch (e) {
       console.error('Error getting document: ', e);
     }
-    return {
-      language: 'en',
-      notificationsEnabled: false,
-      vibrationEnabled: true,
-      fontSize: 'medium',
-      isDarkMode: false
-    };
-  };
+    return settings;
+  }, [settings]);
 
   useEffect(() => {
     const fetchSettings = async () => {
       const storedSettings = await getUserSettings();
-      setLanguage(storedSettings.language);
-      setNotificationsEnabled(storedSettings.notificationsEnabled);
-      setVibrationEnabled(storedSettings.vibrationEnabled);
-      setFontSize(storedSettings.fontSize);
-      setIsDarkMode(storedSettings.isDarkMode);
+      setSettings(storedSettings);
       i18n.changeLanguage(storedSettings.language);
       document.documentElement.dir = storedSettings.language === 'he' ? 'rtl' : 'ltr';
       document.body.className = `font-size-${storedSettings.fontSize}`;
       document.documentElement.setAttribute('data-theme', storedSettings.isDarkMode ? 'dark' : 'light');
     };
     fetchSettings();
-  }, [i18n]);
+  }, [getUserSettings, i18n]);
 
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang);
-    saveUserSettings({ language: lang });
+  const updateSetting = useCallback((key, value) => {
+    setSettings(prev => {
+      const newSettings = { ...prev, [key]: value };
+      saveUserSettings(newSettings);
+      return newSettings;
+    });
+  }, [saveUserSettings]);
+
+  const handleLanguageChange = useCallback((lang) => {
+    updateSetting('language', lang);
     i18n.changeLanguage(lang).then(() => {
       document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
     });
-  };
+  }, [i18n, updateSetting]);
 
-  const toggleTheme = () => {
-    const newDarkMode = !isDarkMode;
-    setIsDarkMode(newDarkMode);
-    saveUserSettings({ isDarkMode: newDarkMode });
-    document.documentElement.setAttribute('data-theme', newDarkMode ? 'dark' : 'light');
-    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
-  };
+  const toggleTheme = useCallback(() => {
+    updateSetting('isDarkMode', !settings.isDarkMode);
+    document.documentElement.setAttribute('data-theme', !settings.isDarkMode ? 'dark' : 'light');
+    localStorage.setItem('theme', !settings.isDarkMode ? 'dark' : 'light');
+  }, [settings.isDarkMode, updateSetting]);
 
-  const handleNotificationToggle = () => {
-    const newNotificationsEnabled = !notificationsEnabled;
-    setNotificationsEnabled(newNotificationsEnabled);
-    saveUserSettings({ notificationsEnabled: newNotificationsEnabled });
-  };
-
-  const handleVibrationToggle = () => {
-    const newVibrationEnabled = !vibrationEnabled;
-    setVibrationEnabled(newVibrationEnabled);
-    saveUserSettings({ vibrationEnabled: newVibrationEnabled });
-    localStorage.setItem('vibrationEnabled', newVibrationEnabled.toString());
-  };
-
-  const handleFontSizeChange = (size) => {
-    setFontSize(size);
-    saveUserSettings({ fontSize: size });
+  const handleFontSizeChange = useCallback((size) => {
+    updateSetting('fontSize', size);
     document.body.className = `font-size-${size}`;
     localStorage.setItem('fontSize', size);
-  };
+  }, [updateSetting]);
 
   return (
     <div className="settings-container">
@@ -497,13 +685,13 @@ const Settings = () => {
         <h3>{t('language')}</h3>
         <div className="setting-buttons">
           <button
-            className={`setting-button ${language === 'en' ? 'active' : ''}`}
+            className={`setting-button ${settings.language === 'en' ? 'active' : ''}`}
             onClick={() => handleLanguageChange('en')}
           >
             English
           </button>
           <button
-            className={`setting-button ${language === 'he' ? 'active' : ''}`}
+            className={`setting-button ${settings.language === 'he' ? 'active' : ''}`}
             onClick={() => handleLanguageChange('he')}
           >
             עברית
@@ -513,8 +701,8 @@ const Settings = () => {
 
       <div className="setting-section">
         <h3>{t('theme')}</h3>
-        <div className={`theme-toggle-container ${language === 'he' ? 'rtl' : ''}`}>
-          <ThemeToggle toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+        <div className={`theme-toggle-container ${settings.language === 'he' ? 'rtl' : ''}`}>
+          <ThemeToggle toggleTheme={toggleTheme} isDarkMode={settings.isDarkMode} />
         </div>
       </div>
 
@@ -523,8 +711,8 @@ const Settings = () => {
         <label className="toggle-switch">
           <input
             type="checkbox"
-            checked={notificationsEnabled}
-            onChange={handleNotificationToggle}
+            checked={settings.notificationsEnabled}
+            onChange={() => updateSetting('notificationsEnabled', !settings.notificationsEnabled)}
           />
           <span className="slider round"></span>
         </label>
@@ -535,8 +723,8 @@ const Settings = () => {
         <label className="toggle-switch">
           <input
             type="checkbox"
-            checked={vibrationEnabled}
-            onChange={handleVibrationToggle}
+            checked={settings.vibrationEnabled}
+            onChange={() => updateSetting('vibrationEnabled', !settings.vibrationEnabled)}
           />
           <span className="slider round"></span>
         </label>
@@ -545,24 +733,15 @@ const Settings = () => {
       <div className="setting-section">
         <h3>{t('font-size')}</h3>
         <div className="setting-buttons">
-          <button
-            className={`setting-button ${fontSize === 'small' ? 'active' : ''}`}
-            onClick={() => handleFontSizeChange('small')}
-          >
-            {t('small')}
-          </button>
-          <button
-            className={`setting-button ${fontSize === 'medium' ? 'active' : ''}`}
-            onClick={() => handleFontSizeChange('medium')}
-          >
-            {t('medium')}
-          </button>
-          <button
-            className={`setting-button ${fontSize === 'large' ? 'active' : ''}`}
-            onClick={() => handleFontSizeChange('large')}
-          >
-            {t('large')}
-          </button>
+          {['small', 'medium', 'large'].map((size) => (
+            <button
+              key={size}
+              className={`setting-button ${settings.fontSize === size ? 'active' : ''}`}
+              onClick={() => handleFontSizeChange(size)}
+            >
+              {t(size)}
+            </button>
+          ))}
         </div>
       </div>
 

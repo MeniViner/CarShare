@@ -273,7 +273,66 @@ i18n.use(initReactI18next).init({
             "Failed to load cars. Please try again.": "טעינת המכוניות נכשלה. אנא נסה שוב.",
         
 
+            // SearchResults
+            "search results": "תוצאות חיפוש",
+            "found results": "נמצאו {{count}} תוצאות עבור: {{query}}",
+            "no results found": "לא נמצאו תוצאות",
+            "map": "מפה",
+            "map page content": "תוכן דף המפה",
+            "profile": "פרופיל",
+            "profile page content": "תוכן דף הפרופיל",
+            "car list": "רשימת רכבים",
+            "car list page content": "תוכן דף רשימת הרכבים",
+            "saved": "שמורים",
+            "saved cars and preferences": "רכבים והעדפות שמורים",
+            "settings": "הגדרות",
+            "settings page content": "תוכן דף ההגדרות",
+            "reservations": "הזמנות",
+            "view and manage your reservations": "צפייה וניהול ההזמנות שלך",
+            "contact": "צור קשר",
+            "contact information and support": "פרטי התקשרות ותמיכה",
+            "prices": "מחירים",
+            "pricing information for car rentals": "מידע על מחירי השכרת רכב",
+            "car": "רכב",
+            "reservation": "הזמנה",
 
+
+            // TermsOfUse
+            "terms of use": "תנאי שימוש",
+            "1. acceptance of terms": "1. קבלת התנאים",
+            "by accessing and using the car manager app, you agree to be bound by these terms of use": "על ידי גישה ושימוש באפליקציית ניהול הרכב, אתה מסכים להיות מחויב לתנאי שימוש אלה",
+            "2. user registration": "2. רישום משתמש",
+            "you must register for an account to use certain features of the app": "עליך להירשם לחשבון כדי להשתמש בתכונות מסוימות של האפליקציה",
+            "3. car rental terms": "3. תנאי השכרת רכב",
+            "all car rentals are subject to availability and our rental agreement": "כל השכרות הרכב כפופות לזמינות ולהסכם ההשכרה שלנו",
+            "4. payment and fees": "4. תשלום ועמלות",
+            "you agree to pay all fees associated with your use of the app and car rentals": "אתה מסכים לשלם את כל העמלות הקשורות לשימוש שלך באפליקציה ובהשכרות רכב",
+            "5. user responsibilities": "5. אחריות המשתמש",
+            "you are responsible for maintaining the confidentiality of your account": "אתה אחראי לשמור על סודיות החשבון שלך",
+            "6. prohibited activities": "6. פעילויות אסורות",
+            "you may not use the app for any illegal or unauthorized purpose": "אינך רשאי להשתמש באפליקציה למטרות בלתי חוקיות או בלתי מורשות",
+            "7. privacy policy": "7. מדיניות פרטיות",
+            "your use of the app is also governed by our privacy policy": "השימוש שלך באפליקציה מוסדר גם על ידי מדיניות הפרטיות שלנו",
+            "8. modifications to service": "8. שינויים בשירות",
+            "we reserve the right to modify or discontinue the app at any time": "אנו שומרים לעצמנו את הזכות לשנות או להפסיק את האפליקציה בכל עת",
+            "9. limitation of liability": "9. הגבלת אחריות",
+            "we are not liable for any indirect, incidental, or consequential damages": "איננו אחראים לנזקים עקיפים, מקריים או תוצאתיים כלשהם",
+            "10. governing law": "10. חוק שולט",
+            "these terms are governed by the laws of the state/country where the app operates": "תנאים אלה מוסדרים על ידי חוקי המדינה/ארץ בה פועלת האפליקציה",
+
+
+          // CONTACTUS
+          "contact us": "צור איתנו קשר",
+          "your name": "שמך",
+          "your email": "כתובת המייל לחזרה",
+          "your phone": "מספר הטלפון ליצירת קשר",
+          "your message": "הודעה מפורטת עם פרטי הפנייה",
+          "send message": "שלח את פנייתך",
+
+
+          // שונות
+          "manage page": "פאנל ניהול",
+          "Price p-km": "מחיר לק\"מ",
       }
     }
   },

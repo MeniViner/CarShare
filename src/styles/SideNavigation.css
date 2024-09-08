@@ -148,7 +148,8 @@
 }
 
 .side-navigation-page .smi2 {
-  margin-top: 12vh;
+  border-top: 1px solid #ddd;
+  margin-top: 5vh;
 }
 
 .side-navigation-page .side-menu-profile {
