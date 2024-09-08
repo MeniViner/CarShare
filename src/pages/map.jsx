@@ -432,6 +432,7 @@ import miniCarIcon from '../images/mini-car.svg';
 import familyCarIcon from '../images/family-car-icon.svg';
 import businessCarIcon from '../images/business-car-icon.svg';
 import suvCarIcon from '../images/suv-car-icon.svg';
+import movingCar from '../images/moving-car.gif';
 
 const CARS_CACHE_KEY = 'cachedCars';
 const USER_LOCATION_KEY = 'userLocation';
@@ -533,16 +534,17 @@ const Map = () => {
 
   const getCarIcon = useCallback((category) => {
     switch (category) {
-      case 'mini':
-        return miniCarIcon;
-      case 'family':
-        return familyCarIcon;
-      case 'business':
-        return businessCarIcon;
-      case 'SUV':
-        return suvCarIcon;
+      // case 'mini':
+      //   return miniCarIcon;
+      // case 'family':
+      //   return familyCarIcon;
+      // case 'business':
+      //   return businessCarIcon;
+      // case 'SUV':
+      //   return suvCarIcon;
       default:
-        return '../images/car-side-solid.svg';
+        // return '../images/car-side-solid.svg';
+        return movingCar;
     }
   }, []);
 
