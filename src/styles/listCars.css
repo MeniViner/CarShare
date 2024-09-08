@@ -1,25 +1,5 @@
-.listCars-container .listCars-header {
-    position: sticky;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 3;
-    background-color: #f5f5f5;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-}
-
-.listCars-container .page-header h1 {
-    text-align: center;
-    font-size: 2.5rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
 .listCars-container .cars-list {
-    direction: ltr !important;
-}
-
-.listCars-container .cars-list {
-    padding: 20px;
     background-color: #f8f9fa;
 }
 
@@ -29,222 +9,202 @@
 }
 
 .listCars-container .sort-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%;
-    margin: 0 auto 20px;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 10px;
+    margin-right: -120%;
 }
 
-.listCars-container .sort-buttons button, 
-.listCars-container .sort-buttons select {
 
-    flex: 1;
-    padding: 10px;
-    margin: 0 5px;
-    border: none;
-    border-radius: 7px;
-    background-color: #ededed;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.listCars-container .sort-buttons button:hover, 
-.listCars-container .sort-buttons select:hover {
-    background-color: #f1f1f1;
-}
-
-.listCars-container .sort-buttons button.active {
-    background-color: #007bff;
-    color: #fff;
-}
-
-.listCars-container .sort-buttons button {
-    border: 0.1px solid rgb(202, 221, 255);
-}
-
-.listCars-container .sort-order-button {
-    color: #007bff;
-    font-size: 18px;
-    margin: 0px;
-}
-
-.listCars-container .sort-buttons button  {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.listCars-container .car-item {
-    margin-bottom: 2px;
-    background-color: #fff; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.listCars-container .car-item:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
-}
-
-.listCars-container .car-item-info {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    padding: 20px 20px 10px 20px; 
-}
-
-.listCars-container .car-item img {
-    width: 100px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 4px;
-    margin-right: 10px;
-    margin-left: -2px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.listCars-container .car-item img:hover {
-    transform: scale(1.2); 
-}
-
-.listCars-container .car-image-container {
-    position: relative;
-    display: inline-block;
-}
-
-.listCars-container .car-image-container .hybrid-badge {
-    position: absolute;
-    bottom: 40px;
-    left: -15px;
-    width: 50px;
-    height: auto;
-}
-
-.listCars-container .car-details {
-    flex: 1;
-    cursor: pointer;
-}
-
-.listCars-container .car-details h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-    color: #495057;
-}
-
-.listCars-container .car-details p {
-    font-size: 14px;
-    color: #6c757d; 
-    margin-bottom: 5px;
-}
-
-.listCars-container .car-details p span {
-    margin-right: 10px;
-}
-
-.listCars-container .more-details-in-list .items {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    padding-bottom: 20px;
-}
-
-.listCars-container .more-details-in-list .item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: start;
-    padding-left: 50px;
-    gap: 5px;
-    padding-bottom: 20px;
-}
-
-.listCars-container .car-item:not(:last-child) {
-    margin-bottom: 20px;
-}
-
-.listCars-container .faLocationArrow {
-    margin-left: auto; 
-}
-
-.listCars-container .saved-bt {
-    padding: 2vw;
-    border: none;
-    background-color: rgba(255, 255, 255, 0);
-    font-size: 25px;
-    cursor: pointer;
-    transition: color 0.3s ease; 
-}
-
-.listCars-container .saved-bt:hover {
-    color: #dc3545; 
-}
-
-@keyframes slideInFromRight {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.listCars-container {
-    animation: slideInFromRight 0.5s ease-out forwards;
-}
-
-@keyframes slideInForCars {
-    from { transform: translateX(-30%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }  
-}
-
-.listCars-container .cars-list {
-    animation: slideInForCars 0.7s ease-out forwards;
-}
-
-@keyframes slideInForSort {
-    from {
-        transform: translateX(-70%);
-        opacity: 0;
-}
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-.listCars-container .sort-buttons {
-    animation: slideInForSort 2s ease-in-out backwards;
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&family=Oswald&display=swap');
 
 .listCars-container {
   font-family: 'Open Sans', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  animation: fadeIn 0.5s ease-out forwards;
 }
 
-.listCars-container h1, 
-.listCars-container h2, 
-.listCars-container h3 {
+.listCars-container .listCars-header {
+  position: sticky;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  background-color: var(--card-background);
+  box-shadow: 0 4px 8px var(--shadow-color);
+  padding: 10px 0;
+}
+
+.listCars-container .page-header h1 {
+  margin-top: 0%;
+  text-align: center;
+  font-size: 2.5rem;
   font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 20px;
 }
 
-.listCars-container .special-text {
-  font-family: 'Oswald', sans-serif;
+.listCars-container .page-header h1 strong {
+  color: var(--accent-color);
+}
+
+
+
+.listCars-container .sort-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+  animation: slideInForSort 1s ease-in-out backwards;
+}
+
+.listCars-container .sort-buttons button,
+.listCars-container .sort-buttons select {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.listCars-container .sort-buttons button:hover,
+.listCars-container .sort-buttons select:hover {
+  background-color: var(--primary-color);
+  color: var(--card-background);
+}
+
+.listCars-container .sort-buttons button.active {
+  background-color: var(--primary-color);
+  color: var(--card-background);
+}
+
+.listCars-container .sort-order-button {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.listCars-container .cars-list {
+  padding: 20px;
+  animation: slideInForCars 0.7s ease-out forwards;
+}
+
+.listCars-container .car-item {
+  margin-bottom: 20px;
+  background-color: var(--card-background);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+  overflow: hidden;
+}
+
+.listCars-container .car-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px var(--shadow-color);
+}
+
+.listCars-container .car-item-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.listCars-container .car-image-container {
+  position: relative;
+  width: 120px;
+  height: 110px;
+  overflow: hidden;
+}
+
+.listCars-container .car-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-speed);
+}
+
+.listCars-container .car-item img:hover {
+  transform: scale(1.1);
+}
+
+.listCars-container .car-details {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.listCars-container .car-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--primary-color);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.listCars-container .car-details p {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.listCars-container .saved-bt {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color var(--transition-speed);
+  color: var(--secondary-color);
+}
+
+.listCars-container .saved-bt:hover {
+  color: var(--accent-color);
+}
+
+.listCars-container .more-details-in-list {
+  background-color: var(--background-color);
+  padding: 15px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.listCars-container .more-details-in-list .item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  color: var(--secondary-color);
 }
 
 .listCars-container .loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: -60px;
-    /* min-height: 400px;  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInForCars {
+  from { transform: translateX(-5%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInForSort {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+

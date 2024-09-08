@@ -1,81 +1,15 @@
-// import React from 'react';
-// import { useLocation, useNavigate } from 'react-router-dom';
-// import Fuse from 'fuse.js';
-// import cars from '../data/carsData';
-// import '../styles/SearchResults.css'; 
-
-// const SearchResults = () => {
-//   const navigate = useNavigate();
-//   const query = new URLSearchParams(useLocation().search).get('q');
-
-//   const data = [
-//     { name: 'Map', path: '/map', content: 'Map page content' },
-//     { name: 'Profile', path: '/profile', content: 'Profile page content' },
-//     { name: 'Car List', path: '/car-list', content: 'Car list page content' },
-//     { name: 'Saved', path: '/saved', content: 'Saved cars and preferences' },
-//     { name: 'Settings', path: '/settings', content: 'Settings page content' },
-//     ...cars.map(car => ({ id: car.id, name: `${car.brand} ${car.model}`, path: `/map?carId=${car.id}`, content: car.description })),
-//     // ניתן להוסיף כאן דפים נוספים ותוכן חיפוש
-//   ];
-
-//   const fuse = new Fuse(data, {
-//     keys: ['name', 'content'],
-//     threshold: 0.1, // סף דיוק החיפוש Scaled from 0.1 to 1 - 0.1 being the most accurate.
-//   });
-
-//   const results = fuse.search(query);
-
-//   const handleNavigate = (path) => {
-//     navigate(path);
-//   };
-
-//   return (
-//     <div className="search-results">
-//       <h1>Search Results</h1>
-//       <p className="search-query">found {results.length} results for: <strong>{query}</strong></p>
-//       {results.length > 0 ? (
-//         <div className="results-list">
-//           {results.map(result => (
-//             <div key={result.item.id} className="result-item" onClick={() => handleNavigate(result.item.path)}>
-//               <h2>{result.item.name}</h2>
-//               <p>{result.item.content}</p>
-//             </div>
-//           ))}
-//         </div>
-//       ) : (
-//         <p className="no-results">No results found</p>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default SearchResults;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Fuse from 'fuse.js';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../data/firebaseConfig';
+import { db, auth } from '../data/firebaseConfig';
 import { useTranslation } from 'react-i18next';
 import { fetchCarsFromFirebase } from '../data/fetchCars';
 import LoadingPage from '../assets/LoadingPage';
 import '../styles/SearchResults.css';
+import Swal from 'sweetalert2';
+
+
 
 const SearchResults = () => {
   const { t } = useTranslation();
@@ -154,14 +88,47 @@ const SearchResults = () => {
   ];
 
   const fetchSearchData = useCallback(async () => {
+
+    const user = auth.currentUser;
+
+    if (!user) {
+      Swal.fire({
+        title: t('log in'),
+        text: t('Please log in to use the search feature.'),
+        icon: 'warning',
+        timer: 4000,
+      });
+      navigate('/profile');
+      return;
+    }
+
     try {
       const cars = await fetchCarsFromFirebase();
       const carData = cars.map(car => ({
         id: car.id,
-        name: `${car.brand} ${car.model}`,
+        name: `${car.brand} ${car.model} ${car.year}`,
         path: `/map?carId=${car.id}`,
-        content: `${car.description} - ${car.year} - ${car.fuelType} - ${car.seats} ${t('seats')} - ${car.pricePerHour}₪/${t('hour')} - ${car.pricePerDay}₪/${t('day')}`,
-        type: 'car'
+        content: `
+          ${car.year} • ${car.fuelType} • ${car.seats} ${t('seats')} • 
+          ${car.pricePerHour}₪/${t('hour')} • ${car.pricePerDay}₪/${t('day')} • 
+          ${t('unlock fee')}: ${car.unlockFee}₪ • ${t('price per km')}: ${car.kmPrice}₪ • 
+          ${t('fuel')}: ${car.fuelType === 'Electric' ? `${t('battery')}: ${car.battery}` : car.fuel} • 
+        `,
+        type: 'car',
+        category: car.category,
+        brand: car.brand,
+        model: car.model,
+        seats: car.seats,
+        year: car.year,
+        pricePerHour: car.pricePerHour,
+        pricePerDay: car.pricePerDay,
+        unlockFee: car.unlockFee,
+        kmPrice: car.kmPrice,
+        fuelType: car.fuelType,
+        fuel: car.fuel,
+        battery: car.battery,
+        image3: car.image3,
+        address: car.address,
       }));
 
       const reservationsSnapshot = await getDocs(collection(db, 'reservations'));
@@ -179,7 +146,7 @@ const SearchResults = () => {
       const allData = [...staticData, ...carData, ...reservationsData];
 
       const fuse = new Fuse(allData, {
-        keys: ['name', 'content'],
+        keys: ['name', 'content', 'category', 'brand', 'model', 'address.city', 'address.street'],
         threshold: 0.3,
         includeScore: true
       });
@@ -221,6 +188,13 @@ const SearchResults = () => {
             >
               <h2>{result.item.name}</h2>
               <p>{result.item.content}</p>
+              {result.item.type === 'car' && (
+                <div className="car-details">
+                  <img src={result.item.image3} alt={result.item.name} className="car-thumbnail" />
+                  <p>{t('category')}: {result.item.category}</p>
+                  <p>{t('location')}: {result.item.address.city}, {result.item.address.street}</p>
+                </div>
+              )}
               <span className="result-type">{t(result.item.type)}</span>
             </div>
           ))}
@@ -235,13 +209,21 @@ const SearchResults = () => {
 export default SearchResults;
 
 
-// נוספו ערכים סטטיים נוספים עבור דפים ותכונות שונות של האפליקציה שלך.
-// הטמיע אחזור נתונים דינמי עבור מכוניות והזמנות באמצעות Firebase.
-// השתמש בפונקציה 'fetchCarsFromFirebase' כדי לקבל את נתוני הרכב העדכניים ביותר.
-// הוסיפו נתוני הזמנות לתוצאות החיפוש, מאחזרים מאוסף 'הזמנות' ב-Firestore.
-// סיווג תוצאות חיפוש על ידי הוספת שדה 'סוג' (לדוגמה, 'מכונית', 'הזמנה').
-// שיפור תצורת Fuse.js לדיוק חיפוש טוב יותר.
-// הוטמע מצב טעינה עם רכיב LoadingPage.
-// השתמשו ב-react-i18next לתמיכה בבינאום.
-// שיפר את ממשק המשתמש כדי להציג סוגי תוצאות (מכונית או הזמנה) ושיפור הסגנון.
-// ביצועים אופטימליים באמצעות 'useCallback' ו-'useEffect'.
+// // נוספו ערכים סטטיים נוספים עבור דפים ותכונות שונות של האפליקציה שלך.
+// // הטמיע אחזור נתונים דינמי עבור מכוניות והזמנות באמצעות Firebase.
+// // השתמש בפונקציה 'fetchCarsFromFirebase' כדי לקבל את נתוני הרכב העדכניים ביותר.
+// // הוסיפו נתוני הזמנות לתוצאות החיפוש, מאחזרים מאוסף 'הזמנות' ב-Firestore.
+// // סיווג תוצאות חיפוש על ידי הוספת שדה 'סוג' (לדוגמה, 'מכונית', 'הזמנה').
+// // שיפור תצורת Fuse.js לדיוק חיפוש טוב יותר.
+// // הוטמע מצב טעינה עם רכיב LoadingPage.
+// // השתמשו ב-react-i18next לתמיכה בבינאום.
+// // שיפר את ממשק המשתמש כדי להציג סוגי תוצאות (מכונית או הזמנה) ושיפור הסגנון.
+// // ביצועים אופטימליים באמצעות 'useCallback' ו-'useEffect'.
+
+
+
+
+
+
+
+
