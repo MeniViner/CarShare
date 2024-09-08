@@ -231,6 +231,7 @@ import { PiSeatFill } from "react-icons/pi";
 import { FaPersonWalking } from "react-icons/fa6";
 import { IoReceiptOutline } from "react-icons/io5";
 import { MdLocationOff, MdOutlineCalendarMonth } from "react-icons/md";
+import { TfiLocationPin } from "react-icons/tfi";
 
 // Animations
 import { useSpring, animated } from '@react-spring/web';
@@ -363,8 +364,9 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
             <div className="vehicle-info-header-brand">
               <h1 className="sticky">{selectedCar.brand}</h1>
             </div>
-            <div className="vehicle-info-header-model">
+            <div className="vehicle-info-header-model vihm2">
               <h3>{selectedCar.model} {selectedCar.year}</h3>
+              <h3><TfiLocationPin/>{selectedCar.address.city}, {selectedCar.address.street}</h3>
             </div>
           </div>
           <img

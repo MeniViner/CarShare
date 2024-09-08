@@ -5,11 +5,11 @@
 
 // import { RiMenu3Fill, RiMenuFoldLine } from "react-icons/ri";
 // import { AiOutlineMessage } from "react-icons/ai";
-// import { IoSettingsOutline, IoMapSharp, IoBookmarksOutline, IoPricetagsOutline, IoSearch } from "react-icons/io5";
+// import { IoSettingsOutline, GrMapLocation  , IoBookmarksOutline, IoPricetagsOutline, IoSearch } from "react-icons/io5";
 // import { LuCalendarCheck } from "react-icons/lu";
 
 // import { auth } from '../data/firebaseConfig';
-// import { MdManageAccounts } from 'react-icons/md';
+// import { MdOutlineManageAccounts  } from 'react-icons/md';
 
 // const SideNavigation = () => {
 //   const { t } = useTranslation();
@@ -77,7 +77,7 @@
 //           </div>
 
 //           <Link to="/map" className={`side-menu-item ${location.pathname === '/map' ? 'active' : ''}`} onClick={closeSideNav}>
-//             <IoMapSharp className='icon' aria-hidden="true" />
+//             <GrMapLocation   className='icon' aria-hidden="true" />
 //             <h3>{t('map')}</h3>
 //           </Link>
 //           <Link to="/saved" className={`side-menu-item ${location.pathname === '/saved' ? 'active' : ''}`} onClick={closeSideNav}>
@@ -93,7 +93,7 @@
 //             <h3>{t('reservation')}</h3>
 //           </Link>
 //           <Link to="/manage" className={`side-menu-item ${location.pathname === '/manage' ? 'active' : ''}`} onClick={closeSideNav}>
-//             <MdManageAccounts className='icon' aria-hidden="true" />
+//             <MdOutlineManageAccounts  className='icon' aria-hidden="true" />
 //             <h3>{t('manage page')}</h3>
 //           </Link>
 
@@ -164,9 +164,11 @@ import '../styles/SideNavigation.css';
 
 import { RiMenu3Fill, RiMenuFoldLine } from "react-icons/ri";
 import { AiOutlineMessage } from "react-icons/ai";
-import { IoSettingsOutline, IoMapSharp, IoBookmarksOutline, IoPricetagsOutline, IoSearch } from "react-icons/io5";
+import { GrMapLocation } from "react-icons/gr";
+import { CgFileDocument } from "react-icons/cg";
+import { IoSettingsOutline , IoBookmarksOutline, IoPricetagsOutline, IoSearch } from "react-icons/io5";
 import { LuCalendarCheck } from "react-icons/lu";
-import { MdManageAccounts } from 'react-icons/md';
+import { MdOutlineManageAccounts  } from 'react-icons/md';
 
 import { auth } from '../data/firebaseConfig';
 
@@ -218,13 +220,13 @@ const SideNavigation = () => {
   }, [closeSideNav, navigate, searchQuery]);
 
   const menuItems = useMemo(() => [
-    { to: '/map', icon: IoMapSharp, label: t('map') },
+    { to: '/map', icon: GrMapLocation  , label: t('map') },
     { to: '/saved', icon: IoBookmarksOutline, label: t('saved') },
     { to: '/prices', icon: IoPricetagsOutline, label: t('prices') },
     { to: '/my-reservations', icon: LuCalendarCheck, label: t('reservation') },
-    { to: '/manage', icon: MdManageAccounts, label: t('manage page') },
+    { to: '/manage', icon: MdOutlineManageAccounts , label: t('manage page') },
     { to: '/contact-info', icon: AiOutlineMessage, label: t('contact'), className: 'smi2' },
-    { to: '/terms-of-use', icon: IoSettingsOutline, label: t('terms of use')},
+    { to: '/terms-of-use', icon: CgFileDocument, label: t('terms of use')},
     { to: '/settings', icon: IoSettingsOutline, label: t('settings') },
   ], [t]);
 
