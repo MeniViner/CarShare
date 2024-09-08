@@ -17,6 +17,10 @@
   text-align: center;
 }
 
+.car-manager #password{
+  width: 89%;
+}
+
 .car-manager .loading {
   text-align: center;
   padding: 2rem;

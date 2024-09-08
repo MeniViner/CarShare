@@ -333,6 +333,15 @@ i18n.use(initReactI18next).init({
           // שונות
           "manage page": "פאנל ניהול",
           "Price p-km": "מחיר לק\"מ",
+          "page": "דף תוכן",
+          "reservation": "הזמנה",
+          "setting": "הגדרה",
+          "day": "יום",
+          "category": "קטגוריה",
+          "location": "מיקום",
+          "user not authenticated": "משתמש לא מחובר",
+          "Please log in to use the search feature.": "נא התחבר כדי להשתמש בתכונת החיפוש..",
+
       }
     }
   },
