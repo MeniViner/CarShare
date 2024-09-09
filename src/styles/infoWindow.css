@@ -204,7 +204,7 @@
 
 .info-window-page .process-steps {
   position: absolute;
-  margin-top: -15vh;
+  margin-top: -12vh;
   display: flex;
   flex-direction: row;
   gap:10px;

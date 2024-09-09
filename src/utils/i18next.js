@@ -341,6 +341,10 @@ i18n.use(initReactI18next).init({
           "location": "מיקום",
           "user not authenticated": "משתמש לא מחובר",
           "Please log in to use the search feature.": "נא התחבר כדי להשתמש בתכונת החיפוש..",
+          "you already have a reservation for this car on this date": "כבר יש לך הזמנה לרכב זה בתאריך זה",
+          "go to reservation": "צפה בהזמנה",
+          "Manager panel": "פאנל ניהול",
+          "Scroll horizontally to see more": "גלול לרוחב כדי לראות עוד",
 
       }
     }
