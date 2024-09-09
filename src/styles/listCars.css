@@ -1,15 +1,15 @@
 
 .listCars-container .cars-list {
-    background-color: #f8f9fa;
+  background-color: #f8f9fa;
 }
 
 .listCars-container .sort-buttons-container {
-    overflow-x: auto;
-    white-space: nowrap; 
+  overflow-x: auto;
+  white-space: nowrap; 
 }
 
 .listCars-container .sort-buttons {
-    margin-right: -120%;
+  margin-right: -120%;
 }
 
 
