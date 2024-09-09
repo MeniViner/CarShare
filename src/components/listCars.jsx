@@ -214,10 +214,10 @@ const ListCars = () => {
           ) : (
             <MdLocationOff /> 
           )}
+          <h4 className="itemi"><TfiLocationPin/>{car.address ? t(car.address.street + ', ' + car.address.city) : t('Address not available')}</h4>
           <p>
             <span>{t('{{price}} ₪/hour', { price: Math.floor(car.pricePerHour) })}</span>
           </p>
-          <h4 className="itemi"><TfiLocationPin/>{car.address ? t(car.address.street + ', ' + car.address.city) : t('Address not available')}</h4>
         </div>
         <button onClick={() => saveCar(car.id)} className='saved-bt'>
           {isCarSaved(car.id) ? <MdBookmarkAdded /> : <CiBookmarkPlus />}
