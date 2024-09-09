@@ -132,15 +132,6 @@
   transform: scale(1.05);
 }
 
-.settings-container .theme-toggle-container {
-  display: flex;
-  justify-content: flex-start;
-}
-
-.settings-container .theme-toggle-container.rtl {
-  justify-content: flex-end;
-}
-
 .settings-container .toggle-switch {
   position: relative;
   display: inline-block;

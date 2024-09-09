@@ -23,6 +23,7 @@
 }
 
 .listCars-container .listCars-header {
+  direction: ltr !important;
   position: sticky;
   top: 0;
   right: 0;
