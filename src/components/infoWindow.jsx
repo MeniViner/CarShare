@@ -364,11 +364,13 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
             <div className="vehicle-info-header-brand">
               <h1 className="sticky">{selectedCar.brand}</h1>
             </div>
-            <div className="vehicle-info-header-model vihm2">
+            <div className="vehicle-info-header-model ">
               <h3>{selectedCar.model} {selectedCar.year}</h3>
-              <h3>{selectedCar.address.city}, {selectedCar.address.street}</h3>
-              <h3><TfiLocationPin/>{selectedCar.address.street}</h3>
             </div>
+            <div className="vehicle-info-header-model vihm2">
+              <h3><TfiLocationPin/>{selectedCar.address.street}, &nbsp;{selectedCar.address.city}</h3>
+            </div>
+
           </div>
           <img
             src={selectedCar.image}
