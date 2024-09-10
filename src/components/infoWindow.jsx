@@ -366,7 +366,8 @@ const CarInfoWindow = ({ selectedCar, onCloseClick, userLocation }) => {
             </div>
             <div className="vehicle-info-header-model vihm2">
               <h3>{selectedCar.model} {selectedCar.year}</h3>
-              <h3><TfiLocationPin/>{selectedCar.address.city}, {selectedCar.address.street}</h3>
+              <h3>{selectedCar.address.city}, {selectedCar.address.street}</h3>
+              <h3><TfiLocationPin/>{selectedCar.address.street}</h3>
             </div>
           </div>
           <img
