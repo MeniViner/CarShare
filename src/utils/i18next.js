@@ -190,7 +190,7 @@ i18n.use(initReactI18next).init({
         "map": "מפה",
         "saved": "שמורים",
         "prices": "מחירים",
-        "reservation": "הזמנה",
+        "reservation": "הזמנות",
         "contact": "צור קשר",
         "settings": "הגדרות",
         "user avatar": "תמונת משתמש",
@@ -294,7 +294,6 @@ i18n.use(initReactI18next).init({
             "prices": "מחירים",
             "pricing information for car rentals": "מידע על מחירי השכרת רכב",
             "car": "רכב",
-            "reservation": "הזמנה",
 
 
             // TermsOfUse
@@ -334,7 +333,6 @@ i18n.use(initReactI18next).init({
           "manage page": "פאנל ניהול",
           "Price p-km": "מחיר לק\"מ",
           "page": "דף תוכן",
-          "reservation": "הזמנה",
           "setting": "הגדרה",
           "day": "יום",
           "category": "קטגוריה",
