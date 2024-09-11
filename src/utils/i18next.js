@@ -350,7 +350,10 @@ i18n.use(initReactI18next).init({
           "go to reservation": "צפה בהזמנה",
           "Manager panel": "פאנל ניהול",
           "Scroll horizontally to see more": "גלול לרוחב כדי לראות עוד",
-
+          "invalid booking date": "תאריך הזמנה לא תקין",
+          "cannot book for past dates": "לא ניתן להזמין לתאריכים מהעבר",
+          "please select a future date for vehicle reservation": "אנא בחר תאריך עתידי להזמנת רכב"
+        
       }
     }
   },
