@@ -45,7 +45,6 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
         userCredential = await createUserWithEmailAndPassword(auth, email, password);
         await updateProfile(userCredential.user, { displayName: name });
 
-        // שמירת פרטי המשתמש ב-Firestore
         await setDoc(doc(db, 'users', userCredential.user.uid), {
           displayName: name,
           email: email,
