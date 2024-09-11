@@ -71,6 +71,7 @@
 }
 
 .reservations-container .reservations-content {
+  min-height: 90dvh;
   margin-top: 30px;
   padding: 0 20px;
 }
