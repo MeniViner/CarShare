@@ -102,6 +102,13 @@ i18n.use(initReactI18next).init({
         "information updated": "המידע שלך עודכן.",
         "error": "שגיאה",
         "failed to update information": "עדכון המידע נכשל.",
+        "firstName": "שם פרטי",
+        "lastName": "שם משפחה",
+        "phoneNumber": "מספר טלפון",
+        "address": "כתובת",
+        "drivingLicense": "רישיון נהיגה",
+        "paymentMethod": "אמצעי תשלום",
+      
 
 
         // EmailLogin
