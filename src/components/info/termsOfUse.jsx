@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import '../styles/termsOfUse.css';
+import '../../styles/termsOfUse.css';
 
 const TermsOfUse = () => {
   const { t } = useTranslation();
