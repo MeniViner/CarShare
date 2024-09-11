@@ -382,8 +382,12 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
 
     if (isBefore(reservationStart, now)) {
       setIsLoading(false);
-      Swal.fire(t('error'), t('cannot book for past dates'), 'error');
-      return;
+      Swal.fire(
+        t('invalid booking date'), 
+        `${t('cannot book for past dates')} ${t('please select a future date for vehicle reservation')}`, 
+        'error'
+      );
+            return;
     }
 
     try {

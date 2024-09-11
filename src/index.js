@@ -11,7 +11,6 @@
 
 // ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -19,28 +18,7 @@ import './utils/i18next';
 import i18n from './utils/i18next';
 import './styles/theme.css';
 
-// Function to apply stored settings
-// const applyStoredSettings = () => {
-//   const storedLanguage = localStorage.getItem('language');
-//   const storedFontSize = localStorage.getItem('fontSize');
-//   const storedTheme = localStorage.getItem('theme');
 
-//   if (storedLanguage) {
-//     i18n.changeLanguage(storedLanguage);
-//     document.documentElement.dir = storedLanguage === 'he' ? 'rtl' : 'ltr';
-//   }
-
-//   if (storedFontSize) {
-//     document.body.className = `font-size-${storedFontSize}`;
-//   }
-
-//   if (storedTheme) {
-//     document.documentElement.setAttribute('data-theme', storedTheme);
-//   } else {
-//     // Default to light theme if no theme is stored
-//     document.documentElement.setAttribute('data-theme', 'light');
-//   }
-// };
 
 const applyStoredSettings = () => {
   const storedLanguage = localStorage.getItem('language') || 'he'; // ברירת מחדל לעברית אם אין שפה מוגדרת
