@@ -349,7 +349,7 @@ i18n.use(initReactI18next).init({
       }
     }
   },
-  lng: "en",
+  lng: "he",
   fallbackLng: "en",
 
   interpolation: {
