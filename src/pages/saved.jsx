@@ -310,7 +310,7 @@ const Saved = () => {
                         <h1 className="glow-text">{t("Nothing here yet")}</h1>
                         <p>{t("You haven't saved anything yet.")}</p>
                         <p>{t("Start adding some items and they will show up here!")}</p>
-                        <Link to="/" className="sign-in-link">
+                        <Link to="/" className="car-list">
                             {t("Explore Cars")}
                             <span className="shine"></span>
                         </Link>
