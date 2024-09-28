@@ -115,6 +115,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
     { label: t('from'), value: `${format(new Date(startDate), 'dd/MM/yyyy')} ${t('at')} ${startTime}` },
     { label: t('until'), value: `${format(new Date(endDate), 'dd/MM/yyyy')} ${t('at')} ${endTime}` },
     { label: t('duration'), value: `${selectedDays} ${t('days')} ${t('and')} ${selectedHours} ${t('hours')}` },
+    { label: t('rental cost'), value: `₪${totalCost}` },
     { label: t('unlock fee'), value: `₪${selectedCar.unlockFee}` },
     { label: t('total cost'), value: `₪${(totalCost + selectedCar.unlockFee)}`, className: 'total-cost' }
   ], [t, startDate, startTime, endDate, endTime, selectedDays, selectedHours, selectedCar.unlockFee, totalCost]);
