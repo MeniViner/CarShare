@@ -1,30 +1,29 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { fetchCarsFromFirebase } from '../data/fetchCars';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import withOfflineOverlay from '../assets/withOfflineOverlay';
 import { calculateDistance } from '../utils/distanceCalculator';
+
+import { fetchCarsFromFirebase } from '../data/fetchCars';
+import { auth, db } from '../data/firebaseConfig';
+import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+
+import LoadingPage from '../assets/LoadingPage';
+import { BsFuelPumpFill } from 'react-icons/bs';
+import { CiBookmarkPlus } from "react-icons/ci";
+import { RiPinDistanceLine } from "react-icons/ri";
+import { PiSeatbeltFill } from "react-icons/pi";
 import { TfiLocationPin } from "react-icons/tfi";
+import { MdBookmarkAdded, MdDateRange, MdElectricCar, MdLocationOff, MdMyLocation } from "react-icons/md";
+import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaCarSide } from "react-icons/fa";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/listCars.css';
-
-
-import { CiBookmarkPlus } from "react-icons/ci";
-import { RiPinDistanceLine } from "react-icons/ri";
-import { MdBookmarkAdded, MdDateRange, MdElectricCar, MdLocationOff, MdMyLocation } from "react-icons/md";
-import { FaRegArrowAltCircleUp, FaRegArrowAltCircleDown, FaCarSide } from "react-icons/fa";
-import { PiSeatbeltFill } from "react-icons/pi";
-import LoadingPage from '../assets/LoadingPage';
-
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { auth, db } from '../data/firebaseConfig';
-import { BsFuelPumpFill } from 'react-icons/bs';
 
 const CARS_CACHE_KEY = 'cachedCars';
 const CARS_CACHE_TIMESTAMP_KEY = 'cachedCarsTimestamp';
 const USER_LOCATION_KEY = 'userLocation';
 const CACHE_EXPIRY_TIME = 60 * 60 * 1000; // 1 hour in milliseconds
+
 
 const ListCars = () => {
   const [cars, setCars] = useState([]);
@@ -301,14 +300,4 @@ const ListCars = () => {
   );
 };
 
-export default withOfflineOverlay(ListCars);
-
-
-
-// **שימוש במטמון מקומי**: הוספנו שימוש ב-`localStorage` עם מפתחות `CARS_CACHE_KEY` ו-`USER_LOCATION_KEY` לשמירה וקריאה של נתוני המכוניות ומיקום המשתמש.
-// **אופטימיזציה של פונקציות**: השתמשנו ב-`useCallback` לכל הפונקציות בקומפוננטה כדי למנוע יצירה מחדש של פונקציות בכל רינדור.
-// **שימוש ב-`useMemo`**: השתמשנו ב-`useMemo` לחישוב הרשימה הממוינת של המכוניות כדי למנוע חישובים מיותרים.
-// **שיפור ביצועים**: הוצאנו את רינדור פריט המכונית למשתנה `renderCarItem` שמחושב מראש, כדי למנוע רינדור מיותר.
-// **שיפור בטיפול באירועים**: השתמשנו ב-`useCallback` עבור פונקציות טיפול באירועים כדי לשפר את הביצועים.
-// **קוד נקי יותר**: ארגנו מחדש את הקוד כדי לשפר את הקריאות והתחזוקתיות שלו.
-// **שמירה על כל התוכן**: כפי שנדרש, שמרנו על כל התוכן והפונקציונליות של הקומפוננטה המקורית.
+export default ListCars;

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { format, addHours, addDays, differenceInHours, differenceInDays } from 'date-fns';
 import { FaPlus, FaMinus } from 'react-icons/fa';
-import Swal from 'sweetalert2';
 import '../styles/invitation.css';
 
 const Invitation = ({ selectedCar, onCheckAvailability }) => {
@@ -248,12 +247,3 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
 };
 
 export default React.memo(Invitation);
-
-
-// **שימוש ב-`useCallback`**: הוספנו `useCallback` לכל הפונקציות בקומפוננטה כדי למנוע יצירה מחדש של פונקציות בכל רינדור.
-// **שימוש ב-`useMemo`**: השתמשנו ב-`useMemo` לחלקים מורכבים של ה-JSX כמו `renderDateTimeSelection` ו-`renderDurationSelection` כדי למנוע רינדור מיותר.
-// **אופטימיזציה של `useEffect`**: פיצלנו את ה-`useEffect` הגדול למספר אפקטים קטנים יותר, כל אחד עם תלויות ספציפיות.
-// **שיפור ביצועים**: הוצאנו חישובים מורכבים מתוך הרינדור ושמנו אותם בתוך `useCallback` או `useMemo`.
-// **שימוש ב-`React.memo`**: עטפנו את הקומפוננטה כולה ב-`React.memo` כדי למנוע רינדורים מיותרים כאשר ה-props לא משתנים.
-// **קוד נקי יותר**: ארגנו מחדש את הקוד כדי לשפר את הקריאות והתחזוקתיות שלו.
-// **שמירה על כל התוכן**: כפי שנדרש, שמרנו על כל התוכן והפונקציונליות של הקומפוננטה המקורית.
