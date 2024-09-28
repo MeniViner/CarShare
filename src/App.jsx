@@ -26,7 +26,6 @@ export default function App() {
                 <Routes>
                     {/* <UploadCars /> */}
                     <Route path='edit-profile' element={<EditProfile />} />
-
                     <Route path="/" element={<Map />} />
                     <Route path="/map" element={<Map />} />
                     <Route path="/my-reservations" element={<Reservations />} />
