@@ -103,7 +103,7 @@ const Settings = () => {
       <h2>{t('settings')}</h2>
 
       <div className="setting-section">
-        <h3>{t('language')}</h3>
+        <h3>{t('set language')}</h3>
         <div className="setting-buttons">
           <button
             className={`setting-button ${settings.language === 'en' ? 'active' : ''}`}
