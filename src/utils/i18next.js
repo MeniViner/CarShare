@@ -1,7 +1,5 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import Invitation from '../components/Invitation';
-
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -352,7 +350,8 @@ i18n.use(initReactI18next).init({
           "Scroll horizontally to see more": "גלול לרוחב כדי לראות עוד",
           "invalid booking date": "תאריך הזמנה לא תקין",
           "cannot book for past dates": "לא ניתן להזמין לתאריכים מהעבר",
-          "please select a future date for vehicle reservation": "אנא בחר תאריך עתידי להזמנת רכב"
+          "please select a future date for vehicle reservation": "אנא בחר תאריך עתידי להזמנת רכב",
+          "The reservation must be for at least 1 hour.": "ההזמנה חייבת להיות למשך שעה אחת לפחות.",
         
       }
     }
