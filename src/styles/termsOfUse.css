@@ -1,73 +1,73 @@
 .terms-of-use-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f5f0e1;
-    color: #3c2f2f;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f0e1;
+  color: #3c2f2f;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.terms-of-use-container h1 {
+  color: #8b4513;
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #d2b48c;
+  padding-bottom: 10px;
+}
+
+.terms-of-use-container section {
+  margin-bottom: 30px;
+  background-color: #fff9e6;
+  padding: 20px;
+  border-radius: 5px;
+  border-left: 5px solid #d2b48c;
+}
+
+.terms-of-use-container h2 {
+  color: #8b4513;
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.terms-of-use-container p {
+  margin-bottom: 10px;
+}
+
+.terms-of-use-container:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background-image: 
+    linear-gradient(45deg, #f5e1d3 25%, transparent 25%),
+    linear-gradient(-45deg, #f5e1d3 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #f5e1d3 75%),
+    linear-gradient(-45deg, transparent 75%, #f5e1d3 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+@media (max-width: 600px) {
+  .terms-of-use-container {
+    padding: 15px;
   }
-  
+
   .terms-of-use-container h1 {
-    color: #8b4513;
-    text-align: center;
-    font-size: 2.5em;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #d2b48c;
-    padding-bottom: 10px;
+    font-size: 2em;
   }
-  
-  .terms-of-use-container section {
-    margin-bottom: 30px;
-    background-color: #fff9e6;
-    padding: 20px;
-    border-radius: 5px;
-    border-left: 5px solid #d2b48c;
-  }
-  
+
   .terms-of-use-container h2 {
-    color: #8b4513;
-    font-size: 1.5em;
-    margin-bottom: 15px;
+    font-size: 1.3em;
   }
-  
-  .terms-of-use-container p {
-    margin-bottom: 10px;
+
+  .terms-of-use-container section {
+    padding: 15px;
   }
-  
-  .terms-of-use-container:before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    background-image: 
-      linear-gradient(45deg, #f5e1d3 25%, transparent 25%),
-      linear-gradient(-45deg, #f5e1d3 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, #f5e1d3 75%),
-      linear-gradient(-45deg, transparent 75%, #f5e1d3 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-  }
-  
-  @media (max-width: 600px) {
-    .terms-of-use-container {
-      padding: 15px;
-    }
-  
-    .terms-of-use-container h1 {
-      font-size: 2em;
-    }
-  
-    .terms-of-use-container h2 {
-      font-size: 1.3em;
-    }
-  
-    .terms-of-use-container section {
-      padding: 15px;
-    }
-  }
+}

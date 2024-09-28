@@ -1,29 +1,29 @@
 :root {
-    --background-color: #ffffff;
-    --text-color: #333333;
-    --primary-color: #8B4513;
-    --secondary-color: #D2691E;
-    --accent-color: #CD853F;
-    --card-background: #FAEBD7;
-    --button-background: #F4A460;
-    --button-text: #333333;
-    --button-text-active: #ffffff;
-  }
-  
-  [data-theme="dark"] {
-    --background-color: #1a1a1a;
-    --text-color: #f0f0f0;
-    --primary-color: #CD853F;
-    --secondary-color: #D2691E;
-    --accent-color: #DEB887;
-    --card-background: #2c2c2c;
-    --button-background: #8B4513;
-    --button-text: #f0f0f0;
-    --button-text-active: #ffffff;
-  }
-  
-  body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --primary-color: #8B4513;
+  --secondary-color: #D2691E;
+  --accent-color: #CD853F;
+  --card-background: #FAEBD7;
+  --button-background: #F4A460;
+  --button-text: #333333;
+  --button-text-active: #ffffff;
+}
+
+[data-theme="dark"] {
+  --background-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --primary-color: #CD853F;
+  --secondary-color: #D2691E;
+  --accent-color: #DEB887;
+  --card-background: #2c2c2c;
+  --button-background: #8B4513;
+  --button-text: #f0f0f0;
+  --button-text-active: #ffffff;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

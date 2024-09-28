@@ -90,8 +90,6 @@
   overflow: hidden;
 }
 
-
-
 .invitation-container .counter-button {
   background: none;
   border: none;
@@ -148,13 +146,10 @@
 }
 
 
-
 .invitation-container .c-h-d-s {
-  /* margin-left: 2%; */
   width: 95%;
 }
 
 .invitation-container .c-d-d-s {
   margin-left: 4%;
-  /* width: 87%; */
 }

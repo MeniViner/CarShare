@@ -12,7 +12,6 @@
   height: 97.5svh;
   outline: none;
   border: #978f8c 3px solid;
-  /* border-radius: 12px; */
 }
 
 /* REMOVE THE BLUE annoying when map active*/
@@ -61,4 +60,3 @@
   bottom: 210px;
   right: 25px;
 }
-
