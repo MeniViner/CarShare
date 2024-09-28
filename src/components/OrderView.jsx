@@ -71,6 +71,8 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
         return;
       }
 
+      const finalCost = totalCost + selectedCar.unlockFee;
+
       await addDoc(collection(db, 'reservations'), {
         reservationId,
         carId: selectedCar.id,
@@ -80,7 +82,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
         endTime,
         selectedHours,
         selectedDays,
-        totalCost,
+        totalCost: finalCost,
         userId: user.uid,
         userEmail: user.email,
         createdAt: new Date(),
@@ -101,7 +103,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
         }
       });
 
-      onConfirmOrder(); //עדכון CarInfoWindow שמאפסת את נתוני ההזמנה 
+      onConfirmOrder(); //עדכון CarInfoWindow המאפסת את נתוני ההזמנה 
     } catch (error) {
       console.error("Error adding reservation: ", error);
       setIsLoading(false);
@@ -114,7 +116,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
     { label: t('until'), value: `${format(new Date(endDate), 'dd/MM/yyyy')} ${t('at')} ${endTime}` },
     { label: t('duration'), value: `${selectedDays} ${t('days')} ${t('and')} ${selectedHours} ${t('hours')}` },
     { label: t('unlock fee'), value: `₪${selectedCar.unlockFee}` },
-    { label: t('total cost'), value: `₪${totalCost}`, className: 'total-cost' }
+    { label: t('total cost'), value: `₪${(totalCost + selectedCar.unlockFee)}`, className: 'total-cost' }
   ], [t, startDate, startTime, endDate, endTime, selectedDays, selectedHours, selectedCar.unlockFee, totalCost]);
 
   return (

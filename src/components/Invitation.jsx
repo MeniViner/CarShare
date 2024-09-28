@@ -28,17 +28,27 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
       cost += remainingHours * selectedCar.pricePerHour;
     }
 
-    return Math.max(cost + selectedCar.unlockFee, 0);
+    return Math.max(cost, 0);
   }, [isHourly, selectedCar.pricePerHour, selectedCar.pricePerDay, selectedCar.unlockFee]);
 
   // הוספת דקה אחת לשעה הנוכחית
+  // useEffect(() => {
+  //   const currentDate = new Date();
+  //   currentDate.setMinutes(currentDate.getMinutes() + 30);
+  //   const formattedTime = format(currentDate, 'HH:mm');
+  //   setStartTime(formattedTime); 
+  //   setEndTime(format(addHours(currentDate, 1), 'HH:mm'));
+  // }, []); 
+
+
   useEffect(() => {
     const currentDate = new Date();
-    currentDate.setMinutes(currentDate.getMinutes() + 1);
+    currentDate.setMinutes(currentDate.getMinutes() + 60); // 60 דקות קדימה מהזמן הנוכחי
     const formattedTime = format(currentDate, 'HH:mm');
     setStartTime(formattedTime); 
-    setEndTime(format(addHours(currentDate, 1), 'HH:mm'));
+    setEndTime(format(addHours(currentDate, 1), 'HH:mm')); // תמיד שעה קדימה
   }, []); 
+
 
   useEffect(() => {
     const start = new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`);
@@ -94,6 +104,9 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     }
   }, [startDate, endDate, startTime, endTime]);
 
+
+
+
   const updateSelectedDaysAndHours = useCallback(() => {
     const start = new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`);
     const end = new Date(`${format(endDate, 'yyyy-MM-dd')}T${endTime}`);
@@ -107,32 +120,64 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     updateSelectedDaysAndHours();
   }, [startDate, startTime, endDate, endTime, updateSelectedDaysAndHours]);
 
+  // const increment = useCallback((type) => {
+  //   let newEndDate = new Date(endDate);
+  //   if (type === 'days') {
+  //     newEndDate = addDays(newEndDate, 1);
+  //   } else if (type === 'hours') {
+  //     newEndDate = addHours(newEndDate, 1);
+  //   }
+  //   setEndDate(newEndDate);
+  //   setEndTime(format(newEndDate, 'HH:mm'));
+  // }, [endDate]);
+
+  // const decrement = useCallback((type) => {
+  //   let newEndDate = new Date(endDate);
+  //   if (type === 'days' && selectedDays > 0) {
+  //     newEndDate = addDays(newEndDate, -1);
+  //   } else if (type === 'hours' && (selectedDays > 0 || selectedHours > 1)) {
+  //     newEndDate = addHours(newEndDate, -1);
+  //   } else {
+  //     return;
+  //   }
+    
+  //   if (newEndDate > startDate) {
+  //     setEndDate(newEndDate);
+  //     setEndTime(format(newEndDate, 'HH:mm'));
+  //   }
+  // }, [endDate, selectedDays, selectedHours, startDate]);
+
+
   const increment = useCallback((type) => {
-    let newEndDate = new Date(endDate);
     if (type === 'days') {
-      newEndDate = addDays(newEndDate, 1);
+      const newEndDate = addDays(endDate, 1);
+      setEndDate(newEndDate);
     } else if (type === 'hours') {
-      newEndDate = addHours(newEndDate, 1);
+      const endDateTime = new Date(`${format(endDate, 'yyyy-MM-dd')}T${endTime}`);
+      const newEndDateTime = addHours(endDateTime, 1);
+      setEndDate(newEndDateTime);
+      setEndTime(format(newEndDateTime, 'HH:mm'));
     }
-    setEndDate(newEndDate);
-    setEndTime(format(newEndDate, 'HH:mm'));
-  }, [endDate]);
+    updateSelectedDaysAndHours();
+  }, [endDate, endTime, updateSelectedDaysAndHours]);
 
   const decrement = useCallback((type) => {
-    let newEndDate = new Date(endDate);
     if (type === 'days' && selectedDays > 0) {
-      newEndDate = addDays(newEndDate, -1);
-    } else if (type === 'hours' && (selectedDays > 0 || selectedHours > 1)) {
-      newEndDate = addHours(newEndDate, -1);
-    } else {
-      return;
-    }
-    
-    if (newEndDate > startDate) {
+      const newEndDate = addDays(endDate, -1);
       setEndDate(newEndDate);
-      setEndTime(format(newEndDate, 'HH:mm'));
+    } else if (type === 'hours' && (selectedDays > 0 || selectedHours > 1)) {
+      const endDateTime = new Date(`${format(endDate, 'yyyy-MM-dd')}T${endTime}`);
+      const newEndDateTime = addHours(endDateTime, -1);
+
+      const startDateTime = new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`);
+      if (newEndDateTime > startDateTime) {
+        setEndDate(newEndDateTime);
+        setEndTime(format(newEndDateTime, 'HH:mm'));
+      }
     }
-  }, [endDate, selectedDays, selectedHours, startDate]);
+    updateSelectedDaysAndHours();
+  }, [endDate, endTime, selectedDays, selectedHours, startDate, startTime, updateSelectedDaysAndHours]);
+
 
   const handleCheckAvailability = useCallback(() => {
     const reservationData = {
