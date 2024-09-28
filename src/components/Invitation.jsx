@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { format, addHours, addDays, differenceInHours, differenceInDays } from 'date-fns';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 import '../styles/invitation.css';
 
 const Invitation = ({ selectedCar, onCheckAvailability }) => {
@@ -30,6 +31,15 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
 
     return Math.max(cost + selectedCar.unlockFee, 0);
   }, [isHourly, selectedCar.pricePerHour, selectedCar.pricePerDay, selectedCar.unlockFee]);
+
+  // הוספת דקה אחת לשעה הנוכחית
+  useEffect(() => {
+    const currentDate = new Date();
+    currentDate.setMinutes(currentDate.getMinutes() + 1);
+    const formattedTime = format(currentDate, 'HH:mm');
+    setStartTime(formattedTime); 
+    setEndTime(format(addHours(currentDate, 1), 'HH:mm'));
+  }, []); 
 
   useEffect(() => {
     const start = new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`);
@@ -60,26 +70,6 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     }
   }, [startDate, endDate]);
 
-  // const handleTimeChange = useCallback((field, value) => {
-  //   const [hours, minutes] = value.split(':').map(Number);
-  //   const date = field === 'start' ? startDate : endDate;
-  //   const newDate = new Date(date);
-  //   newDate.setHours(hours, minutes);
-
-  //   if (field === 'start') {
-  //     setStartTime(value);
-  //     if (newDate >= new Date(`${format(endDate, 'yyyy-MM-dd')}T${endTime}`)) {
-  //       setEndTime(format(addHours(newDate, 1), 'HH:mm'));
-  //     }
-  //   } else {
-  //     if (newDate <= new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`)) {
-  //       setEndTime(startTime);
-  //     } else {
-  //       setEndTime(value);
-  //     }
-  //   }
-  // }, [startDate, endDate, startTime, endTime]);
-
   const handleTimeChange = useCallback((field, value) => {
     const [hours, minutes] = value.split(':').map(Number);
     const date = field === 'start' ? startDate : endDate;
@@ -87,13 +77,14 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     newDate.setHours(hours, minutes);
 
     if (field === 'start') {
-      const currentDate = new Date(); // Get the current date and time
-      currentDate.setMinutes(currentDate.getMinutes() + 1); // Set to one minute later
-      const formattedTime = format(currentDate, 'HH:mm'); // Format the time to 'HH:mm'
+      setStartTime(value); 
 
-      setStartTime(formattedTime); // Set startTime to one minute later from now
+      // תמיד לעדכן את שעת הסיום כך שתהיה לפחות שעה אחרי שעת ההתחלה
+      const newEndTime = format(addHours(newDate, 1), 'HH:mm');
+      setEndTime(newEndTime);
+      
       if (newDate >= new Date(`${format(endDate, 'yyyy-MM-dd')}T${endTime}`)) {
-        setEndTime(format(addHours(newDate, 1), 'HH:mm')); // Set endTime one hour later
+        setEndTime(format(addHours(newDate, 1), 'HH:mm')); 
       }
     } else {
       if (newDate <= new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`)) {
@@ -103,7 +94,6 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
       }
     }
   }, [startDate, endDate, startTime, endTime]);
-
 
   const updateSelectedDaysAndHours = useCallback(() => {
     const start = new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`);
