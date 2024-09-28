@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from '../../data/firebaseConfig';
@@ -12,6 +13,7 @@ import { motion } from "framer-motion";
 const USER_CACHE_KEY = 'cachedUserInfo';
 
 const ProfileDetails = ({ user }) => {
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const [profileData, setProfileData] = useState({
         firstName: '',
@@ -60,7 +62,17 @@ const ProfileDetails = ({ user }) => {
     const handleSaveChanges = async () => {
         try {
             if (!auth.currentUser) {
-                Swal.fire(t('error'), t('user not authenticated'), 'error');
+                // Swal.fire(t('error'), t('user not authenticated'), 'error');
+                Swal.fire({
+                    title: t('error'),
+                    text: t('user not authenticated'),
+                    icon: 'error',
+                    confirmButtonText: t('connect now'),  // Customize the button text
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      navigate('/profile');  // Redirect on button click
+                    }
+                  });
                 return;
             }
 

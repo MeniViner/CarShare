@@ -238,7 +238,6 @@ const UserProfile = () => {
                     transition={{ duration: 0.3 }}
                 >
                     <GoogleLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
-                    <div className="divider">{t('or')}</div>
                     <EmailLogin setIsAuthenticated={setIsAuthenticated} setUser={setUser} />
                 </motion.div>
             ) : (

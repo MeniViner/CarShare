@@ -352,6 +352,12 @@ i18n.use(initReactI18next).init({
           "cannot book for past dates": "לא ניתן להזמין לתאריכים מהעבר",
           "please select a future date for vehicle reservation": "אנא בחר תאריך עתידי להזמנת רכב",
           "The reservation must be for at least 1 hour.": "ההזמנה חייבת להיות למשך שעה אחת לפחות.",
+          "connect now": "התחבר כעת",
+          "login with google": "התחבר באמצעות גוגל",
+          "need an account?": "צריך חשבון?",
+          "register here": "הירשם כאן",
+          "already have an account?": "כבר יש לך חשבון?",
+          "Sign in here": "התחבר כאן",
         
       }
     }
