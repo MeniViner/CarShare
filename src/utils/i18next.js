@@ -164,6 +164,7 @@ i18n.use(initReactI18next).init({
         "reservation history empty": "היסטוריית ההזמנות שלך ריקה",
         "past rented cars appear here": "רכבים שהשכרת בעבר יופיעו פה",
         "delete all history": "מחק את כל ההיסטוריה",
+        "rental cost": "עלות זמן ההשכרה",
 
 
         //SideNavigation
