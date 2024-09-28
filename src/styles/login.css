@@ -57,7 +57,6 @@
 } 
 
 .login-with-google-page .google-btn {
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -65,6 +64,8 @@
   border: 1px solid #4285F4;
   color: #4285F4;
   padding: 10px 20px;
+  padding-right: 8px;
+  gap: 5px;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;

@@ -177,7 +177,16 @@ const EmailLogin = ({ setIsAuthenticated, setUser }) => {
               onClick={() => setIsLogin(!isLogin)}
               whileHover={{ scale: 1.05 }}
             >
-              {isLogin ? t('need an account? register here') : t('already have an account? Sign in here')}
+              {isLogin ? (
+                <>
+                  {t('need an account?')} <span className="underline-hover">{t('register here')}</span>
+                </>
+              ) : (
+                <>
+                  {t('already have an account?')} <span className="underline-hover">{t('Sign in here')}</span>
+                </>
+              )}
+
             </motion.p>
           </motion.form>
         ) : (

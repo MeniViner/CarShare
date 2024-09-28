@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Swal from 'sweetalert2';
 import { format, differenceInHours, differenceInDays, isBefore } from 'date-fns';
@@ -6,7 +7,7 @@ import { collection, addDoc, query, where, getDocs } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { db } from '../data/firebaseConfig';
 import '../styles/orderView.css';
-import { useNavigate } from 'react-router-dom';
+
 
 const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
   const { t } = useTranslation();
@@ -44,7 +45,17 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
 
     if (!user) {
       setIsLoading(false);
-      Swal.fire(t('error'), t('user not authenticated'), 'error');
+      Swal.fire({
+        title: t('error'),
+        text: t('user not authenticated'),
+        icon: 'error',
+        showCancelButton: false,
+        confirmButtonText: t('connect now'),  // Customize the button text
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate('/profile');  // Redirect on button click
+        }
+      });
       return;
     }
 

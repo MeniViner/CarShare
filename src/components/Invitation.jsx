@@ -48,9 +48,9 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     setTotalCost(cost);
   }, [startDate, startTime, endDate, endTime, calculateCost]);
 
-  const handleTabClick = useCallback((hourly) => {
+  const handleTabClick = (hourly) => {
     setIsHourly(hourly);
-  }, []);
+  };
 
   const handleDateChange = useCallback((field, value) => {
     const date = new Date(value);
