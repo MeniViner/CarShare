@@ -238,15 +238,17 @@
   font: 1.2em ;
 }
 
-.vihm2 {
+.info-window-page .vihm2 {
   margin-bottom: 5%;
   display: flex;
   gap: 40px; /* רווח שווה בין הכותרות */
   align-items: center; /* ממרכז את הכותרות אנכית */
 }
 
-.vihm2 h3 {
+.info-window-page .vihm2 h3 {
   display: flex;
+  gap: 6px;
   margin: 0; /* מסיר רווחים מיותרים */
   white-space: nowrap; /* מונע ירידת שורה */
 }
+

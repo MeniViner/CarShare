@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { collection, query, where, getDocs, deleteDoc, doc, addDoc } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { db } from '../data/firebaseConfig';
-import '../styles/reservations.css';
-import { fetchCarsFromFirebase } from '../data/fetchCars';
 import LoadingPage from '../assets/LoadingPage';
 
+import { db } from '../data/firebaseConfig';
+import { getAuth } from 'firebase/auth';
+import { fetchCarsFromFirebase } from '../data/fetchCars';
+import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
+
+import Swal from 'sweetalert2';
+import '../styles/reservations.css';
+
+
 const Reservations = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('active');
   const [activeReservations, setActiveReservations] = useState([]);
@@ -27,7 +29,7 @@ const Reservations = () => {
       await loadReservations(fetchedCars);
     } catch (error) {
       console.error("Error fetching data:", error);
-      Swal.fire(t('error'), t('Please refresh the page and try again'), 'warning');
+      Swal.fire(t('error'), t('Please refresh the page and try again'), 'error');
     } finally {
       setIsLoading(false);
       console.log("Fetching data ended.");
@@ -152,70 +154,6 @@ const Reservations = () => {
     });
   };
 
-  // const createReservation = async (carId, startDate, endDate, startTime, endTime, selectedHours, selectedDays, totalCost) => {
-  //   const auth = getAuth();
-  //   const user = auth.currentUser;
-
-  //   if (!user) {
-  //     Swal.fire({
-  //       title: t('error'),
-  //       text: t('user not authenticated'),
-  //       icon: 'error',
-  //       confirmButtonText: t('connect noww'),  // Customize the button text
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //         navigate('/profile');  // Redirect on button click
-  //       }
-  //     });
-  //     return;
-  //   }
-
-  //   const now = new Date();
-  //   const reservationStart = new Date(`${startDate}T${startTime}`);
-
-  //   if (reservationStart < now) {
-  //     Swal.fire(t('error'), t('cannot book for past dates'), 'error');
-  //     return;
-  //   }
-
-  //   try {
-  //     // Check for existing reservations
-  //     const reservationsRef = collection(db, 'reservations');
-  //     const q = query(
-  //       reservationsRef, 
-  //       where('userId', '==', user.uid),
-  //       where('carId', '==', carId),
-  //       where('startDate', '==', startDate)
-  //     );
-  //     const querySnapshot = await getDocs(q);
-
-  //     if (!querySnapshot.empty) {
-  //       Swal.fire(t('error'), t('you already have a reservation for this car on this date'), 'error');
-  //       return;
-  //     }
-
-  //     // Create new reservation
-  //     const newReservation = {
-  //       userId: user.uid,
-  //       carId,
-  //       startDate,
-  //       endDate,
-  //       startTime,
-  //       endTime,
-  //       selectedHours,
-  //       selectedDays,
-  //       totalCost
-  //     };
-
-  //     await addDoc(collection(db, 'reservations'), newReservation);
-  //     await loadReservations(cars);
-  //     Swal.fire(t('success'), t('reservation created successfully'), 'success');
-  //   } catch (error) {
-  //     console.error("Error creating reservation: ", error);
-  //     Swal.fire(t('error'), t('failed to create reservation'), 'error');
-  //   }
-  // };
-
   const ReservationCard = ({ reservation, isActive }) => (
     <div className="reservation-card">
       {reservation.carDetails && (
@@ -317,17 +255,3 @@ const Reservations = () => {
 };
 
 export default Reservations;
-
-
-// נוספה פונקציית `createReservation` חדשה שמטפלת בתהליך יצירת ההזמנה. פונקציה זו:
-
-// - בודק אם המשתמש מחובר לחשבון
-// - מונע הזמנה לתאריכים קודמים
-// - בדיקת הזמנות קיימות עבור אותו משתמש, רכב ותאריך
-// - יוצר הזמנה חדשה אם כל ההמחאות עוברות
-
-
-
-// טיפול בשגיאות מעודכן ומשוב משתמשים באמצעות Swal (SweetAlert2) לחוויית משתמש טובה יותר.
-// השתמש ב-'useCallback' עבור הפונקציה 'fetchData' כדי לייעל את הביצועים.
-// שמר על הפונקציונליות הקיימת לצפייה, ביטול ומחיקה של הזמנות.
