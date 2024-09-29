@@ -30,7 +30,7 @@ export const fetchCarsFromFirebase = async (forceRefresh = false) => {
   }
 };
 
-// Function to clear the cache (use when updating car data)
+// Function to clear the cache (uses when updating car data)
 export const clearCarCache = () => {
   localStorage.removeItem(CACHE_KEY);
 };

@@ -146,7 +146,7 @@ const SearchResults = () => {
 
       const fuse = new Fuse(allData, {
         keys: ['name', 'content', 'category', 'brand', 'model', 'address.city', 'address.street'],
-        threshold: 0.3,
+        threshold: 0.3, //יחסית נמוך
         includeScore: true
       });
 
@@ -210,15 +210,3 @@ const SearchResults = () => {
 };
 
 export default SearchResults;
-
-
-// נוספו ערכים סטטיים נוספים עבור דפים ותכונות שונות של האפליקציה שלך.
-// הטמיע אחזור נתונים דינמי עבור מכוניות והזמנות באמצעות Firebase.
-// השתמש בפונקציה 'fetchCarsFromFirebase' כדי לקבל את נתוני הרכב העדכניים ביותר.
-// הוסיפו נתוני הזמנות לתוצאות החיפוש, מאחזרים מאוסף 'הזמנות' ב-Firestore.
-// סיווג תוצאות חיפוש על ידי הוספת שדה 'סוג' (לדוגמה, 'מכונית', 'הזמנה').
-// שיפור תצורת Fuse.js לדיוק חיפוש טוב יותר.
-// הוטמע מצב טעינה עם רכיב LoadingPage.
-// השתמשו ב-react-i18next לתמיכה בבינאום.
-// שיפר את ממשק המשתמש כדי להציג סוגי תוצאות (מכונית או הזמנה) ושיפור הסגנון.
-// ביצועים אופטימליים באמצעות 'useCallback' ו-'useEffect'.

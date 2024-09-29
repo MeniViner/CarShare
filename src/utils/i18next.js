@@ -180,6 +180,7 @@ i18n.use(initReactI18next).init({
         "log in here": "התחבר כאן",
         "close menu": "סגור תפריט",
         "open menu": "פתח תפריט",
+        "setting saved": "ההגדרה נשמרה",
 
         //profile and related
         "or": "או",
