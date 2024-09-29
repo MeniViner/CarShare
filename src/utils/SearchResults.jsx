@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Fuse from 'fuse.js';
@@ -19,7 +19,7 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const staticData = [
+  const staticData = useMemo(() => [
     { 
       name: t('map'), 
       path: '/map', 
@@ -86,7 +86,7 @@ const SearchResults = () => {
       content: t('view pricing information, special offers, and loyalty programs'),
       type: 'page'
     },
-  ];
+  ], [t]);
 
   const fetchSearchData = useCallback(async () => {
     const user = auth.currentUser;
@@ -157,7 +157,7 @@ const SearchResults = () => {
       console.error('Error fetching search data:', error);
       setIsLoading(false);
     }
-  }, [query, t]);
+  }, [query, t, navigate, staticData]);
 
   useEffect(() => {
     fetchSearchData();

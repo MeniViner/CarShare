@@ -169,7 +169,7 @@ i18n.use(initReactI18next).init({
 
         //SideNavigation
         "main navigation": "ניווט ראשי",
-        "search": "חיפוש",
+        "general search": "חיפוש כללי",
         "map": "מפה",
         "saved": "שמורים",
         "reservation": "הזמנות",
