@@ -34,6 +34,7 @@ const Map = () => {
   const [isInfoWindowOpen, setIsInfoWindowOpen] = useState(true);
   const [isLocationSet, setIsLocationSet] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     language: 'iw',

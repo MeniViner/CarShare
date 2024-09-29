@@ -1,15 +1,17 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import withOfflineOverlay from '../assets/withOfflineOverlay';
-import LoadingPage from '../assets/LoadingPage';
+
 import { auth, db } from '../data/firebaseConfig';
 import { doc, getDoc, arrayRemove, updateDoc } from "firebase/firestore";
-import Swal from 'sweetalert2';
-import { MdBookmarkRemove, MdNoAccounts, MdOutlineSaveAlt, MdElectricCar, MdLocalGasStation } from "react-icons/md";
-import { FaCar, FaChargingStation } from "react-icons/fa";
-import '../styles/saved.css';
 import { fetchCarsFromFirebase } from '../data/fetchCars';
+
+import LoadingPage from '../assets/LoadingPage';
+import Swal from 'sweetalert2';
+import { FaCar, FaChargingStation } from "react-icons/fa";
+import { MdBookmarkRemove, MdNoAccounts, MdOutlineSaveAlt, MdElectricCar, MdLocalGasStation } from "react-icons/md";
+import '../styles/saved.css';
+
 
 const Saved = () => {
     const { t } = useTranslation();
@@ -172,4 +174,4 @@ const Saved = () => {
     );
 };
 
-export default withOfflineOverlay(Saved);
+export default Saved;

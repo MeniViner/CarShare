@@ -45,10 +45,14 @@ const SideNavigation = () => {
   const toggleSideNav = useCallback(() => setIsSideNavOpen(prev => !prev), []);
 
   const closeSideNav = useCallback(() => {
-    const vibrationEnabled = localStorage.getItem('vibrationEnabled');
-    if (vibrationEnabled === 'true' && navigator.vibrate) {
-      navigator.vibrate(50); // Vibrate for 50ms
+    // const vibrationEnabled = localStorage.getItem('vibrationEnabled');
+    // if (vibrationEnabled === 'true' && navigator.vibrate) {
+    //   navigator.vibrate(50); // Vibrate for 50ms
+    // }
+    if (navigator.vibrate) { // need to move it into firebase setting..
+      navigator.vibrate(50);
     }
+
     setIsSideNavOpen(false);
   }, []);
 
@@ -143,14 +147,3 @@ const SideNavigation = () => {
 };
 
 export default React.memo(SideNavigation);
-
-
-
-
-// **שימוש במטמון מקומי**: הוספנו שימוש ב-`localStorage` עם מפתח `USER_CACHE_KEY` לשמירה וקריאה של נתוני המשתמש.
-// **אופטימיזציה של פונקציות**: השתמשנו ב-`useCallback` לפונקציות `toggleSideNav`, `closeSideNav`, ו-`handleSearch` כדי למנוע יצירה מחדש של פונקציות בכל רינדור.
-// **שימוש ב-`useMemo`**: השתמשנו ב-`useMemo` לחישוב `menuItems` ו-`renderProfileSection` כדי למנוע חישובים מיותרים.
-// **שיפור ביצועים**: הוצאנו את רינדור פריטי התפריט למשתנה `menuItems` שמחושב מראש, כדי למנוע רינדור מיותר.
-// **קוד נקי יותר**: ארגנו מחדש את הקוד כדי לשפר את הקריאות והתחזוקתיות שלו.
-// **שימוש ב-`React.memo`**: עטפנו את הקומפוננטה כולה ב-`React.memo` כדי למנוע רינדורים מיותרים כאשר ה-props לא משתנים.
-// **שמירה על כל התוכן**: כפי שנדרש, שמרנו על כל התוכן והפונקציונליות של הקומפוננטה המקורית.

@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import withOfflineOverlay from '../assets/withOfflineOverlay';
-import ThemeToggle from '../assets/themeToggle';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
+import { ToastContainer, toast } from 'react-toastify';
+import ThemeToggle from '../assets/themeToggle';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/settings.css'
 
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from '../data/firebaseConfig';
+
 
 const Settings = () => {
   const { t, i18n } = useTranslation();
   const [settings, setSettings] = useState({
     isDarkMode: false,
     language: 'en',
-    notificationsEnabled: false,
+    notificationsEnabled: true,
     vibrationEnabled: true,
     fontSize: 'medium'
   });
@@ -27,12 +27,12 @@ const Settings = () => {
     try {
       const userRef = doc(db, 'users', auth.currentUser.uid);
       await updateDoc(userRef, { settings: newSettings });
-      toast.success(t('settings-saved'), {
+      toast.success(t('setting saved'), {
         position: "top-center",
-        autoClose: 1500,
+        autoClose: 1000,
         hideProgressBar: true,
         closeOnClick: true,
-        pauseOnHover: true,
+        pauseOnHover: false,
         draggable: true,
         progress: undefined,
       });
@@ -171,4 +171,4 @@ const Settings = () => {
   );
 };
 
-export default withOfflineOverlay(Settings);
+export default Settings;
