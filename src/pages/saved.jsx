@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { auth, db } from '../data/firebaseConfig';
@@ -18,6 +18,7 @@ const Saved = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [savedCarIds, setSavedCarIds] = useState([]);
     const [cars, setCars] = useState([]);
+    const navigate = useNavigate();
 
     const fetchSavedCarIds = useCallback(async () => {
         if (!auth.currentUser) {
@@ -101,6 +102,10 @@ const Saved = () => {
         </div>
     ), [t]);
 
+    const handleCarClick = useCallback((carId) => {
+        navigate(`/map?carId=${carId}`);
+    }, [navigate]);
+
     if (isLoading) {
         return <LoadingPage />;
     }
@@ -155,7 +160,11 @@ const Saved = () => {
             </div>
             <div className="saved-container">
                 {savedCars.map((car) => (
-                    <div key={car.id} className="saved-car-item">
+                    <div 
+                        key={car.id} 
+                        className="saved-car-item"
+                        onClick={() => handleCarClick(car.id)}
+                    >
                         <div className="car-image-container">
                             <img src={car.image} alt={t("{{brand}} {{model}}", { brand: car.brand, model: car.model })} />
                             <button onClick={() => removeSavedCar(car.id)} className='remove-button'>
