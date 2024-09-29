@@ -346,3 +346,23 @@
     padding: 0.6rem 0.8rem;
   }
 }
+
+
+.car-manager .car-info-inside {
+  display: flex;
+  align-items: center; /* Aligns image and text vertically in the center */
+  justify-content: space-between; /* Pushes the image and text to opposite ends */
+}
+
+.car-manager .car-info-inside img {
+  width: 80px; 
+  height: auto;
+  margin-left: 15px;
+}
+
+.car-manager .car-info-inside h2 {
+  margin-right: auto; /* Ensures the text sticks to the right */
+  text-align: right;
+  font-size: 1.5rem; /* Adjust the font size of the brand and model */
+  font-weight: bold;
+}

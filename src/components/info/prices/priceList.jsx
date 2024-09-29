@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { motion } from 'framer-motion';
+
 import { fetchCarsFromFirebase } from '../../../data/fetchCars';
+
+import { motion } from 'framer-motion';
 import LoadingPage from '../../../assets/LoadingPage';
 import '../../../styles/priceList.css';
+
 
 const PriceList = () => {
   const { t } = useTranslation();
   const [cars, setCars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchCars = useCallback(async () => {
     try {
@@ -24,6 +29,10 @@ const PriceList = () => {
   useEffect(() => {
     fetchCars();
   }, [fetchCars]);
+
+  const handleCarClick = useCallback((carId) => {
+    navigate(`/map?carId=${carId}`);
+  }, [navigate]);
 
   if (isLoading) {
     return <LoadingPage />;
@@ -57,6 +66,8 @@ const PriceList = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.1 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
+            onClick={() => handleCarClick(car.id)}
+            style={{ cursor: 'pointer' }}
           >
             <h2> {t('{{seats}} seats', { seats: car.seats })} | {car.brand} {car.model} | {t(car.category)}</h2>
             <img src={car.image5} alt={`${car.brand} ${car.model}`} />

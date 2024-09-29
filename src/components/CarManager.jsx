@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import '../styles/CarManager.css';
-import Swal from 'sweetalert2';
-import { db, auth } from '../data/firebaseConfig';
-import { collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
 import UserManagement from './UserManagement';
+
+import { db } from '../data/firebaseConfig';
+import { collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
+
+import Swal from 'sweetalert2';
+import '../styles/CarManager.css';
 
 
 const CARS_CACHE_KEY = 'cachedCars';
@@ -12,7 +14,6 @@ const CARS_CACHE_KEY = 'cachedCars';
 const CarManager = () => {
   const { t } = useTranslation();
   const [cars, setCars] = useState([]);
-  const [users, setUsers] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -254,6 +255,7 @@ const CarList = React.memo(({ filteredCars, searchQuery, setSearchQuery, setSele
         className="search-input"
       />
     </div>
+
     <button className="add-car-btn" onClick={() => {
       setSelectedCar({ 
         id: '',
@@ -263,8 +265,9 @@ const CarList = React.memo(({ filteredCars, searchQuery, setSearchQuery, setSele
       });
       setSearchQuery('');
     }}>
-      {t('Add New Car')}
+      {t('Add New Car')} +
     </button>
+
     {filteredCars.map(car => (
       <div key={car.id} className="car-item">
         <div className="car-info">
@@ -286,8 +289,14 @@ const CarList = React.memo(({ filteredCars, searchQuery, setSearchQuery, setSele
 const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, handleSave, handleDelete, t }) => (
   <div className="car-edit">
     <button className="back-btn" onClick={() => setSelectedCar(null)}>
-      {t('Back')}
+      {t('Back')}  ←
     </button>
+    <div className="car-info-inside">
+      <img src={selectedCar.image || '/placeholder.svg?height=100&width=100'} alt={` `} />
+      <div>
+        <h2>{selectedCar.brand} {selectedCar.model}</h2>
+      </div>
+    </div>
     <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
       <div className="form-group">
         <label htmlFor="id">{t('Car ID')}</label>
@@ -376,9 +385,10 @@ const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, ha
               text: t('You won\'t be able to revert this!'),
               icon: 'warning',
               showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: t('Yes, delete it!')
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#s33',
+              confirmButtonText: t('Yes, delete it!'),
+              cancelButtonText: t('no, cancel')
             }).then((result) => {
               if (result.isConfirmed) {
                 handleDelete();

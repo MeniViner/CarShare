@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LoadingPage from '../assets/LoadingPage';
 
@@ -19,6 +19,7 @@ const Reservations = () => {
   const [pastReservations, setPastReservations] = useState([]);
   const [cars, setCars] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   const fetchData = useCallback(async () => {
     console.log("Fetching data started...");
@@ -39,6 +40,10 @@ const Reservations = () => {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  const handleCarClick = useCallback((carId) => {
+    navigate(`/map?carId=${carId}`);
+  }, [navigate]);
 
   const loadReservations = async (carData) => {
     const now = new Date();
@@ -155,7 +160,7 @@ const Reservations = () => {
   };
 
   const ReservationCard = ({ reservation, isActive }) => (
-    <div className="reservation-card">
+    <div className="reservation-card" onClick={() => handleCarClick(reservation.carId)} >
       {reservation.carDetails && (
         <>
           <div className="car-image-container">
@@ -221,7 +226,11 @@ const Reservations = () => {
                   </div>
                 ) : (
                   activeReservations.map(reservation => (
-                    <ReservationCard key={reservation.id} reservation={reservation} isActive={true} />
+                    <ReservationCard 
+                      key={reservation.id} 
+                      reservation={reservation} 
+                      isActive={true} 
+                    />
                   ))
                 )}
               </div>
@@ -241,7 +250,11 @@ const Reservations = () => {
                   <>
                     <button className="clear-history-button" onClick={clearAllHistory}>{t('delete all history')}</button>
                     {pastReservations.map(reservation => (
-                      <ReservationCard key={reservation.id} reservation={reservation} isActive={false} />
+                      <ReservationCard 
+                        key={reservation.id} 
+                        reservation={reservation} 
+                        isActive={false}                         
+                      />
                     ))}
                   </>
                 )}
