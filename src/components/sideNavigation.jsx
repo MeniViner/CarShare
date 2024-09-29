@@ -47,10 +47,10 @@ const SideNavigation = () => {
   const closeSideNav = useCallback(() => {
     // const vibrationEnabled = localStorage.getItem('vibrationEnabled');
     // if (vibrationEnabled === 'true' && navigator.vibrate) {
-    //   navigator.vibrate(50); // Vibrate for 50ms
+    //   navigator.vibrate(20); // Vibrate for 20ms
     // }
     if (navigator.vibrate) { // need to move it into firebase setting..
-      navigator.vibrate(50);
+      navigator.vibrate([20]);
     }
 
     setIsSideNavOpen(false);
@@ -121,7 +121,7 @@ const SideNavigation = () => {
             <IoSearch className='icon' aria-hidden="true" />
             <input
               type="text"
-              placeholder={t('search')}
+              placeholder={t('general search')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={handleSearch}
