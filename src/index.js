@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import './utils/i18next';
 import i18n from './utils/i18next';
+import './utils/i18next';
 import './styles/theme.css';
 
 const applyStoredSettings = () => {

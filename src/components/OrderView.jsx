@@ -146,4 +146,4 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
 };
 
 export default React.memo(OrderView);
-
+ 

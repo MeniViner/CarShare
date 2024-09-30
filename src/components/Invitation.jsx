@@ -31,24 +31,13 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     return Math.max(cost, 0);
   }, [isHourly, selectedCar.pricePerHour, selectedCar.pricePerDay, selectedCar.unlockFee]);
 
-  // הוספת דקה אחת לשעה הנוכחית
-  // useEffect(() => {
-  //   const currentDate = new Date();
-  //   currentDate.setMinutes(currentDate.getMinutes() + 30);
-  //   const formattedTime = format(currentDate, 'HH:mm');
-  //   setStartTime(formattedTime); 
-  //   setEndTime(format(addHours(currentDate, 1), 'HH:mm'));
-  // }, []); 
-
-
   useEffect(() => {
     const currentDate = new Date();
-    currentDate.setMinutes(currentDate.getMinutes() + 60); // 60 דקות קדימה מהזמן הנוכחי
+    currentDate.setMinutes(currentDate.getMinutes() + 60); // שעה קדימה מהזמן הנוכחי
     const formattedTime = format(currentDate, 'HH:mm');
     setStartTime(formattedTime); 
-    setEndTime(format(addHours(currentDate, 1), 'HH:mm')); // תמיד שעה קדימה
+    setEndTime(format(addHours(currentDate, 1), 'HH:mm')); // תמיד שעה אחת קדימה
   }, []); 
-
 
   useEffect(() => {
     const start = new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`);
@@ -104,9 +93,6 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     }
   }, [startDate, endDate, startTime, endTime]);
 
-
-
-
   const updateSelectedDaysAndHours = useCallback(() => {
     const start = new Date(`${format(startDate, 'yyyy-MM-dd')}T${startTime}`);
     const end = new Date(`${format(endDate, 'yyyy-MM-dd')}T${endTime}`);
@@ -119,34 +105,6 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
   useEffect(() => {
     updateSelectedDaysAndHours();
   }, [startDate, startTime, endDate, endTime, updateSelectedDaysAndHours]);
-
-  // const increment = useCallback((type) => {
-  //   let newEndDate = new Date(endDate);
-  //   if (type === 'days') {
-  //     newEndDate = addDays(newEndDate, 1);
-  //   } else if (type === 'hours') {
-  //     newEndDate = addHours(newEndDate, 1);
-  //   }
-  //   setEndDate(newEndDate);
-  //   setEndTime(format(newEndDate, 'HH:mm'));
-  // }, [endDate]);
-
-  // const decrement = useCallback((type) => {
-  //   let newEndDate = new Date(endDate);
-  //   if (type === 'days' && selectedDays > 0) {
-  //     newEndDate = addDays(newEndDate, -1);
-  //   } else if (type === 'hours' && (selectedDays > 0 || selectedHours > 1)) {
-  //     newEndDate = addHours(newEndDate, -1);
-  //   } else {
-  //     return;
-  //   }
-    
-  //   if (newEndDate > startDate) {
-  //     setEndDate(newEndDate);
-  //     setEndTime(format(newEndDate, 'HH:mm'));
-  //   }
-  // }, [endDate, selectedDays, selectedHours, startDate]);
-
 
   const increment = useCallback((type) => {
     if (type === 'days') {
@@ -177,7 +135,6 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     }
     updateSelectedDaysAndHours();
   }, [endDate, endTime, selectedDays, selectedHours, startDate, startTime, updateSelectedDaysAndHours]);
-
 
   const handleCheckAvailability = useCallback(() => {
     const reservationData = {
