@@ -3,13 +3,15 @@ import { useTranslation } from 'react-i18next';
 import UserManagement from './UserManagement';
 
 import { db } from '../data/firebaseConfig';
-import { collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
+import { collection, addDoc, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
 
+import LoadingPage from '../assets/LoadingPage';
 import Swal from 'sweetalert2';
 import '../styles/CarManager.css';
 
 
 const CARS_CACHE_KEY = 'cachedCars';
+
 
 const CarManager = () => {
   const { t } = useTranslation();
@@ -79,21 +81,31 @@ const CarManager = () => {
     });
   }, [t]);
 
+
   const handleSave = useCallback(async () => {
     if (selectedCar) {
       try {
-        const carRef = doc(db, 'cars', selectedCar.id.toString());
-        await setDoc(carRef, selectedCar, { merge: true });
-        
+        let carRef;  // נגדיר את carRef מחוץ לבלוקי ה-if כדי שנוכל להשתמש בו בכל מקרה
+
+        if (selectedCar.id) {
+          // אם יש ID, נעדכן את המסמך הקיים
+          carRef = doc(db, 'cars', selectedCar.id.toString());
+          await setDoc(carRef, selectedCar, { merge: true });
+        } else {
+          // אם אין ID, ניצור מסמך חדש עם ID אוטומטי
+          carRef = await addDoc(collection(db, 'cars'), selectedCar);
+          setSelectedCar(prev => ({ ...prev, id: carRef.id })); // עדכון הרכב עם ה-ID שנוצר
+        }
+
         setCars(prevCars => {
-          const updatedCars = prevCars.map(car => 
-            car.id === selectedCar.id ? selectedCar : car
-          );
+          const updatedCars = selectedCar.id 
+            ? prevCars.map(car => car.id === selectedCar.id ? selectedCar : car)
+            : [...prevCars, { ...selectedCar, id: carRef.id }]; // אם יצרנו ID חדש, נוסיף אותו לרשימה
           localStorage.setItem(CARS_CACHE_KEY, JSON.stringify(updatedCars));
           return updatedCars;
         });
+
         setSelectedCar(null);
-        
         Swal.fire({
           icon: 'success',
           title: t('Saved'),
@@ -109,6 +121,7 @@ const CarManager = () => {
       }
     }
   }, [selectedCar, t]);
+
 
   const handleDelete = useCallback(async () => {
     if (selectedCar) {
@@ -192,7 +205,7 @@ const CarManager = () => {
   }
 
   if (isLoading) {
-    return <div className="loading">{t('Loading...')}</div>;
+    return <LoadingPage />;
   }
 
   return (
@@ -291,16 +304,20 @@ const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, ha
     <button className="back-btn" onClick={() => setSelectedCar(null)}>
       {t('Back')}  ←
     </button>
-    <div className="car-info-inside">
-      <img src={selectedCar.image || '/placeholder.svg?height=100&width=100'} alt={` `} />
-      <div>
-        <h2>{selectedCar.brand} {selectedCar.model}</h2>
+
+    {selectedCar.id && (
+      <div className="car-info-inside">
+        <img src={selectedCar.image || '/placeholder.svg?height=100&width=100'}  alt={`${selectedCar.brand} ${selectedCar.model}`} />
+        <div>
+          <h2>{selectedCar.brand} {selectedCar.model}</h2>
+        </div>
       </div>
-    </div>
+    )}
+
     <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
       <div className="form-group">
         <label htmlFor="id">{t('Car ID')}</label>
-        <input id="id" name="id" value={selectedCar.id || ''} onChange={handleInputChange} required />
+        <input id="id" name="id" value={selectedCar.id || ''} onChange={handleInputChange}  />
       </div>
       <div className="form-group">
         <label htmlFor="brand">{t('Brand')}</label>

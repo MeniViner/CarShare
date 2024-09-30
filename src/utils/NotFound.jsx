@@ -1,18 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/NotFound.css';
-// import logo from './assets/meniverse-icon.png';
 import video404 from '../assets/404.mp4';
 
 const NotFound = () => {
   return (
     <div className='page-404'>
-      {/* <div id="logo-section">
-        <img src={logo} alt="Logo" width="50" height="50" />
-        <h1>
-          <a id="b">M</a>eni<a id="b">V</a>erse<a id="b">.</a>
-        </h1>
-      </div> */}
       <h1>Car Share</h1>
       <h1 id="hmm" align="center">
         <b>Hmm... we can't find that!</b>

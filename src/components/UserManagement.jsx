@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { auth, db } from '../data/firebaseConfig';
 import { deleteUser, sendPasswordResetEmail } from 'firebase/auth';
 import { collection, getDocs, doc, deleteDoc, query, orderBy } from 'firebase/firestore';
+
 import Swal from 'sweetalert2';
+import LoadingPage from '../assets/LoadingPage';
 import { FaSearch, FaTrash, FaSort, FaEnvelope } from 'react-icons/fa';
 import '../styles/UserManagement.css';
 
@@ -131,7 +134,7 @@ const UserManagement = () => {
     });
 
   if (isLoading) {
-    return <div className="loading">{t('Loading...')}</div>;
+    return <LoadingPage />;
   }
 
   return (
