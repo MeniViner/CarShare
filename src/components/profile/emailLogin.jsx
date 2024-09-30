@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { auth } from '../../data/firebaseConfig';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from "firebase/auth";
 import { doc, setDoc, getFirestore } from "firebase/firestore";
-import { toast, ToastContainer } from 'react-toastify';
+
 import Swal from 'sweetalert2';
-import '../../styles/emailLogin.css';
-import 'react-toastify/dist/ReactToastify.css';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import '../../styles/emailLogin.css';
+
 
 const USER_CACHE_KEY = 'cachedUserInfo';
 
