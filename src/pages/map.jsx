@@ -171,7 +171,7 @@ const Map = () => {
     });
   }, [cars, getCarIcon, handleMarkerClick, isLoaded]);
 
-  if (loadError) return <div>Error loading maps</div>;
+  if (loadError) return <h3 id='elm'>Error loading maps</h3>;
   if (!isLoaded || isLoading) return <LoadingPage />;
 
   return (
