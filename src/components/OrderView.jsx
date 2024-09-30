@@ -109,7 +109,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
       setIsLoading(false);
       Swal.fire(t('error'), t('failed to reserve car'), 'error');
     }
-  }, [t, selectedCar.id, startDate, startTime, endDate, endTime, selectedHours, selectedDays, totalCost, navigate, onConfirmOrder]);
+  }, [t, selectedCar.id, selectedCar.unlockFee, startDate, startTime, endDate, endTime, selectedHours, selectedDays, totalCost, navigate, onConfirmOrder]);
 
   const orderDetails = useMemo(() => [
     { label: t('from'), value: `${format(new Date(startDate), 'dd/MM/yyyy')} ${t('at')} ${startTime}` },

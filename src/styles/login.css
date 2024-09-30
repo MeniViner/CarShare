@@ -9,7 +9,7 @@
   margin-bottom: 5vh;
 }
 
-.profile-page-header {
+.login-with-google-page .profile-page-header {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,7 +39,7 @@
   margin: 20px 20px;
 }
 
-.separate-line {
+.login-with-google-page .separate-line {
   flex-grow: 1;
   height: 1px;
   background-color: grey;
@@ -72,11 +72,35 @@
   transition: background-color 0.3s;
 }
   
-.google-btn:hover {
+.login-with-google-page .google-btn:hover {
   background-color: #f1f1f1;
 }
   
-.google-icon {
+.login-with-google-page .google-icon {
   margin-right: 10px;
   font-size: 20px;
+}
+
+
+
+
+.login-with-google-page .loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-with-google-page .spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #09f;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

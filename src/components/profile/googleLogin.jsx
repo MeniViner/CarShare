@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { doc, setDoc, getFirestore } from "firebase/firestore";
+
 import Swal from 'sweetalert2';
 import { MdAccountCircle } from "react-icons/md";
 import { FcGoogle } from 'react-icons/fc';
 import { useTranslation } from 'react-i18next';
 import '../../styles/login.css';
+
 
 const USER_CACHE_KEY = 'cachedUserInfo';
 
@@ -13,9 +16,11 @@ const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
   const { t } = useTranslation();
   const auth = getAuth();
   const db = getFirestore();
+  const [isLoading, setIsLoading] = useState(false); 
 
   const handleGoogleLogin = async () => {
     const provider = new GoogleAuthProvider();
+    setIsLoading(true);
 
     try {
       const userCredential = await signInWithPopup(auth, provider);
@@ -41,12 +46,21 @@ const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
       setIsAuthenticated(true);
     } catch (error) {
       console.error('Google login error:', error);
-      Swal.fire({
-        icon: 'error',
-        title: t('Error!'),
-        text: t('Google login failed.'),
-        showConfirmButton: true,
-      });
+      if (error.code === 'auth/popup-closed-by-user') {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: 'The popup was closed before completing the sign in. Please try again.',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Failed',
+          text: `An error occurred: ${error.message}`,
+        });
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -64,14 +78,21 @@ const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
           <div className="separate-line"></div>
         </div>
         
-        <button 
-          className="google-btn center-button" 
-          onClick={handleGoogleLogin}
-          aria-label={t('Login with Google')}
-        >
-          <FcGoogle className="google-icon" aria-hidden="true" />
-          {t('Login with Google')}
-        </button>
+        {isLoading ? (
+          <div className="loading-indicator">
+            <p>{t('Connecting to Google, please wait...')}</p>
+            <div className="spinner"></div>
+          </div>
+        ) : (
+          <button 
+            className="google-btn center-button" 
+            onClick={handleGoogleLogin}
+            aria-label={t('Login with Google')}
+          >
+            <FcGoogle className="google-icon" aria-hidden="true" />
+            {t('Login with Google')}
+          </button>
+        )}
       </div>
     </div>
   );
@@ -79,14 +100,3 @@ const GoogleLogin = ({ setIsAuthenticated, setUser }) => {
 
 export default GoogleLogin;
 
-
-
-
-
-// **שימוש ב-i18next**: הוספנו `useTranslation` והחלפנו את כל המחרוזות הקבועות ב-`t()` לתמיכה בתרגום.
-// **שיפור המטמון**: שינינו את מפתח המטמון ל-`USER_CACHE_KEY` לעקביות עם הקומפוננטות האחרות.
-// **טיפול בשגיאות**: הוספנו פרטים נוספים להודעת השגיאה בקונסול.
-// **נגישות**: הוספנו מאפייני `aria-label` ו-`aria-hidden` לשיפור הנגישות.
-// **ייבוא**: הסרנו ייבוא לא נחוץ של `auth` מ-`firebaseConfig` מכיוון שאנחנו משתמשים ב-`getAuth()`.
-// **עקביות**: השתמשנו ב-`USER_CACHE_KEY` במקום במחרוזת קבועה 'user' לשמירת מידע המשתמש ב-`localStorage`.
-// **ביצועים**: הוצאנו את יצירת ה-`GoogleAuthProvider` מחוץ לפונקציית ה-`handleGoogleLogin` כדי למנוע יצירה מחדש בכל לחיצה.

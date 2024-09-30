@@ -29,7 +29,7 @@ const Invitation = ({ selectedCar, onCheckAvailability }) => {
     }
 
     return Math.max(cost, 0);
-  }, [isHourly, selectedCar.pricePerHour, selectedCar.pricePerDay, selectedCar.unlockFee]);
+  }, [isHourly, selectedCar.pricePerHour, selectedCar.pricePerDay]);
 
   useEffect(() => {
     const currentDate = new Date();

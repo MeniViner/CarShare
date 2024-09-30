@@ -1,20 +1,28 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useTranslation } from 'react-i18next';
+
 import { auth, db } from '../../data/firebaseConfig';
-import '../../styles/profileDetails.css';
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { setPersistence, browserLocalPersistence, onAuthStateChanged } from "firebase/auth";
+import Swal from 'sweetalert2';
+import LoadingPage from '../../assets/LoadingPage'
 import { MdModeEditOutline } from "react-icons/md";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from 'react-i18next';
 import { motion } from "framer-motion";
+import '../../styles/profileDetails.css';
+
 
 const USER_CACHE_KEY = 'cachedUserInfo';
 
 const ProfileDetails = ({ user }) => {
-    const navigate = useNavigate();
     const { t } = useTranslation();
+    const storage = getStorage();
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [profileData, setProfileData] = useState({
         firstName: '',
         lastName: '',
@@ -24,14 +32,15 @@ const ProfileDetails = ({ user }) => {
         paymentMethod: '',
         photoURL: ''
     });
-
+    
     const fetchUserInfo = useCallback(async () => {
-        try {
-            if (!auth.currentUser) {
-                console.error('No authenticated user');
-                return;
-            }
+        setIsLoading(true);
 
+        if (!auth.currentUser) {
+            return;
+        }
+
+        try {
             const userDoc = doc(db, "users", auth.currentUser.uid);
             const userSnapshot = await getDoc(userDoc);
             
@@ -52,6 +61,8 @@ const ProfileDetails = ({ user }) => {
         } catch (error) {
             console.error('Error fetching user info: ', error);
             Swal.fire(t('error'), t('failed to fetch user information'), 'error');
+        } finally {
+            setIsLoading(false);
         }
     }, [t]);
 
@@ -59,18 +70,41 @@ const ProfileDetails = ({ user }) => {
         fetchUserInfo();
     }, [fetchUserInfo]);
 
+    useEffect(() => {
+        setIsLoading(true);
+        const initializeAuth = async () => {
+            await setPersistence(auth, browserLocalPersistence);
+            
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    setIsAuthenticated(true);
+                    fetchUserInfo();
+                } else {
+                    setIsAuthenticated(false);
+                    setIsLoading(false);
+                }
+            });
+        };
+      
+        initializeAuth();
+    }, [fetchUserInfo]);
+
+
+    if (isLoading) {
+        return <LoadingPage />;
+    }
+
     const handleSaveChanges = async () => {
         try {
             if (!auth.currentUser) {
-                // Swal.fire(t('error'), t('user not authenticated'), 'error');
                 Swal.fire({
                     title: t('error'),
                     text: t('user not authenticated'),
                     icon: 'error',
-                    confirmButtonText: t('connect now'),  // Customize the button text
+                    confirmButtonText: t('connect now'), 
                   }).then((result) => {
                     if (result.isConfirmed) {
-                      navigate('/profile');  // Redirect on button click
+                      navigate('/profile'); 
                     }
                   });
                 return;
@@ -94,32 +128,45 @@ const ProfileDetails = ({ user }) => {
         }));
     };
 
-    const handleImageUpload = (e) => {
+    const handleImageUpload = async (e) => {
         const imageFile = e.target.files[0];
         if (imageFile) {
-            const imageUrl = URL.createObjectURL(imageFile);
-            Swal.fire({
-                title: t('change profile picture'),
-                text: t('change profile picture confirmation'),
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: t('yes change it'),
-                cancelButtonText: t('cancel')
-            }).then((result) => {
+            try {
+                const storageRef = ref(storage, `profile_pictures/${auth.currentUser.uid}/${imageFile.name}`);
+                
+                // Upload image to Firebase Storage
+                await uploadBytes(storageRef, imageFile);
+                const imageUrl = await getDownloadURL(storageRef);
+
+                // Show confirmation before saving image
+                const result = await Swal.fire({
+                    title: t('change profile picture'),
+                    text: t('change profile picture confirmation'),
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: t('yes change it'),
+                    cancelButtonText: t('no dont')
+                });
+
                 if (result.isConfirmed) {
+                    // Update profileData with the new image URL
                     setProfileData(prevData => ({
                         ...prevData,
                         photoURL: imageUrl
                     }));
-                    Swal.fire(
-                        t('changed'),
-                        t('profile picture updated'),
-                        'success'
-                    );
+                    
+                    // Update the user document in Firestore
+                    const userDoc = doc(db, "users", auth.currentUser.uid);
+                    await setDoc(userDoc, { photoURL: imageUrl }, { merge: true });
+                    
+                    Swal.fire(t('changed'), t('profile picture updated'), 'success');
                 }
-            });
+            } catch (error) {
+                console.error("Error uploading image: ", error);
+                Swal.fire(t('error'), t('failed to upload image'), 'error');
+            }
         }
     };
 
@@ -188,40 +235,3 @@ const ProfileDetails = ({ user }) => {
 
 export default ProfileDetails;
 
-
-
-// **שימוש במטמון מקומי**: הוספנו שימוש ב-`localStorage` עם מפתח `USER_CACHE_KEY` לשמירה וקריאה של מידע המשתמש.
-// **אחדות מצב**: במקום מספר משתני מצב נפרדים, השתמשנו באובייקט `profileData` אחד לכל נתוני הפרופיל.
-// **יעילות בטעינת נתונים**: השתמשנו ב-`useCallback` עבור `fetchUserInfo` כדי למנוע יצירה מחדש של הפונקציה בכל רינדור.
-// **עדכון מטמון בשמירת שינויים**: בעת שמירת שינויים, אנו מעדכנים גם את המטמון המקומי.
-// **טיפול בשגיאות משופר**: הוספנו הודעות שגיאה עם תרגום ב-`fetchUserInfo`.
-// **שיפור בטיפול בקלט**: השתמשנו בפונקציה `handleInputChange` אחת עבור כל השדות.
-// **קוד נקי יותר**: השתמשנו ב-`map` כדי לרנדר את שדות הקלט, מה שהופך את הקוד לקריא יותר ופחות חזרתי.
-// **שימוש עקבי ב-Firestore**: השתמשנו ב-`setDoc` עם האופציה `merge: true` במקום `updateDoc`, מה שמאפשר יצירת מסמך חדש אם הוא לא קיים.
-
-
-// **שיפור בפונקציית `fetchUserInfo`**:
-
-// - בדיקה אם המשתמש מחובר לפני ניסיון לגשת ל-Firestore.
-// - אם אין נתונים ב-Firestore, מנסה לטעון מהמטמון המקומי.
-// - עדכון ה-`profileData` באופן שמשמר את הנתונים הקיימים.
-
-// **שיפור בפונקציית `handleSaveChanges`**:
-
-// - בדיקה אם המשתמש מחובר לפני ניסיון לשמור נתונים.
-
-// **טיפול בערכים חסרים**:
-
-// - בשדות הקלט, הוספנו `|| ''` כדי להתמודד עם ערכים `undefined` או `null`.
-
-// **שימור נתונים קיימים**:
-
-// - בעת עדכון ה-`profileData`, אנו משתמשים ב-`prevData` כדי לשמר נתונים קיימים שלא השתנו.
-
-// **שיפור בטיפול בשגיאות**:
-
-// - הוספנו יותר הודעות שגיאה ולוגים כדי לסייע באיתור בעיות.
-
-// **שמירה על אופטימיזציות קודמות**:
-
-// - שמרנו על השימוש ב-`useCallback`, `localStorage`, ועל המבנה הכללי של הקומפוננטה.

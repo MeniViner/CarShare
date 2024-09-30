@@ -68,18 +68,15 @@ i18n.use(initReactI18next).init({
         "mileage overage": "חריגה מקילומטראז'",
         "up to 100 km included per rental": "עד 100 ק\"מ כלולים בהשכרה",
         "over 100 km": "מעבר ל-100 ק\"מ",
-        "per km": "לכל ק\"מ",
         "toll roads": "כבישי אגרה",
         "any toll road fees will be passed to the user with an additional processing fee of": "כל דמי כבישי אגרה יועברו למשתמש בתוספת דמי טיפול של",
         "damaged or missing accessories": "אביזרים פגומים או חסרים",
         "loss or damage to items like GPS, chargers, or child seats will result in a replacement fee of": "אובדן או נזק לאביזרים כמו GPS, מטענים או מושבי ילדים יגררו תשלום עבור החלפה",
         "per item": "לכל פריט",
-        "early return fee": "תוספת על החזרה מוקדמת",
         "if the car is returned more than 1 hour before the scheduled time": "אם הרכב מוחזר יותר משעה לפני הזמן המתוכנן",
         "early return fee": "דמי החזרה מוקדמת",
         "lost key fee": "תוספת אובדן מפתח",
         "if the key or key fob is lost or damaged": "אם המפתח או שלט הרכב אובדים או ניזוקים",
-        "replacement fee": "תוספת עלות החלפה",
         "smoking in vehicle": "עישון ברכב",
         "if smoking is detected inside the vehicle": "אם מתגלה עישון בתוך הרכב",
         "cleaning and deodorizing fee": "דמי ניקוי ובישום",
@@ -92,7 +89,6 @@ i18n.use(initReactI18next).init({
         "parking violation fee": "תוספת על עבירת חניה",
         "if the car is involved in any parking violations during the rental period": "אם הרכב מעורב בעבירות חניה במהלך תקופת ההשכרה",
         "actual fine": "הקנס בפועל",
-        "administration fee": "דמי טיפול",
       
         "insurance waiver": "ויתור על אחריות ביטוח",
         "optional waiver to reduce the damage liability in case of an accident": "ויתור אופציונלי להפחתת האחריות במקרה של תאונה",
@@ -108,7 +104,6 @@ i18n.use(initReactI18next).init({
       
         "pet cleaning fee": "תוספת על ניקוי לאחר חיות מחמד",
         "if the car requires additional cleaning due to pet hair or odors": "אם נדרש ניקוי נוסף עקב שערות או ריחות מחיות מחמד",
-        "standard cleaning fee": "דמי ניקוי סטנדרטיים",     
 
         "tire damage": "נזק לצמיג",
         "if tire damage occurs during the rental period": "אם נגרם נזק לצמיג במהלך תקופת ההשכרה",
@@ -133,11 +128,9 @@ i18n.use(initReactI18next).init({
       
         "car lockout fee": "תוספת על נעילה מחוץ לרכב",
         "if the user locks themselves out of the vehicle and requires assistance to unlock it": "אם המשתמש ננעל מחוץ לרכב וזקוק לסיוע כדי לפתוח אותו",
-        "per incident": "לכל מקרה",
       
         "missing fuel card": "תוספת על אובדן כרטיס דלק",
         "if the fuel card provided with the vehicle is lost or damaged": "אם כרטיס הדלק שסופק עם הרכב אובד או ניזוק",
-        "replacement fee": "דמי החלפה",
       
         "overnight parking fee": "תוספת על חניה לא מורשית ללילה",
         "if the car is parked in unauthorized areas overnight": "אם הרכב חונה באזורים לא מורשים ללילה",
@@ -174,7 +167,6 @@ i18n.use(initReactI18next).init({
         "per hour": "לשעה",
         "per km": "לכל ק\"מ",
         "daily": "יומי",
-        "per day": "ליום",
         "small G": "קטן G",
         "Peugeot 208": "פיגו 208",
       
@@ -443,7 +435,12 @@ i18n.use(initReactI18next).init({
             "register here": "הירשם כאן",
             "already have an account?": "כבר יש לך חשבון?",
             "Sign in here": "התחבר כאן",
-        
+            "Connecting to Google, please wait...": "מתחבר לגוגל, אנא המתן...",        
+            "Login Failed": "ההתחברות נכשלה",
+            "The popup was closed before completing the sign in. Please try again.": "חלון ההתחברות נסגר לפני השלמת ההתחברות. אנא נסה שוב.",
+            "An error occurred:": "אירעה שגיאה:",
+            "Login with Google": "התחבר עם Google",
+            "failed to reserve car": "נכשל ניסיון הזמנת הרכב",
       }
     }
   },
