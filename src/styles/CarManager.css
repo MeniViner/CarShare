@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 .car-manager {
@@ -347,6 +348,20 @@
   }
 }
 
+.car-manager .get-location-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.car-manager .get-location-btn:hover {
+  background-color: #45a049;
+}
 
 .car-manager .car-info-inside {
   display: flex;
@@ -366,3 +381,4 @@
   font-size: 1.5rem; /* Adjust the font size of the brand and model */
   font-weight: bold;
 }
+
