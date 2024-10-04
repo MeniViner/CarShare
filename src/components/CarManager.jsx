@@ -85,22 +85,20 @@ const CarManager = () => {
   const handleSave = useCallback(async () => {
     if (selectedCar) {
       try {
-        let carRef;  // נגדיר את carRef מחוץ לבלוקי ה-if כדי שנוכל להשתמש בו בכל מקרה
+        let carRef;
 
         if (selectedCar.id) {
-          // אם יש ID, נעדכן את המסמך הקיים
           carRef = doc(db, 'cars', selectedCar.id.toString());
           await setDoc(carRef, selectedCar, { merge: true });
         } else {
-          // אם אין ID, ניצור מסמך חדש עם ID אוטומטי
           carRef = await addDoc(collection(db, 'cars'), selectedCar);
-          setSelectedCar(prev => ({ ...prev, id: carRef.id })); // עדכון הרכב עם ה-ID שנוצר
+          setSelectedCar(prev => ({ ...prev, id: carRef.id }));
         }
 
         setCars(prevCars => {
           const updatedCars = selectedCar.id 
             ? prevCars.map(car => car.id === selectedCar.id ? selectedCar : car)
-            : [...prevCars, { ...selectedCar, id: carRef.id }]; // אם יצרנו ID חדש, נוסיף אותו לרשימה
+            : [...prevCars, { ...selectedCar, id: carRef.id }];
           localStorage.setItem(CARS_CACHE_KEY, JSON.stringify(updatedCars));
           return updatedCars;
         });
@@ -299,125 +297,168 @@ const CarList = React.memo(({ filteredCars, searchQuery, setSearchQuery, setSele
   </div>
 ));
 
-const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, handleSave, handleDelete, t }) => (
-  <div className="car-edit">
-    <button className="back-btn" onClick={() => setSelectedCar(null)}>
-      {t('Back')}  ←
-    </button>
+const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, handleSave, handleDelete, t }) => {
+  const handleGetLocation = useCallback(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setSelectedCar(prev => ({
+            ...prev,
+            coordinates: {
+              lat: latitude,
+              lng: longitude
+            }
+          }));
+          Swal.fire({
+            icon: 'success',
+            title: t('Location Updated'),
+            text: t('Your current location has been set.'),
+          });
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          Swal.fire({
+            icon: 'error',
+            title: t('Location Error'),
+            text: t('Unable to get your current location. Please try again or enter manually.'),
+          });
+        }
+      );
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: t('Geolocation Not Supported'),
+        text: t('Your browser does not support geolocation.'),
+      });
+    }
+  }, [setSelectedCar, t]);
 
-    {selectedCar.id && (
-      <div className="car-info-inside">
-        <img src={selectedCar.image || '/placeholder.svg?height=100&width=100'}  alt={`${selectedCar.brand} ${selectedCar.model}`} />
-        <div>
-          <h2>{selectedCar.brand} {selectedCar.model}</h2>
-        </div>
-      </div>
-    )}
+  return (
+    <div className="car-edit">
+      <button className="back-btn" onClick={() => setSelectedCar(null)}>
+        {t('Back')}  ←
+      </button>
 
-    <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
-      <div className="form-group">
-        <label htmlFor="id">{t('Car ID')}</label>
-        <input id="id" name="id" value={selectedCar.id || ''} onChange={handleInputChange}  />
-      </div>
-      <div className="form-group">
-        <label htmlFor="brand">{t('Brand')}</label>
-        <input id="brand" name="brand" value={selectedCar.brand || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="model">{t('Model')}</label>
-        <input id="model" name="model" value={selectedCar.model || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="year">{t('Year')}</label>
-        <input id="year" name="year" type="number" value={selectedCar.year || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="category">{t('Category')}</label>
-        <input id="category" name="category" value={selectedCar.category || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="address.city">{t('City')}</label>
-        <input id="address.city" name="address.city" value={selectedCar.address?.city || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="address.street">{t('Street')}</label>
-        <input id="address.street" name="address.street" value={selectedCar.address?.street || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="coordinates.lat">{t('Latitude')}</label>
-        <input id="coordinates.lat" name="coordinates.lat" type="number" value={selectedCar.coordinates?.lat || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="coordinates.lng">{t('Longitude')}</label>
-        <input id="coordinates.lng" name="coordinates.lng" type="number" value={selectedCar.coordinates?.lng || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="battery">{t('Battery')}</label>
-        <input id="battery" name="battery" value={selectedCar.battery || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="fuel">{t('Fuel')}</label>
-        <input id="fuel" name="fuel" value={selectedCar.fuel || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="fuelType">{t('Fuel Type')}</label>
-        <input id="fuelType" name="fuelType" value={selectedCar.fuelType || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="kmPrice">{t('Price per KM')}</label>
-        <input id="kmPrice" name="kmPrice" type="number" value={selectedCar.kmPrice || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="pricePerHour">{t('Price per Hour')}</label>
-        <input id="pricePerHour" name="pricePerHour" type="number" value={selectedCar.pricePerHour || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="pricePerDay">{t('Price per Day')}</label>
-        <input id="pricePerDay" name="pricePerDay" type="number" value={selectedCar.pricePerDay || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="seats">{t('Seats')}</label>
-        <input id="seats" name="seats" type="number" value={selectedCar.seats || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="unlockFee">{t('Unlock Fee')}</label>
-        <input id="unlockFee" name="unlockFee" type="number" value={selectedCar.unlockFee || ''} onChange={handleInputChange} required />
-      </div>
-      <div className="form-group">
-        <label htmlFor="image">{t('Main Image URL')}</label>
-        <input id="image" name="image" value={selectedCar.image || ''} onChange={handleInputChange} required />
-      </div>
-      {[1, 2, 3, 4, 5].map((num) => (
-        <div key={num} className="form-group">
-          <label htmlFor={`image${num}`}>{t(`Image ${num} URL`)}</label>
-          <input id={`image${num}`} name={`image${num}`} value={selectedCar[`image${num}`] || ''} onChange={handleInputChange} />
+      {selectedCar.id && (
+        <div className="car-info-inside">
+          <img src={selectedCar.image || '/placeholder.svg?height=100&width=100'}  alt={`${selectedCar.brand} ${selectedCar.model}`} />
+          <div>
+            <h2>{selectedCar.brand} {selectedCar.model}</h2>
+          </div>
         </div>
-      ))}
-      <div className="form-actions">
-        <button type="submit">{t('Save')}</button>
-        {selectedCar.id && (
-          <button type="button" className="delete-btn" onClick={() => {
-            Swal.fire({
-              title: t('Are you sure?'),
-              text: t('You won\'t be able to revert this!'),
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#d33',
-              cancelButtonColor: '#s33',
-              confirmButtonText: t('Yes, delete it!'),
-              cancelButtonText: t('no, cancel')
-            }).then((result) => {
-              if (result.isConfirmed) {
-                handleDelete();
-              }
-            });
-          }}>
-            {t('Delete')}
+      )}
+
+      <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
+        <div className="form-group">
+          <label htmlFor="id">{t('Car ID')}</label>
+          <input id="id" name="id" value={selectedCar.id || ''} onChange={handleInputChange}  />
+        </div>
+        <div className="form-group">
+          <label htmlFor="brand">{t('Brand')}</label>
+          <input id="brand" name="brand" value={selectedCar.brand || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="model">{t('Model')}</label>
+          <input id="model" name="model" value={selectedCar.model || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="year">{t('Year')}</label>
+          <input id="year" name="year" type="number" value={selectedCar.year || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="category">{t('Category')}</label>
+          <input id="category" name="category" value={selectedCar.category || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="address.city">{t('City')}</label>
+          <input id="address.city" name="address.city" value={selectedCar.address?.city || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="address.street">{t('Street')}</label>
+          <input id="address.street" name="address.street" value={selectedCar.address?.street || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <button type="button" onClick={handleGetLocation} className="get-location-btn">
+            {t('Get Current Location')}
           </button>
-        )}
-      </div>
-    </form>
-  </div>
-));
+        </div>
+        <div className="form-group">
+          <label htmlFor="coordinates.lat">{t('Latitude')}</label>
+          <input id="coordinates.lat" name="coordinates.lat" type="number" value={selectedCar.coordinates?.lat || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="coordinates.lng">{t('Longitude')}</label>
+          <input id="coordinates.lng" name="coordinates.lng" type="number" value={selectedCar.coordinates?.lng || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="battery">{t('Battery')}</label>
+          <input id="battery" name="battery" value={selectedCar.battery || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="fuel">{t('Fuel')}</label>
+          <input id="fuel" name="fuel" value={selectedCar.fuel || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="fuelType">{t('Fuel Type')}</label>
+          <input id="fuelType" name="fuelType" value={selectedCar.fuelType || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="kmPrice">{t('Price per KM')}</label>
+          <input id="kmPrice" name="kmPrice" type="number" value={selectedCar.kmPrice || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="pricePerHour">{t('Price per Hour')}</label>
+          <input id="pricePerHour" name="pricePerHour" type="number" value={selectedCar.pricePerHour || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="pricePerDay">{t('Price per Day')}</label>
+          <input id="pricePerDay" name="pricePerDay" type="number" value={selectedCar.pricePerDay || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="seats">{t('Seats')}</label>
+          <input id="seats" name="seats" type="number" value={selectedCar.seats || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="unlockFee">{t('Unlock Fee')}</label>
+          <input id="unlockFee" name="unlockFee" type="number" value={selectedCar.unlockFee || ''} onChange={handleInputChange} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="image">{t('Main Image URL')}</label>
+          <input id="image" name="image" value={selectedCar.image || ''} onChange={handleInputChange} required />
+        </div>
+        {[1, 2, 3, 4, 5].map((num) => (
+          <div key={num} className="form-group">
+            <label htmlFor={`image${num}`}>{t(`Image ${num} URL`)}</label>
+            <input id={`image${num}`} name={`image${num}`} value={selectedCar[`image${num}`] || ''} onChange={handleInputChange} />
+          </div>
+        ))}
+        <div className="form-actions">
+          <button type="submit">{t('Save')}</button>
+          {selectedCar.id && (
+            <button type="button" className="delete-btn" onClick={() => {
+              Swal.fire({
+                title: t('Are you sure?'),
+                text: t('You won\'t be able to revert this!'),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: t('Yes, delete it!'),
+                cancelButtonText: t('No, cancel')
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  handleDelete();
+                }
+              });
+            }}>
+              {t('Delete')}
+            </button>
+          )}
+        </div>
+      </form>
+    </div>
+  );
+});
 
 export default CarManager;
