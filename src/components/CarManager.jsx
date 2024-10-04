@@ -297,42 +297,24 @@ const CarList = React.memo(({ filteredCars, searchQuery, setSearchQuery, setSele
   </div>
 ));
 
-const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, handleSave, handleDelete, t }) => {
-  const handleGetLocation = useCallback(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setSelectedCar(prev => ({
-            ...prev,
-            coordinates: {
-              lat: latitude,
-              lng: longitude
-            }
-          }));
-          Swal.fire({
-            icon: 'success',
-            title: t('Location Updated'),
-            text: t('Your current location has been set.'),
-          });
-        },
-        (error) => {
-          console.error("Error getting location:", error);
-          Swal.fire({
-            icon: 'error',
-            title: t('Location Error'),
-            text: t('Unable to get your current location. Please try again or enter manually.'),
-          });
-        }
-      );
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: t('Geolocation Not Supported'),
-        text: t('Your browser does not support geolocation.'),
-      });
-    }
-  }, [setSelectedCar, t]);
+
+const CarEdit = ({ selectedCar, setSelectedCar, handleInputChange, handleSave, handleDelete, t }) => {
+  const [isLocationPickerOpen, setIsLocationPickerOpen] = useState(false);
+
+  const handleLocationPicked = useCallback((location) => {
+    const [street, city] = location.address.split(',');
+    setSelectedCar(prev => ({
+      ...prev,
+      address: {
+        city: city.trim(),
+        street: street.trim()
+      },
+      coordinates: {
+        lat: location.lat,
+        lng: location.lng
+      }
+    }));
+  }, [setSelectedCar]);
 
   return (
     <div className="car-edit">
@@ -352,7 +334,7 @@ const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, ha
       <form onSubmit={(e) => { e.preventDefault(); handleSave(); }}>
         <div className="form-group">
           <label htmlFor="id">{t('Car ID')}</label>
-          <input id="id" name="id" value={selectedCar.id || ''} onChange={handleInputChange}  />
+          <input id="id" name="id" value={selectedCar.id || ''} onChange={handleInputChange} />
         </div>
         <div className="form-group">
           <label htmlFor="brand">{t('Brand')}</label>
@@ -370,6 +352,12 @@ const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, ha
           <label htmlFor="category">{t('Category')}</label>
           <input id="category" name="category" value={selectedCar.category || ''} onChange={handleInputChange} required />
         </div>
+        
+        <div className="form-group">
+          <button type="button" onClick={() => setIsLocationPickerOpen(true)} className="get-location-btn">
+            {t('Pick Location')}
+          </button>
+        </div>
         <div className="form-group">
           <label htmlFor="address.city">{t('City')}</label>
           <input id="address.city" name="address.city" value={selectedCar.address?.city || ''} onChange={handleInputChange} required />
@@ -379,11 +367,6 @@ const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, ha
           <input id="address.street" name="address.street" value={selectedCar.address?.street || ''} onChange={handleInputChange} required />
         </div>
         <div className="form-group">
-          <button type="button" onClick={handleGetLocation} className="get-location-btn">
-            {t('Get Current Location')}
-          </button>
-        </div>
-        <div className="form-group">
           <label htmlFor="coordinates.lat">{t('Latitude')}</label>
           <input id="coordinates.lat" name="coordinates.lat" type="number" value={selectedCar.coordinates?.lat || ''} onChange={handleInputChange} required />
         </div>
@@ -391,6 +374,7 @@ const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, ha
           <label htmlFor="coordinates.lng">{t('Longitude')}</label>
           <input id="coordinates.lng" name="coordinates.lng" type="number" value={selectedCar.coordinates?.lng || ''} onChange={handleInputChange} required />
         </div>
+        
         <div className="form-group">
           <label htmlFor="battery">{t('Battery')}</label>
           <input id="battery" name="battery" value={selectedCar.battery || ''} onChange={handleInputChange} required />
@@ -427,12 +411,7 @@ const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, ha
           <label htmlFor="image">{t('Main Image URL')}</label>
           <input id="image" name="image" value={selectedCar.image || ''} onChange={handleInputChange} required />
         </div>
-        {[1, 2, 3, 4, 5].map((num) => (
-          <div key={num} className="form-group">
-            <label htmlFor={`image${num}`}>{t(`Image ${num} URL`)}</label>
-            <input id={`image${num}`} name={`image${num}`} value={selectedCar[`image${num}`] || ''} onChange={handleInputChange} />
-          </div>
-        ))}
+        
         <div className="form-actions">
           <button type="submit">{t('Save')}</button>
           {selectedCar.id && (
@@ -457,8 +436,14 @@ const CarEdit = React.memo(({ selectedCar, setSelectedCar, handleInputChange, ha
           )}
         </div>
       </form>
+
+      <LocationPicker
+        isOpen={isLocationPickerOpen}
+        onClose={() => setIsLocationPickerOpen(false)}
+        onLocationPicked={handleLocationPicked}
+      />
     </div>
   );
-});
+};
 
 export default CarManager;
