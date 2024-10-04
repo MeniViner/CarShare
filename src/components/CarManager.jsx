@@ -6,8 +6,6 @@ import LocationPicker from '../utils/LocationPicker';
 import { db } from '../data/firebaseConfig';
 import { collection, addDoc, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
 
-import dayMapStyles from '../assets/dayMapStyles';
-import nightMapStyles from '../assets/nightMapStyles';
 import LoadingPage from '../assets/LoadingPage';
 import Swal from 'sweetalert2';
 import '../styles/CarManager.css';
