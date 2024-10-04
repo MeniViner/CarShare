@@ -89,6 +89,28 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
     }
   }, [map, reverseGeocode]);
 
+  const getMapOptions = useCallback(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const isDarkMode = savedTheme ? savedTheme === 'dark' : false;
+    
+    return {
+      disableDefaultUI: true,
+      zoomControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      streetViewControl: false,
+      rotateControl: false,
+      fullscreenControl: false,
+      draggable: true,
+      scrollwheel: true,
+      disableDoubleClickZoom: true,
+      minZoom: 9,
+      maxZoom: 20,
+      clickableIcons: false,
+      styles: isDarkMode ? nightMapStyles : dayMapStyles,
+    };
+  }, []);
+
   if (!isOpen) return null;
 
   return (
@@ -113,6 +135,7 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
             zoom={10}
             onClick={onMapClick}
             onLoad={setMap}
+            options={getMapOptions()}
           >
             {marker && <Marker position={marker} />}
           </GoogleMap>
