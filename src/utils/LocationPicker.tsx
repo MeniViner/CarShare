@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import '../'
 
 const mapContainerStyle = {
   width: '100%',
@@ -15,68 +12,101 @@ const center = {
   lng: 35.2137
 };
 
-interface LocationPickerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onLocationPicked: (location: { city: string; street: string; lat: number; lng: number }) => void;
-}
+const libraries = ["places"];
 
-export default function LocationPicker({ isOpen, onClose, onLocationPicked }: LocationPickerProps) {
+export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
   const [map, setMap] = useState(null);
   const [marker, setMarker] = useState(null);
-  const [city, setCity] = useState('');
-  const [street, setStreet] = useState('');
+  const [searchBox, setSearchBox] = useState(null);
+  const [address, setAddress] = useState('');
 
   const onMapClick = useCallback((e) => {
     setMarker({
       lat: e.latLng.lat(),
       lng: e.latLng.lng()
     });
+    reverseGeocode(e.latLng);
   }, []);
 
   const handleConfirm = useCallback(() => {
     if (marker) {
-      const geocoder = new google.maps.Geocoder();
-      geocoder.geocode({ location: marker }, (results, status) => {
-        if (status === 'OK') {
-          if (results[0]) {
-            const addressComponents = results[0].address_components;
-            const cityComponent = addressComponents.find(component => component.types.includes('locality'));
-            const streetComponent = addressComponents.find(component => component.types.includes('route'));
-            
-            onLocationPicked({
-              city: cityComponent ? cityComponent.long_name : '',
-              street: streetComponent ? streetComponent.long_name : '',
-              lat: marker.lat,
-              lng: marker.lng
-            });
-            onClose();
-          }
-        }
+      onLocationPicked({
+        address: address,
+        lat: marker.lat,
+        lng: marker.lng
       });
+      onClose();
     }
-  }, [marker, onLocationPicked, onClose]);
+  }, [marker, address, onLocationPicked, onClose]);
 
-  const handleManualEntry = useCallback(() => {
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ address: `${street}, ${city}` }, (results, status) => {
+  const handleSearchBoxLoad = useCallback((ref) => {
+    setSearchBox(ref);
+  }, []);
+
+  const handlePlacesChanged = useCallback(() => {
+    const places = searchBox.getPlaces();
+    if (places && places.length > 0) {
+      const place = places[0];
+      const newMarker = {
+        lat: place.geometry.location.lat(),
+        lng: place.geometry.location.lng()
+      };
+      setMarker(newMarker);
+      setAddress(place.formatted_address);
+      map.panTo(newMarker);
+    }
+  }, [searchBox, map]);
+
+  const reverseGeocode = useCallback((latLng) => {
+    const geocoder = new window.google.maps.Geocoder();
+    geocoder.geocode({ location: latLng }, (results, status) => {
       if (status === 'OK') {
         if (results[0]) {
-          const { lat, lng } = results[0].geometry.location;
-          setMarker({ lat: lat(), lng: lng() });
-          map.panTo({ lat: lat(), lng: lng() });
+          setAddress(results[0].formatted_address);
         }
       }
     });
-  }, [city, street, map]);
+  }, []);
+
+  const handleGetMyLocation = useCallback(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          setMarker(pos);
+          map.panTo(pos);
+          reverseGeocode(pos);
+        },
+        () => {
+          console.error('Error: The Geolocation service failed.');
+        }
+      );
+    } else {
+      console.error('Error: Your browser doesn\'t support geolocation.');
+    }
+  }, [map, reverseGeocode]);
+
+  if (!isOpen) return null;
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Pick a Location</DialogTitle>
-        </DialogHeader>
-        <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+    <div className="location-picker-overlay">
+      <div className="location-picker-modal">
+        <h2>Pick a Location</h2>
+        <LoadScript 
+          googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+          libraries={libraries}
+        >
+          <div className="search-box">
+            <input
+              type="text"
+              placeholder="Search for a location"
+              onLoad={handleSearchBoxLoad}
+              onChange={handlePlacesChanged}
+            />
+          </div>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             center={center}
@@ -87,29 +117,20 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }: Lo
             {marker && <Marker position={marker} />}
           </GoogleMap>
         </LoadScript>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="city" className="text-right">
-              City
-            </Label>
-            <Input id="city" value={city} onChange={(e) => setCity(e.target.value)} className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="street" className="text-right">
-              Street
-            </Label>
-            <Input id="street" value={street} onChange={(e) => setStreet(e.target.value)} className="col-span-3" />
-          </div>
+        <div className="address-input">
+          <label htmlFor="address">Address</label>
+          <input 
+            id="address" 
+            value={address} 
+            onChange={(e) => setAddress(e.target.value)} 
+          />
         </div>
-        <DialogFooter>
-          <Button type="button" onClick={handleManualEntry}>
-            Find Address
-          </Button>
-          <Button type="button" onClick={handleConfirm}>
-            Confirm Location
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        <div className="button-group">
+          <button onClick={handleGetMyLocation}>Get My Location</button>
+          <button onClick={handleConfirm}>Confirm Location</button>
+          <button onClick={onClose}>Cancel</button>
+        </div>
+      </div>
+    </div>
   );
 }
