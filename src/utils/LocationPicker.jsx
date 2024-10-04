@@ -30,7 +30,7 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
       lng: e.latLng.lng()
     });
     reverseGeocode(e.latLng);
-  }, []);
+  }, [reverseGeocode]);
 
   const handleConfirm = useCallback(() => {
     if (marker) {
