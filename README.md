@@ -137,6 +137,6 @@ there's not yet any.
 
 ## Contact
 
-Meni Viner - [GitHub](https://github.com/MeniViner)
+Meni Viner - [GitHub](https://github.com/MeniViner)  [telegram](https://t.me/meniviner)
 
 Project Link: [https://github.com/MeniViner/CarShare](https://github.com/MeniViner/CarShare)
