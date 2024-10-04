@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import '../'
+import '../styles/LocationPicker.css'
 
 const mapContainerStyle = {
   width: '100%',
