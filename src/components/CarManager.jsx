@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import UserManagement from './UserManagement';
-import LocationPicker from '../assets/LocationPicker';
+import LocationPicker from '../utils/LocationPicker';
 
 import { db } from '../data/firebaseConfig';
 import { collection, addDoc, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore';
