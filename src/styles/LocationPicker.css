@@ -74,7 +74,7 @@
   transition: background-color 0.3s;
 }
 
-.location-picker-overlay .cancel-btn {
+.location-picker-overlay .button-group .cancel-btn {
   background-color: #ff4d4d;
   color: white;
   flex: 1;
