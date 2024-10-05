@@ -162,9 +162,9 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
           />
         </div>
         <div className="button-group">
-          <button onClick={onClose} className="cancel-btn">Cancel</button>
-          <button onClick={handleConfirm} className="confirm-btn">Confirm Location</button>
-          <button onClick={handleGetMyLocation} className="get-location-btn">Get My Location</button>
+          <button onClick={handleGetMyLocation} className="get-location-btn">🧭 Get My Location</button>
+          <button onClick={handleConfirm} className="confirm-btn">✔️ Confirm Location</button>
+          <button onClick={onClose} className="cancel-btn">✖️ Cancel</button>
         </div>
       </div>
     </div>
