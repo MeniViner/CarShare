@@ -74,21 +74,21 @@
   transition: background-color 0.3s;
 }
 
-.location-picker-overlay .button-group .cancel-btn {
+.location-picker-modal #cancel-btn {
   background-color: #ff4d4d;
   color: white;
   flex: 1;
   margin-right: 10px;
 }
 
-.location-picker-overlay .confirm-btn {
+ .location-picker-modal .confirm-btn {
   background-color: #4CAF50;
   color: white;
   flex: 2;
   margin-right: 10px;
 }
 
-.location-picker-overlay .get-location-btn {
+ .button-group #get-location-btn {
   background-color: #2196F3;
   color: white;
   flex: 2;
