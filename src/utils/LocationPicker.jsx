@@ -141,7 +141,7 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
               />
             </Autocomplete>
           </div>
-          <button onClick={handleGetMyLocation} id="get-location-btn">🧭 Get My Location</button>
+          
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
             center={center}
@@ -152,6 +152,7 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
           >
             {marker && <Marker position={marker} />}
           </GoogleMap>
+          
         </LoadScript>
         <div className="address-input">
           <label htmlFor="address">Address</label>
@@ -163,7 +164,7 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
           />
         </div>
         <div className="button-group">
-          
+          <button onClick={handleGetMyLocation} id="get-location-btn">🧭 Get My Location</button>
           <button onClick={handleConfirm} className="confirm-btn">✔️ Confirm Location</button>
           <button onClick={onClose} id="cancel-btn">✖️ Cancel</button>
         </div>
