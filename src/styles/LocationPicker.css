@@ -88,7 +88,7 @@
   margin-right: 10px;
 }
 
- .button-group #get-location-btn {
+ .location-picker-overlay #get-location-btn {
   background-color: #2196F3;
   color: white;
   flex: 2;
