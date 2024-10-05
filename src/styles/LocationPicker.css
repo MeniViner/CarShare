@@ -8,67 +8,130 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
-.location-picker-modal {
+.location-picker-overlay .location-picker-modal {
   background-color: white;
-  padding: 20px;
   border-radius: 8px;
-  width: 80%;
-  max-width: 500px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.search-box {
-  margin-bottom: 10px;
+.location-picker-overlay .location-picker-modal h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
 }
 
-.search-box input {
+.location-picker-overlay .search-box {
+  margin-bottom: 15px;
+}
+
+.location-picker-overlay .search-input {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 16px;
 }
 
-.address-input {
-  margin-top: 10px;
+.location-picker-overlay .address-input {
+  margin-top: 15px;
 }
 
-.address-input label {
+.location-picker-overlay .address-input label {
   display: block;
   margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
 }
 
-.address-input input {
+.location-picker-overlay .address-input input {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 14px;
+  background-color: #f9f9f9;
 }
 
-.button-group {
-  margin-top: 15px;
+.location-picker-overlay .button-group {
   display: flex;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
-.button-group button {
-  padding: 8px 16px;
+.location-picker-overlay .button-group button {
+  padding: 10px 15px;
   border: none;
   border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.location-picker-overlay .cancel-btn {
+  background-color: #ff4d4d;
+  color: white;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.location-picker-overlay .confirm-btn {
+  background-color: #4CAF50;
+  color: white;
+  flex: 2;
+  margin-right: 10px;
+}
+
+.location-picker-overlay .get-location-btn {
+  background-color: #2196F3;
+  color: white;
+  flex: 2;
+}
+
+.location-picker-overlay .cancel-btn:hover { background-color: #ff3333; }
+.location-picker-overlay .confirm-btn:hover { background-color: #45a049; }
+.location-picker-overlay .get-location-btn:hover { background-color: #0b7dda; }
+
+/* Styles for the Google Maps Autocomplete dropdown */
+.location-picker-overlay .pac-container {
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
+}
+
+.location-picker-overlay .pac-item {
+  padding: 10px;
+  font-size: 14px;
   cursor: pointer;
 }
 
-.button-group button:nth-child(1) {
-  background-color: #4CAF50;
-  color: white;
+.location-picker-overlay .pac-item:hover {
+  background-color: #f0f0f0;
 }
 
-.button-group button:nth-child(2) {
-  background-color: #008CBA;
-  color: white;
+.location-picker-overlay .pac-item-selected {
+  background-color: #e0e0e0;
 }
 
-.button-group button:nth-child(3) {
-  background-color: #f44336;
-  color: white;
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .location-picker-overlay .location-picker-modal {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .location-picker-overlay .button-group {
+    flex-direction: column;
+  }
+
+  .location-picker-overlay .button-group button {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 }
