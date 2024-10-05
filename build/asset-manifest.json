@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "./static/css/main.38aebffd.css",
+    "main.js": "./static/js/main.b9e28ce5.js",
+    "static/media/404.mp4": "./static/media/404.85fcc8f1ca5c05fe7fd1.mp4",
+    "static/media/moving-car.gif": "./static/media/moving-car.4c542b49d9e511e40b57.gif",
+    "index.html": "./index.html",
+    "main.38aebffd.css.map": "./static/css/main.38aebffd.css.map",
+    "main.b9e28ce5.js.map": "./static/js/main.b9e28ce5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.38aebffd.css",
+    "static/js/main.b9e28ce5.js"
+  ]
+}
