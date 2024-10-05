@@ -79,6 +79,7 @@
   color: white;
   flex: 1;
   margin-right: 10px;
+  width: 100%;
 }
 
  .location-picker-modal .confirm-btn {
@@ -94,9 +95,12 @@
   flex: 2;
 }
 
-.location-picker-overlay .cancel-btn:hover { background-color: #ff3333; }
-.location-picker-overlay .confirm-btn:hover { background-color: #45a049; }
-.location-picker-overlay .get-location-btn:hover { background-color: #0b7dda; }
+.location-picker-overlay #cancel-btn:hover,
+.location-picker-overlay #cancel-btn:active { background-color: #ff3333; }
+.location-picker-overlay .confirm-btn:hover,
+.location-picker-overlay .confirm-btn:active { background-color: #45a049; }
+.location-picker-overlay #get-location-btn:hover,
+.location-picker-overlay #get-location-btn:active { background-color: #0b7dda; }
 
 /* Styles for the Google Maps Autocomplete dropdown */
 .location-picker-overlay .pac-container {
