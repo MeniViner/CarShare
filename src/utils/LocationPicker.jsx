@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import { Autocomplete } from '@react-google-maps/api';
 
 import dayMapStyles from '../assets/dayMapStyles';
 import nightMapStyles from '../assets/nightMapStyles';
 import '../styles/LocationPicker.css'
+
 
 const mapContainerStyle = {
   width: '100%',
@@ -161,9 +162,9 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
           />
         </div>
         <div className="button-group">
-          <button onClick={handleGetMyLocation}>Get My Location</button>
-          <button onClick={handleConfirm}>Confirm Location</button>
-          <button onClick={onClose}>Cancel</button>
+          <button onClick={onClose} className="cancel-btn">Cancel</button>
+          <button onClick={handleConfirm} className="confirm-btn">Confirm Location</button>
+          <button onClick={handleGetMyLocation} className="get-location-btn">Get My Location</button>
         </div>
       </div>
     </div>
