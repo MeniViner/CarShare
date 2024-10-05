@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { Autocomplete } from '@react-google-maps/api';
 
 import dayMapStyles from '../assets/dayMapStyles';
 import nightMapStyles from '../assets/nightMapStyles';
 import '../styles/LocationPicker.css'
-
 
 const mapContainerStyle = {
   width: '100%',
@@ -21,7 +21,7 @@ const libraries = ["places"];
 export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
   const [map, setMap] = useState(null);
   const [marker, setMarker] = useState(null);
-  const [searchBox, setSearchBox] = useState(null);
+  const [autocomplete, setAutocomplete] = useState(null);
   const [address, setAddress] = useState('');
 
   const onMapClick = useCallback((e) => {
@@ -43,23 +43,25 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
     }
   }, [marker, address, onLocationPicked, onClose]);
 
-  const handleSearchBoxLoad = useCallback((ref) => {
-    setSearchBox(ref);
+  const onLoad = useCallback((autocomplete) => {
+    setAutocomplete(autocomplete);
   }, []);
 
-  const handlePlacesChanged = useCallback(() => {
-    const places = searchBox.getPlaces();
-    if (places && places.length > 0) {
-      const place = places[0];
-      const newMarker = {
-        lat: place.geometry.location.lat(),
-        lng: place.geometry.location.lng()
-      };
-      setMarker(newMarker);
-      setAddress(place.formatted_address);
-      map.panTo(newMarker);
+  const onPlaceChanged = useCallback(() => {
+    if (autocomplete !== null) {
+      const place = autocomplete.getPlace();
+      if (place.geometry) {
+        const newMarker = {
+          lat: place.geometry.location.lat(),
+          lng: place.geometry.location.lng()
+        };
+        setMarker(newMarker);
+        setAddress(place.formatted_address);
+        map.panTo(newMarker);
+        map.setZoom(15);
+      }
     }
-  }, [searchBox, map]);
+  }, [autocomplete, map]);
 
   const reverseGeocode = useCallback((latLng) => {
     const geocoder = new window.google.maps.Geocoder();
@@ -82,6 +84,7 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
           };
           setMarker(pos);
           map.panTo(pos);
+          map.setZoom(15);
           reverseGeocode(pos);
         },
         () => {
@@ -99,7 +102,7 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
     
     return {
       disableDefaultUI: true,
-      zoomControl: false,
+      zoomControl: true,
       mapTypeControl: false,
       scaleControl: false,
       streetViewControl: false,
@@ -107,8 +110,8 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
       fullscreenControl: false,
       draggable: true,
       scrollwheel: true,
-      disableDoubleClickZoom: true,
-      minZoom: 9,
+      disableDoubleClickZoom: false,
+      minZoom: 3,
       maxZoom: 20,
       clickableIcons: false,
       styles: isDarkMode ? nightMapStyles : dayMapStyles,
@@ -126,12 +129,16 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
           libraries={libraries}
         >
           <div className="search-box">
-            <input
-              type="text"
-              placeholder="Search for a location"
-              onLoad={handleSearchBoxLoad}
-              onChange={handlePlacesChanged}
-            />
+            <Autocomplete
+              onLoad={onLoad}
+              onPlaceChanged={onPlaceChanged}
+            >
+              <input
+                type="text"
+                placeholder="Search for a location"
+                className="search-input"
+              />
+            </Autocomplete>
           </div>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
@@ -150,6 +157,7 @@ export default function LocationPicker({ isOpen, onClose, onLocationPicked }) {
             id="address" 
             value={address} 
             onChange={(e) => setAddress(e.target.value)} 
+            readOnly
           />
         </div>
         <div className="button-group">
