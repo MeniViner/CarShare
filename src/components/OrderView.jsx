@@ -104,6 +104,7 @@ const OrderView = ({ selectedCar, reservationData, onConfirmOrder }) => {
       });
 
       onConfirmOrder(); //עדכון CarInfoWindow המאפסת את נתוני ההזמנה 
+      
     } catch (error) {
       console.error("Error adding reservation: ", error);
       setIsLoading(false);
