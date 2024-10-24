@@ -81,7 +81,7 @@ Experience CarShare in action: [https://we-car-share.web.app/](https://we-car-sh
 2. **Search for Cars**: Use the map or search filters to find available cars in your area.
 3. **Book a Car**: Select a car and choose your rental period.
 4. **Manage Bookings**: View and manage your current and past bookings in your profile.
-5. **Add Your Car**: Car owners can list their vehicles for rent through the "Add Car" feature.
+5. **Manager Page**: In the admin panel we can manage car list - add/edit/or delete csars, also manage users as well.
 
 ## Project Structure
 
